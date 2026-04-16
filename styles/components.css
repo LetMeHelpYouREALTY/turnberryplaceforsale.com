@@ -782,18 +782,7 @@
 }
 
 /* Standardized Formatting System */
-/* Consistent section spacing */
-.card-content {
-  padding-top: 3rem;
-  padding-bottom: 3rem;
-}
-
-@media (min-width: 768px) {
-  .card-content {
-    padding-top: 4rem;
-    padding-bottom: 4rem;
-  }
-}
+/* Vertical section padding is defined in the global polish block (tokens + clamp) */
 
 /* Standardized heading spacing */
 .card-content h1 {
@@ -1336,7 +1325,7 @@ main .card-top-header:first-of-type {
   display: inline-block;
   color: rgba(255, 255, 255, 0.95);
   font-weight: 400;
-  font-family: var(--nav-font, 'Cinzel', serif);
+  font-family: var(--nav-font, "Playfair Display", serif);
   font-size: 0.9rem;
 }
 
@@ -1347,10 +1336,10 @@ main .card-top-header:first-of-type {
 }
 
 .card-top-nav .nav-link.active {
-  border-bottom: 2px solid var(--nav-link-color, rgba(255, 255, 255, 1));
+  border-bottom: 2px solid var(--luxury-gold, #d4af37);
   padding-bottom: calc(0.5rem - 2px);
-  font-weight: 500;
-  color: #fff;
+  font-weight: 600;
+  color: var(--luxury-gold, #d4af37);
   text-decoration: none;
 }
 
@@ -5054,6 +5043,71 @@ main#main-content {
 
   body.has-sticky-cta {
     padding-bottom: calc(4.25rem + env(safe-area-inset-bottom, 0px));
+  }
+}
+
+/* Heading scale (Playfair headings + Inter body from fonts.css) */
+.card-content h1 {
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  font-weight: var(--headlines-font-weight, 600);
+  color: var(--heading-color, #fff);
+}
+
+.card-content h2 {
+  font-size: clamp(1.4rem, 3vw, 2rem);
+  font-weight: var(--headlines-font-weight, 600);
+  color: var(--heading-color, #fff);
+}
+
+.card-content h3,
+.card-content .h3 {
+  font-size: clamp(1.2rem, 2.5vw, 1.5rem);
+}
+
+.card-content p {
+  font-size: clamp(0.9375rem, 2vw, 1.0625rem);
+  color: var(--body-copy-color, #e0e0e0);
+}
+
+.card-content .lead {
+  max-width: 48rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Light card shell for embedded widgets (RealScout, etc.) */
+.widget-card--light {
+  background: #fafafa;
+  color: #1a1a1a;
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  padding: 1rem;
+}
+
+.widget-card--light .lead,
+.widget-card--light p {
+  color: #333;
+}
+
+@media (min-width: 768px) {
+  .widget-card--light {
+    padding: 1.5rem;
+  }
+}
+
+/* Navbar link density — readable without crowding */
+.card-top-nav .nav-wrapper .nav-link {
+  font-size: 0.8125rem;
+  padding-left: 0.35rem;
+  padding-right: 0.35rem;
+}
+
+@media (min-width: 992px) {
+  .card-top-nav .nav-wrapper .nav-link {
+    font-size: 0.875rem;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
   }
 }
 

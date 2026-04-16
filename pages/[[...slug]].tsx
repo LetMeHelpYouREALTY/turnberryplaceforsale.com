@@ -233,12 +233,12 @@ function HomePageContent() {
           <div className="row justify-content-center">
             <div className="col-12 col-lg-11">
               <div className="text-center mb-4">
-                <h1 className="mb-3">Available Turnberry Place Condos</h1>
+                <h2 className="mb-3">Available Turnberry Place Condos</h2>
                 <p className="lead">
                   Browse current listings with real-time availability, pricing, and property details. Use the filters to find your perfect luxury residence.
                 </p>
               </div>
-              <div className="widget-wrapper">
+              <div className="widget-card--light widget-wrapper">
                 <Script
                   src="https://em.realscout.com/widgets/realscout-web-components.umd.js"
                   type="module"
@@ -330,9 +330,9 @@ function HomePageContent() {
               }}>
                 <div className="mt-0 mt-md-2 d-flex align-items-center justify-content-center">
                   <div className="w-10 horiz-line d-none d-sm-block" style={{ flex: '1', maxWidth: '100px', height: '1px', backgroundColor: 'rgba(181,152,90,1)' }}></div>
-                  <h1 className="my-0 mx-2 heading-color" id="contact-label">
+                  <h2 className="my-0 mx-2 heading-color" id="contact-label">
                     Turnberry Place Request Pricing & Details
-                  </h1>
+                  </h2>
                   <div className="w-10 horiz-line d-none d-sm-block" style={{ flex: '1', maxWidth: '100px', height: '1px', backgroundColor: 'rgba(181,152,90,1)' }}></div>
                 </div>
                 <LeadCaptureForm variant="footer" showValuationCTA={true} />
@@ -353,7 +353,7 @@ function HomePageContent() {
                   Get an instant estimate of your property's value with our free home valuation tool.
                 </p>
               </div>
-              <div className="widget-wrapper">
+              <div className="widget-card--light widget-wrapper">
                 <Script
                   src="https://em.realscout.com/widgets/realscout-web-components.umd.js"
                   type="module"
@@ -382,7 +382,7 @@ function HomePageContent() {
             <div className="col-12">
               <div className="row justify-content-center">
                 <div className="py-2 col-12 text-center">
-                  <h1>Dr. Jan Duffy, REALTOR</h1>
+                  <h2>Dr. Jan Duffy, REALTOR</h2>
                   <div className="my-1">
                     The Turnberry Place Team at Berkshire Hathaway HomeServices Nevada Properties
                     <br /> S.0197614.LLC
@@ -437,7 +437,7 @@ function HomePageContent() {
           <div className="row justify-content-center">
             <div className="col-12 col-lg-10">
               <div className="text-center mb-4">
-                <h1 className="mb-3">Photo Gallery</h1>
+                <h2 className="mb-3">Photo Gallery</h2>
                 <p className="lead">
                   Explore stunning images of Turnberry Place luxury condominiums, amenities, and Las Vegas Strip views.
                 </p>

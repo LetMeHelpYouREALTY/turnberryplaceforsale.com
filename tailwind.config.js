@@ -7,10 +7,11 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        'headline': ['Cinzel', 'serif'],
-        'body': ['Questrial', 'sans-serif'],
-        'sans': ['Questrial', 'sans-serif'],
-        'serif': ['Cinzel', 'serif'],
+        // Match styles/fonts.css (Playfair + Inter); legacy Cinzel/Questrial remain available via CSS vars
+        headline: ['"Playfair Display"', 'Cinzel', 'serif'],
+        body: ['Inter', 'Questrial', 'system-ui', 'sans-serif'],
+        sans: ['Inter', 'Questrial', 'system-ui', 'sans-serif'],
+        serif: ['"Playfair Display"', 'Cinzel', 'serif'],
       },
     },
   },
