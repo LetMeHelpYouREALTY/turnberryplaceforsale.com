@@ -35,9 +35,7 @@ const allPages = [
   { href: "/photos", title: "Photos" },
   { href: "/map", title: "Map" },
   { href: "/open-house", title: "Open House" },
-  { href: "/request-details", title: "Request Details" },
   { href: "/agent", title: "Agent" },
-  { href: "/share", title: "Share" },
 ]
 
 // Footer links - use same array to avoid duplication

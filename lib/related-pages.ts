@@ -89,9 +89,9 @@ export const relatedPages: Record<string, RelatedPage[]> = {
       description: 'Understand costs and HOA fees',
     },
     {
-      href: '/request-details',
-      title: 'Schedule Showing',
-      description: 'Book a private tour today',
+      href: '/agent',
+      title: 'Contact Dr. Jan Duffy',
+      description: 'Book a private tour with a local expert',
     },
     {
       href: '/towers',
@@ -167,9 +167,9 @@ export const relatedPages: Record<string, RelatedPage[]> = {
   ],
   '/agent': [
     {
-      href: '/request-details',
-      title: 'Contact Me',
-      description: 'Get in touch to schedule a showing',
+      href: '/open-house',
+      title: 'Private Showings',
+      description: 'Schedule a private showing',
     },
     {
       href: '/available-condos',
@@ -211,8 +211,8 @@ export const relatedPages: Record<string, RelatedPage[]> = {
   ],
   '/open-house': [
     {
-      href: '/request-details',
-      title: 'Schedule Private Tour',
+      href: '/agent',
+      title: 'Contact Dr. Jan Duffy',
       description: 'Book your personal showing',
     },
     {
@@ -272,9 +272,9 @@ export const relatedPages: Record<string, RelatedPage[]> = {
       description: 'Layouts and sizes',
     },
     {
-      href: '/request-details',
-      title: 'Get Pricing Sheet',
-      description: 'Request detailed pricing',
+      href: '/agent',
+      title: 'Talk With an Expert',
+      description: 'Get detailed pricing guidance',
     },
   ],
   '/share': [
@@ -306,9 +306,9 @@ export const relatedPages: Record<string, RelatedPage[]> = {
       description: 'Learn about each tower',
     },
     {
-      href: '/request-details',
+      href: '/agent',
       title: 'Schedule Showing',
-      description: 'Book a tour',
+      description: 'Book a tour with Dr. Jan Duffy',
     },
   ],
 }

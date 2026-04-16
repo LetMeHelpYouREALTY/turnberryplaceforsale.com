@@ -287,6 +287,12 @@ export default function FloorPlansPage({ menus }: FloorPlansPageProps) {
         </div>
       </section>
 
+      {/* Related Pages */}
+      <RelatedPages path="/floor-plans" />
+
+      {/* Back to Top Button */}
+      <BackToTop showAfter={400} />
+
       {/* Add bottom padding when comparison bar is visible */}
       {comparingPlans.length > 0 && <div className="h-32" />}
     </Layout>

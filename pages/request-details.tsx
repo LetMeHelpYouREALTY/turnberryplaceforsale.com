@@ -66,6 +66,9 @@ export default function RequestDetailsPage({ menus }: RequestDetailsPageProps) {
         description="Request pricing and details for Turnberry Place luxury high-rise condos near the Las Vegas Strip. Las Vegas Strip High Rise Condos for Sale. Call (702) 500-1971."
         path="/request-details"
       />
+      <Head>
+        <meta name="robots" content="noindex,follow" />
+      </Head>
       {/* JSON-LD Structured Data */}
       {(() => {
         const contactPageSchema = generateContactPageSchema(

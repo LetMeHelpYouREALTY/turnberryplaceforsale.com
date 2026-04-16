@@ -82,16 +82,6 @@ const staticPages: SitemapPage[] = [
     changefreq: 'monthly',
   },
   {
-    path: '/request-details',
-    priority: '0.6',
-    changefreq: 'monthly',
-  },
-  {
-    path: '/share',
-    priority: '0.4',
-    changefreq: 'monthly',
-  },
-  {
     path: '/mls',
     priority: '0.6',
     changefreq: 'daily',

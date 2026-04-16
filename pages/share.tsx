@@ -1,6 +1,5 @@
-'use client'
-
 import { GetStaticPropsResult } from "next"
+import Head from "next/head"
 import { useState } from "react"
 import { Layout, LayoutProps } from "components/layout"
 import { getMenus } from "lib/get-menus"
@@ -80,6 +79,9 @@ export default function SharePage({ menus }: SharePageProps) {
         ogImageAlt="Turnberry Place Las Vegas luxury high-rise condominium community"
         path="/share"
       />
+      <Head>
+        <meta name="robots" content="noindex,follow" />
+      </Head>
       <JsonLdSchema type="property" />
       <BreadcrumbSchema currentPageTitle="Share Turnberry Place | Digital Business Card" />
       

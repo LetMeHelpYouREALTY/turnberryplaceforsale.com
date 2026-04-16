@@ -1,0 +1,15 @@
+{
+  "redirects": [
+    {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "turnberryplaceforsale.com"
+        }
+      ],
+      "destination": "https://www.turnberryplaceforsale.com/:path*",
+      "permanent": true
+    }
+  ]
+}

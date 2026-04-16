@@ -13,6 +13,8 @@ import "photoswipe/style.css"
 import { Fragment, useEffect, useMemo, useRef, useState } from "react"
 import { useRouter } from "next/router"
 import vimeoVideos from "../data/media/vimeo-videos.json"
+import { RelatedPages } from "../components/RelatedPages"
+import { BackToTop } from "../components/BackToTop"
 
 type GalleryCategory = "Residences" | "Stirling Club" | "Views" | "Amenities"
 type GalleryFilter = "All" | GalleryCategory
@@ -1910,6 +1912,12 @@ export default function PhotosPage({ menus }: PhotosPageProps) {
           </div>
         </div>
       ) : null}
+
+      {/* Related Pages */}
+      <RelatedPages path="/photos" />
+
+      {/* Back to Top Button */}
+      <BackToTop showAfter={400} />
     </Layout>
   )
 }

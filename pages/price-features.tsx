@@ -18,6 +18,8 @@ import { Meta } from "components/meta"
 import { SEOHead } from "../components/seo/SEOHead"
 import { JsonLdSchema } from "components/json-ld-schema"
 import { BreadcrumbSchema } from "components/breadcrumb-schema"
+import { RelatedPages } from "../components/RelatedPages"
+import { BackToTop } from "../components/BackToTop"
 
 interface PriceFeaturesPageProps extends LayoutProps {}
 
@@ -625,6 +627,12 @@ export default function PriceFeaturesPage({ menus }: PriceFeaturesPageProps) {
             </div>
           </div>
         </section>
+
+      {/* Related Pages */}
+      <RelatedPages path="/price-features" />
+
+      {/* Back to Top Button */}
+      <BackToTop showAfter={400} />
       </div>
 
       {/* VIP Newsletter Signup - Available on homepage */}
