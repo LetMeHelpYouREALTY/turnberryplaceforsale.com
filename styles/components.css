@@ -4959,6 +4959,104 @@ img.highlight-border {
     }
 }
 
+/* ===============================
+   Global Layout/CSS Fine-Tuning
+   Site-wide polish overrides
+   =============================== */
+
+:root {
+  --site-content-max-width: 1200px;
+  --site-section-spacing-y: clamp(2.75rem, 5vw, 5rem);
+}
+
+html {
+  scroll-padding-top: var(--navbar-height, 110px);
+}
+
+body {
+  line-height: 1.6;
+  text-rendering: optimizeLegibility;
+}
+
+main#main-content {
+  width: 100%;
+}
+
+/* Keep major content containers centered and predictable */
+.card-content .container,
+.site-links-section .container {
+  max-width: var(--site-content-max-width);
+  margin-inline: auto;
+}
+
+/* More consistent vertical rhythm across page sections */
+.card-content {
+  padding-top: var(--site-section-spacing-y);
+  padding-bottom: var(--site-section-spacing-y);
+}
+
+.card-content h1,
+.card-content h2,
+.card-content h3 {
+  line-height: 1.2;
+}
+
+.card-content p,
+.card-content .lead {
+  line-height: 1.7;
+}
+
+/* Improve fixed header readability and interaction */
+.card-top-nav {
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.card-top-nav .nav-link {
+  border-radius: 0.3rem;
+}
+
+.card-top-nav .nav-link:focus-visible,
+.overlay nav#navbarMobile ul li a:focus-visible,
+.card-site-footer .footer-nav-link:focus-visible,
+.site-link-item:focus-visible {
+  outline: 2px solid var(--luxury-gold, #d4af37);
+  outline-offset: 2px;
+}
+
+/* Footer/site-links visual consistency */
+.site-links-section {
+  background: #121212;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.site-link-item {
+  color: rgba(255, 255, 255, 0.88) !important;
+  border-color: rgba(255, 255, 255, 0.12) !important;
+}
+
+.site-link-item:hover {
+  background-color: rgba(255, 255, 255, 0.06) !important;
+  color: #ffffff !important;
+}
+
+.card-site-footer .footer-nav-link {
+  text-decoration: none;
+}
+
+/* Sticky CTA spacing and safe-area support on mobile */
+@media (max-width: 991.98px) {
+  .sticky-cta-bar {
+    padding-bottom: calc(0.75rem + env(safe-area-inset-bottom, 0px));
+  }
+
+  body.has-sticky-cta {
+    padding-bottom: calc(4.25rem + env(safe-area-inset-bottom, 0px));
+  }
+}
+
 /* Document Access Modal Styles */
 .doc-modal .modal-footer {
     border: none;
