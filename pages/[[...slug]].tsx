@@ -13,13 +13,14 @@ import { drupal } from "lib/drupal"
 import { getMenus } from "lib/get-menus"
 import { absoluteURL } from "lib/utils/absolute-url"
 import { getParams } from "lib/get-params"
+import { getTurnberryInventory } from "lib/inventory/getTurnberryInventory"
 import { Node } from "components/node"
 import { Layout, LayoutProps } from "components/layout"
 import { Meta } from "components/meta"
 import { HeroSlideshow } from "components/hero-slideshow"
-import { ContactForm } from "components/contact-form"
 import { JsonLdSchema } from "components/json-ld-schema"
-import { DynamicUnitCount } from "components/dynamic-unit-count"
+import { HomeFaqSection } from "components/home-faq-section"
+import { LiveInventoryBadge } from "components/live-inventory-badge"
 import { PropertyGrid } from "components/property-grid"
 import { VIPNewsletterSignup } from "components/vip-newsletter-signup"
 import { LuxuryAmenitiesGrid } from "components/luxury-amenities-grid"
@@ -35,9 +36,15 @@ const RESOURCE_TYPES = ["node--page", "node--landing_page", "node--article"]
 
 interface NodePageProps extends LayoutProps {
   node: DrupalNode
+  inventory: {
+    count: number
+    source: "realscout" | "fallback"
+    lastUpdatedIso: string
+    priceRange: { low: number; high: number }
+  }
 }
 
-export default function NodePage({ node, menus }: NodePageProps) {
+export default function NodePage({ node, menus, inventory }: NodePageProps) {
   const router = useRouter()
 
   // Handle home page when Drupal is not configured
@@ -76,8 +83,14 @@ export default function NodePage({ node, menus }: NodePageProps) {
             href="/images/turnberry/asset-1.jpg"
           />
         </Head>
-        <JsonLdSchema type="home" propertyPrice="$800,000 - $10,000,000+" />
-        <HomePageContent />
+        <JsonLdSchema
+          type="home"
+          propertyPrice="$800,000 - $10,000,000+"
+          inventoryCount={inventory.count}
+          inventoryLastUpdatedIso={inventory.lastUpdatedIso}
+          inventorySource={inventory.source}
+        />
+        <HomePageContent inventory={inventory} />
       </Layout>
     )
   }
@@ -103,7 +116,11 @@ export default function NodePage({ node, menus }: NodePageProps) {
 }
 
 // Home page content component
-function HomePageContent() {
+function HomePageContent({
+  inventory,
+}: {
+  inventory: NodePageProps["inventory"]
+}) {
   // Hero photos - using local images from public/images/turnberry (optimized)
   const heroPhotos = [
     "/images/turnberry/Turnberry_Place_For_Sale.jpg",
@@ -158,7 +175,11 @@ function HomePageContent() {
               </p>
               <h2 className="h3 mb-3">4 Luxury Towers from $800,000 to $10M+</h2>
               <p className="mt-2 mb-1" style={{ fontSize: '1.1rem', fontWeight: 500 }}>
-                Only <DynamicUnitCount defaultCount={12} /> Units Available Now
+                <LiveInventoryBadge
+                  count={inventory.count}
+                  source={inventory.source}
+                  lastUpdatedIso={inventory.lastUpdatedIso}
+                />
               </p>
               <p className="text-muted" style={{ fontSize: '0.9rem' }}>
                 <time dateTime={new Date().toISOString()}>
@@ -277,6 +298,8 @@ function HomePageContent() {
 
       {/* Luxury Amenities Section */}
       <LuxuryAmenitiesGrid />
+
+      <HomeFaqSection />
 
       {/* Open House Section - Matching Live Site */}
       <section className="card-content card-open-house py-5" id="card-id-2271761" data-card-type="8" aria-label="Schedule Private Showing" style={{
@@ -611,6 +634,13 @@ export async function getStaticProps(
   context: GetStaticPropsContext
 ): Promise<GetStaticPropsResult<NodePageProps>> {
   const slug = context.params?.slug as string[] | undefined
+  const inventory = await getTurnberryInventory()
+  const serializedInventory: NodePageProps["inventory"] = {
+    count: inventory.count,
+    source: inventory.source,
+    lastUpdatedIso: inventory.lastUpdated.toISOString(),
+    priceRange: inventory.priceRange,
+  }
   
   // Handle root route (/) - always return home page structure
   // Try Drupal first if configured, but fallback to static home page if it fails
@@ -628,7 +658,9 @@ export async function getStaticProps(
               props: {
                 node,
                 menus: await getMenus(context),
+                inventory: serializedInventory,
               },
+              revalidate: 3600,
             }
           }
         }
@@ -653,7 +685,9 @@ export async function getStaticProps(
             field_sections: [],
           } as any,
           menus: await getMenus(context),
+          inventory: serializedInventory,
         },
+        revalidate: 3600,
       }
     } catch (error) {
       // If getMenus fails, return empty menus
@@ -671,7 +705,9 @@ export async function getStaticProps(
             main: [],
             footer: [],
           },
+          inventory: serializedInventory,
         },
+        revalidate: 3600,
       }
     }
   }
@@ -735,6 +771,7 @@ export async function getStaticProps(
       props: {
         node,
         menus: await getMenus(context),
+        inventory: serializedInventory,
       },
     }
   } catch (error) {
