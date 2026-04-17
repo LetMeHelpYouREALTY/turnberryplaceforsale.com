@@ -11,6 +11,8 @@ interface JsonLdSchemaProps {
   propertyName?: string
   propertyAddress?: string
   propertyPrice?: string
+  inventoryCount?: number
+  inventoryLastUpdatedIso?: string
 }
 
 export function JsonLdSchema({
@@ -18,6 +20,8 @@ export function JsonLdSchema({
   propertyName = 'Turnberry Place Las Vegas',
   propertyAddress = '2827 Paradise Rd, Las Vegas, NV 89109',
   propertyPrice,
+  inventoryCount,
+  inventoryLastUpdatedIso,
 }: JsonLdSchemaProps) {
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://www.turnberryplaceforsale.com'
 
@@ -92,6 +96,8 @@ export function JsonLdSchema({
     },
     numberOfBedroomsTotal: '1-4',
     numberOfBathroomsTotal: '1-4',
+    ...(inventoryCount && { numberOfAccommodationUnits: inventoryCount }),
+    ...(inventoryLastUpdatedIso && { dateModified: inventoryLastUpdatedIso }),
     ...(propertyPrice && { price: propertyPrice }),
     description:
       'Luxury high-rise condominium community featuring 4 towers with 1-4 bedroom residences, Strip views, and exclusive access to The Stirling Club.',
