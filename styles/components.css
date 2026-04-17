@@ -1554,6 +1554,10 @@ main .card-top-header:first-of-type {
   display: flex;
   flex-direction: column;
   padding-top: 0;
+  /* Fluid hero type — tune min/max/rem or vw coefficients here */
+  --hero-title-fluid: clamp(1.625rem, 0.65rem + 4.1vw, 5.25rem);
+  --hero-location-fluid: clamp(1.05rem, 0.55rem + 1.85vw, 2.125rem);
+  --hero-status-fluid: clamp(1rem, 0.88rem + 0.45vw, 1.35rem);
 }
 
 .card-top-header::after {
@@ -1569,71 +1573,55 @@ main .card-top-header:first-of-type {
   background-color: rgba(0, 0, 0, var(--overlay-opacity, 0.15));
 }
 
-/* Hero content already defined above */
-
-.card-top-header h1 {
+/* Hero content — one H1; location + status are paragraphs (avoids duplicate heading levels) */
+.card-top-header .hero-headline {
   color: var(--heading-overlay-color, rgba(255, 255, 255, 1));
   font-family: var(--headlines-font, "Playfair Display", serif);
   font-weight: var(--headlines-font-weight, 600);
-  font-size: 3rem;
-  line-height: 1.2;
+  font-size: var(--hero-title-fluid);
+  line-height: 1.14;
   margin: 0 auto 0.5rem;
   text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
   letter-spacing: 0.05em;
   text-align: center;
-  max-width: 100%;
   text-transform: uppercase;
+  max-width: min(100%, 42rem);
+  margin-left: auto;
+  margin-right: auto;
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 
-.card-top-header h2 {
+@supports (text-wrap: balance) {
+  .card-top-header .hero-headline {
+    text-wrap: balance;
+  }
+}
+
+.card-top-header .hero-location {
   color: var(--heading-overlay-color, rgba(255, 255, 255, 1));
   font-family: var(--headlines-font, "Playfair Display", serif);
   font-weight: var(--headlines-font-weight, 600);
-  font-size: 2.5rem;
-  line-height: 1.2;
-  margin: 0 auto 1rem;
-  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+  font-size: var(--hero-location-fluid);
+  line-height: 1.25;
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.6);
   letter-spacing: 0.05em;
   text-align: center;
-  max-width: 100%;
   text-transform: uppercase;
 }
 
-/* Desktop hero title */
-@media (min-width: 992px) {
-  .card-top-header h1 {
-    font-size: 4.5rem;
-    margin-bottom: 0.5rem;
-  }
-  
-  .card-top-header h2 {
-    font-size: 3.5rem;
-    margin-bottom: 1rem;
-  }
-}
-
-@media (max-width: 991.98px) {
-  .card-top-header h1 {
-    font-size: 2.75rem;
-    margin-bottom: 0.5rem;
-  }
-  
-  .card-top-header h2 {
-    font-size: 2.25rem;
-    margin-bottom: 0.75rem;
-  }
-}
-
-@media (max-width: 767.98px) {
-  .card-top-header h1 {
-    font-size: 2.25rem;
-    margin-bottom: 0.5rem;
-  }
-  
-  .card-top-header h2 {
-    font-size: 1.75rem;
-    margin-bottom: 0.75rem;
-  }
+.card-top-header .hero-status-title {
+  margin: 0;
+  padding: 0;
+  font-family: var(--headlines-font, "Playfair Display", serif);
+  font-weight: 600;
+  color: #ffffff;
+  font-size: var(--hero-status-fluid);
+  line-height: 1.2;
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.6);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  text-align: center;
 }
 
 .card-top-header h4 {
@@ -1700,11 +1688,9 @@ main .card-top-header:first-of-type {
   backdrop-filter: blur(5px);
 }
 
-.card-top-header .status-banner h4 {
+.card-top-header .status-banner .hero-status-title {
   margin-top: 2px;
-  margin-bottom: 0px;
-  font-size: 1.1rem;
-  font-weight: 500;
+  margin-bottom: 0;
 }
 
 /* Desktop status banner */
@@ -1712,10 +1698,6 @@ main .card-top-header:first-of-type {
   .card-top-header .status-banner {
     min-width: 220px;
     padding: 0.75rem 1.5rem;
-  }
-  
-  .card-top-header .status-banner h4 {
-    font-size: 1.25rem;
   }
 }
 

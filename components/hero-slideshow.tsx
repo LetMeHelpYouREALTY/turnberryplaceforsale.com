@@ -159,22 +159,12 @@ export function HeroSlideshow({ photos }: HeroSlideshowProps) {
       <div className="container h-100 d-flex align-items-center justify-content-center">
         <div className="row w-100 justify-content-center">
           <div className="col-12 text-center hero-content position-relative" style={{ zIndex: 14 }}>
-            <h1 className="display-4 mb-2" style={{ 
-              fontWeight: 600,
-              color: '#ffffff',
-              textShadow: '2px 2px 8px rgba(0, 0, 0, 0.7)',
-            }}>
+            <h1 className="hero-headline mb-2">
               Turnberry Place Condos for Sale | Luxury High-Rise Living Near the Las Vegas Strip
             </h1>
             <div className="d-flex align-items-center justify-content-center mb-4">
               <div className="w-10 horiz-line" style={{ flex: '1', maxWidth: '100px', height: '2px', backgroundColor: '#ffffff' }}></div>
-              <h2 className="h4 my-0 mx-4" style={{ 
-                fontWeight: 600,
-                color: '#ffffff',
-                textShadow: '1px 1px 4px rgba(0,0,0,0.6)',
-              }}>
-                Las Vegas, NV
-              </h2>
+              <p className="hero-location my-0 mx-4">Las Vegas, NV</p>
               <div className="w-10 horiz-line" style={{ flex: '1', maxWidth: '100px', height: '2px', backgroundColor: '#ffffff' }}></div>
             </div>
             <div className="mt-4 d-flex flex-column align-items-center justify-content-center" style={{ gap: '1rem' }}>
@@ -184,15 +174,7 @@ export function HeroSlideshow({ photos }: HeroSlideshowProps) {
                 minWidth: '200px',
                 backgroundColor: 'rgba(255, 255, 255, 0.3)',
               }}>
-                <h2 className="h4 my-0" style={{
-                  marginTop: '2px',
-                  marginBottom: '0px',
-                  fontWeight: 600,
-                  color: '#ffffff',
-                  textShadow: '1px 1px 4px rgba(0,0,0,0.6)',
-                }}>
-                  Units for Sale
-                </h2>
+                <p className="hero-status-title">Units for Sale</p>
               </div>
               <div className="d-flex flex-column flex-sm-row align-items-center justify-content-center" style={{ gap: '0.75rem' }}>
                 <Link 
