@@ -10,6 +10,7 @@ import { getMenus } from "lib/get-menus"
 import { Meta } from "components/meta"
 import { TowersSchema } from "components/towers-schema"
 import { BreadcrumbSchema } from "components/breadcrumb-schema"
+import { JsonLdSchema } from "components/json-ld-schema"
 import Link from "next/link"
 import Image from "next/image"
 
@@ -26,6 +27,7 @@ export default function TowersPage({ menus }: TowersPageProps) {
         ogImageAlt="Turnberry Place towers and surrounding Las Vegas views"
         path="/towers"
       />
+      <JsonLdSchema type="towers" />
       <TowersSchema />
       <BreadcrumbSchema currentPageTitle="Turnberry Place Towers | Las Vegas Luxury High-Rise Condos" />
       

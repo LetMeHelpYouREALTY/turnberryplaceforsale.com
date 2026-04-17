@@ -5,6 +5,7 @@
 
 import React from 'react'
 import { useRouter } from 'next/router'
+import { buildBreadcrumbListSchema } from 'lib/schema/breadcrumbList'
 
 interface BreadcrumbItem {
   name: string
@@ -59,16 +60,12 @@ export function BreadcrumbSchema({ items, currentPageTitle }: BreadcrumbSchemaPr
     breadcrumbItems = [{ name: 'Home', url: baseUrl }]
   }
 
-  const schema = {
-    '@context': 'https://schema.org',
-    '@type': 'BreadcrumbList',
-    itemListElement: breadcrumbItems.map((item, index) => ({
-      '@type': 'ListItem',
-      position: index + 1,
+  const schema = buildBreadcrumbListSchema({
+    items: breadcrumbItems.map((item) => ({
       name: item.name,
       item: item.url,
     })),
-  }
+  })
 
   return (
     <script

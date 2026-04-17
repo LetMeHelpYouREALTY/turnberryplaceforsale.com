@@ -37,7 +37,7 @@ function parseCountFromHtml(html: string): number | null {
 }
 
 function parsePriceRangeFromHtml(html: string): { low: number; high: number } | null {
-  const priceMatches = [...html.matchAll(/\$([0-9][0-9,]{2,})/g)]
+  const priceMatches = Array.from(html.matchAll(/\$([0-9][0-9,]{2,})/g))
     .map((match) => Number(match[1].replace(/,/g, "")))
     .filter((value) => Number.isFinite(value) && value >= 100000)
 

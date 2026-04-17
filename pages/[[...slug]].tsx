@@ -19,6 +19,7 @@ import { Layout, LayoutProps } from "components/layout"
 import { Meta } from "components/meta"
 import { HeroSlideshow } from "components/hero-slideshow"
 import { JsonLdSchema } from "components/json-ld-schema"
+import { HomeFaqSection } from "components/home-faq-section"
 import { LiveInventoryBadge } from "components/live-inventory-badge"
 import { PropertyGrid } from "components/property-grid"
 import { VIPNewsletterSignup } from "components/vip-newsletter-signup"
@@ -87,6 +88,7 @@ export default function NodePage({ node, menus, inventory }: NodePageProps) {
           propertyPrice="$800,000 - $10,000,000+"
           inventoryCount={inventory.count}
           inventoryLastUpdatedIso={inventory.lastUpdatedIso}
+          inventorySource={inventory.source}
         />
         <HomePageContent inventory={inventory} />
       </Layout>
@@ -296,6 +298,8 @@ function HomePageContent({
 
       {/* Luxury Amenities Section */}
       <LuxuryAmenitiesGrid />
+
+      <HomeFaqSection />
 
       {/* Open House Section - Matching Live Site */}
       <section className="card-content card-open-house py-5" id="card-id-2271761" data-card-type="8" aria-label="Schedule Private Showing" style={{
