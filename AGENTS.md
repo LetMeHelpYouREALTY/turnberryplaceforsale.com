@@ -12,6 +12,7 @@ This file exists so Cursor and other agents that prefer **`AGENTS.md`** load the
 - **Canonical host**: **`https://www.turnberryplaceforsale.com`** for `NEXT_PUBLIC_BASE_URL` in production (middleware enforces `www`).
 - **Do not edit** `components/idx/*` without explicit user approval (MLS compliance).
 - **Secrets**: never commit live keys; use Vercel env and `.env.example` patterns.
+- **Standards baseline**: apply official best practices as of **April 2026**; verify material framework/SEO/platform changes against current docs before implementing.
 
 ## Optional user rules
 

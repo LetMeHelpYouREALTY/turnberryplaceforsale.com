@@ -55,7 +55,7 @@ export function NeighborhoodBenefitsSection() {
       <div className="container mx-auto px-4">
         {/* Section Header */}
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif text-gray-900 mb-4" style={{ fontFamily: 'Cinzel, serif' }}>
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif text-gray-900 mb-4">
             The Paradise Neighborhood
           </h2>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">

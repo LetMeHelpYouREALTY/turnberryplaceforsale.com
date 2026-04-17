@@ -28,7 +28,7 @@ export function DirectionsContactCTA({
                 <div className="w-12 h-12 rounded-full bg-[#D4AF37] flex items-center justify-center">
                   <MapPin size={24} className="text-gray-900" aria-hidden="true" />
                 </div>
-                <h2 className="text-2xl md:text-3xl font-serif text-white" style={{ fontFamily: 'Cinzel, serif' }}>
+                <h2 className="text-2xl md:text-3xl font-serif text-white">
                   Visit Turnberry Place
                 </h2>
               </div>
@@ -77,7 +77,7 @@ export function DirectionsContactCTA({
                 <div className="w-12 h-12 rounded-full bg-[#D4AF37] flex items-center justify-center">
                   <Phone size={24} className="text-gray-900" aria-hidden="true" />
                 </div>
-                <h2 className="text-2xl md:text-3xl font-serif text-white" style={{ fontFamily: 'Cinzel, serif' }}>
+                <h2 className="text-2xl md:text-3xl font-serif text-white">
                   Schedule a Private Tour
                 </h2>
               </div>

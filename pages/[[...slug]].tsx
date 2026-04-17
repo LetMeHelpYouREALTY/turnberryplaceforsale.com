@@ -342,38 +342,7 @@ function HomePageContent() {
         </div>
       </section>
 
-      {/* Home Value Widget - RealScout (Compact) */}
-      <section className="card-content card-home-value py-5" id="card-id-home-value" aria-label="Home Value Estimate">
-        <div className="container">
-          <div className="row justify-content-center">
-            <div className="col-12 col-lg-8">
-              <div className="text-center mb-3">
-                <h2 className="h4 mb-2">What's Your Home Worth?</h2>
-                <p className="small text-muted mb-3">
-                  Get an instant estimate of your property's value with our free home valuation tool.
-                </p>
-              </div>
-              <div className="widget-card--light widget-wrapper">
-                <Script
-                  src="https://em.realscout.com/widgets/realscout-web-components.umd.js"
-                  type="module"
-                  strategy="lazyOnload"
-                />
-                <style jsx>{`
-                  realscout-home-value {
-                    width: 100%;
-                    min-height: 250px;
-                  }
-                `}</style>
-                {/* @ts-ignore - Custom web component */}
-                <realscout-home-value
-                  agent-encoded-id="QWdlbnQtMjI1MDUw"
-                ></realscout-home-value>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* Home valuation widget lives on /price-features (avoids duplicate RealScout script on home) */}
 
       {/* Agent Section - Matching Live Site */}
       <section className="card-content card-agent py-5" id="card-id-2271762" data-card-type="12" aria-label="Dr. Jan Duffy, REALTOR">
@@ -494,9 +463,9 @@ function HomePageContent() {
         <div className="container">
           <div className="row align-items-center justify-content-center">
             <div className="col-12 col-lg-11 col-xl-10 text-center">
-              <h1 className="text-center mb-4">
+              <h2 className="text-center mb-4">
                 Floor Plans
-              </h1>
+              </h2>
               <div className="py-4">
                 <Link href="/floor-plans" className="btn btn-primary btn-lg">
                   View All Floor Plans
@@ -512,7 +481,7 @@ function HomePageContent() {
         <div className="container">
           <div className="row justify-content-center">
             <div className="col-12 col-lg-10">
-              <h1 className="text-center mb-4">The Stirling Club</h1>
+              <h2 className="text-center mb-4">The Stirling Club</h2>
               <div className="row align-items-center mb-4">
                 <div className="col-12 col-md-6 mb-4 mb-md-0">
                   <div className="text-center">
@@ -575,7 +544,7 @@ function HomePageContent() {
           <div className="row align-items-center justify-content-center">
             <div className="col-12 col-sm-11 col-lg-10 col-xl-9">
               <div className="py-4">
-                <h1 className="text-center mb-4">Turnberry Place Neighborhood</h1>
+                <h2 className="text-center mb-4">Turnberry Place Neighborhood</h2>
                 <div className="area-desc">
                   <p>Turnberry Place is located just one block east of the Las Vegas Strip between the Wynn Encore and Sahara resorts. This guard-gated, four-tower condominium complex offers residents immediate proximity to the Entertainment Capital of the World while residing in a serene, tropical-inspired oasis.</p>
                 </div>

@@ -51,7 +51,6 @@ export default function TowersPage({ menus }: TowersPageProps) {
           <h1 
             className="text-4xl md:text-5xl lg:text-6xl font-serif text-white mb-4" 
             style={{ 
-              fontFamily: 'Cinzel, serif',
               textShadow: '2px 2px 8px rgba(0, 0, 0, 0.7)',
               letterSpacing: '0.02em'
             }}

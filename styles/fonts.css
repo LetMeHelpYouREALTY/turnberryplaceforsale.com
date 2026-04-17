@@ -1,24 +1,19 @@
-/* Custom Fonts - Simplified to 2 font families */
-/* Luxury Font Stack: Playfair Display (serif headings) + Inter (sans-serif body) */
+/* Typography: exactly two webfont families site-wide (Playfair Display + Inter).
+   System UI stacks are fallbacks only — not additional branded fonts. */
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
 
-/* Legacy fonts for backward compatibility */
-@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Questrial:wght@400;500;600&display=swap');
-
 :root {
-  /* Luxury Font Families - High-End Aesthetic */
-  --default-font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  --headlines-font: 'Playfair Display', serif; /* Serif for headings - luxury aesthetic */
+  /* Primary stacks (max two branded families) */
+  --headlines-font: 'Playfair Display', Georgia, 'Times New Roman', serif;
   --headlines-font-weight: 600;
-  --body-font: 'Inter', sans-serif; /* Clean sans-serif for body text */
+  --body-font: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   --body-font-weight: 400;
-  --nav-font: 'Playfair Display', serif; /* Match headings for navigation */
+  --nav-font: 'Playfair Display', Georgia, 'Times New Roman', serif;
   --nav-font-weight: 600;
-  
-  /* Legacy fonts for backward compatibility */
-  --legacy-headlines-font: 'Cinzel', serif;
-  --legacy-body-font: 'Questrial', sans-serif;
-  
+
+  /* Generic system stack — forms, rare UI (same “class” as body, not a third webfont) */
+  --default-font: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+
   /* Luxury Color Palette: Deep Navy, Slate, Gold Accents */
   --luxury-navy: #0a1929; /* Deep Navy */
   --luxury-navy-rgb: 10, 25, 41;
@@ -28,7 +23,7 @@
   --luxury-gold-rgb: 212, 175, 55;
   --luxury-gold-light: #f4e4a6; /* Light gold for highlights */
   --luxury-gold-dark: #b8941f; /* Dark gold for hover states */
-  
+
   /* Colors - Matching Live Site CSS Variables (luxury black theme) */
   --heading-color: #ffffff;
   --body-copy-color: #e0e0e0;
@@ -47,34 +42,44 @@
   --section-bgcolor-odd-rgb: 26,26,26;
   --section-bgcolor-even: #0d0d0d;
   --section-bgcolor-even-rgb: 13,13,13;
-  
+
   /* Gold accent for primary buttons and CTAs */
   --primary-accent: var(--luxury-gold);
   --primary-accent-hover: var(--luxury-gold-dark);
 }
 
-/* Body text uses Inter (clean sans-serif) */
-body, .body-font {
-  font-family: var(--body-font), var(--legacy-body-font), sans-serif;
+/* Body: Inter */
+body,
+.body-font {
+  font-family: var(--body-font);
   font-weight: var(--body-font-weight);
-  letter-spacing: -0.01em; /* Slight letter-spacing for Inter */
+  letter-spacing: -0.01em;
 }
 
-/* Headings use Playfair Display (serif - luxury aesthetic) */
-h1, h2, h3, h4, h5, h6, .headlines-font {
-  font-family: var(--headlines-font), var(--legacy-headlines-font), serif;
+/* Headings: Playfair Display */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.headlines-font {
+  font-family: var(--headlines-font);
   font-weight: var(--headlines-font-weight);
-  letter-spacing: 0.02em; /* Elegant spacing for serif headings */
+  letter-spacing: 0.02em;
 }
 
-/* Buttons use Inter (same as body) */
-button, .btn, .buttons-font {
-  font-family: var(--body-font), var(--legacy-body-font), sans-serif;
-  font-weight: 500; /* Slightly bolder for buttons */
+/* Buttons: Inter (same as body) */
+button,
+.btn,
+.buttons-font {
+  font-family: var(--body-font);
+  font-weight: 500;
 }
 
-/* Navigation uses Playfair Display (same as headings) */
-a.nav-link, .nav-font {
-  font-family: var(--nav-font), var(--legacy-headlines-font), serif;
+/* Navigation: Playfair Display (same as headings) */
+a.nav-link,
+.nav-font {
+  font-family: var(--nav-font);
   font-weight: var(--nav-font-weight);
 }

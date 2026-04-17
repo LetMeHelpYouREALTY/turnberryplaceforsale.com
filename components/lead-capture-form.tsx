@@ -247,7 +247,7 @@ export function LeadCaptureForm({ variant = 'footer', showValuationCTA = true }:
         {showValuationCTA && (
           <div className="mt-4 pt-3 border-top text-center">
             <Link
-              href="/request-details"
+              href="/price-features#home-value-estimate"
               className="btn btn-outline-primary btn-sm w-100 d-flex align-items-center justify-content-center"
             >
               <Home className="w-4 h-4 mr-2" aria-hidden="true" />

@@ -7,11 +7,30 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        // Match styles/fonts.css (Playfair + Inter); legacy Cinzel/Questrial remain available via CSS vars
-        headline: ['"Playfair Display"', 'Cinzel', 'serif'],
-        body: ['Inter', 'Questrial', 'system-ui', 'sans-serif'],
-        sans: ['Inter', 'Questrial', 'system-ui', 'sans-serif'],
-        serif: ['"Playfair Display"', 'Cinzel', 'serif'],
+        // Match styles/fonts.css — only Playfair Display + Inter (system fonts are fallbacks)
+        headline: ['"Playfair Display"', 'Georgia', 'serif'],
+        body: ['Inter', 'system-ui', 'sans-serif'],
+        sans: ['Inter', 'system-ui', 'sans-serif'],
+        serif: ['"Playfair Display"', 'Georgia', 'serif'],
+      },
+      typography: {
+        DEFAULT: {
+          css: {
+            fontFamily: 'Inter, system-ui, sans-serif',
+            h1: {
+              fontFamily: '"Playfair Display", Georgia, serif',
+            },
+            h2: {
+              fontFamily: '"Playfair Display", Georgia, serif',
+            },
+            h3: {
+              fontFamily: '"Playfair Display", Georgia, serif',
+            },
+            h4: {
+              fontFamily: '"Playfair Display", Georgia, serif',
+            },
+          },
+        },
       },
     },
   },

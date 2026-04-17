@@ -65,12 +65,11 @@ export function ExpandableTowerSections({ towers }: ExpandableTowerSectionsProps
                 <div style={{ flex: 1 }}>
                   <div style={{ display: 'flex', alignItems: 'baseline', gap: '1rem', flexWrap: 'wrap' }}>
                     <span
-                      className="font-weight-bold"
+                      className="font-weight-bold font-serif"
                       style={{
                         fontSize: '3rem',
                         color: '#D4AF37',
                         lineHeight: 1,
-                        fontFamily: 'serif',
                       }}
                     >
                       {tower.number}

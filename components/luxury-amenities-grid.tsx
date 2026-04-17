@@ -44,7 +44,7 @@ export function LuxuryAmenitiesGrid() {
         <div className="row justify-content-center">
           <div className="col-12 col-lg-10">
             <div className="text-center mb-5">
-              <h1 className="mb-3">Luxury Amenities</h1>
+              <h2 className="mb-3">Luxury Amenities</h2>
               <p className="lead">
                 Turnberry Place residents enjoy exclusive access to world-class amenities designed for luxury living and relaxation.
               </p>
@@ -92,9 +92,9 @@ export function LuxuryAmenitiesGrid() {
               borderRadius: '8px',
               border: '1px solid #3a3a3a',
             }}>
-              <h2 className="h4 mb-3 text-center" style={{ color: '#ffffff' }}>
+              <h3 className="h4 mb-3 text-center" style={{ color: '#ffffff' }}>
                 Exclusive Access to The Stirling Club
-              </h2>
+              </h3>
               <p style={{ color: '#e0e0e0', lineHeight: 1.7, marginBottom: 0 }}>
                 The crown jewel of Turnberry Place is the recently renovated Stirling Club, an 80,000 square foot private club offering world-class amenities exclusively to residents. This premier facility features state-of-the-art fitness centers, resort-style pools, professional tennis courts, luxury spa services, fine dining venues, and business facilities. The Stirling Club represents the pinnacle of luxury living, providing residents with a resort-style experience right at home.
               </p>

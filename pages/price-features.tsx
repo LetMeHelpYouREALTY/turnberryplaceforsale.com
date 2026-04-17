@@ -2,6 +2,7 @@ import { GetStaticPropsResult } from "next"
 import Head from "next/head"
 import Image from "next/image"
 import Link from "next/link"
+import Script from "next/script"
 import React, { useEffect, useMemo, useState } from "react"
 import {
   Building2,
@@ -263,6 +264,40 @@ export default function PriceFeaturesPage({ menus }: PriceFeaturesPageProps) {
                     </div>
                   </div>
                 ))}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* RealScout home valuation — kept off homepage (single script load per priority URL) */}
+        <section
+          className="price-features-section"
+          aria-label="Home value estimate"
+          id="home-value-estimate"
+        >
+          <div className="container">
+            <div className="row justify-content-center">
+              <div className="col-12 col-lg-8 text-center">
+                <h2 className="price-features-h2" data-reveal>
+                  What&apos;s Your Home Worth?
+                </h2>
+                <p className="price-features-lead mb-4" data-reveal>
+                  Get an instant estimate with our free home valuation tool.
+                </p>
+                <div className="widget-card--light widget-wrapper" data-reveal>
+                  <Script
+                    src="https://em.realscout.com/widgets/realscout-web-components.umd.js"
+                    type="module"
+                    strategy="lazyOnload"
+                  />
+                  <style jsx>{`
+                    realscout-home-value {
+                      width: 100%;
+                      min-height: 250px;
+                    }
+                  `}</style>
+                  <realscout-home-value agent-encoded-id="QWdlbnQtMjI1MDUw" />
+                </div>
               </div>
             </div>
           </div>

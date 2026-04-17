@@ -29,6 +29,8 @@ Marketing site for **Turnberry Place** luxury high-rise condos (Las Vegas). **Ne
 
 ## SEO / Search
 
+- **Heading hierarchy**: the home page should expose **one `<h1>`** (hero in `HeroSlideshow`); section titles use `<h2>` / `<h3>`.
+- **Home valuation** (RealScout `realscout-home-value`): lives on **`/price-features#home-value-estimate`**, not on `/`, to avoid a second widget script on the homepage.
 - **`public/robots.txt`**: do **not** add `Disallow: /_next/` — crawlers need `/_next/static` assets to render. Sitemap URL is listed at the bottom of `robots.txt`.
 - **Sitemap**: `pages/sitemap.xml.ts` → `/sitemap.xml`.
 - Optional GSC HTML tag: **`NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION`** (see `pages/_document.tsx`).
@@ -41,6 +43,10 @@ Marketing site for **Turnberry Place** luxury high-rise condos (Las Vegas). **Ne
 ## IDX / MLS
 
 - **Do not edit `components/idx/*`** unless the user explicitly approves. Preserve MLS disclaimers and attribution anywhere listings appear.
+
+## Typography
+
+- **Two webfonts only:** Playfair Display (headings / nav) and Inter (body, buttons, UI). Do not add Google Font imports or `font-family` stacks with extra branded faces (legacy Cinzel/Questrial were removed).
 
 ## Change discipline
 

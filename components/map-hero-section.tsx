@@ -28,7 +28,7 @@ export function MapHeroSection({
       {/* Left Content - 40% */}
       <div className="w-full lg:w-2/5 flex flex-col justify-center bg-white p-8 lg:p-12">
         <div className="max-w-lg mx-auto lg:mx-0">
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif text-gray-900 mb-6" style={{ fontFamily: 'Cinzel, serif' }}>
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif text-gray-900 mb-6">
             One Block From the Strip
           </h1>
           

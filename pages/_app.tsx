@@ -11,8 +11,8 @@ import { Analytics } from "@vercel/analytics/react"
 import { SpeedInsights } from "@vercel/speed-insights/react"
 import "nprogress/nprogress.css"
 
-import "styles/globals.css"
 import "styles/fonts.css"
+import "styles/globals.css"
 
 NProgress.configure({ showSpinner: false })
 

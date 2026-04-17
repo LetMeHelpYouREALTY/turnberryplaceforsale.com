@@ -161,7 +161,6 @@ export function HeroSlideshow({ photos }: HeroSlideshowProps) {
         <div className="row w-100 justify-content-center">
           <div className="col-12 text-center hero-content position-relative" style={{ zIndex: 14 }}>
             <h1 className="display-4 mb-2" style={{ 
-              fontFamily: 'var(--headlines-font, "Playfair Display", serif)',
               fontWeight: 600,
               color: '#ffffff',
               textShadow: '2px 2px 8px rgba(0, 0, 0, 0.7)',
@@ -171,7 +170,6 @@ export function HeroSlideshow({ photos }: HeroSlideshowProps) {
             <div className="d-flex align-items-center justify-content-center mb-4">
               <div className="w-10 horiz-line" style={{ flex: '1', maxWidth: '100px', height: '2px', backgroundColor: '#ffffff' }}></div>
               <h2 className="h4 my-0 mx-4" style={{ 
-                fontFamily: 'var(--headlines-font, "Playfair Display", serif)',
                 fontWeight: 600,
                 color: '#ffffff',
                 textShadow: '1px 1px 4px rgba(0,0,0,0.6)',
@@ -190,7 +188,6 @@ export function HeroSlideshow({ photos }: HeroSlideshowProps) {
                 <h2 className="h4 my-0" style={{
                   marginTop: '2px',
                   marginBottom: '0px',
-                  fontFamily: 'var(--headlines-font, "Playfair Display", serif)',
                   fontWeight: 600,
                   color: '#ffffff',
                   textShadow: '1px 1px 4px rgba(0,0,0,0.6)',
@@ -203,7 +200,6 @@ export function HeroSlideshow({ photos }: HeroSlideshowProps) {
                   href="/available-condos" 
                   className="btn btn-light btn-lg px-6 py-3 d-flex align-items-center"
                   style={{
-                    fontFamily: 'var(--body-font, Inter, sans-serif)',
                     fontWeight: 600,
                     textTransform: 'uppercase',
                     letterSpacing: '0.5px',
@@ -219,7 +215,6 @@ export function HeroSlideshow({ photos }: HeroSlideshowProps) {
                   href="/request-details" 
                   className="btn btn-outline-light btn-lg px-6 py-3 d-flex align-items-center"
                   style={{
-                    fontFamily: 'var(--body-font, Inter, sans-serif)',
                     fontWeight: 600,
                     textTransform: 'uppercase',
                     letterSpacing: '0.5px',

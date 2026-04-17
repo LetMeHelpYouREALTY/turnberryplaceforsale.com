@@ -2,7 +2,7 @@
 
 A luxury real estate marketing site built with Next.js, Drupal, and modern web technologies.
 
-**AI assistants:** Project instructions live in [`CLAUDE.md`](./CLAUDE.md) (Claude Code loads it automatically). Cursor-oriented pointer: [`AGENTS.md`](./AGENTS.md).
+**AI assistants:** Project instructions live in [`CLAUDE.md`](./CLAUDE.md) (Claude Code loads it automatically). Cursor-oriented pointer: [`AGENTS.md`](./AGENTS.md). Apply official best practices as of **April 2026** and verify material changes against current docs.
 
 ## Built With
 

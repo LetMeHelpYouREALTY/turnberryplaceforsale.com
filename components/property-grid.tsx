@@ -27,7 +27,7 @@ export function PropertyGrid({ properties, title, subtitle }: PropertyGridProps)
         {(title || subtitle) && (
           <div className="text-center mb-6">
             {title && (
-              <h1 className="mb-3">{title}</h1>
+              <h2 className="mb-3">{title}</h2>
             )}
             {subtitle && (
               <p className="lead">

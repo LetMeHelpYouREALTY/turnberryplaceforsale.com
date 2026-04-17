@@ -1378,7 +1378,7 @@ main .card-top-header:first-of-type {
 }
 
 .nav-dropdown .dropdown-item {
-  font-family: var(--nav-font, 'Cinzel', serif);
+  font-family: var(--nav-font, "Playfair Display", serif);
   font-weight: 400;
   color: rgba(255, 255, 255, 0.9);
   display: block;
@@ -1532,7 +1532,7 @@ main .card-top-header:first-of-type {
 .card-top-nav .agent-text a:hover {
   color: var(--body-copy-color, rgba(255, 255, 255, 1));
   text-decoration: none;
-  font-family: var(--nav-font, 'Cinzel', serif);
+  font-family: var(--nav-font, "Playfair Display", serif);
   font-weight: var(--nav-font-weight, 500);
 }
 
@@ -1573,7 +1573,7 @@ main .card-top-header:first-of-type {
 
 .card-top-header h1 {
   color: var(--heading-overlay-color, rgba(255, 255, 255, 1));
-  font-family: var(--headlines-font, 'Cinzel', serif);
+  font-family: var(--headlines-font, "Playfair Display", serif);
   font-weight: var(--headlines-font-weight, 600);
   font-size: 3rem;
   line-height: 1.2;
@@ -1587,7 +1587,7 @@ main .card-top-header:first-of-type {
 
 .card-top-header h2 {
   color: var(--heading-overlay-color, rgba(255, 255, 255, 1));
-  font-family: var(--headlines-font, 'Cinzel', serif);
+  font-family: var(--headlines-font, "Playfair Display", serif);
   font-weight: var(--headlines-font-weight, 600);
   font-size: 2.5rem;
   line-height: 1.2;
@@ -1638,7 +1638,7 @@ main .card-top-header:first-of-type {
 
 .card-top-header h4 {
   color: var(--heading-overlay-color, rgba(255, 255, 255, 1));
-  font-family: var(--body-font, 'Questrial', sans-serif);
+  font-family: var(--body-font, "Inter", sans-serif);
   font-weight: 400;
   font-size: 1rem;
   letter-spacing: 0.1em;
@@ -2364,7 +2364,7 @@ main .card-top-header:first-of-type {
   display: block;
   padding: 1rem 1.25rem;
   font-size: 1.1rem;
-  font-family: var(--nav-font, 'Cinzel', serif);
+  font-family: var(--nav-font, "Playfair Display", serif);
   transition: background-color 0.2s ease, color 0.2s ease;
   width: 100%;
   box-sizing: border-box;
@@ -2441,13 +2441,13 @@ main .card-top-header:first-of-type {
 }
 
 .site-links-section h2 {
-  font-family: var(--headlines-font, 'Cinzel', serif);
+  font-family: var(--headlines-font, "Playfair Display", serif);
   font-weight: 600;
   color: #ffffff;
 }
 
 .site-link-item {
-  font-family: var(--body-font, 'Questrial', sans-serif);
+  font-family: var(--body-font, "Inter", sans-serif);
   font-size: 0.95rem;
   font-weight: 400;
 }
