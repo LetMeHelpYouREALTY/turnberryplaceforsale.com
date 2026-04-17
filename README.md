@@ -2,6 +2,8 @@
 
 A luxury real estate marketing site built with Next.js, Drupal, and modern web technologies.
 
+**AI assistants:** Project instructions live in [`CLAUDE.md`](./CLAUDE.md) (Claude Code loads it automatically). Cursor-oriented pointer: [`AGENTS.md`](./AGENTS.md).
+
 ## Built With
 
 - **Next.js** - React framework for production
@@ -57,8 +59,8 @@ DRUPAL_SITE_ID=1
 # If not set, will auto-extract from NEXT_PUBLIC_DRUPAL_BASE_URL
 NEXT_IMAGE_DOMAIN=your-drupal-site.com
 
-# Base URL for the Next.js site
-NEXT_PUBLIC_BASE_URL=https://turnberryplaceforsale.com
+# Base URL for the Next.js site (use www in production — matches middleware & sitemap)
+NEXT_PUBLIC_BASE_URL=https://www.turnberryplaceforsale.com
 ```
 
 ### Development

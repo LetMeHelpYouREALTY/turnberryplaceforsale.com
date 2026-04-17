@@ -4,9 +4,11 @@
 User-agent: *
 Allow: /
 
-# Disallow admin/private areas if any
+# Do NOT disallow /_next/static (JS/CSS chunks). Blocking it can prevent Google
+# from rendering pages correctly and may hurt indexing in Search Console.
+
+# Disallow non-public endpoints and legacy paths only
 Disallow: /api/
-Disallow: /_next/
 Disallow: /admin/
 Disallow: /visit-api
 

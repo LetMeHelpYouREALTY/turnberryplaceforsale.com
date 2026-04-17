@@ -15,6 +15,12 @@ export default class Document extends NextDocument {
             name="robots"
             content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
           />
+          {process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION ? (
+            <meta
+              name="google-site-verification"
+              content={process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION}
+            />
+          ) : null}
           <meta name="author" content="Dr. Jan Duffy, REALTOR" />
           {/* Google Analytics */}
           <script
