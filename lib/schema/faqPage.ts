@@ -6,44 +6,44 @@ export type FaqItem = {
 /** Eight on-page + JSON-LD FAQ entries (keep in sync with homepage FAQ section). */
 export const TURNBERRY_FAQ_ITEMS: FaqItem[] = [
   {
-    question: 'What is Turnberry Place Las Vegas?',
+    question: 'What is Turnberry Place?',
     answer:
-      'Turnberry Place is a luxury high-rise condominium community in Las Vegas featuring 4 towers with 1-4 bedroom residences, Strip views, and exclusive access to The Stirling Club private amenities. Located at 2827 Paradise Rd, just one block from the Las Vegas Strip.',
+      'Turnberry Place is a guard-gated, four-tower luxury high-rise condominium community at 2827 Paradise Rd in Las Vegas (89109), one block east of the Las Vegas Strip. Residents enjoy private amenities plus membership access to the 80,000-square-foot Stirling Club.',
   },
   {
-    question: 'What is the price range for condos at Turnberry Place?',
+    question: 'How many towers does Turnberry Place have?',
     answer:
-      'Turnberry Place condos range from $800,000 to $10,000,000+ depending on tower, floor plan, floor level, and views. Tower 1 typically starts around $800K, while Tower 4 penthouses can exceed $10 million.',
+      'Turnberry Place has four towers—Tower 1 (38 stories, completed 2000) and Towers 2–4 (45 stories each, completed 2001–2005). Together they form one iconic Paradise Road address with sweeping Strip, mountain, and city views.',
   },
   {
-    question: 'What amenities are available at Turnberry Place?',
+    question: 'What is the price range for Turnberry Place condos?',
     answer:
-      'Turnberry Place residents enjoy exclusive access to The Stirling Club, an 80,000-square-foot private facility featuring pools, fitness center, tennis courts, spa, dining venues, and business facilities. The community is guard-gated with 24-hour security, valet parking, and concierge services.',
+      'Residences have historically ranged from roughly $800,000 entry points to $10,000,000+ for premium penthouses, depending on tower, floor, finishes, and view. Dr. Jan Duffy can walk you through what is available today and how pricing compares across towers.',
   },
   {
-    question: 'How many towers are at Turnberry Place?',
+    question: 'What is The Stirling Club?',
     answer:
-      'Turnberry Place consists of 4 luxury towers: Tower 1 (38 stories, completed 2000), Tower 2 (45 stories, completed 2001), Tower 3 (45 stories, completed 2002), and Tower 4 (45 stories, completed 2005).',
+      'The Stirling Club is an approximately 80,000-square-foot private club for Turnberry Place residents, with pools, fitness, tennis, spa, dining, and business and social spaces—think resort-style living without leaving the community.',
   },
   {
-    question: 'How can I schedule a showing at Turnberry Place?',
+    question: 'Is Turnberry Place guard-gated?',
     answer:
-      'Call (702) 500-1971 to schedule a private showing, or use the Calendly scheduling link on this site to book a tour. Dr. Jan Duffy specializes in Turnberry Place condos and offers personalized tours.',
+      'Yes. The community is guard-gated with controlled access and on-site security staff, plus conveniences like valet and concierge—privacy and peace of mind are part of the lifestyle buyers expect here.',
   },
   {
-    question: 'Where is Turnberry Place located?',
+    question: 'How close is Turnberry Place to the Las Vegas Strip?',
     answer:
-      'Turnberry Place is located at 2827 Paradise Rd, Las Vegas, NV 89109, just one block east of the Las Vegas Strip between the Wynn Encore and Sahara resorts. The property offers immediate proximity to world-class dining, entertainment, and attractions.',
+      'Turnberry Place sits about one block east of the Las Vegas Strip—close enough for world-class dining and entertainment, yet set back from the sidewalk crowds. Landmarks like Wynn and Encore are essentially neighbors.',
   },
   {
-    question: 'What is The Stirling Club at Turnberry Place?',
+    question: 'Who is the listing agent for Turnberry Place condos?',
     answer:
-      'The Stirling Club is an 80,000-square-foot private membership facility exclusively for Turnberry Place residents. It features state-of-the-art fitness center, resort-style pools, tennis courts, spa services, multiple dining venues, business center, and social lounges.',
+      'Dr. Jan Duffy, REALTOR, focuses on Turnberry Place and Las Vegas luxury high-rise condos. She is licensed in Nevada (S.0197614.LLC) with Berkshire Hathaway HomeServices Nevada Properties and can be reached at (702) 500-1971.',
   },
   {
-    question: 'What types of views are available at Turnberry Place?',
+    question: 'Are Turnberry Place condos a good investment?',
     answer:
-      'Turnberry Place offers spectacular views including Las Vegas Strip skyline, Red Rock Canyon, Spring Mountain Range, and panoramic city views. Views vary by tower, floor level, and unit orientation.',
+      'Every buyer’s goals differ, and real estate carries risks—there are no guarantees. What draws investors and owner-occupants alike is a finite high-rise footprint near the Strip, strong lifestyle amenities, and a trophy address. Dr. Jan helps clients review comps, HOA considerations, and timing with their own financial and tax advisors.',
   },
 ]
 

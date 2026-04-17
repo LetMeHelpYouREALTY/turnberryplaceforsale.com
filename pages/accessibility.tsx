@@ -46,7 +46,10 @@ export default function AccessibilityPage({ menus }: AccessibilityPageProps) {
           </p>
 
           <p className="mt-4 text-muted">
-            <small>Last updated: January 2026</small>
+            <small>
+              Last updated:{' '}
+              {new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
+            </small>
           </p>
         </div>
       </div>

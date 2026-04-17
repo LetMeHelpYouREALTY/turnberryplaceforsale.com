@@ -1,9 +1,10 @@
 /**
- * Single source for Turnberry Place geo coordinates (aligned with pages/[[...slug]].tsx
- * meta geo.position and on-page consistency). Document in PR when changing.
+ * Turnberry Place (2827 Paradise Rd) — coordinates used consistently in JSON-LD,
+ * homepage meta (geo.position), and related markup. Approximate parcel entrance;
+ * update if GBP pin moves.
  */
 export const TURNBERRY_GEO = {
   '@type': 'GeoCoordinates' as const,
-  latitude: '36.1447',
-  longitude: '-115.1541',
+  latitude: '36.1408',
+  longitude: '-115.1564',
 }

@@ -1,5 +1,17 @@
 import { TURNBERRY_GEO } from 'lib/schema/geo'
 
+function buildTowerResidenceStubs() {
+  return [1, 2, 3, 4].map((n) => ({
+    '@type': 'Residence',
+    name: `Turnberry Place Tower ${n}`,
+    numberOfRooms: {
+      '@type': 'QuantitativeValue',
+      minValue: 1,
+      maxValue: 4,
+    },
+  }))
+}
+
 export type ListingInventorySnapshot = {
   count: number
   source: 'realscout' | 'fallback'
@@ -23,7 +35,7 @@ type ApartmentComplexInput = {
 }
 
 const DEFAULT_DESCRIPTION =
-  'Luxury high-rise condominium community featuring 4 towers with 1-4 bedroom residences, Strip views, and exclusive access to The Stirling Club.'
+  'Four-tower guard-gated luxury high-rise condominium complex one block east of the Las Vegas Strip, with exclusive access to the 80,000 sq ft Stirling Club.'
 
 const TOWERS_DEFAULT_DESCRIPTION =
   'Turnberry Place is a luxury high-rise condominium community featuring four towers (38-45 stories) with 1,200+ residences, Strip views, and exclusive access to The Stirling Club. Starting from $800K.'
@@ -69,11 +81,12 @@ export function buildApartmentComplexSchema({
           { '@type': 'LocationFeatureSpecification', name: '24/7 Security', value: true },
         ]
       : [
-          { '@type': 'LocationFeatureSpecification', name: 'Gated Community' },
-          { '@type': 'LocationFeatureSpecification', name: 'Swimming Pool' },
-          { '@type': 'LocationFeatureSpecification', name: 'Fitness Center' },
-          { '@type': 'LocationFeatureSpecification', name: 'Tennis Courts' },
-          { '@type': 'LocationFeatureSpecification', name: 'Spa' },
+          { '@type': 'LocationFeatureSpecification', name: '24-hour guard-gated security', value: true },
+          { '@type': 'LocationFeatureSpecification', name: 'The Stirling Club access', value: true },
+          { '@type': 'LocationFeatureSpecification', name: 'Resort-style pools', value: true },
+          { '@type': 'LocationFeatureSpecification', name: 'Tennis courts', value: true },
+          { '@type': 'LocationFeatureSpecification', name: 'Fitness center', value: true },
+          { '@type': 'LocationFeatureSpecification', name: 'Spa', value: true },
         ],
     image: towersEnrichment
       ? [
@@ -98,6 +111,8 @@ export function buildApartmentComplexSchema({
       { '@type': 'TouristAttraction', name: 'Spring Mountain Range' },
     ]
   }
+
+  schema.containsPlace = buildTowerResidenceStubs()
 
   const totalUnits =
     towersEnrichment && typeof approximateTotalUnits !== 'number' ? 1200 : approximateTotalUnits

@@ -62,8 +62,8 @@ export default function NodePage({ node, menus, inventory }: NodePageProps) {
           <meta name="author" content="Dr. Jan Duffy, REALTOR" />
           <meta name="geo.region" content="US-NV" />
           <meta name="geo.placename" content="Las Vegas" />
-          <meta name="geo.position" content="36.1447;-115.1541" />
-          <meta name="ICBM" content="36.1447, -115.1541" />
+          <meta name="geo.position" content="36.1408;-115.1564" />
+          <meta name="ICBM" content="36.1408, -115.1564" />
           
           {/* Performance optimizations */}
           <link rel="preconnect" href="https://fonts.googleapis.com" />

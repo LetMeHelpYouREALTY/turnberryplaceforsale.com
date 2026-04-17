@@ -30,8 +30,8 @@ interface InteractiveMapProps {
 }
 
 const TURNBERRY_LOCATION = {
-  lat: 36.1447,
-  lng: -115.1541,
+  lat: 36.1408,
+  lng: -115.1564,
 }
 
 const categoryColors: Record<string, string> = {

@@ -68,7 +68,7 @@ export default function MapPage({ menus }: MapPageProps) {
               {/* Interactive Map */}
               <InteractiveMap
                 mapKey={mapKey}
-                center={{ lat: 36.1447, lng: -115.1541 }}
+                center={{ lat: 36.1408, lng: -115.1564 }}
                 zoom={15}
                 activeCategory={activeCategory}
                 places={placesData}

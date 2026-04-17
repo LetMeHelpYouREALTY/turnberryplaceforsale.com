@@ -20,8 +20,8 @@ export function MapPlaceSchema() {
     },
     "geo": {
       "@type": "GeoCoordinates",
-      "latitude": 36.1447,
-      "longitude": -115.1541
+      "latitude": 36.1408,
+      "longitude": -115.1564
     },
     "image": `${baseUrl}/images/turnberry/Turnberry_Place_For_Sale.jpg`,
     "telephone": "+17025001971"
@@ -43,8 +43,8 @@ export function MapPlaceSchema() {
     },
     "geo": {
       "@type": "GeoCoordinates",
-      "latitude": 36.1447,
-      "longitude": -115.1541
+      "latitude": 36.1408,
+      "longitude": -115.1564
     },
     "telephone": "+17025001971",
     "priceRange": "$800,000 - $10,000,000+",

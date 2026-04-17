@@ -6,6 +6,7 @@
 
 import React from 'react'
 import { buildApartmentComplexSchema } from 'lib/schema/apartmentComplex'
+import { TURNBERRY_GEO } from 'lib/schema/geo'
 import { JsonLd } from './json-ld'
 
 export function TowersSchema() {
@@ -74,11 +75,7 @@ export function TowersSchema() {
       postalCode: '89109',
       addressCountry: 'US',
     },
-    geo: {
-      '@type': 'GeoCoordinates',
-      latitude: '36.1447',
-      longitude: '-115.1541',
-    },
+    geo: TURNBERRY_GEO,
     floorSize: {
       '@type': 'QuantitativeValue',
       value: tower.sizeRange,

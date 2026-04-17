@@ -4,6 +4,31 @@
 User-agent: *
 Allow: /
 
+# Explicit allows for major crawlers + AI discovery (site also allows all via * above)
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: GPTBot
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
 # Do NOT disallow /_next/static (JS/CSS chunks). Blocking it can prevent Google
 # from rendering pages correctly and may hurt indexing in Search Console.
 

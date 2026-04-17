@@ -23,6 +23,9 @@
 .DS_Store
 *.pem
 
+# lighthouse CLI output (local audits)
+lighthouse-*.json
+
 # debug
 npm-debug.log*
 yarn-debug.log*

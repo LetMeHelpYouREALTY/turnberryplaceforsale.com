@@ -3,6 +3,7 @@ import { TURNBERRY_GEO } from 'lib/schema/geo'
 type AreaServedEntry =
   | { '@type': 'City'; name: string }
   | { '@type': 'AdministrativeArea'; name: string }
+  | { '@type': 'Place'; name: string }
 
 type RealEstateAgentInput = {
   baseUrl: string
@@ -14,6 +15,8 @@ export function buildRealEstateAgentSchema({ baseUrl }: RealEstateAgentInput) {
     { '@type': 'City', name: 'Paradise' },
     { '@type': 'City', name: 'Winchester' },
     { '@type': 'AdministrativeArea', name: 'Clark County' },
+    { '@type': 'Place', name: 'Las Vegas, NV 89109' },
+    { '@type': 'Place', name: 'Las Vegas, NV 89169' },
   ]
 
   return {
@@ -31,11 +34,11 @@ export function buildRealEstateAgentSchema({ baseUrl }: RealEstateAgentInput) {
       '@type': 'EducationalOccupationalCredential',
       credentialCategory: 'license',
       name: 'Nevada Real Estate Salesperson License',
-      identifier: {
-        '@type': 'PropertyValue',
-        name: 'Nevada Real Estate License',
-        value: 'S.0197614.LLC',
+      recognizedBy: {
+        '@type': 'Organization',
+        name: 'Nevada Real Estate Division',
       },
+      identifier: 'S.0197614.LLC',
     },
     address: {
       '@type': 'PostalAddress',
@@ -53,9 +56,9 @@ export function buildRealEstateAgentSchema({ baseUrl }: RealEstateAgentInput) {
       url: 'https://www.berkshirehathawayhs.com',
     },
     knowsAbout: [
-      'Turnberry Place Las Vegas',
-      'Luxury High-Rise Condos',
-      'Las Vegas Strip Real Estate',
+      'Luxury high-rise condos',
+      'Turnberry Place',
+      'Las Vegas Strip real estate',
       'The Stirling Club',
     ],
     priceRange: '$800,000 - $10,000,000+',
