@@ -54,9 +54,11 @@ export default function AvailableCondosPage({ menus }: AvailableCondosPageProps)
               <div className="content-section mb-5">
                 <div className="card border-primary shadow-sm" style={{ borderWidth: '2px' }}>
                   <div className="card-body p-4 text-center">
-                    <h3 className="mb-3" style={{ color: '#007bff' }}>
+                    {/* h2: first section heading after the page h1 — must
+                        be h2 to preserve semantic heading order (axe). */}
+                    <h2 className="h3 mb-3" style={{ color: '#007bff' }}>
                       <strong>VIP Pre-Market Listings</strong>
-                    </h3>
+                    </h2>
                     <p className="mb-4">
                       Get exclusive early access to Turnberry Place listings before they're available to the public. View upcoming properties, coming soon listings, and off-market opportunities.
                     </p>

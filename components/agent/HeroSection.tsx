@@ -111,10 +111,10 @@ export function HeroSection() {
                 rel="noopener noreferrer"
                 className="inline-flex items-center justify-center px-8 py-4 rounded-full font-bold text-white border bg-white/5 transition-transform hover:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
                 style={{ borderColor: "rgba(212, 175, 55, 0.55)", outlineColor: GOLD }}
-                aria-label="Schedule a private tour"
                 data-cta="agent-hero-schedule"
               >
                 Schedule Tour
+                <span className="sr-only"> (opens Calendly in a new tab)</span>
               </a>
             </div>
           </div>

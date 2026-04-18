@@ -5052,6 +5052,69 @@ main#main-content {
   color: var(--body-copy-color, #e0e0e0);
 }
 
+/* Light-bg islands nested inside dark `.card-content` sections must NOT
+   inherit the dark-section body color (#e0e0e0 / #fff / #fdfdfd) which
+   collapses to 1.03-1.32:1 on light backgrounds. Reset text color for any
+   descendant of a recognized light-utility container so Bootstrap and
+   Tailwind light blocks stay readable.
+   WCAG 2.1 AA: #212529 on #fff = 16.1:1. */
+.card-content :is(.card, .card-body, .bg-light, .bg-white, .bg-gray-50, .bg-gray-100, .bg-gray-200),
+.card-content :is(.card, .card-body, .bg-light, .bg-white, .bg-gray-50, .bg-gray-100, .bg-gray-200)
+  :is(p, h1, h2, h3, h4, h5, h6, li, td, th, strong, em, blockquote, figcaption, label, dt, dd) {
+  color: var(--card-body-color, #212529);
+}
+
+/* Also catch the case where `.card-content` itself carries a light-utility
+   class (e.g. `<section class="card-content bg-light">`). The descendant
+   selector above doesn't match when the light class lives on the same
+   element as `.card-content`. */
+.card-content.bg-light,
+.card-content.bg-white,
+.card-content.bg-gray-50,
+.card-content.bg-gray-100,
+.card-content.bg-gray-200,
+.card-content.bg-light :is(p, h1, h2, h3, h4, h5, h6, li, td, th, strong, em, blockquote, figcaption, label, dt, dd),
+.card-content.bg-white :is(p, h1, h2, h3, h4, h5, h6, li, td, th, strong, em, blockquote, figcaption, label, dt, dd),
+.card-content.bg-gray-50 :is(p, h1, h2, h3, h4, h5, h6, li, td, th, strong, em, blockquote, figcaption, label, dt, dd),
+.card-content.bg-gray-100 :is(p, h1, h2, h3, h4, h5, h6, li, td, th, strong, em, blockquote, figcaption, label, dt, dd),
+.card-content.bg-gray-200 :is(p, h1, h2, h3, h4, h5, h6, li, td, th, strong, em, blockquote, figcaption, label, dt, dd) {
+  color: var(--card-body-color, #212529);
+}
+
+/* Muted / lead text inside light-bg islands needs an AA-compliant gray.
+   Bootstrap's .text-muted (#6c757d) is 4.47:1 — borderline. Use #565e64
+   (5.89:1) as the accessible floor. `.lead` inside dark sections is
+   intentionally light, but inside a light island it must flip to dark. */
+.card-content :is(.card, .card-body, .bg-light, .bg-white, .bg-gray-50, .bg-gray-100, .bg-gray-200) .text-muted,
+.card-content.bg-light .text-muted,
+.card-content.bg-white .text-muted,
+.card-content.bg-gray-50 .text-muted,
+.card-content.bg-gray-100 .text-muted,
+.card-content.bg-gray-200 .text-muted {
+  color: #565e64 !important;
+}
+
+.card-content :is(.card, .card-body, .bg-light, .bg-white, .bg-gray-50, .bg-gray-100, .bg-gray-200) .lead,
+.card-content.bg-light .lead,
+.card-content.bg-white .lead,
+.card-content.bg-gray-50 .lead,
+.card-content.bg-gray-100 .lead,
+.card-content.bg-gray-200 .lead {
+  color: #343a40;
+}
+
+/* Tower expandable sections use inline backgroundColor (#fff / #f8f9fa) on
+   the card div itself, so class-based bg-* selectors above can't catch the
+   nested h3/p/li inside. Target the component class directly. */
+.tower-expandable-section,
+.tower-expandable-section :is(p, h1, h2, h3, h4, h5, h6, li, td, th, strong, em, dt, dd) {
+  color: var(--card-body-color, #212529);
+}
+
+.tower-expandable-section .text-muted {
+  color: #565e64 !important;
+}
+
 .card-content .lead {
   max-width: 48rem;
   margin-left: auto;
