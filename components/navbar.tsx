@@ -161,21 +161,7 @@ export function Navbar({ links, ...props }: NavbarProps) {
   return (
     <>
       {/* Skip to content link - first focusable element */}
-      <a
-        href="#main-content"
-        className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-[100] focus:px-4 focus:py-2 focus:bg-gray-900 focus:text-white focus:rounded focus:outline-2 focus:outline-[#D4AF37] focus:outline-offset-2"
-        style={{
-          position: 'absolute',
-          left: '-9999px',
-        }}
-        onFocus={(e) => {
-          e.currentTarget.style.left = '1rem'
-          e.currentTarget.style.top = '1rem'
-        }}
-        onBlur={(e) => {
-          e.currentTarget.style.left = '-9999px'
-        }}
-      >
+      <a href="#main-content" className="skip-link">
         Skip to main content
       </a>
 

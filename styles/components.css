@@ -470,6 +470,7 @@
   display: block;
   width: 100%;
   height: 760px;
+  border: 0;
 }
 @media (max-width: 575.98px) {
   .agent-calendly-frame iframe {
@@ -1554,6 +1555,10 @@ main .card-top-header:first-of-type {
   display: flex;
   flex-direction: column;
   padding-top: 0;
+  /* Fluid hero type — slightly smaller scale; tune tokens here only */
+  --hero-title-fluid: clamp(1.375rem, 0.55rem + 3.15vw, 4.125rem);
+  --hero-location-fluid: clamp(0.95rem, 0.5rem + 1.45vw, 1.75rem);
+  --hero-status-fluid: clamp(0.875rem, 0.78rem + 0.35vw, 1.125rem);
 }
 
 .card-top-header::after {
@@ -1569,71 +1574,55 @@ main .card-top-header:first-of-type {
   background-color: rgba(0, 0, 0, var(--overlay-opacity, 0.15));
 }
 
-/* Hero content already defined above */
-
-.card-top-header h1 {
+/* Hero content — one H1; location + status are paragraphs (avoids duplicate heading levels) */
+.card-top-header .hero-headline {
   color: var(--heading-overlay-color, rgba(255, 255, 255, 1));
   font-family: var(--headlines-font, "Playfair Display", serif);
   font-weight: var(--headlines-font-weight, 600);
-  font-size: 3rem;
-  line-height: 1.2;
+  font-size: var(--hero-title-fluid);
+  line-height: 1.16;
   margin: 0 auto 0.5rem;
   text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
   letter-spacing: 0.05em;
   text-align: center;
-  max-width: 100%;
   text-transform: uppercase;
+  max-width: min(100%, 42rem);
+  margin-left: auto;
+  margin-right: auto;
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 
-.card-top-header h2 {
+@supports (text-wrap: balance) {
+  .card-top-header .hero-headline {
+    text-wrap: balance;
+  }
+}
+
+.card-top-header .hero-location {
   color: var(--heading-overlay-color, rgba(255, 255, 255, 1));
   font-family: var(--headlines-font, "Playfair Display", serif);
   font-weight: var(--headlines-font-weight, 600);
-  font-size: 2.5rem;
-  line-height: 1.2;
-  margin: 0 auto 1rem;
-  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+  font-size: var(--hero-location-fluid);
+  line-height: 1.25;
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.6);
   letter-spacing: 0.05em;
   text-align: center;
-  max-width: 100%;
   text-transform: uppercase;
 }
 
-/* Desktop hero title */
-@media (min-width: 992px) {
-  .card-top-header h1 {
-    font-size: 4.5rem;
-    margin-bottom: 0.5rem;
-  }
-  
-  .card-top-header h2 {
-    font-size: 3.5rem;
-    margin-bottom: 1rem;
-  }
-}
-
-@media (max-width: 991.98px) {
-  .card-top-header h1 {
-    font-size: 2.75rem;
-    margin-bottom: 0.5rem;
-  }
-  
-  .card-top-header h2 {
-    font-size: 2.25rem;
-    margin-bottom: 0.75rem;
-  }
-}
-
-@media (max-width: 767.98px) {
-  .card-top-header h1 {
-    font-size: 2.25rem;
-    margin-bottom: 0.5rem;
-  }
-  
-  .card-top-header h2 {
-    font-size: 1.75rem;
-    margin-bottom: 0.75rem;
-  }
+.card-top-header .hero-status-title {
+  margin: 0;
+  padding: 0;
+  font-family: var(--headlines-font, "Playfair Display", serif);
+  font-weight: 600;
+  color: #ffffff;
+  font-size: var(--hero-status-fluid);
+  line-height: 1.2;
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.6);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  text-align: center;
 }
 
 .card-top-header h4 {
@@ -1700,11 +1689,9 @@ main .card-top-header:first-of-type {
   backdrop-filter: blur(5px);
 }
 
-.card-top-header .status-banner h4 {
+.card-top-header .status-banner .hero-status-title {
   margin-top: 2px;
-  margin-bottom: 0px;
-  font-size: 1.1rem;
-  font-weight: 500;
+  margin-bottom: 0;
 }
 
 /* Desktop status banner */
@@ -1712,10 +1699,6 @@ main .card-top-header:first-of-type {
   .card-top-header .status-banner {
     min-width: 220px;
     padding: 0.75rem 1.5rem;
-  }
-  
-  .card-top-header .status-banner h4 {
-    font-size: 1.25rem;
   }
 }
 
@@ -5069,6 +5052,69 @@ main#main-content {
   color: var(--body-copy-color, #e0e0e0);
 }
 
+/* Light-bg islands nested inside dark `.card-content` sections must NOT
+   inherit the dark-section body color (#e0e0e0 / #fff / #fdfdfd) which
+   collapses to 1.03-1.32:1 on light backgrounds. Reset text color for any
+   descendant of a recognized light-utility container so Bootstrap and
+   Tailwind light blocks stay readable.
+   WCAG 2.1 AA: #212529 on #fff = 16.1:1. */
+.card-content :is(.card, .card-body, .bg-light, .bg-white, .bg-gray-50, .bg-gray-100, .bg-gray-200),
+.card-content :is(.card, .card-body, .bg-light, .bg-white, .bg-gray-50, .bg-gray-100, .bg-gray-200)
+  :is(p, h1, h2, h3, h4, h5, h6, li, td, th, strong, em, blockquote, figcaption, label, dt, dd) {
+  color: var(--card-body-color, #212529);
+}
+
+/* Also catch the case where `.card-content` itself carries a light-utility
+   class (e.g. `<section class="card-content bg-light">`). The descendant
+   selector above doesn't match when the light class lives on the same
+   element as `.card-content`. */
+.card-content.bg-light,
+.card-content.bg-white,
+.card-content.bg-gray-50,
+.card-content.bg-gray-100,
+.card-content.bg-gray-200,
+.card-content.bg-light :is(p, h1, h2, h3, h4, h5, h6, li, td, th, strong, em, blockquote, figcaption, label, dt, dd),
+.card-content.bg-white :is(p, h1, h2, h3, h4, h5, h6, li, td, th, strong, em, blockquote, figcaption, label, dt, dd),
+.card-content.bg-gray-50 :is(p, h1, h2, h3, h4, h5, h6, li, td, th, strong, em, blockquote, figcaption, label, dt, dd),
+.card-content.bg-gray-100 :is(p, h1, h2, h3, h4, h5, h6, li, td, th, strong, em, blockquote, figcaption, label, dt, dd),
+.card-content.bg-gray-200 :is(p, h1, h2, h3, h4, h5, h6, li, td, th, strong, em, blockquote, figcaption, label, dt, dd) {
+  color: var(--card-body-color, #212529);
+}
+
+/* Muted / lead text inside light-bg islands needs an AA-compliant gray.
+   Bootstrap's .text-muted (#6c757d) is 4.47:1 — borderline. Use #565e64
+   (5.89:1) as the accessible floor. `.lead` inside dark sections is
+   intentionally light, but inside a light island it must flip to dark. */
+.card-content :is(.card, .card-body, .bg-light, .bg-white, .bg-gray-50, .bg-gray-100, .bg-gray-200) .text-muted,
+.card-content.bg-light .text-muted,
+.card-content.bg-white .text-muted,
+.card-content.bg-gray-50 .text-muted,
+.card-content.bg-gray-100 .text-muted,
+.card-content.bg-gray-200 .text-muted {
+  color: #565e64 !important;
+}
+
+.card-content :is(.card, .card-body, .bg-light, .bg-white, .bg-gray-50, .bg-gray-100, .bg-gray-200) .lead,
+.card-content.bg-light .lead,
+.card-content.bg-white .lead,
+.card-content.bg-gray-50 .lead,
+.card-content.bg-gray-100 .lead,
+.card-content.bg-gray-200 .lead {
+  color: #343a40;
+}
+
+/* Tower expandable sections use inline backgroundColor (#fff / #f8f9fa) on
+   the card div itself, so class-based bg-* selectors above can't catch the
+   nested h3/p/li inside. Target the component class directly. */
+.tower-expandable-section,
+.tower-expandable-section :is(p, h1, h2, h3, h4, h5, h6, li, td, th, strong, em, dt, dd) {
+  color: var(--card-body-color, #212529);
+}
+
+.tower-expandable-section .text-muted {
+  color: #565e64 !important;
+}
+
 .card-content .lead {
   max-width: 48rem;
   margin-left: auto;
@@ -5435,4 +5481,553 @@ main#main-content {
   .quick-search-widget .card-body {
     padding: 1.5rem;
   }
+}
+
+/* ===============================
+   BUTTONS + FORMS + CARDS + TEXT UTILITIES
+   (Bootstrap-style classes the markup uses;
+    Bootstrap Reboot is deliberately NOT loaded
+    to preserve Tailwind Preflight.)
+   =============================== */
+
+/* Base button */
+.btn {
+  display: inline-block;
+  font-family: var(--body-font);
+  font-weight: 500;
+  line-height: 1.5;
+  color: #fff;
+  text-align: center;
+  text-decoration: none;
+  vertical-align: middle;
+  cursor: pointer;
+  -webkit-user-select: none;
+  user-select: none;
+  background-color: transparent;
+  border: 1px solid transparent;
+  padding: 0.5rem 1.1rem;
+  font-size: 1rem;
+  border-radius: 6px;
+  transition:
+    color 0.15s ease-in-out,
+    background-color 0.15s ease-in-out,
+    border-color 0.15s ease-in-out,
+    box-shadow 0.15s ease-in-out,
+    transform 0.15s ease-in-out;
+}
+
+.btn:hover,
+.btn:focus {
+  text-decoration: none;
+}
+
+.btn:focus-visible {
+  outline: 2px solid var(--luxury-gold, #d4af37);
+  outline-offset: 2px;
+}
+
+.btn:disabled,
+.btn.disabled {
+  pointer-events: none;
+  opacity: 0.65;
+}
+
+/* btn-sm / btn-lg are already partially defined above; keep consistent */
+.btn-sm {
+  padding: 0.35rem 0.75rem;
+  font-size: 0.875rem;
+  border-radius: 5px;
+}
+
+/* Primary = luxury gold gradient */
+.btn-primary {
+  background: linear-gradient(
+    135deg,
+    var(--luxury-gold, #d4af37) 0%,
+    var(--luxury-gold-light, #f4e4a6) 50%,
+    var(--luxury-gold, #d4af37) 100%
+  );
+  color: #0a1929 !important;
+  border-color: var(--luxury-gold, #d4af37);
+  font-weight: 600;
+}
+
+.btn-primary:hover,
+.btn-primary:focus {
+  filter: brightness(0.96);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(212, 175, 55, 0.25);
+  color: #0a1929 !important;
+}
+
+/* Outline primary = gold border, light fill on hover */
+.btn-outline-primary {
+  color: var(--luxury-gold, #d4af37);
+  border-color: var(--luxury-gold, #d4af37);
+  background-color: transparent;
+  font-weight: 600;
+}
+
+.btn-outline-primary:hover,
+.btn-outline-primary:focus {
+  color: #0a1929;
+  background-color: var(--luxury-gold, #d4af37);
+  border-color: var(--luxury-gold, #d4af37);
+}
+
+/* Secondary = slate */
+.btn-secondary {
+  background-color: #2a3544;
+  color: #fff;
+  border-color: #2a3544;
+}
+
+.btn-secondary:hover,
+.btn-secondary:focus {
+  background-color: #1a2332;
+  border-color: #1a2332;
+  color: #fff;
+}
+
+/* Custom (used on homepage Open House CTA) */
+.btn-custom {
+  background: linear-gradient(135deg, var(--luxury-gold, #d4af37), var(--luxury-gold-dark, #b8941f));
+  color: #0a1929;
+  border-color: var(--luxury-gold, #d4af37);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.btn-custom:hover,
+.btn-custom:focus {
+  filter: brightness(0.96);
+  transform: translateY(-1px);
+  color: #0a1929;
+}
+
+/* Spacing helper some legacy links use */
+.btn + .btn,
+.btn.mr-2 + .btn {
+  margin-left: 0.25rem;
+}
+
+/* ===============================
+   Form controls
+   =============================== */
+.form-control,
+.form-select {
+  display: block;
+  width: 100%;
+  padding: 0.5rem 0.85rem;
+  font-size: 1rem;
+  font-family: var(--body-font);
+  font-weight: 400;
+  line-height: 1.5;
+  color: #1a2332;
+  background-color: #fff;
+  border: 1px solid #ced4da;
+  border-radius: 6px;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.form-control:focus,
+.form-select:focus {
+  color: #1a2332;
+  background-color: #fff;
+  border-color: var(--luxury-gold, #d4af37);
+  outline: 0;
+  box-shadow: 0 0 0 0.2rem rgba(212, 175, 55, 0.2);
+}
+
+.form-control::placeholder {
+  color: #8a8a8a;
+  opacity: 1;
+}
+
+.form-control:disabled,
+.form-control[readonly] {
+  background-color: #e9ecef;
+  opacity: 1;
+}
+
+.form-label {
+  display: inline-block;
+  margin-bottom: 0.4rem;
+  font-weight: 500;
+  color: inherit;
+}
+
+.form-text {
+  margin-top: 0.25rem;
+  font-size: 0.875em;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* ===============================
+   Card + shadow (non-Reboot replacements)
+   =============================== */
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  background-color: #fff;
+  background-clip: border-box;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 10px;
+  color: #1a2332;
+}
+
+.card > .card-body {
+  flex: 1 1 auto;
+  padding: 1.25rem;
+}
+
+.card-title {
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+
+.card-text:last-child {
+  margin-bottom: 0;
+}
+
+.shadow-sm {
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+}
+
+.shadow {
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.16);
+}
+
+.shadow-lg {
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.22);
+}
+
+/* ===============================
+   Text utilities the markup expects
+   =============================== */
+.lead {
+  font-size: 1.15rem;
+  font-weight: 400;
+  line-height: 1.7;
+  color: var(--body-copy-color, #e0e0e0);
+}
+
+.text-muted {
+  color: rgba(255, 255, 255, 0.65) !important;
+}
+
+.text-heading {
+  color: var(--heading-color, #ffffff);
+}
+
+.text-uppercase {
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+/* ===============================
+   Homepage section backgrounds
+   (extracted from inline style={{}})
+   =============================== */
+.card-open-house--bg {
+  background-image: url('/images/turnberry/turnberry-tower-nice-view.jpg');
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+}
+
+.card-contact-form--bg {
+  background-image: url('/images/turnberry/Las-Vegas-High-Rise-Condo-Living-Downtown-Las-Vegas-Turnberry-Place-Interior.jpg');
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+}
+
+.open-house-box,
+.contact-form-box {
+  background-color: rgba(255, 255, 255, 0.96);
+  border-radius: 8px;
+  color: #1a2332;
+}
+
+/* Gold hairline divider (replaces div-with-inline-style hrs on homepage) */
+.rule-gold {
+  flex: 1;
+  max-width: 100px;
+  height: 1px;
+  background-color: rgba(222, 226, 230, 1);
+  border: 0;
+  margin: 0;
+}
+
+/* ===============================
+   Skip-to-content link (replaces clobbered inline styles)
+   =============================== */
+.skip-link {
+  position: absolute;
+  top: 0;
+  left: -9999px;
+  z-index: 100;
+  padding: 0.5rem 1rem;
+  background: #0a1929;
+  color: #fff;
+  border-radius: 4px;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.skip-link:focus,
+.skip-link:focus-visible {
+  left: 1rem;
+  top: 1rem;
+  outline: 2px solid var(--luxury-gold, #d4af37);
+  outline-offset: 2px;
+}
+
+/* ===============================
+   Prose / legal pages (Accessibility, 404)
+   =============================== */
+.prose-page {
+  max-width: 780px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.prose-page h1,
+.prose-page h2,
+.prose-page h3 {
+  color: var(--heading-color, #ffffff);
+}
+
+.prose-page p,
+.prose-page li {
+  color: var(--body-copy-color, #e0e0e0);
+  line-height: 1.75;
+}
+
+.prose-page a {
+  color: var(--luxury-gold, #d4af37);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* ===============================
+   Homepage inline-style replacements
+   =============================== */
+.homepage-inventory {
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+
+.homepage-updated-note {
+  font-size: 0.9rem;
+}
+
+.home-info-row {
+  gap: 5px;
+}
+
+.home-logo-img {
+  max-height: 100px;
+  object-fit: contain;
+}
+
+.home-photo-tile {
+  position: relative;
+  width: 100%;
+  height: 250px;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.home-photo-tile--sm {
+  height: 200px;
+}
+
+.home-photo-tile img {
+  object-fit: cover;
+}
+
+/* Homepage Contact panel subheading rule (gold) */
+.rule-gold-soft {
+  flex: 1;
+  max-width: 100px;
+  height: 1px;
+  background-color: rgba(181, 152, 90, 1);
+  border: 0;
+  margin: 0;
+}
+
+/* ===============================
+   Object-fit helpers for next/image fill
+   =============================== */
+.img-cover img,
+.img-cover > img {
+  object-fit: cover;
+}
+
+.img-contain img,
+.img-contain > img {
+  object-fit: contain;
+}
+
+.img-natural img {
+  width: 100%;
+  height: auto;
+}
+
+/* ===============================
+   Towers page hero inline-style replacements
+   =============================== */
+.towers-hero-title {
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+  letter-spacing: 0.02em;
+}
+
+.towers-hero-subtitle {
+  color: rgba(255, 255, 255, 0.95);
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5);
+}
+
+.towers-hero-tagline {
+  color: rgba(255, 255, 255, 0.98);
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+.towers-hero-stat {
+  color: var(--luxury-gold, #d4af37);
+  text-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
+}
+
+.towers-hero-sep {
+  color: var(--luxury-gold, #d4af37);
+}
+
+.towers-hero-gold-bar {
+  background-color: var(--luxury-gold, #d4af37);
+}
+
+/* ===============================
+   Price & Features background image (extracted)
+   =============================== */
+.price-features-tower-grid--bg {
+  background-image: var(--pf-tower-bg, none);
+}
+
+.price-features-calendly-frame {
+  border: 0;
+}
+
+/* Next/Image sizing helpers used by price-features + others */
+.img-fluid-auto {
+  width: 100%;
+  height: auto;
+}
+
+.img-auto-h {
+  height: auto;
+}
+
+.price-features-calendly-iframe {
+  border: 0;
+}
+
+/* Home Calendly iframe — consistent with agent-calendly-frame iframe rule */
+.home-calendly-iframe {
+  border: 0;
+}
+
+/* ===============================
+   Footer link tile (replaces inline hover handlers)
+   =============================== */
+.site-link-item {
+  color: #495057;
+  text-decoration: none;
+  border-radius: 4px;
+  border: 1px solid transparent;
+  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+.site-link-item:hover,
+.site-link-item:focus-visible {
+  background-color: #f8f9fa;
+  border-color: #dee2e6;
+  color: #212529;
+  text-decoration: none;
+}
+
+.footer-logo-wrap {
+  max-width: 300px;
+  width: 100%;
+}
+
+/* ===============================
+   Lead capture form container + card
+   =============================== */
+.lead-form-container.sidebar-sticky {
+  position: sticky;
+  top: 100px;
+  z-index: 10;
+}
+
+.lead-form-card {
+  background-color: #ffffff;
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e9ecef;
+  color: #1a2332;
+}
+
+.lead-form-card h2,
+.lead-form-card .form-label {
+  color: #1a2332;
+}
+
+.lead-form-card .form-label.fw-600,
+.lead-form-title {
+  font-weight: 600;
+}
+
+.lead-form-submit {
+  font-weight: 600;
+}
+
+/* ===============================
+   FAQ (home-faq-section)
+   Section sits on the near-black
+   .card-content background
+   (#1a1a1a / #0d0d0d), so Bootstrap
+   defaults like .text-dark / .text-muted
+   collapse contrast to <2:1.
+   These rules force WCAG AA (>=4.5:1).
+   =============================== */
+.faq-toggle {
+  color: var(--body-copy-color, #ffffff);
+  font-weight: 600;
+  background-color: transparent;
+}
+
+.faq-toggle:hover,
+.faq-toggle:focus {
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.faq-toggle:focus-visible {
+  outline: 2px solid var(--luxury-gold, #d4af37);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+.faq-toggle-icon {
+  color: var(--luxury-gold, #d4af37);
+}
+
+.faq-answer {
+  color: var(--body-copy-color, #e9ecef);
+  line-height: 1.65;
 }

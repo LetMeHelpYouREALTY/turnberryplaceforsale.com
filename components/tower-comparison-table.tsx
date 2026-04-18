@@ -38,7 +38,7 @@ export function TowerComparisonTable({ towers }: TowerComparisonTableProps) {
   return (
     <section className="py-20 bg-white">
       <div className="container mx-auto px-6">
-        <h2 className="text-3xl md:text-4xl font-serif text-center mb-4">
+        <h2 className="text-3xl md:text-4xl font-serif text-center mb-4 text-gray-900">
           Compare All Four Towers
         </h2>
         <p className="text-gray-600 text-center mb-12">
@@ -56,7 +56,7 @@ export function TowerComparisonTable({ towers }: TowerComparisonTableProps) {
                 <th className="py-4 px-6 text-center">Tower 4</th>
               </tr>
             </thead>
-            <tbody className="divide-y">
+            <tbody className="divide-y text-gray-900">
               {/* Completed */}
               <tr className="hover:bg-gray-50">
                 <td className="py-4 px-6 font-medium">Completed</td>
@@ -81,9 +81,9 @@ export function TowerComparisonTable({ towers }: TowerComparisonTableProps) {
               <tr className="hover:bg-gray-50">
                 <td className="py-4 px-6 font-medium">Starting Price</td>
                 {towers.map((tower) => (
-                  <td 
-                    key={`price-${tower.number}`} 
-                    className="py-4 px-6 text-center text-[#D4AF37] font-semibold"
+                  <td
+                    key={`price-${tower.number}`}
+                    className="py-4 px-6 text-center text-[#8a6d18] font-semibold"
                   >
                     {tower.startingPrice}
                   </td>
@@ -128,9 +128,9 @@ export function TowerComparisonTable({ towers }: TowerComparisonTableProps) {
         
         <p className="text-center text-gray-500 mt-8">
           Not sure which tower?{' '}
-          <Link 
-            href="tel:+17025001971" 
-            className="text-[#D4AF37] font-medium hover:underline"
+          <Link
+            href="tel:+17025001971"
+            className="text-[#8a6d18] font-semibold hover:underline"
           >
             Call (702) 500-1971
           </Link>

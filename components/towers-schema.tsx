@@ -1,70 +1,24 @@
 /**
  * JSON-LD Schema Markup for Towers Page
- * Provides ApartmentComplex schema with 4 Residence schemas for each tower
+ * ApartmentComplex from lib/schema + Residence per tower
  * Dr. Jan Duffy - Turnberry Place Las Vegas
  */
 
 import React from 'react'
+import { buildApartmentComplexSchema } from 'lib/schema/apartmentComplex'
+import { TURNBERRY_GEO } from 'lib/schema/geo'
 import { JsonLd } from './json-ld'
 
 export function TowersSchema() {
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://www.turnberryplaceforsale.com'
+  const canonicalUrl = `${baseUrl}/towers`
 
-  // ApartmentComplex schema
-  const apartmentComplexSchema = {
-    '@context': 'https://schema.org',
-    '@type': 'ApartmentComplex',
-    name: 'Turnberry Place Las Vegas',
-    alternateName: 'Turnberry Place',
-    url: `${baseUrl}/towers`,
-    description:
-      'Turnberry Place is a luxury high-rise condominium community featuring four towers (38-45 stories) with 1,200+ residences, Strip views, and exclusive access to The Stirling Club. Starting from $800K.',
-    address: {
-      '@type': 'PostalAddress',
-      streetAddress: '2827 Paradise Rd',
-      addressLocality: 'Las Vegas',
-      addressRegion: 'NV',
-      postalCode: '89109',
-      addressCountry: 'US',
-    },
-    geo: {
-      '@type': 'GeoCoordinates',
-      latitude: '36.1447',
-      longitude: '-115.1541',
-    },
-    numberOfUnits: '1200+',
-    numberOfBedroomsTotal: '1-4',
-    numberOfBathroomsTotal: '1-4',
-    priceRange: '$800,000 - $10,000,000+',
-    amenityFeature: [
-      { '@type': 'LocationFeatureSpecification', name: 'Gated Community', value: true },
-      { '@type': 'LocationFeatureSpecification', name: 'Stirling Club', value: true },
-      { '@type': 'LocationFeatureSpecification', name: 'Swimming Pool', value: true },
-      { '@type': 'LocationFeatureSpecification', name: 'Fitness Center', value: true },
-      { '@type': 'LocationFeatureSpecification', name: 'Spa', value: true },
-      { '@type': 'LocationFeatureSpecification', name: 'Tennis Courts', value: true },
-      { '@type': 'LocationFeatureSpecification', name: 'Valet Parking', value: true },
-      { '@type': 'LocationFeatureSpecification', name: 'Concierge', value: true },
-      { '@type': 'LocationFeatureSpecification', name: '24/7 Security', value: true },
-    ],
-    image: [
-      `${baseUrl}/images/turnberry/Turnberry_Place_For_Sale.jpg`,
-      `${baseUrl}/images/turnberry/turnberry-tower-south-view.jpeg`,
-      `${baseUrl}/images/turnberry/turnberry-tower-nice-view.jpg`,
-      `${baseUrl}/images/turnberry/turnberry-towers-las-vegas-nv-primary-photo.jpg`,
-    ],
-    containedInPlace: {
-      '@type': 'City',
-      name: 'Las Vegas',
-    },
-    nearbyAttraction: [
-      { '@type': 'TouristAttraction', name: 'Las Vegas Strip' },
-      { '@type': 'TouristAttraction', name: 'Red Rock Canyon' },
-      { '@type': 'TouristAttraction', name: 'Spring Mountain Range' },
-    ],
-  }
+  const apartmentComplexSchema = buildApartmentComplexSchema({
+    baseUrl,
+    canonicalUrl,
+    towersEnrichment: true,
+  })
 
-  // Residence schemas for each tower
   const towerResidences = [
     {
       number: 1,
@@ -121,11 +75,7 @@ export function TowersSchema() {
       postalCode: '89109',
       addressCountry: 'US',
     },
-    geo: {
-      '@type': 'GeoCoordinates',
-      latitude: '36.1447',
-      longitude: '-115.1541',
-    },
+    geo: TURNBERRY_GEO,
     floorSize: {
       '@type': 'QuantitativeValue',
       value: tower.sizeRange,

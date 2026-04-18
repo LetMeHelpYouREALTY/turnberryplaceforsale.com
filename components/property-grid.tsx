@@ -50,13 +50,18 @@ export function PropertyGrid({ properties, title, subtitle }: PropertyGridProps)
 }
 
 function PropertyCard({ property }: { property: PropertyCard }) {
+  // Note: we intentionally do NOT set aria-label on the Link.
+  // The whole card is a link with rich visible content (title, stories,
+  // year, description, and a "View Listings" CTA). axe's
+  // `label-content-name-mismatch` rule requires the accessible name to
+  // include the visible text, so we let the concatenated visible text
+  // serve as the accessible name (WAI "Card" pattern).
   return (
     <Link
       href={property.href}
       className="text-decoration-none"
-      aria-label={`View listings for ${property.title}`}
     >
-      <div 
+      <div
         className="card border-0 shadow-sm h-100 property-card-hover" 
         style={{
           backgroundColor: '#ffffff',

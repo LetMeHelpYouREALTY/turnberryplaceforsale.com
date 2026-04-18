@@ -136,23 +136,9 @@ export function LeadCaptureForm({ variant = 'footer', showValuationCTA = true }:
   return (
     <div 
       className={`lead-form-container ${variant === 'sidebar' ? 'sidebar-sticky' : ''}`}
-      style={variant === 'sidebar' ? {
-        position: 'sticky',
-        top: '100px',
-        zIndex: 10,
-      } : {}}
     >
-      <div 
-        className="lead-form-card"
-        style={{
-          backgroundColor: '#ffffff',
-          borderRadius: '8px',
-          padding: '1.5rem',
-          boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)',
-          border: '1px solid #e9ecef',
-        }}
-      >
-        <h2 className="h4 mb-3 text-center" style={{ fontWeight: 600 }}>
+      <div className="lead-form-card">
+        <h2 className="h4 mb-3 text-center lead-form-title">
           Get In Touch
         </h2>
         <p className="text-muted text-center small mb-4">
@@ -237,8 +223,7 @@ export function LeadCaptureForm({ variant = 'footer', showValuationCTA = true }:
           <button
             type="submit"
             disabled={isSubmitting}
-            className="btn btn-primary btn-block w-100 mb-3"
-            style={{ fontWeight: 600 }}
+            className="btn btn-primary btn-block w-100 mb-3 lead-form-submit"
           >
             {isSubmitting ? 'Sending...' : 'Send Message'}
           </button>

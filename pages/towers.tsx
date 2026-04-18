@@ -10,6 +10,7 @@ import { getMenus } from "lib/get-menus"
 import { Meta } from "components/meta"
 import { TowersSchema } from "components/towers-schema"
 import { BreadcrumbSchema } from "components/breadcrumb-schema"
+import { JsonLdSchema } from "components/json-ld-schema"
 import Link from "next/link"
 import Image from "next/image"
 
@@ -26,6 +27,7 @@ export default function TowersPage({ menus }: TowersPageProps) {
         ogImageAlt="Turnberry Place towers and surrounding Las Vegas views"
         path="/towers"
       />
+      <JsonLdSchema type="towers" />
       <TowersSchema />
       <BreadcrumbSchema currentPageTitle="Turnberry Place Towers | Las Vegas Luxury High-Rise Condos" />
       
@@ -48,60 +50,27 @@ export default function TowersPage({ menus }: TowersPageProps) {
 
         {/* Hero Content */}
         <div className="container mx-auto px-4 relative z-20 text-center">
-          <h1 
-            className="text-4xl md:text-5xl lg:text-6xl font-serif text-white mb-4" 
-            style={{ 
-              textShadow: '2px 2px 8px rgba(0, 0, 0, 0.7)',
-              letterSpacing: '0.02em'
-            }}
-          >
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif text-white mb-4 towers-hero-title">
             Four Towers. One Iconic Address.
           </h1>
-          <p 
-            className="text-xl md:text-2xl mb-6 max-w-2xl mx-auto"
-            style={{
-              color: 'rgba(255, 255, 255, 0.95)',
-              textShadow: '1px 1px 4px rgba(0, 0, 0, 0.5)'
-            }}
-          >
+          <p className="text-xl md:text-2xl mb-6 max-w-2xl mx-auto towers-hero-subtitle">
             Discover your perfect residence at Turnberry Place
           </p>
           
           {/* Quick Stats Row */}
-          <div 
-            className="flex flex-wrap justify-center items-center gap-4 md:gap-6 mb-8"
-            style={{
-              color: 'rgba(255, 255, 255, 0.98)',
-              textShadow: '1px 1px 3px rgba(0, 0, 0, 0.5)'
-            }}
-          >
+          <div className="flex flex-wrap justify-center items-center gap-4 md:gap-6 mb-8 towers-hero-tagline">
             <div className="flex items-center gap-2">
-              <span 
-                className="text-2xl md:text-3xl font-bold" 
-                style={{ color: '#D4AF37', textShadow: '0 0 10px rgba(212, 175, 55, 0.3)' }}
-              >
-                4
-              </span>
+              <span className="text-2xl md:text-3xl font-bold towers-hero-stat">4</span>
               <span className="text-lg md:text-xl">Towers</span>
             </div>
-            <div className="hidden md:block" style={{ color: '#D4AF37' }}>|</div>
+            <div className="hidden md:block towers-hero-sep">|</div>
             <div className="flex items-center gap-2">
-              <span 
-                className="text-2xl md:text-3xl font-bold" 
-                style={{ color: '#D4AF37', textShadow: '0 0 10px rgba(212, 175, 55, 0.3)' }}
-              >
-                38-45
-              </span>
+              <span className="text-2xl md:text-3xl font-bold towers-hero-stat">38-45</span>
               <span className="text-lg md:text-xl">Stories</span>
             </div>
-            <div className="hidden md:block" style={{ color: '#D4AF37' }}>|</div>
+            <div className="hidden md:block towers-hero-sep">|</div>
             <div className="flex items-center gap-2">
-              <span 
-                className="text-2xl md:text-3xl font-bold" 
-                style={{ color: '#D4AF37', textShadow: '0 0 10px rgba(212, 175, 55, 0.3)' }}
-              >
-                1,200+
-              </span>
+              <span className="text-2xl md:text-3xl font-bold towers-hero-stat">1,200+</span>
               <span className="text-lg md:text-xl">Residences</span>
             </div>
           </div>
@@ -112,16 +81,7 @@ export default function TowersPage({ menus }: TowersPageProps) {
               onClick={() => {
                 document.getElementById('towers-content')?.scrollIntoView({ behavior: 'smooth' })
               }}
-              className="px-8 py-4 rounded-md font-medium text-white transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5"
-              style={{
-                backgroundColor: '#D4AF37',
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.backgroundColor = '#B8941F'
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.backgroundColor = '#D4AF37'
-              }}
+              className="btn btn-primary btn-lg"
             >
               Compare Towers
             </button>

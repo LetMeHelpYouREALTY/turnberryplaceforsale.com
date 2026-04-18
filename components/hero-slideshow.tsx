@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react"
 import Image from "next/image"
 import Link from "next/link"
-import { DynamicUnitCount } from "components/dynamic-unit-count"
 import { ArrowRight, Phone } from "lucide-react"
+import { BUILD_DATE_MONTH_YEAR } from "lib/build-date"
 
 interface HeroSlideshowProps {
   photos: string[]
@@ -160,22 +160,12 @@ export function HeroSlideshow({ photos }: HeroSlideshowProps) {
       <div className="container h-100 d-flex align-items-center justify-content-center">
         <div className="row w-100 justify-content-center">
           <div className="col-12 text-center hero-content position-relative" style={{ zIndex: 14 }}>
-            <h1 className="display-4 mb-2" style={{ 
-              fontWeight: 600,
-              color: '#ffffff',
-              textShadow: '2px 2px 8px rgba(0, 0, 0, 0.7)',
-            }}>
+            <h1 className="hero-headline mb-2">
               Turnberry Place Condos for Sale | Luxury High-Rise Living Near the Las Vegas Strip
             </h1>
             <div className="d-flex align-items-center justify-content-center mb-4">
               <div className="w-10 horiz-line" style={{ flex: '1', maxWidth: '100px', height: '2px', backgroundColor: '#ffffff' }}></div>
-              <h2 className="h4 my-0 mx-4" style={{ 
-                fontWeight: 600,
-                color: '#ffffff',
-                textShadow: '1px 1px 4px rgba(0,0,0,0.6)',
-              }}>
-                Las Vegas, NV
-              </h2>
+              <p className="hero-location my-0 mx-4">Las Vegas, NV</p>
               <div className="w-10 horiz-line" style={{ flex: '1', maxWidth: '100px', height: '2px', backgroundColor: '#ffffff' }}></div>
             </div>
             <div className="mt-4 d-flex flex-column align-items-center justify-content-center" style={{ gap: '1rem' }}>
@@ -185,15 +175,7 @@ export function HeroSlideshow({ photos }: HeroSlideshowProps) {
                 minWidth: '200px',
                 backgroundColor: 'rgba(255, 255, 255, 0.3)',
               }}>
-                <h2 className="h4 my-0" style={{
-                  marginTop: '2px',
-                  marginBottom: '0px',
-                  fontWeight: 600,
-                  color: '#ffffff',
-                  textShadow: '1px 1px 4px rgba(0,0,0,0.6)',
-                }}>
-                  Units for Sale
-                </h2>
+                <p className="hero-status-title">Units for Sale</p>
               </div>
               <div className="d-flex flex-column flex-sm-row align-items-center justify-content-center" style={{ gap: '0.75rem' }}>
                 <Link 
@@ -232,7 +214,7 @@ export function HeroSlideshow({ photos }: HeroSlideshowProps) {
                 textShadow: '1px 1px 4px rgba(0,0,0,0.6)',
                 fontStyle: 'italic',
               }}>
-                Updated {new Date().toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}
+                Updated {BUILD_DATE_MONTH_YEAR}
               </p>
             </div>
           </div>
@@ -273,10 +255,15 @@ export function HeroSlideshow({ photos }: HeroSlideshowProps) {
             />
           </button>
         ))}
-        <Link href="/photos" className="ml-2" style={{ display: 'flex', alignItems: 'center', padding: '0.5rem' }}>
-          <div style={{ 
-            backgroundColor: 'rgba(0,0,0,0.4)', 
-            borderRadius: '4px', 
+        <Link
+          href="/photos"
+          className="ml-2"
+          aria-label="View all Turnberry Place photos"
+          style={{ display: 'flex', alignItems: 'center', padding: '0.5rem' }}
+        >
+          <div style={{
+            backgroundColor: 'rgba(0,0,0,0.4)',
+            borderRadius: '4px',
             padding: '0.5rem',
             backdropFilter: 'blur(4px)',
             transition: 'all 0.3s ease'
@@ -290,7 +277,15 @@ export function HeroSlideshow({ photos }: HeroSlideshowProps) {
             e.currentTarget.style.transform = 'scale(1)'
           }}
           >
-            <svg height="24" width="24" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 512" style={{ color: "#fff" }}>
+            <svg
+              height="24"
+              width="24"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 192 512"
+              style={{ color: "#fff" }}
+              aria-hidden="true"
+              focusable="false"
+            >
               <path fill="currentColor" d="M0 128.032v255.93c0 28.425 34.488 42.767 54.627 22.627l128-127.962c12.496-12.496 12.497-32.758 0-45.255l-128-127.968C34.528 85.305 0 99.55 0 128.032zM160 256L32 384V128l128 128z"/>
             </svg>
           </div>

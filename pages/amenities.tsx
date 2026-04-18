@@ -170,11 +170,11 @@ export default function AmenitiesPage({ menus }: AmenitiesPageProps) {
                     target="_blank"
                     rel="noopener noreferrer"
                     className="btn btn-warning btn-lg amenities-btn-gold"
-                    aria-label="Schedule a private tour on Calendly"
                     data-cta="schedule-tour"
                   >
                     <CalendarDays className="mr-2" aria-hidden="true" />
                     Schedule a Tour
+                    <span className="sr-only"> (opens Calendly in a new tab)</span>
                   </a>
                   <a
                     href={`tel:${officePhoneTel}`}

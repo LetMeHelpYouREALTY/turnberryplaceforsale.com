@@ -71,7 +71,11 @@ export function TestimonialsSection() {
 
         <div className="mt-10 max-w-3xl mx-auto">
           <div className="rounded-2xl border border-gray-200 bg-white shadow-sm p-8 md:p-10 relative">
-            <div className="flex items-center justify-center gap-1" aria-label="5 star rating">
+            <div
+              className="flex items-center justify-center gap-1"
+              role="img"
+              aria-label="5 star rating"
+            >
               {Array.from({ length: 5 }).map((_, i) => (
                 <Star key={i} className="h-5 w-5" style={{ color: GOLD }} fill={GOLD} aria-hidden="true" />
               ))}
@@ -88,22 +92,33 @@ export function TestimonialsSection() {
               </div>
             </div>
 
-            <div className="mt-8 flex items-center justify-center gap-2">
+            {/* Pagination dots: visible dot stays 10px for brand aesthetic,
+                but the <button> hit area expands to 24x24 via padding so we
+                meet WCAG 2.5.8 AA (target size). bg-transparent on the button
+                keeps the color on the inner span only. */}
+            <div className="mt-8 flex items-center justify-center gap-1">
               {testimonials.map((_, i) => (
                 <button
                   key={i}
                   type="button"
-                  className={
-                    i === index
-                      ? "h-2.5 w-8 rounded-full"
-                      : "h-2.5 w-2.5 rounded-full"
-                  }
-                  style={{
-                    backgroundColor: i === index ? GOLD : "rgba(17, 24, 39, 0.18)",
-                  }}
+                  className="p-2 rounded-full bg-transparent border-0 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
+                  style={{ outlineColor: GOLD }}
                   onClick={() => setIndex(i)}
                   aria-label={`Go to testimonial ${i + 1}`}
-                />
+                  aria-current={i === index ? "true" : undefined}
+                >
+                  <span
+                    aria-hidden="true"
+                    className={
+                      i === index
+                        ? "block h-2.5 w-8 rounded-full"
+                        : "block h-2.5 w-2.5 rounded-full"
+                    }
+                    style={{
+                      backgroundColor: i === index ? GOLD : "rgba(17, 24, 39, 0.3)",
+                    }}
+                  />
+                </button>
               ))}
             </div>
 

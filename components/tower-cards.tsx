@@ -23,7 +23,7 @@ export function TowerCards({ towers }: TowerCardsProps) {
   return (
     <section className="py-20 bg-gray-50">
       <div className="container mx-auto px-6">
-        <h2 className="text-3xl md:text-4xl font-serif text-center mb-4">
+        <h2 className="text-3xl md:text-4xl font-serif text-center mb-4 text-gray-900">
           Four Distinct Towers
         </h2>
         <p className="text-gray-600 text-center mb-12 max-w-2xl mx-auto">
@@ -51,7 +51,7 @@ export function TowerCards({ towers }: TowerCardsProps) {
                     style={{ objectFit: 'cover' }}
                     quality={85}
                   />
-                  <div className="absolute top-4 left-4 bg-[#D4AF37] text-white px-3 py-1 rounded-full text-sm font-semibold">
+                  <div className="absolute top-4 left-4 bg-[#D4AF37] text-gray-900 px-3 py-1 rounded-full text-sm font-semibold">
                     Tower {tower.number}
                   </div>
                 </div>
@@ -59,24 +59,27 @@ export function TowerCards({ towers }: TowerCardsProps) {
                 {/* Content */}
                 <div className="p-6">
                   {tower.tagline && (
-                    <h3 className="text-xl font-serif mb-1">{tower.tagline}</h3>
+                    <h3 className="text-xl font-serif mb-1 text-gray-900">{tower.tagline}</h3>
                   )}
-                  <p className="text-[#D4AF37] font-semibold text-lg mb-4">
+                  {/* Price line: using #8a6d18 (darker brand gold) to pass
+                      WCAG AA on white (6.1:1). Bright #D4AF37 only passes on
+                      dark bgs or at 18pt+ bold with 3:1 non-text threshold. */}
+                  <p className="text-[#8a6d18] font-semibold text-lg mb-4">
                     From {priceDisplay}
                   </p>
-                  
+
                   {/* Stats */}
-                  <div className="grid grid-cols-2 gap-3 text-sm mb-4">
+                  <div className="grid grid-cols-2 gap-3 text-sm mb-4 text-gray-900">
                     <div>
-                      <span className="text-gray-500">Stories</span>
+                      <span className="text-gray-600">Stories</span>
                       <p className="font-semibold">{tower.stories}</p>
                     </div>
                     <div>
-                      <span className="text-gray-500">Built</span>
+                      <span className="text-gray-600">Built</span>
                       <p className="font-semibold">{tower.completed}</p>
                     </div>
                     <div className="col-span-2">
-                      <span className="text-gray-500">Size Range</span>
+                      <span className="text-gray-600">Size Range</span>
                       <p className="font-semibold">{sizeDisplay}</p>
                     </div>
                   </div>

@@ -18,6 +18,7 @@ import { getMenus } from "lib/get-menus"
 import { Meta } from "components/meta"
 import { JsonLdSchema } from "components/json-ld-schema"
 import { BreadcrumbSchema } from "components/breadcrumb-schema"
+import { BUILD_DATE_ISO } from "lib/build-date"
 
 interface PriceFeaturesPageProps extends LayoutProps {}
 
@@ -47,7 +48,7 @@ export default function PriceFeaturesPage({ menus }: PriceFeaturesPageProps) {
       url: "https://www.turnberryplaceforsale.com/price-features",
       description:
         "Turnberry Place Las Vegas pricing and features for luxury high-rise condos from $800K to $10M+. Four towers, Stirling Club amenities, guard-gated security, and Strip-adjacent location.",
-      dateModified: new Date().toISOString(),
+      dateModified: BUILD_DATE_ISO,
       priceRange: "$800,000 - $10,000,000+",
       address: {
         "@type": "PostalAddress",
@@ -130,7 +131,7 @@ export default function PriceFeaturesPage({ menus }: PriceFeaturesPageProps) {
               fill
               priority
               sizes="100vw"
-              style={{ objectFit: "cover" }}
+              className="object-cover"
             />
           </div>
           <div className="price-features-hero-overlay" aria-hidden="true" />
@@ -161,15 +162,14 @@ export default function PriceFeaturesPage({ menus }: PriceFeaturesPageProps) {
                     href={calendlyUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    aria-label="Schedule a private tour on Calendly"
                   >
                     <CalendarDays aria-hidden="true" className="mr-2" />
                     Schedule Private Tour
+                    <span className="sr-only"> (opens Calendly in a new tab)</span>
                   </a>
                   <a
                     className="btn btn-outline-light btn-lg"
                     href={`tel:${officePhoneTel}`}
-                    aria-label={`Call the office at ${officePhoneDisplay}`}
                   >
                     Call {officePhoneDisplay}
                   </a>
@@ -325,7 +325,7 @@ export default function PriceFeaturesPage({ menus }: PriceFeaturesPageProps) {
                   alt="Modern condo lifestyle at Turnberry Place"
                   fill
                   sizes="(max-width: 991px) 100vw, 50vw"
-                  style={{ objectFit: "cover" }}
+                  className="object-cover"
                 />
               </div>
               <div className="price-features-tier-body">
@@ -362,7 +362,7 @@ export default function PriceFeaturesPage({ menus }: PriceFeaturesPageProps) {
                   alt="Luxury interior with floor-to-ceiling windows"
                   fill
                   sizes="(max-width: 991px) 100vw, 50vw"
-                  style={{ objectFit: "cover" }}
+                  className="object-cover"
                 />
               </div>
               <div className="price-features-tier-body">
@@ -404,7 +404,7 @@ export default function PriceFeaturesPage({ menus }: PriceFeaturesPageProps) {
                   alt="Penthouse lifestyle with panoramic views"
                   fill
                   sizes="100vw"
-                  style={{ objectFit: "cover" }}
+                  className="object-cover"
                 />
               </div>
               <div className="price-features-tier-full-overlay" aria-hidden="true" />
@@ -585,7 +585,7 @@ export default function PriceFeaturesPage({ menus }: PriceFeaturesPageProps) {
                       alt="Dr. Jan Duffy"
                       width={420}
                       height={520}
-                      style={{ width: "100%", height: "auto" }}
+                      className="img-fluid-auto"
                     />
                   </div>
                   <div className="price-features-agent-body">
@@ -603,7 +603,7 @@ export default function PriceFeaturesPage({ menus }: PriceFeaturesPageProps) {
                         alt="Berkshire Hathaway HomeServices Nevada Properties"
                         width={260}
                         height={120}
-                        style={{ height: "auto" }}
+                        className="img-auto-h"
                       />
                     </div>
                   </div>
@@ -640,7 +640,7 @@ export default function PriceFeaturesPage({ menus }: PriceFeaturesPageProps) {
                         src={`${calendlyUrl}?hide_gdpr_banner=1`}
                         width="100%"
                         height="760"
-                        style={{ border: 0 }}
+                        className="price-features-calendly-iframe"
                         loading="lazy"
                       />
                     </div>

@@ -223,7 +223,7 @@ export function TowerViewsSection({ views = defaultViews }: TowerViewsSectionPro
 
         {/* CTA */}
         <div className="text-center">
-          <p className="mb-3" style={{ fontSize: '1.1rem', color: '#495057' }}>
+          <p className="mb-3" style={{ fontSize: '1.1rem' }}>
             Schedule a tour to see these views in person
           </p>
           <Link

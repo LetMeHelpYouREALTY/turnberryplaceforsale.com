@@ -74,7 +74,7 @@ export default function NeighborhoodPage({ menus }: NeighborhoodPageProps) {
               <div className="content-section">
                 <h2>Prime Location and Accessibility</h2>
                     <p>
-                      Turnberry Place's location at 2827 Paradise Rd positions it at the heart of Las Vegas' most dynamic corridor. The property lies within a one-mile radius of over twenty Zagat-rated restaurants, including establishments at the Wynn, Encore, and Resorts World. The Strip's iconic attractions—such as the T-Mobile Arena (home of the Vegas Golden Knights) and Allegiant Stadium (home of the Las Vegas Raiders)—are mere minutes away, alongside the Las Vegas Convention Center and McCarran International Airport. Despite its central location, the community maintains a tranquil ambiance, shielded from the Strip's bustle by its elevated design and guarded entrance.
+                      Turnberry Place's location at 2827 Paradise Rd positions it at the heart of Las Vegas' most dynamic corridor. The property lies within a one-mile radius of over twenty Zagat-rated restaurants, including establishments at the Wynn, Encore, and Resorts World. The Strip's iconic attractions—such as the T-Mobile Arena (home of the Vegas Golden Knights) and Allegiant Stadium (home of the Las Vegas Raiders)—are mere minutes away, alongside the Las Vegas Convention Center, Fashion Show Mall, and the Las Vegas Monorail corridor. McCarran International Airport is a short drive. Despite its central location, the community maintains a tranquil ambiance, shielded from the Strip's bustle by its elevated design and guarded entrance.
                     </p>
                     <h3>Transportation and Accessibility</h3>
                     <p>

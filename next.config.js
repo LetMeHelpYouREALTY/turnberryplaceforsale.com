@@ -18,7 +18,35 @@ function getImageDomain() {
   return []
 }
 
+// Freeze "last updated" / "updated" display dates at build time so server SSR
+// and client hydration always resolve to the same string. Without this,
+// `new Date()` inside a rendered component would be evaluated once on Vercel
+// (in UTC, at request time) and again in the visitor's browser (in their local
+// timezone), producing different strings and triggering React #425 (text
+// content mismatch) + #423 (bail out to client-only render). Both errors were
+// firing on every route in production Lighthouse before this change.
+// Timezone pinned to America/Los_Angeles (site's operating market — Las Vegas).
+const BUILD_NOW = new Date()
+const TZ = 'America/Los_Angeles'
+const BUILD_DATE_ISO = BUILD_NOW.toISOString()
+const BUILD_DATE_DISPLAY = BUILD_NOW.toLocaleDateString('en-US', {
+  month: 'long',
+  day: 'numeric',
+  year: 'numeric',
+  timeZone: TZ,
+})
+const BUILD_DATE_MONTH_YEAR = BUILD_NOW.toLocaleDateString('en-US', {
+  month: 'long',
+  year: 'numeric',
+  timeZone: TZ,
+})
+
 module.exports = {
+  env: {
+    NEXT_PUBLIC_BUILD_DATE_ISO: BUILD_DATE_ISO,
+    NEXT_PUBLIC_BUILD_DATE_DISPLAY: BUILD_DATE_DISPLAY,
+    NEXT_PUBLIC_BUILD_DATE_MONTH_YEAR: BUILD_DATE_MONTH_YEAR,
+  },
   swcMinify: true,
   compress: true,
   poweredByHeader: false,

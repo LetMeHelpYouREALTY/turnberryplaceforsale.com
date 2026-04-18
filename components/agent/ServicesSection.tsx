@@ -127,7 +127,6 @@ export function ServicesSection() {
                 href="/request-details"
                 className="inline-flex items-center gap-2 text-sm font-semibold"
                 style={{ color: "#111827" }}
-                aria-label="Request details to sell"
               >
                 <Megaphone className="h-4 w-4" style={{ color: GOLD }} aria-hidden="true" />
                 Get a Pricing Plan
