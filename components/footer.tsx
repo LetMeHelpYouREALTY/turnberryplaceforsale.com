@@ -8,6 +8,8 @@ interface FooterProps {
 }
 
 const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://www.turnberryplaceforsale.com'
+const calendlyUrl =
+  process.env.NEXT_PUBLIC_CALENDLY_URL || 'https://calendly.com/drjanduffy/1-home-tour-30-mins'
 
 // Organization schema for footer
 const organizationSchema = {
@@ -141,16 +143,17 @@ export function Footer({ links }: FooterProps) {
           <div className="col-12 col-lg-10 text-center">
             <div className="mt-4 mt-md-5">
               <a
-                href="https://lasvegas55plushomes.com/"
+                href={calendlyUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                title="Las Vegas 55 Plus Homes"
+                title="Schedule a private tour with Dr. Jan Duffy on Calendly"
                 className="d-inline-block footer-logo-wrap"
+                data-cta="footer-calendly"
               >
                 <Image
                   src="/images/turnberry/asset-20.jpg"
                   className="img-fluid footer-wl-logo"
-                  alt="Las Vegas 55 Plus Homes company logo"
+                  alt="Dr. Jan Duffy — schedule a private tour on Calendly"
                   width={300}
                   height={100}
                 />
