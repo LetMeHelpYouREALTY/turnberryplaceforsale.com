@@ -250,12 +250,12 @@ function HomePageContent({
       </section>
 
       {/* RealScout Office Listings Widget - Featured Listings */}
-      <section className="card-content card-realscout-listings py-5" id="card-id-realscout-listings" aria-label="Available Turnberry Place Condos">
+      <section className="card-content card-realscout-listings py-5" id="card-id-realscout-listings" aria-label="Available homes in the surrounding area of Turnberry Place">
         <div className="container">
           <div className="row justify-content-center">
             <div className="col-12 col-lg-11">
               <div className="text-center mb-4">
-                <h2 className="mb-3">Available Turnberry Place Condos</h2>
+                <h2 className="mb-3">Available Homes in the Surrounding Area of Turnberry Place Condos</h2>
                 <p className="lead">
                   Browse current listings with real-time availability, pricing, and property details. Use the filters to find your perfect luxury residence.
                 </p>
