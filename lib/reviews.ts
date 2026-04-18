@@ -34,15 +34,31 @@
  *                                      URL using the canonical NAP below
  */
 
-// Canonical NAP for the Turnberry Place building microsite. This must match
-// the visible footer, JSON-LD, and GBP so the search URL resolves cleanly.
-// Source of truth: components/footer.tsx + CLAUDE.md + AGENTS.md.
+// Canonical NAP for the Google Business Profile that owns reviews relevant
+// to this site. Confirmed 2026-04-18: Dr. Jan Duffy operates five GBPs, one
+// per service vertical. The correct target for the Turnberry Place Strip
+// high-rise microsite is the "Sahara" GBP (store code: Sahara), which is
+// specifically scoped to Strip high-rise condo inventory.
+//
+// Business name + street address below are the exact GBP values, so
+// Google's Maps URL API search action (buildMapsSearchUrl) resolves to this
+// listing's review panel and not to the Turnberry Place building's generic
+// community listing (which is owned by Turnberry Associates HOA, not Dr.
+// Duffy).
+//
+// Note: the site's visible footer still shows "Turnberry Place | 2827
+// Paradise Rd" as the service location, which is intentional (that's where
+// tours happen) but does not match this GBP's NAP. That divergence is
+// tracked separately; flipping the reviews CTA to use the correct GBP NAP
+// for lookup does not require changing the footer -- the footer's visible
+// NAP is purely presentational, while this constant drives Google entity
+// resolution.
 const CANONICAL_NAP = {
-  name: "Turnberry Place",
+  name: "Las Vegas Strip High Rise Condos Homes by Dr. Jan Duffy",
   locality: "Las Vegas",
   region: "NV",
-  postalCode: "89109",
-  streetAddress: "2827 Paradise Rd",
+  postalCode: "89117",
+  streetAddress: "7475 W Sahara Ave Ste 100",
 } as const
 
 /**
