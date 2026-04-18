@@ -1,6 +1,6 @@
 'use client'
 
-import React from "react"
+import React, { useEffect, useState } from "react"
 
 interface LiveInventoryBadgeProps {
   count: number
@@ -9,7 +9,14 @@ interface LiveInventoryBadgeProps {
 }
 
 function formatMonthYear(date: Date) {
-  return date.toLocaleDateString("en-US", { month: "long", year: "numeric" })
+  // Pin timezone so server + client "Month Year" always matches. Even with a
+  // stable `lastUpdatedIso`, the default renderer uses the runtime TZ, which
+  // differs between Vercel (UTC) and a PT visitor around month boundaries.
+  return date.toLocaleDateString("en-US", {
+    month: "long",
+    year: "numeric",
+    timeZone: "America/Los_Angeles",
+  })
 }
 
 export function LiveInventoryBadge({
@@ -19,9 +26,24 @@ export function LiveInventoryBadge({
 }: LiveInventoryBadgeProps) {
   const parsed = new Date(lastUpdatedIso)
   const isValidDate = !Number.isNaN(parsed.getTime())
-  const lastUpdated = isValidDate ? parsed : new Date()
-  const freshnessHours = (Date.now() - lastUpdated.getTime()) / (1000 * 60 * 60)
-  const isFresh = freshnessHours <= 24
+  // Use a deterministic fallback instead of `new Date()` so SSR and hydration
+  // resolve to the same Date instance when `lastUpdatedIso` is absent.
+  const lastUpdated = isValidDate ? parsed : new Date(0)
+
+  // Freshness depends on `Date.now()`, which drifts between the SSR request and
+  // the client hydration (timezone + seconds of latency). Defer the visual
+  // freshness indicator to after mount so the server renders the "stale" color
+  // and the client upgrades it without a text/attribute mismatch.
+  const [isFresh, setIsFresh] = useState(false)
+  useEffect(() => {
+    if (!isValidDate) {
+      setIsFresh(false)
+      return
+    }
+    const freshnessHours =
+      (Date.now() - lastUpdated.getTime()) / (1000 * 60 * 60)
+    setIsFresh(freshnessHours <= 24)
+  }, [isValidDate, lastUpdated])
 
   return (
     <span className="d-inline-flex align-items-center" style={{ gap: "0.45rem" }}>

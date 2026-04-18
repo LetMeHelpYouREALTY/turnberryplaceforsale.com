@@ -1,6 +1,7 @@
 import Link from "next/link"
 import Image from "next/image"
 import { DrupalMenuLinkContent } from "next-drupal"
+import { BUILD_DATE_DISPLAY } from "lib/build-date"
 
 interface FooterProps {
   links: DrupalMenuLinkContent[]
@@ -184,7 +185,7 @@ export function Footer({ links }: FooterProps) {
               Turnberry Place Las Vegas | 2827 Paradise Rd, Las Vegas, NV 89109 | Dr. Jan Duffy | <a href="tel:+17025001971" className="footer-phone-link" itemProp="telephone">(702) 500-1971</a>
             </div>
             <div className="mt-2 font-size-80 text-muted">
-              Last updated: {new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
+              Last updated: {BUILD_DATE_DISPLAY}
             </div>
           </div>
         </div>

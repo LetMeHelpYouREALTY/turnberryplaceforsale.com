@@ -25,6 +25,7 @@ import { PropertyGrid } from "components/property-grid"
 import { VIPNewsletterSignup } from "components/vip-newsletter-signup"
 import { LuxuryAmenitiesGrid } from "components/luxury-amenities-grid"
 import { HomeRequestCalendly } from "components/home-request-calendly"
+import { BUILD_DATE_ISO, BUILD_DATE_MONTH_YEAR } from "lib/build-date"
 // Components moved to other pages:
 // WhyWorkWithUs, ClientTestimonials, PowerOfNumbers, InTheMedia → /agent page
 import { FeaturedListingCard } from "components/featured-listing-card"
@@ -182,8 +183,8 @@ function HomePageContent({
                 />
               </p>
               <p className="text-muted homepage-updated-note">
-                <time dateTime={new Date().toISOString()}>
-                  Updated {new Date().toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}
+                <time dateTime={BUILD_DATE_ISO}>
+                  Updated {BUILD_DATE_MONTH_YEAR}
                 </time>
               </p>
             </div>

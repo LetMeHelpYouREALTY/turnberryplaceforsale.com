@@ -18,6 +18,7 @@ import { getMenus } from "lib/get-menus"
 import { Meta } from "components/meta"
 import { JsonLdSchema } from "components/json-ld-schema"
 import { BreadcrumbSchema } from "components/breadcrumb-schema"
+import { BUILD_DATE_ISO } from "lib/build-date"
 
 interface PriceFeaturesPageProps extends LayoutProps {}
 
@@ -47,7 +48,7 @@ export default function PriceFeaturesPage({ menus }: PriceFeaturesPageProps) {
       url: "https://www.turnberryplaceforsale.com/price-features",
       description:
         "Turnberry Place Las Vegas pricing and features for luxury high-rise condos from $800K to $10M+. Four towers, Stirling Club amenities, guard-gated security, and Strip-adjacent location.",
-      dateModified: new Date().toISOString(),
+      dateModified: BUILD_DATE_ISO,
       priceRange: "$800,000 - $10,000,000+",
       address: {
         "@type": "PostalAddress",

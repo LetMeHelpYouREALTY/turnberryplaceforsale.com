@@ -3,6 +3,7 @@ import { GetStaticPropsResult } from "next"
 import { Layout, LayoutProps } from "components/layout"
 import { Meta } from "components/meta"
 import { getMenus } from "lib/get-menus"
+import { BUILD_DATE_DISPLAY } from "lib/build-date"
 
 interface AccessibilityPageProps extends LayoutProps {}
 
@@ -47,8 +48,7 @@ export default function AccessibilityPage({ menus }: AccessibilityPageProps) {
 
           <p className="mt-4 text-muted">
             <small>
-              Last updated:{' '}
-              {new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
+              Last updated: {BUILD_DATE_DISPLAY}
             </small>
           </p>
         </div>

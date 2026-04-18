@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react"
 import Image from "next/image"
 import Link from "next/link"
 import { ArrowRight, Phone } from "lucide-react"
+import { BUILD_DATE_MONTH_YEAR } from "lib/build-date"
 
 interface HeroSlideshowProps {
   photos: string[]
@@ -213,7 +214,7 @@ export function HeroSlideshow({ photos }: HeroSlideshowProps) {
                 textShadow: '1px 1px 4px rgba(0,0,0,0.6)',
                 fontStyle: 'italic',
               }}>
-                Updated {new Date().toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}
+                Updated {BUILD_DATE_MONTH_YEAR}
               </p>
             </div>
           </div>

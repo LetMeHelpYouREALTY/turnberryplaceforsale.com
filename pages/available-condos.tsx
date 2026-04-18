@@ -7,6 +7,7 @@ import { BreadcrumbSchema } from "components/breadcrumb-schema"
 // VIPNewsletterSignup available on homepage
 import Script from "next/script"
 import Link from "next/link"
+import { BUILD_DATE_MONTH_YEAR } from "lib/build-date"
 
 interface AvailableCondosPageProps extends LayoutProps {}
 
@@ -42,7 +43,7 @@ export default function AvailableCondosPage({ menus }: AvailableCondosPageProps)
                     whiteSpace: 'nowrap',
                     boxShadow: '0 2px 8px rgba(212, 175, 55, 0.3)',
                   }}>
-                    Updated: {new Date().toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}
+                    Updated: {BUILD_DATE_MONTH_YEAR}
                   </div>
                 </div>
                 <p className="lead">

@@ -10,6 +10,7 @@ import { Meta } from "components/meta"
 import { JsonLdSchema } from "components/json-ld-schema"
 import { BreadcrumbSchema } from "components/breadcrumb-schema"
 import { LeadCaptureForm } from "components/lead-capture-form"
+import { BUILD_DATE_ISO } from "lib/build-date"
 // ClientTestimonials and VIPNewsletterSignup available on homepage and /agent page
 
 interface RequestDetailsPageProps extends LayoutProps {}
@@ -34,7 +35,7 @@ export default function RequestDetailsPage({ menus }: RequestDetailsPageProps) {
       url: "https://www.turnberryplaceforsale.com/request-details",
       description:
         "Request pricing and details for Turnberry Place Las Vegas luxury high-rise condos from $800K to $10M+. Schedule a private tour or call the office for immediate help.",
-      dateModified: new Date().toISOString(),
+      dateModified: BUILD_DATE_ISO,
       priceRange: "$800,000 - $10,000,000+",
       address: {
         "@type": "PostalAddress",
