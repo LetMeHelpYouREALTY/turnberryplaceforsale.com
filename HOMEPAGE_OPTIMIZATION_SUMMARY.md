@@ -1,5 +1,23 @@
 # Homepage Optimization Summary
 
+> ⚠️ **HISTORICAL PLANNING DOCUMENT — DO NOT TREAT AS SOURCE OF TRUTH**
+>
+> This post-hoc summary predates the 2026-04-18 integrity sweep
+> (commit `ca26581`). It contains:
+> - **Fabricated social-proof claims**: "500+ Las Vegas Families
+>   Helped", "30+ Years Experience", "⭐ 4.9/5 Google Reviews" — none
+>   of these figures are verifiable. The components that displayed
+>   them have been neutralized.
+> - **Stale phone numbers**: references `(702) 222-1964` in multiple
+>   places. Current canonical is **`(702) 500-1971`** (see
+>   `CLAUDE.md` + `components/footer.tsx`).
+> - **Stale analytics references**: cites Universal Analytics
+>   (`UA-46249003-1`) which Google shut down in 2023-2024. The site
+>   now uses GA4 only.
+>
+> Agents and developers should consult `CLAUDE.md` + `AGENTS.md` for
+> the current canonical configuration.
+
 ## ✅ Completed Optimizations
 
 ### 1. Hero Section - Urgency & Value

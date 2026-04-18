@@ -1,5 +1,28 @@
 # Turnberry Place Las Vegas - Project Complete ✅
 
+> ⚠️ **HISTORICAL PLANNING DOCUMENT — DO NOT TREAT AS SOURCE OF TRUTH**
+>
+> This completion checklist predates the 2026-04-18 integrity sweep
+> (commit `ca26581`). It contains:
+> - **Fabricated social-proof claims**: "500+ families, 30+ years,
+>   4.9/5 stars" — none of these figures are verifiable. Related
+>   components have been neutralized.
+> - **Conflicting / stale phone numbers**: lists `(702) 222-1964`
+>   and `(702) 500-1955`. Current canonical is
+>   **`(702) 500-1971`** (see `CLAUDE.md` + `components/footer.tsx`).
+> - **Stale analytics references**: Universal Analytics
+>   (`UA-46249003-1`) is deprecated (shut down by Google 2023-2024).
+>   The site now uses GA4 only.
+> - **Stale "all complete" framing**: many items listed as done have
+>   since been extended, rewritten, or neutralized. Do not rely on
+>   this file to check what's currently shipped — use `git log` +
+>   `CLAUDE.md` instead.
+>
+> Agents and developers should consult:
+> - `CLAUDE.md` + `AGENTS.md` for canonical rules
+> - `git log --oneline -30` for the actual recent change history
+> - Individual source files for current state
+
 ## 🎉 Project Status: PRODUCTION READY
 
 All optimizations, improvements, and enhancements have been completed and deployed.

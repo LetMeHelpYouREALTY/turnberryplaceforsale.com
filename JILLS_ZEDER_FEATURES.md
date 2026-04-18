@@ -1,5 +1,26 @@
 # Jills Zeder Group Features - Implementation Summary
 
+> ⚠️ **HISTORICAL PLANNING DOCUMENT — DO NOT TREAT AS SOURCE OF TRUTH**
+>
+> This spec document predates the 2026-04-18 integrity sweep (commit
+> `ca26581`). It contains:
+> - **Fabricated social proof**: "30+ years", "500+ families",
+>   "4.9/5 Average Rating", "$500M+ In Sales Volume" — none of these
+>   figures are verifiable against independent sources. The components
+>   this spec described (`PowerOfNumbers`, `InTheMedia`,
+>   `WhyWorkWithUs`) have been **neutralized to empty-state-safe
+>   defaults** and are no longer rendering.
+> - **Stale phone number**: references `(702) 222-1988` which is not
+>   the site's canonical number. Current canonical is **`(702) 500-1971`**
+>   (see `CLAUDE.md` + `components/footer.tsx`).
+> - **Misleading "location" claims**: states these components are on
+>   the homepage. They are not — they are currently orphaned.
+>
+> Agents and developers should consult:
+> - `CLAUDE.md` + `AGENTS.md` for current brand / NAP / integrity rules
+> - `components/client-testimonials.tsx` for verified review excerpts
+> - Commit `ca26581` message for the neutralization details
+
 ## Overview
 Inspired by the Jills Zeder Group website (https://jillszeder.com/), we've added several premium features to enhance the Turnberry Place Las Vegas site with conversion-focused elements and social proof.
 
