@@ -26,8 +26,10 @@ import { VIPNewsletterSignup } from "components/vip-newsletter-signup"
 import { LuxuryAmenitiesGrid } from "components/luxury-amenities-grid"
 import { HomeRequestCalendly } from "components/home-request-calendly"
 import { BUILD_DATE_ISO, BUILD_DATE_MONTH_YEAR } from "lib/build-date"
-// Components moved to other pages:
-// WhyWorkWithUs, ClientTestimonials, PowerOfNumbers, InTheMedia → /agent page
+// Components WhyWorkWithUs / ClientTestimonials / PowerOfNumbers / InTheMedia
+// exist in components/ but are currently orphaned (nothing imports them).
+// Neutralized to empty-state-safe defaults on 2026-04-18 (see each file's
+// header comment) so re-importing without verified data is a no-op.
 import { FeaturedListingCard } from "components/featured-listing-card"
 import Image from "next/image"
 import Link from "next/link"

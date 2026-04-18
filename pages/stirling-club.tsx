@@ -4,7 +4,8 @@ import { getMenus } from "lib/get-menus"
 import { Meta } from "components/meta"
 import { JsonLdSchema } from "components/json-ld-schema"
 import { BreadcrumbSchema } from "components/breadcrumb-schema"
-// ClientTestimonials and VIPNewsletterSignup available on homepage and /agent page
+// ClientTestimonials currently orphaned (neutralized 2026-04-18 to use only
+// verified Google reviews). VIPNewsletterSignup imported separately where used.
 import Image from "next/image"
 
 interface StirlingClubPageProps extends LayoutProps {}

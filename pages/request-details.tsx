@@ -11,7 +11,8 @@ import { JsonLdSchema } from "components/json-ld-schema"
 import { BreadcrumbSchema } from "components/breadcrumb-schema"
 import { LeadCaptureForm } from "components/lead-capture-form"
 import { BUILD_DATE_ISO } from "lib/build-date"
-// ClientTestimonials and VIPNewsletterSignup available on homepage and /agent page
+// ClientTestimonials currently orphaned (neutralized 2026-04-18 to use only
+// verified Google reviews). VIPNewsletterSignup imported separately where used.
 
 interface RequestDetailsPageProps extends LayoutProps {}
 
