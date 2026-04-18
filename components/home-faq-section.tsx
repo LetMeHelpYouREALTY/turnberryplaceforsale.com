@@ -26,14 +26,13 @@ export function HomeFaqSection() {
                       <button
                         type="button"
                         id={headingId}
-                        className="d-flex w-100 align-items-center justify-content-between text-left px-4 py-3 btn btn-link text-dark text-decoration-none"
-                        style={{ fontWeight: 600 }}
-                        aria-expanded={isOpen ? 'true' : 'false'}
+                        className="faq-toggle d-flex w-100 align-items-center justify-content-between text-left px-4 py-3 btn btn-link text-decoration-none"
+                        aria-expanded={isOpen}
                         aria-controls={panelId}
                         onClick={() => setOpenIndex(isOpen ? null : index)}
                       >
                         <span>{item.question}</span>
-                        <span className="ml-2 text-muted small" aria-hidden>
+                        <span className="faq-toggle-icon ml-2 small" aria-hidden>
                           {isOpen ? '−' : '+'}
                         </span>
                       </button>
@@ -43,9 +42,9 @@ export function HomeFaqSection() {
                       role="region"
                       aria-labelledby={headingId}
                       hidden={!isOpen}
-                      className="px-4 pb-4"
+                      className="faq-panel px-4 pb-4"
                     >
-                      <p className="mb-0 text-muted" style={{ lineHeight: 1.65 }}>
+                      <p className="faq-answer mb-0">
                         {item.answer}
                       </p>
                     </div>

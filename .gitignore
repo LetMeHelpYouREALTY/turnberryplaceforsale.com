@@ -25,6 +25,8 @@
 
 # lighthouse CLI output (local audits)
 lighthouse-*.json
+/.lighthouseci/
+/.lighthouseci-prod/
 
 # debug
 npm-debug.log*

@@ -24,7 +24,7 @@ import { LiveInventoryBadge } from "components/live-inventory-badge"
 import { PropertyGrid } from "components/property-grid"
 import { VIPNewsletterSignup } from "components/vip-newsletter-signup"
 import { LuxuryAmenitiesGrid } from "components/luxury-amenities-grid"
-import { LeadCaptureForm } from "components/lead-capture-form"
+import { HomeRequestCalendly } from "components/home-request-calendly"
 // Components moved to other pages:
 // WhyWorkWithUs, ClientTestimonials, PowerOfNumbers, InTheMedia → /agent page
 import { FeaturedListingCard } from "components/featured-listing-card"
@@ -174,14 +174,14 @@ function HomePageContent({
                 <span itemProp="addressLocality">Las Vegas</span>, <span itemProp="addressRegion">NV</span> <span itemProp="postalCode">89109</span>
               </p>
               <h2 className="h3 mb-3">4 Luxury Towers from $800,000 to $10M+</h2>
-              <p className="mt-2 mb-1" style={{ fontSize: '1.1rem', fontWeight: 500 }}>
+              <p className="mt-2 mb-1 homepage-inventory">
                 <LiveInventoryBadge
                   count={inventory.count}
                   source={inventory.source}
                   lastUpdatedIso={inventory.lastUpdatedIso}
                 />
               </p>
-              <p className="text-muted" style={{ fontSize: '0.9rem' }}>
+              <p className="text-muted homepage-updated-note">
                 <time dateTime={new Date().toISOString()}>
                   Updated {new Date().toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}
                 </time>
@@ -302,26 +302,18 @@ function HomePageContent({
       <HomeFaqSection />
 
       {/* Open House Section - Matching Live Site */}
-      <section className="card-content card-open-house py-5" id="card-id-2271761" data-card-type="8" aria-label="Schedule Private Showing" style={{
-        backgroundImage: "url(/images/turnberry/turnberry-tower-nice-view.jpg)",
-        backgroundRepeat: "no-repeat",
-        backgroundPosition: "center center",
-        backgroundSize: "cover",
-      }}>
+      <section className="card-content card-open-house card-open-house--bg py-5" id="card-id-2271761" data-card-type="8" aria-label="Schedule Private Showing">
         <div className="container">
           <div className="row align-items-center justify-content-center">
             <div className="col-12 col-sm-11 col-md-10 col-lg-9 col-xl-7 text-center py-5">
-              <div className="open-house-box p-2 p-md-4 shadow" style={{
-                backgroundColor: 'rgba(255, 255, 255, 0.95)',
-                borderRadius: '4px',
-              }}>
+              <div className="open-house-box p-2 p-md-4 shadow">
                 <div className="mt-2 mb-2 text-heading text-uppercase">
                   Please join us for an
                 </div>
                 <div className="d-flex mb-3 mb-lg-4 align-items-center justify-content-center">
-                  <div className="d-none d-md-block w-10 horiz-line" style={{ flex: '1', maxWidth: '100px', height: '1px', backgroundColor: 'rgba(222,226,230,1)' }}></div>
+                  <hr className="d-none d-md-block rule-gold" aria-hidden="true" />
                   <h2 className="my-0 mx-2 text-uppercase">Open House</h2>
-                  <div className="d-none d-md-block w-10 horiz-line" style={{ flex: '1', maxWidth: '100px', height: '1px', backgroundColor: 'rgba(222,226,230,1)' }}></div>
+                  <hr className="d-none d-md-block rule-gold" aria-hidden="true" />
                 </div>
                 <div className="text-center pb-4">
                   <p className="none-scheduled mb-4">
@@ -338,27 +330,19 @@ function HomePageContent({
       </section>
 
       {/* Contact Form Section - Matching Live Site */}
-      <section className="card-content card-contact-form py-5" id="card-id-2271763" data-card-type="11" aria-label="Request Pricing and Details" style={{
-        backgroundImage: "url(/images/turnberry/Las-Vegas-High-Rise-Condo-Living-Downtown-Las-Vegas-Turnberry-Place-Interior.jpg)",
-        backgroundRepeat: "no-repeat",
-        backgroundPosition: "center center",
-        backgroundSize: "cover",
-      }}>
+      <section className="card-content card-contact-form card-contact-form--bg py-5" id="card-id-2271763" data-card-type="11" aria-label="Request pricing and schedule a Calendly tour">
         <div className="container">
           <div className="row align-items-center justify-content-center">
             <div className="col-12 col-sm-10 col-md-8 col-lg-7 col-xl-6 text-center">
-              <div className="contact-form-box p-4" style={{
-                backgroundColor: 'rgba(255,255,255,0.95)',
-                borderRadius: '4px',
-              }}>
+              <div className="contact-form-box p-4">
                 <div className="mt-0 mt-md-2 d-flex align-items-center justify-content-center">
-                  <div className="w-10 horiz-line d-none d-sm-block" style={{ flex: '1', maxWidth: '100px', height: '1px', backgroundColor: 'rgba(181,152,90,1)' }}></div>
+                  <hr className="d-none d-sm-block rule-gold-soft" aria-hidden="true" />
                   <h2 className="my-0 mx-2 heading-color" id="contact-label">
                     Turnberry Place Request Pricing & Details
                   </h2>
-                  <div className="w-10 horiz-line d-none d-sm-block" style={{ flex: '1', maxWidth: '100px', height: '1px', backgroundColor: 'rgba(181,152,90,1)' }}></div>
+                  <hr className="d-none d-sm-block rule-gold-soft" aria-hidden="true" />
                 </div>
-                <LeadCaptureForm variant="footer" showValuationCTA={true} />
+                <HomeRequestCalendly showValuationCTA={true} />
               </div>
             </div>
           </div>
@@ -393,7 +377,7 @@ function HomePageContent({
                   />
                 </div>
                 <div className="col-12 text-center py-2">
-                  <div className="py-2 d-flex flex-column flex-lg-row align-items-center justify-content-center" style={{ gap: '5px' }}>
+                  <div className="py-2 d-flex flex-column flex-lg-row align-items-center justify-content-center home-info-row">
                     <div className="mx-2" itemScope itemType="https://schema.org/LocalBusiness">
                       <span>Office:</span> <a href="tel:+17025001971" title="Phone office">(702) 500-1971</a>
                     </div>
@@ -406,7 +390,7 @@ function HomePageContent({
                 </div>
                 <div className="col-12 text-center py-2">
                   <Image
-                    className="img-fluid company-logo"
+                    className="img-fluid company-logo home-logo-img"
                     src="/images/turnberry/asset-19.jpg"
                     alt="The Turnberry Place Team at Berkshire Hathaway HomeServices Nevada Properties Logo"
                     width={250}
@@ -414,7 +398,6 @@ function HomePageContent({
                     loading="lazy"
                     quality={85}
                     sizes="(max-width: 768px) 200px, 250px"
-                    style={{ maxHeight: '100px', objectFit: 'contain' }}
                   />
                 </div>
               </div>
@@ -439,13 +422,12 @@ function HomePageContent({
               <div className="row g-3 mb-4">
                 {homepagePhotos.interior.slice(0, 3).map((photo, index) => (
                   <div key={index} className="col-12 col-md-4">
-                    <div style={{ position: 'relative', width: '100%', height: '250px', borderRadius: '8px', overflow: 'hidden' }}>
+                    <div className="home-photo-tile">
                       <Image
                         src={photo}
                         alt={`Turnberry Place interior view ${index + 1}`}
                         fill
                         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 33vw, 25vw"
-                        style={{ objectFit: 'cover' }}
                         loading="lazy"
                         quality={85}
                         className="hover-zoom"
@@ -455,13 +437,12 @@ function HomePageContent({
                 ))}
                 {homepagePhotos.exterior.slice(0, 3).map((photo, index) => (
                   <div key={`ext-${index}`} className="col-12 col-md-4">
-                    <div style={{ position: 'relative', width: '100%', height: '250px', borderRadius: '8px', overflow: 'hidden' }}>
+                    <div className="home-photo-tile">
                       <Image
                         src={photo}
                         alt={`Turnberry Place exterior view ${index + 1}`}
                         fill
                         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 33vw, 25vw"
-                        style={{ objectFit: 'cover' }}
                         loading="lazy"
                         quality={85}
                         className="hover-zoom"
@@ -541,13 +522,12 @@ function HomePageContent({
               <div className="row g-3 mt-3">
                 {homepagePhotos.stirlingClub.slice(1, 4).map((photo, index) => (
                   <div key={index} className="col-12 col-md-4">
-                    <div style={{ position: 'relative', width: '100%', height: '200px', borderRadius: '8px', overflow: 'hidden' }}>
+                    <div className="home-photo-tile home-photo-tile--sm">
                       <Image
                         src={photo}
                         alt={`The Stirling Club amenities ${index + 2} - Turnberry Place`}
                         fill
                         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 33vw, 25vw"
-                        style={{ objectFit: 'cover' }}
                         loading="lazy"
                         quality={80}
                         className="hover-zoom"

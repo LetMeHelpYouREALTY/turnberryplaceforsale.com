@@ -1,14 +1,14 @@
 /* Typography: exactly two webfont families site-wide (Playfair Display + Inter).
-   System UI stacks are fallbacks only — not additional branded fonts. */
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
+   Fonts are loaded via next/font/google in pages/_app.tsx (self-hosted, no render-block).
+   The --font-playfair / --font-inter CSS variables come from next/font. */
 
 :root {
   /* Primary stacks (max two branded families) */
-  --headlines-font: 'Playfair Display', Georgia, 'Times New Roman', serif;
+  --headlines-font: var(--font-playfair, 'Playfair Display'), Georgia, 'Times New Roman', serif;
   --headlines-font-weight: 600;
-  --body-font: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --body-font: var(--font-inter, 'Inter'), system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   --body-font-weight: 400;
-  --nav-font: 'Playfair Display', Georgia, 'Times New Roman', serif;
+  --nav-font: var(--font-playfair, 'Playfair Display'), Georgia, 'Times New Roman', serif;
   --nav-font-weight: 600;
 
   /* Generic system stack — forms, rare UI (same “class” as body, not a third webfont) */

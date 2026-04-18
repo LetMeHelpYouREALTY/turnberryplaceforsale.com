@@ -65,23 +65,6 @@ export function Footer({ links }: FooterProps) {
                       <Link 
                         href={link.href} 
                         className="site-link-item d-block text-center py-2 px-3"
-                        style={{
-                          color: '#495057',
-                          textDecoration: 'none',
-                          borderRadius: '4px',
-                          transition: 'all 0.2s ease',
-                          border: '1px solid transparent'
-                        }}
-                        onMouseEnter={(e) => {
-                          e.currentTarget.style.backgroundColor = '#f8f9fa'
-                          e.currentTarget.style.borderColor = '#dee2e6'
-                          e.currentTarget.style.color = '#212529'
-                        }}
-                        onMouseLeave={(e) => {
-                          e.currentTarget.style.backgroundColor = 'transparent'
-                          e.currentTarget.style.borderColor = 'transparent'
-                          e.currentTarget.style.color = '#495057'
-                        }}
                       >
                         {link.title}
                       </Link>
@@ -140,7 +123,7 @@ export function Footer({ links }: FooterProps) {
           {/* Berkshire Hathaway Logo */}
         <div className="row mt-4 mt-md-5">
           <div className="col-12 text-center">
-            <div className="d-inline-block" style={{ maxWidth: '300px', width: '100%' }}>
+            <div className="d-inline-block footer-logo-wrap">
               <Image
                 src="/images/turnberry/asset-19.jpg"
                 className="img-fluid footer-team-logo"
@@ -161,8 +144,7 @@ export function Footer({ links }: FooterProps) {
                 target="_blank"
                 rel="noopener noreferrer"
                 title="Las Vegas 55 Plus Homes"
-                className="d-inline-block"
-                style={{ maxWidth: '300px', width: '100%' }}
+                className="d-inline-block footer-logo-wrap"
               >
                 <Image
                   src="/images/turnberry/asset-20.jpg"

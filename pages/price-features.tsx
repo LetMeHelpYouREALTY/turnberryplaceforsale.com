@@ -130,7 +130,7 @@ export default function PriceFeaturesPage({ menus }: PriceFeaturesPageProps) {
               fill
               priority
               sizes="100vw"
-              style={{ objectFit: "cover" }}
+              className="object-cover"
             />
           </div>
           <div className="price-features-hero-overlay" aria-hidden="true" />
@@ -325,7 +325,7 @@ export default function PriceFeaturesPage({ menus }: PriceFeaturesPageProps) {
                   alt="Modern condo lifestyle at Turnberry Place"
                   fill
                   sizes="(max-width: 991px) 100vw, 50vw"
-                  style={{ objectFit: "cover" }}
+                  className="object-cover"
                 />
               </div>
               <div className="price-features-tier-body">
@@ -362,7 +362,7 @@ export default function PriceFeaturesPage({ menus }: PriceFeaturesPageProps) {
                   alt="Luxury interior with floor-to-ceiling windows"
                   fill
                   sizes="(max-width: 991px) 100vw, 50vw"
-                  style={{ objectFit: "cover" }}
+                  className="object-cover"
                 />
               </div>
               <div className="price-features-tier-body">
@@ -404,7 +404,7 @@ export default function PriceFeaturesPage({ menus }: PriceFeaturesPageProps) {
                   alt="Penthouse lifestyle with panoramic views"
                   fill
                   sizes="100vw"
-                  style={{ objectFit: "cover" }}
+                  className="object-cover"
                 />
               </div>
               <div className="price-features-tier-full-overlay" aria-hidden="true" />
@@ -585,7 +585,7 @@ export default function PriceFeaturesPage({ menus }: PriceFeaturesPageProps) {
                       alt="Dr. Jan Duffy"
                       width={420}
                       height={520}
-                      style={{ width: "100%", height: "auto" }}
+                      className="img-fluid-auto"
                     />
                   </div>
                   <div className="price-features-agent-body">
@@ -603,7 +603,7 @@ export default function PriceFeaturesPage({ menus }: PriceFeaturesPageProps) {
                         alt="Berkshire Hathaway HomeServices Nevada Properties"
                         width={260}
                         height={120}
-                        style={{ height: "auto" }}
+                        className="img-auto-h"
                       />
                     </div>
                   </div>
@@ -640,7 +640,7 @@ export default function PriceFeaturesPage({ menus }: PriceFeaturesPageProps) {
                         src={`${calendlyUrl}?hide_gdpr_banner=1`}
                         width="100%"
                         height="760"
-                        style={{ border: 0 }}
+                        className="price-features-calendly-iframe"
                         loading="lazy"
                       />
                     </div>

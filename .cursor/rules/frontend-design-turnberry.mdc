@@ -1,0 +1,81 @@
+---
+description: Project-scoped override for Anthropic's `frontend-design` skill. Pins Turnberry Place brand rails so the skill respects established typography, palette, tone, and layout instead of applying generic "BOLD aesthetic" defaults.
+globs: "**/*.{tsx,ts,jsx,js,css,scss,html,mdx}"
+alwaysApply: true
+---
+
+# Turnberry Place brand rails for the `frontend-design` skill
+
+Anthropic's [`frontend-design`](https://github.com/anthropics/skills/blob/main/skills/frontend-design/SKILL.md) skill (installed at `~/.cursor/skills/frontend-design/SKILL.md`) pushes distinctive, "BOLD aesthetic" UI and explicitly tells the agent to **avoid Inter**, vary aesthetics per page, and mix light/dark themes.
+
+Those defaults **do not apply to this project**. Turnberry Place is a luxury real-estate marketing site with a fixed brand, compliance constraints, and deliberate typography/layout choices already shipped. When the `frontend-design` skill is active on files in this repo, apply the overrides below first; anything the base skill says that conflicts with these rules loses.
+
+## 1. Typography is fixed — do not "choose fonts"
+
+- Headings and nav: **Playfair Display** (serif).
+- Body, buttons, UI: **Inter** (sans-serif).
+- Both are loaded via `next/font/google` in [`pages/_app.tsx`](pages/_app.tsx) and exposed through CSS vars `--font-playfair` / `--font-inter`, consumed in [`styles/fonts.css`](styles/fonts.css) as `--headlines-font` / `--body-font` / `--nav-font`.
+- The base skill's rule *"Avoid generic fonts like Arial and Inter"* is **ignored here.** Inter is intentional, tuned for the BHHS brand, and paired with Playfair. Do not propose Cinzel, Questrial, Fraunces, Cormorant, or any other replacement.
+- Do **not** add `@import url('https://fonts.googleapis.com/...')` or `<link rel="stylesheet" href="https://fonts...">`; the migration away from those was part of the April 2026 CSS audit.
+
+## 2. Aesthetic tone = `luxury/refined`
+
+Pick `luxury/refined` from the `frontend-design` skill's tone menu. **Do not** pick brutalist, maximalist chaos, retro-futuristic, playful/toy-like, or industrial/utilitarian. No purple gradients, no neo-brutalist borders, no oversized layered type, no grid-breaking asymmetry that fights Bootstrap's grid.
+
+Reference language: restrained, editorial, high-rise luxury, Las Vegas Strip view, Dr. Jan Duffy at Berkshire Hathaway HomeServices Nevada Properties. Keep tone consistent with copy already on [`pages/[[...slug]].tsx`](pages/[[...slug]].tsx), [`pages/price-features.tsx`](pages/price-features.tsx), and [`pages/towers.tsx`](pages/towers.tsx).
+
+## 3. Color system is fixed
+
+Use the existing CSS variables in [`styles/components.css`](styles/components.css) and scoped page blocks:
+
+- `--luxury-gold: #d4af37`
+- `--luxury-gold-dark: #b8941f`
+- Per-page panel/ink/muted tokens already defined on `.price-features-page`, `.towers-hero-*`, etc.
+
+Do not introduce new palette names, gradient sets, or per-page colorways without first adding the token to `styles/components.css`. One brand, many pages.
+
+## 4. No dark mode
+
+The project does not support `dark:` Tailwind variants or a dark theme toggle. The base skill's *"Vary between light and dark themes"* guidance is off. Design only for the existing light/ivory luxury context (some sections use dark photographic backgrounds with white text — those are hand-styled, not a theme).
+
+## 5. Layout system is fixed — Tailwind + Bootstrap-grid hybrid
+
+Per the April 2026 CSS audit, the site uses:
+
+- `bootstrap/dist/css/bootstrap-grid.min.css` and `bootstrap/dist/css/bootstrap-utilities.min.css` imported once in [`pages/_app.tsx`](pages/_app.tsx).
+- Tailwind utilities for everything else.
+- Hand-rolled button/form/card component classes in [`styles/components.css`](styles/components.css).
+
+Do not reintroduce full Bootstrap (Reboot would fight Tailwind Preflight), do not add a second UI framework (MUI, Chakra, Radix, HeroUI, DaisyUI, etc.), and do not replace `bootstrap-grid` with a custom grid unless explicitly requested.
+
+## 6. Consistency over variation
+
+The base skill says *"No design should be the same. Vary between different fonts, different aesthetics. NEVER converge on common choices."* That rule is for one-off artifacts, not multi-page marketing sites. On this repo, pages **must** share visual language. Reuse existing component classes (`.btn.btn-primary`, `.lead-form-card`, `.homepage-inventory`, `.towers-hero-title`, etc.) before inventing new ones.
+
+## 7. No inline styles
+
+Per the audit, `style={{ ... }}` has been removed from the homepage, towers, price-features, navbar, footer, and lead-capture form in favor of classes in [`styles/components.css`](styles/components.css). Do not reintroduce inline styles when "designing" new sections. If a new visual needs a value, add a class.
+
+## 8. Honor existing project guardrails
+
+These pre-existing rules continue to apply unchanged and take precedence over anything the skill generates:
+
+- [`CLAUDE.md`](CLAUDE.md) — single `<h1>` per page; canonical host `https://www.turnberryplaceforsale.com`; two webfonts only; no Google Fonts `@import`.
+- [`AGENTS.md`](AGENTS.md) — Pages Router (not App Router); no secrets; verify against April 2026 framework/SEO docs.
+- Agent identity: **Dr. Jan Duffy**, License **S.0197614.LLC**, **Berkshire Hathaway HomeServices Nevada Properties**. Never write "Janet"; never invent review counts, rankings, or sales volume.
+- **Never edit `components/idx/*`** without explicit approval (MLS compliance).
+- RealScout CSP: `em.realscout.com` and `www.realscout.com` must both be allowed in `script-src` and `connect-src` if CSP is touched.
+- No legal or tax advice framing in copy or UI microtext.
+
+## 9. When you generate new UI
+
+Before producing a component or page with the `frontend-design` skill active, confirm:
+
+- [ ] Headings use Playfair via `var(--headlines-font)` (or a `font-serif`/heading class already in the repo).
+- [ ] Body uses Inter via `var(--body-font)` (the default on `<body>`; no override needed in most cases).
+- [ ] Accent = `var(--luxury-gold)`; dark accents = `var(--luxury-gold-dark)`.
+- [ ] Grid = Bootstrap `container`/`row`/`col-*` **or** Tailwind `grid`/`flex`; not both fighting.
+- [ ] No `style={{}}`; classes live in `styles/components.css`.
+- [ ] No new font families, no dark-mode variants, no `@import` font URLs.
+- [ ] NAP, agent name, license, and brokerage match [`CLAUDE.md`](CLAUDE.md) if shown.
+- [ ] New sections carry accessible landmarks, single `<h1>` per route, descriptive `alt` text.

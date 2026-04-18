@@ -5,8 +5,12 @@ export function middleware(request: NextRequest) {
   const { pathname, hostname, protocol } = request.nextUrl
   const url = request.nextUrl.clone()
 
-  // Redirect HTTP to HTTPS (force secure connection)
-  if (protocol === 'http:') {
+  // Redirect HTTP to HTTPS (force secure connection).
+  // Skip for local loopback hosts — there's no TLS cert on `next start`/`next dev`,
+  // and the redirect would send Chrome (incl. Lighthouse) to an `chrome-error://` interstitial.
+  const isLocalLoopback =
+    hostname === 'localhost' || hostname === '127.0.0.1' || hostname === '::1'
+  if (protocol === 'http:' && !isLocalLoopback) {
     url.protocol = 'https:'
     return NextResponse.redirect(url, 301)
   }
