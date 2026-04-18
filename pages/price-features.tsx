@@ -162,15 +162,14 @@ export default function PriceFeaturesPage({ menus }: PriceFeaturesPageProps) {
                     href={calendlyUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    aria-label="Schedule a private tour on Calendly"
                   >
                     <CalendarDays aria-hidden="true" className="mr-2" />
                     Schedule Private Tour
+                    <span className="sr-only"> (opens Calendly in a new tab)</span>
                   </a>
                   <a
                     className="btn btn-outline-light btn-lg"
                     href={`tel:${officePhoneTel}`}
-                    aria-label={`Call the office at ${officePhoneDisplay}`}
                   >
                     Call {officePhoneDisplay}
                   </a>

@@ -1486,10 +1486,10 @@ export default function PhotosPage({ menus }: PhotosPageProps) {
               href={calendlyUrl}
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="Schedule a private tour"
             >
               <Calendar className="photos-mobile-footer-icon" aria-hidden="true" />
               <span>Schedule Tour</span>
+              <span className="sr-only"> (opens Calendly in a new tab)</span>
             </a>
           </div>
         ) : null}
@@ -1773,10 +1773,10 @@ export default function PhotosPage({ menus }: PhotosPageProps) {
                             className="photos-btn photos-btn-gold"
                             target="_blank"
                             rel="noopener noreferrer"
-                            aria-label="Schedule a tour"
                             data-cta="photos-mid-schedule"
                           >
                             Schedule Tour
+                            <span className="sr-only"> (opens Calendly in a new tab)</span>
                           </a>
                         </div>
                       </div>
