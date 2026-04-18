@@ -1,0 +1,185 @@
+---
+description: Project-specific integrity patterns for turnberryplaceforsale.com — codifies the architecture decisions made during the 2026-04-18 session
+alwaysApply: true
+---
+
+# Turnberry Place — Integrity & Architecture Patterns
+
+Established 2026-04-18 across commits `76bc393` → `eb6595d`. These patterns
+are non-negotiable for this repo and supersede generic 2026 best-practice
+defaults where they conflict.
+
+## 1. Reviews / GBP CTA — env-gated, no fabrication
+
+**Rule:** All "View Google Reviews" / "Write a Review" CTAs route through
+`lib/reviews.ts`. Never hardcode a `place_id`, `placeid=ChIJ…`,
+`g.page/r/…`, or `google.com/maps/place/?q=place_id:…` in any component.
+
+**Precedence (highest wins):**
+1. `NEXT_PUBLIC_GBP_REVIEWS_URL` — full read URL (env var, Vercel)
+2. `NEXT_PUBLIC_GBP_WRITEREVIEW_URL` — full write URL
+3. `NEXT_PUBLIC_GBP_PLACE_ID` — bare `ChIJ…` ID (helper builds both URLs)
+4. **Fallback:** Google Maps URL API search action built from
+   `CANONICAL_NAP` in `lib/reviews.ts`
+
+**Operator off-switch:** `NEXT_PUBLIC_GBP_REVIEWS_DISABLED=true` hides
+both CTAs site-wide without a code change. Always set this during a GBP
+verification window so visitors don't land on disambiguation pages.
+
+**Multi-GBP awareness:** Dr. Jan Duffy operates **multiple distinct GBPs**
+(at minimum: Arts District / Centennial Hills / Sunset / Sahara /
+MacDonald Highlands / 2827 Paradise Rd). Before changing `CANONICAL_NAP`,
+confirm with the operator which GBP this site targets. The current
+target is the new GBP at 2827 Paradise Rd: **`Turnberry Place | Condos
+by Dr. Jan Duffy`**.
+
+## 2. AggregateRating — env-gated, validated, no fabrication
+
+**Rule:** Use `lib/schema/aggregateRating.ts` `buildAggregateRating()`.
+Never hardcode `aggregateRating`, `ratingValue`, `reviewCount`,
+`bestRating`, or `worstRating` anywhere in JSON-LD.
+
+Helper requires BOTH `NEXT_PUBLIC_GBP_AGGREGATE_RATING_VALUE` and
+`NEXT_PUBLIC_GBP_AGGREGATE_RATING_COUNT` to be set AND valid (1–5,
+positive integer). Invalid values silently emit nothing — never ship a
+malformed schema.
+
+Currently wired into `RealEstateAgent` and `ApartmentComplex` schemas.
+If adding it elsewhere, spread conditionally:
+
+```ts
+const aggregateRating = buildAggregateRating()
+return { ..., ...(aggregateRating ? { aggregateRating } : {}) }
+```
+
+## 3. Build-stable dates — never `new Date()` in render or schema
+
+**Rule:** Any `<time>` attribute, "Last updated" copy, JSON-LD
+`datePublished` / `dateModified` / `uploadDate`, sitemap `<lastmod>`,
+or freshness indicator MUST use a constant from `lib/build-date.ts`:
+
+- `BUILD_DATE_ISO` — for ISO-8601 (schema, `<time dateTime>`, sitemap)
+- `BUILD_DATE_DISPLAY` — for human "April 18, 2026" copy
+- `BUILD_DATE_MONTH_YEAR` — for coarse "April 2026" labels
+
+**Why:** `new Date()` evaluated during SSR (Vercel UTC) vs. client
+hydration (visitor TZ) causes React #423/#425 hydration errors and
+client-only re-renders. In sitemaps, dynamic dates trigger Google's
+"lastmod inflation" distrust pattern. Fixed once in commit `63544df`.
+
+If you genuinely need a runtime current time (e.g. countdown timer),
+defer to `useEffect` after mount — see `components/live-inventory-badge.tsx`.
+
+## 4. Empty-state-safe components — fabrication-impossible-by-construction
+
+**Rule:** Components that display social proof, stats, press mentions,
+or reviews MUST be prop-driven with empty-state defaults. Never
+hardcode social-proof claims in component bodies.
+
+Reference implementations (commit `ca26581`):
+- `components/power-of-numbers.tsx` — returns `null` when `stats=[]`
+- `components/in-the-media.tsx` — returns `null` when `items=[]`,
+  filters out items missing `url`
+- `components/why-work-with-us.tsx` — only verifiable claims (BHHS
+  affiliation, license number, multi-office footprint), no numerics
+
+**Type-level enforcement:** Required fields like `MediaItem.url` and
+`PowerStat.sourceNote` make verifiable backing structurally mandatory
+at the call site.
+
+## 5. Multi-GBP NAP — visible NAP may diverge from GBP NAP
+
+The site's footer presentation NAP (`Turnberry Place | 2827 Paradise
+Rd, Las Vegas, NV 89109`) is deliberate — that's where tours happen.
+The GBP NAP that drives Google entity resolution lives in
+`lib/reviews.ts` `CANONICAL_NAP`. They CAN diverge if the operator
+intends it. Document any divergence inline with rationale; do not
+silently align them.
+
+## 6. label-content-name-mismatch — no redundant `aria-label`
+
+**Rule:** When an interactive element has visible text, do NOT add an
+`aria-label` that duplicates or fails-to-contain the visible text.
+WCAG 2.5.3 + axe `label-content-name-mismatch` will flag it.
+
+**Pattern for "opens in new tab" cues:**
+
+```tsx
+<a href={calendlyUrl} target="_blank" rel="noopener noreferrer">
+  Schedule Tour
+  <span className="sr-only"> (opens Calendly in a new tab)</span>
+</a>
+```
+
+The visible text becomes the accessible name; the sr-only span adds
+context without breaking substring-containment. Established in commit
+`44221c4` (label-sweep) and reinforced in `d720592` (testimonials).
+
+## 7. FAQ accordions — native `<details>` / `<summary>`
+
+**Rule:** Use HTML-native `<details>` / `<summary>` for collapsible
+FAQ items. Don't reach for a JS state machine. Reference: `pages/photos.tsx`
+plus `.photos-faq-item` styles in `styles/components.css`.
+
+Native disclosure has full keyboard + screen-reader support free, plus
+`open` attribute is part of the DOM (selectable in CSS). Pair the
+visible Q&A with a `FAQPage` JSON-LD block so visible content and
+schema stay in lockstep.
+
+## 8. Schema entity consolidation — `isPartOf` for child pages
+
+**Rule:** Sub-pages that emit their own JSON-LD entity (e.g.
+`ImageGallery` on `/photos`) MUST declare `isPartOf` pointing at the
+parent `ApartmentComplex` `@id` from the home page:
+
+```ts
+isPartOf: {
+  '@type': 'ApartmentComplex',
+  '@id': `${baseUrl}/#apartmentcomplex`,
+}
+```
+
+Tells Google these pages are children of one entity, not separate
+entities. Established in commit `2b83ddb` for `/photos`.
+
+## 9. Stale planning docs — banner, don't delete
+
+When a `.md` file at repo root contains fabricated stats, stale phone
+numbers, deprecated tech references, or "all complete" framing that no
+longer matches reality:
+
+1. Do **not** delete (per repo "never delete files without approval" rule).
+2. Add a warning banner at the top: blockquote starting with
+   `> ⚠️ **HISTORICAL PLANNING DOCUMENT — DO NOT TREAT AS SOURCE OF
+   TRUTH**` that lists specific issues by name and points to current
+   sources (`CLAUDE.md`, `git log`, source files).
+
+Reference commit: `f9309f0`. Files currently bannered:
+`JILLS_ZEDER_FEATURES.md`, `HOMEPAGE_OPTIMIZATION_SUMMARY.md`,
+`PROJECT_COMPLETE.md`.
+
+## 10. robots.txt — explicit AI-crawler + social-preview allowlist
+
+**Rule:** Even though `User-agent: *` allow-all covers all bots,
+maintain explicit `Allow` entries for the canonical 2026 AI-training
+and social-preview crawlers. Makes intent scannable for auditors.
+Current canonical list (commit `eb6595d`): Googlebot, Bingbot, GPTBot,
+CCBot, PerplexityBot, ClaudeBot, Google-Extended, Applebot-Extended,
+Applebot, anthropic-ai, DuckAssistBot, Meta-ExternalAgent, Amazonbot,
+Bytespider, facebookexternalhit, Twitterbot, LinkedInBot.
+
+Never add `Disallow: /_next/static` — Google needs it to render JS-heavy
+pages and will downrank if blocked.
+
+## 11. Operational defaults
+
+- Production branch: `main` (Vercel deploys on push)
+- Site canonical host: `https://www.turnberryplaceforsale.com` (middleware
+  enforces `www`)
+- Phone (canonical): `(702) 500-1971` only — historical `222-1964`,
+  `222-1988`, `500-1955` references in older docs are stale
+- Email (canonical): `DrDuffy@TurnberryPlaceForSale.com`
+- Lockfile: `yarn.lock` (not `package-lock.json`); use `corepack yarn`
+- Local builds may be skipped (Vercel is source-of-truth) — TypeScript
+  `--noEmit` check is sufficient validation before push when local disk
+  or build environment is constrained
