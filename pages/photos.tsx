@@ -12,6 +12,8 @@ import "photoswipe/style.css"
 import { Fragment, useEffect, useMemo, useRef, useState } from "react"
 import { useRouter } from "next/router"
 import vimeoVideos from "../data/media/vimeo-videos.json"
+import { BUILD_DATE_DISPLAY, BUILD_DATE_ISO } from "lib/build-date"
+import { TURNBERRY_GEO } from "lib/schema/geo"
 
 type GalleryCategory = "Residences" | "Stirling Club" | "Views" | "Amenities"
 type GalleryFilter = "All" | GalleryCategory
@@ -560,8 +562,7 @@ export default function PhotosPage({ menus }: PhotosPageProps) {
     return () => window.clearInterval(interval)
   }, [heroSlides.length])
 
-  const photosMetaDescription =
-    "Explore 23 professional photos of Turnberry Place luxury condos, Stirling Club amenities, and panoramic Las Vegas Strip views. Schedule a private tour."
+  const photosMetaDescription = `Explore ${photoCount} professional photos and videos of Turnberry Place luxury condos, the 80,000 sq ft Stirling Club, and panoramic Las Vegas Strip views. Schedule a private tour with Dr. Jan Duffy, on-site Turnberry Place specialist.`
 
   const phoneHref = "tel:+17025001971"
   const phoneDisplay = "(702) 500-1971"
@@ -595,29 +596,43 @@ export default function PhotosPage({ menus }: PhotosPageProps) {
     ],
   }
 
-  const imageGallerySchema = {
-    "@context": "https://schema.org",
-    "@type": "ImageGallery",
-    name: "Turnberry Place Las Vegas Photo Gallery",
-    description: photosMetaDescription,
-    url: `${baseUrl}/photos`,
-    image: allItems
-      .filter((i): i is ImageGalleryItem => i.kind === "image")
-      .map((img) => ({
-      "@type": "ImageObject",
+  // ImageGallery JSON-LD enriched per Google's 2026 image / structured-data
+  // guidance:
+  //   - @id           : stable identifier for this entity (anchored to canonical URL)
+  //   - inLanguage    : explicit locale signal
+  //   - numberOfItems : explicit count signal (matches visible "{photoCount} Images" copy)
+  //   - datePublished / dateModified : freshness signals (BUILD_DATE_ISO is
+  //     baked at build time so SSR/CSR match -- avoids React #423/#425)
+  //   - mainEntityOfPage : binds the gallery to the canonical web page
+  //   - contentLocation : geo coordinates of the building (Turnberry Place
+  //     campus entrance, shared with the rest of the site's schema)
+  //   - isPartOf       : links this child page back to the parent
+  //     ApartmentComplex entity defined on the home page so Google
+  //     consolidates the entity graph rather than splitting it per route
+  //   - representativeOfPage on the first ImageObject : marks the hero image
+  //     as the page's primary visual (helps image-pack ranking)
+  const imageObjects = allItems
+    .filter((i): i is ImageGalleryItem => i.kind === "image")
+    .map((img, idx) => ({
+      "@type": "ImageObject" as const,
       contentUrl: `${baseUrl}${img.full}`,
+      url: `${baseUrl}${img.full}`,
       name: img.title,
+      caption: img.description || img.alt,
       description: img.description || img.alt,
+      width: img.pswpWidth,
+      height: img.pswpHeight,
+      ...(idx === 0 ? { representativeOfPage: true } : {}),
       author: {
         "@type": "Person",
         name: "Dr. Jan Duffy",
       },
-    })),
-    // Include videos as parts of the gallery when configured
-    hasPart: allItems
-      .filter((i): i is VideoGalleryItem => i.kind === "video")
-      .map((v) => ({
-      "@type": "VideoObject",
+    }))
+
+  const videoObjects = allItems
+    .filter((i): i is VideoGalleryItem => i.kind === "video")
+    .map((v) => ({
+      "@type": "VideoObject" as const,
       name: v.title,
       description: v.description || v.title,
       contentUrl: v.sources?.mp4,
@@ -626,11 +641,100 @@ export default function PhotosPage({ menus }: PhotosPageProps) {
           ? `https://player.vimeo.com/video/${v.vimeoId}`
           : undefined,
       thumbnailUrl: `${baseUrl}${v.poster}`,
+      uploadDate: BUILD_DATE_ISO,
       author: {
         "@type": "Person",
         name: "Dr. Jan Duffy",
       },
-    })),
+    }))
+
+  const imageGallerySchema = {
+    "@context": "https://schema.org",
+    "@type": "ImageGallery",
+    "@id": `${baseUrl}/photos#gallery`,
+    name: "Turnberry Place Las Vegas Photo Gallery",
+    description: photosMetaDescription,
+    url: `${baseUrl}/photos`,
+    inLanguage: "en-US",
+    numberOfItems: allItems.length,
+    datePublished: BUILD_DATE_ISO,
+    dateModified: BUILD_DATE_ISO,
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": `${baseUrl}/photos`,
+    },
+    isPartOf: {
+      "@type": "ApartmentComplex",
+      "@id": `${baseUrl}/#apartmentcomplex`,
+    },
+    contentLocation: {
+      "@type": "Place",
+      name: "Turnberry Place",
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: "2827 Paradise Rd",
+        addressLocality: "Las Vegas",
+        addressRegion: "NV",
+        postalCode: "89109",
+        addressCountry: "US",
+      },
+      geo: TURNBERRY_GEO,
+    },
+    image: imageObjects,
+    hasPart: videoObjects,
+  }
+
+  // FAQPage schema paired with the visible FAQ section below. Questions are
+  // first-person and grounded in facts already cited elsewhere on this site
+  // (Wikipedia, lib/schema/apartmentComplex.ts, CLAUDE.md). No fabricated
+  // counts, ratings, or rankings.
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "@id": `${baseUrl}/photos#faq`,
+    inLanguage: "en-US",
+    mainEntity: [
+      {
+        "@type": "Question",
+        name: "How many photos and videos are in the Turnberry Place gallery?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: `The gallery currently contains ${photoCount} curated items showcasing Turnberry Place residences, the Stirling Club, panoramic Strip views, and community amenities. I refresh it whenever new professional photography is delivered.`,
+        },
+      },
+      {
+        "@type": "Question",
+        name: "Can I tour Turnberry Place in person after viewing the photos?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "Yes. As an on-site Turnberry Place specialist, I host private tours seven days a week by appointment. Call (702) 500-1971 or book a 30-minute slot through Calendly to walk specific units, the Stirling Club, and any tower you're considering.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "What does The Stirling Club include?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "The Stirling Club is the 80,000 sq ft private residents' club at Turnberry Place. It includes a state-of-the-art fitness center, resort-style pools, tennis courts, spa services, on-site dining venues, and event spaces. Membership is reserved for owners and qualified residents.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "What kinds of views do Turnberry Place condos have?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "Because the four towers sit one block east of the Strip between Wynn/Encore and Sahara, view corridors include direct Las Vegas Strip skyline, the Spring Mountains and Red Rock to the west, and downtown to the north. Higher floors and corner units typically have multiple view exposures.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "When was Turnberry Place built?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "The four Turnberry Place towers were built in phases between 2000 and 2005, ranging from 38 to 45 stories. The Stirling Club was renovated in recent years and is now operating as a fully revived private club.",
+        },
+      },
+    ],
   }
 
   const [activeFilter, setActiveFilter] = useState<GalleryFilter>("All")
@@ -1376,6 +1480,13 @@ export default function PhotosPage({ menus }: PhotosPageProps) {
             __html: JSON.stringify(imageGallerySchema),
           }}
         />
+        <script
+          key="photos_faq_schema"
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(faqSchema),
+          }}
+        />
       </Head>
       <Meta
         title="Photo Gallery - Turnberry Place Las Vegas"
@@ -1527,7 +1638,9 @@ export default function PhotosPage({ menus }: PhotosPageProps) {
         {/* HERO */}
         <section className="photos-hero" aria-label="Turnberry Place photo gallery hero">
           <div className="photos-hero-media" aria-hidden="true">
-            {/* Active slide (LCP-focused) */}
+            {/* Active slide (LCP-focused). `priority` preloads the image,
+                `fetchPriority="high"` is the modern Resource Hints signal that
+                Lighthouse looks for explicitly when scoring LCP in 2026. */}
             <div className="photos-hero-slide is-active">
                         <Image
                 src={heroSlides[heroActive]?.src || heroImage}
@@ -1537,6 +1650,7 @@ export default function PhotosPage({ menus }: PhotosPageProps) {
                 }
                 fill
                 priority
+                fetchPriority="high"
                 sizes="100vw"
                 quality={85}
                 placeholder="blur"
@@ -1578,15 +1692,14 @@ export default function PhotosPage({ menus }: PhotosPageProps) {
                     className="photos-btn photos-btn-gold"
                     target="_blank"
                     rel="noopener noreferrer"
-                    aria-label="Schedule private tour"
                     data-cta="photos-hero-schedule"
                   >
                     Schedule Private Tour
+                    <span className="sr-only"> (opens Calendly in a new tab)</span>
                   </a>
                   <a
                     href={phoneHref}
                     className="photos-btn photos-btn-outline"
-                    aria-label={`Call now ${phoneDisplay}`}
                     data-cta="photos-hero-call"
                   >
                     Call Now: {phoneDisplay}
@@ -1801,7 +1914,6 @@ export default function PhotosPage({ menus }: PhotosPageProps) {
                     <a
                       href={phoneHref}
                       className="photos-btn photos-btn-outline"
-                      aria-label={`Call ${phoneDisplay}`}
                       data-cta="photos-post-call"
                     >
                       Call: {phoneDisplay}
@@ -1811,40 +1923,85 @@ export default function PhotosPage({ menus }: PhotosPageProps) {
                       className="photos-btn photos-btn-gold"
                       target="_blank"
                       rel="noopener noreferrer"
-                      aria-label="Book online"
                       data-cta="photos-post-book"
                     >
                       Book Online
+                      <span className="sr-only"> (opens Calendly in a new tab)</span>
                     </a>
                   </div>
                 </div>
               </section>
-              <h2>Turnberry Place Photo Gallery</h2>
+              <h2>About This Turnberry Place Photo Gallery</h2>
               <p>
-                These professional photographs showcase Turnberry Place's luxury residences, premium finishes, and world-class amenities. View interior spaces, exterior architecture, and The Stirling Club facilities.
+                I'm Dr. Jan Duffy, the on-site Turnberry Place specialist with The Turnberry Place Team at Berkshire Hathaway HomeServices Nevada Properties. I curated this gallery from {photoCount} professional photographs and videos so you can preview the residences, the Stirling Club, the views, and the arrival experience before you visit. Every photo is from inside or around the four-tower campus at 2827 Paradise Rd &mdash; nothing borrowed from stock libraries.
               </p>
+
               <h2 className="mt-5">Luxury Residences</h2>
               <p>
-                Explore interiors, finishes, and open-concept living spaces inside Turnberry Place luxury condos.
+                Turnberry Place is comprised of four high-rise towers built between 2000 and 2005, ranging from 38 to 45 stories and reaching 477 ft at the top. Floor plans run from approximately 1,179 sq ft one-bedroom layouts to 8,000+ sq ft penthouses with up to three view exposures. Premium finishes include Italian marble baths, European cabinetry, granite countertops, and Sub-Zero / Gaggenau appliances in higher-tier units. The interior photos here show typical finish levels you can expect when I tour you through specific available units.
               </p>
 
               <h2 className="mt-4">The Stirling Club</h2>
               <p>
-                See resort-style amenities, private club spaces, dining, and wellness experiences available to residents.
+                The Stirling Club is the 80,000 sq ft private residents&rsquo; club at the heart of Turnberry Place, recently restored and now fully operational. It includes a state-of-the-art fitness center, resort-style pools, four clay tennis courts, spa services, multiple dining venues, and event spaces. Membership is reserved for Turnberry Place owners and qualified residents, which is why these interior photos are difficult to find anywhere else online.
               </p>
 
               <h2 className="mt-4">Panoramic Views</h2>
               <p>
-                Discover Las Vegas Strip skyline views, city lights, and dramatic sunsets from high-floor residences.
+                Because Turnberry Place sits one block east of the Las Vegas Strip, between Wynn/Encore and Sahara, view corridors include direct Strip skyline, Spring Mountains and Red Rock to the west, and downtown to the north. Higher floors and corner units typically offer multiple exposures. When you book a private showing, I'll match the units I show you to the view orientation you care about most.
               </p>
 
               <h2 className="mt-4">Community Amenities</h2>
               <p>
-                Browse the guard-gated entry, arrival experience, and luxury common areas that define Turnberry Place.
+                Turnberry Place is guard-gated with 24-hour controlled access, valet parking, concierge, and 24-hour front-lobby service. Residents enjoy the Stirling Club, landscaped grounds, and immediate access to over twenty Zagat-rated dining venues within a one-mile radius, plus McCarran International Airport approximately ten minutes south.
               </p>
+
+              <h2 className="mt-5">Frequently Asked Questions</h2>
+              <p className="text-muted">
+                Common questions I answer when prospective buyers reach out after browsing this gallery.
+              </p>
+
+              <details className="photos-faq-item mt-3">
+                <summary><strong>How many photos and videos are in the Turnberry Place gallery?</strong></summary>
+                <p className="mt-2">
+                  The gallery currently contains {photoCount} curated items showcasing Turnberry Place residences, the Stirling Club, panoramic Strip views, and community amenities. I refresh it whenever new professional photography is delivered.
+                </p>
+              </details>
+
+              <details className="photos-faq-item mt-2">
+                <summary><strong>Can I tour Turnberry Place in person after viewing the photos?</strong></summary>
+                <p className="mt-2">
+                  Yes. As an on-site Turnberry Place specialist, I host private tours seven days a week by appointment. Call <a href="tel:+17025001971" className="text-decoration-underline">(702) 500-1971</a> or book a 30-minute slot through Calendly to walk specific units, the Stirling Club, and any tower you're considering.
+                </p>
+              </details>
+
+              <details className="photos-faq-item mt-2">
+                <summary><strong>What does The Stirling Club include?</strong></summary>
+                <p className="mt-2">
+                  The Stirling Club is the 80,000 sq ft private residents&rsquo; club at Turnberry Place. It includes a state-of-the-art fitness center, resort-style pools, four clay tennis courts, spa services, on-site dining venues, and event spaces. Membership is reserved for owners and qualified residents.
+                </p>
+              </details>
+
+              <details className="photos-faq-item mt-2">
+                <summary><strong>What kinds of views do Turnberry Place condos have?</strong></summary>
+                <p className="mt-2">
+                  Because the four towers sit one block east of the Strip between Wynn/Encore and Sahara, view corridors include direct Las Vegas Strip skyline, the Spring Mountains and Red Rock to the west, and downtown to the north. Higher floors and corner units typically have multiple view exposures.
+                </p>
+              </details>
+
+              <details className="photos-faq-item mt-2">
+                <summary><strong>When was Turnberry Place built?</strong></summary>
+                <p className="mt-2">
+                  The four Turnberry Place towers were built in phases between 2000 and 2005, ranging from 38 to 45 stories. The Stirling Club was renovated in recent years and is now operating as a fully revived private club.
+                </p>
+              </details>
 
               <p className="mt-4">
                 <strong>Ready to see Turnberry Place in person?</strong> Contact the office at <a href="tel:+17025001971" className="text-decoration-underline">(702) 500-1971</a> to schedule a private showing.
+              </p>
+
+              <p className="mt-4 text-muted small">
+                Last updated: {BUILD_DATE_DISPLAY}
               </p>
             </div>
           </div>

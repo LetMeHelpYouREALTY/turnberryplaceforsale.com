@@ -6035,3 +6035,68 @@ main#main-content {
   color: var(--body-copy-color, #e9ecef);
   line-height: 1.65;
 }
+
+/* ===============================
+   /photos FAQ accordion (<details>-based)
+   Scoped to: .photos-page .photos-faq-item
+   Native <details> gives free a11y (keyboard + screen-reader), this block
+   just supplies brand-aligned spacing, focus ring, and a chevron marker.
+   =============================== */
+.photos-page .photos-faq-item {
+  border: 1px solid rgba(212, 175, 55, 0.18);
+  border-radius: 6px;
+  padding: 1rem 1.25rem;
+  background-color: rgba(255, 255, 255, 0.02);
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.photos-page .photos-faq-item[open] {
+  border-color: rgba(212, 175, 55, 0.35);
+  background-color: rgba(255, 255, 255, 0.04);
+}
+
+.photos-page .photos-faq-item > summary {
+  cursor: pointer;
+  list-style: none;
+  padding-right: 1.5rem;
+  position: relative;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+/* Hide the default disclosure triangle (Webkit + Firefox) so we can ship a
+   custom chevron that matches the site's gold accent. */
+.photos-page .photos-faq-item > summary::-webkit-details-marker {
+  display: none;
+}
+.photos-page .photos-faq-item > summary::marker {
+  display: none;
+  content: "";
+}
+
+.photos-page .photos-faq-item > summary::after {
+  content: "+";
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.5rem;
+  font-weight: 300;
+  color: var(--luxury-gold, #d4af37);
+  line-height: 1;
+  transition: transform 0.2s ease;
+}
+
+.photos-page .photos-faq-item[open] > summary::after {
+  content: "\2212"; /* unicode minus, matches "+" weight visually */
+}
+
+.photos-page .photos-faq-item > summary:focus-visible {
+  outline: 2px solid var(--luxury-gold, #d4af37);
+  outline-offset: 4px;
+  border-radius: 4px;
+}
+
+.photos-page .photos-faq-item p {
+  margin-bottom: 0;
+}
