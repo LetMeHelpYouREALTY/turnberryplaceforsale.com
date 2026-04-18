@@ -35,30 +35,29 @@
  */
 
 // Canonical NAP for the Google Business Profile that owns reviews relevant
-// to this site. Confirmed 2026-04-18: Dr. Jan Duffy operates five GBPs, one
-// per service vertical. The correct target for the Turnberry Place Strip
-// high-rise microsite is the "Sahara" GBP (store code: Sahara), which is
-// specifically scoped to Strip high-rise condo inventory.
+// to this site.
 //
-// Business name + street address below are the exact GBP values, so
-// Google's Maps URL API search action (buildMapsSearchUrl) resolves to this
-// listing's review panel and not to the Turnberry Place building's generic
-// community listing (which is owned by Turnberry Associates HOA, not Dr.
-// Duffy).
+// IMPORTANT: the Dr. Jan Duffy team operates multiple distinct offices,
+// each with its own GBP. Confirmed offices include (non-exhaustive):
+//   - 921 S Main St ("Arts District" / Downtown)
+//   - 1490 Center Crossing Rd ("Centennial Hills")
+//   - 8850 W Sunset Rd Ste 200 ("Affordable Homes" / Sunset)
+//   - 7475 W Sahara Ave Ste 100 ("Strip High Rise")
+//   - 3185 St Rose Pkwy Ste 101 ("MacDonald Highlands" / Henderson)
+//   - 2827 Paradise Rd -- THIS OFFICE, the Turnberry Place team location
 //
-// Note: the site's visible footer still shows "Turnberry Place | 2827
-// Paradise Rd" as the service location, which is intentional (that's where
-// tours happen) but does not match this GBP's NAP. That divergence is
-// tracked separately; flipping the reviews CTA to use the correct GBP NAP
-// for lookup does not require changing the footer -- the footer's visible
-// NAP is purely presentational, while this constant drives Google entity
-// resolution.
+// The 2827 Paradise Rd office is the physical origin of the services
+// marketed on turnberryplaceforsale.com. Matching GBP NAP below drives
+// Google entity resolution via the Maps URL API search action. If a
+// dedicated GBP exists at 2827 Paradise Rd under a different business
+// name (e.g. "The Turnberry Place Team"), set NEXT_PUBLIC_GBP_PLACE_ID
+// in Vercel env to that listing's place_id for a deep-link upgrade.
 const CANONICAL_NAP = {
-  name: "Las Vegas Strip High Rise Condos Homes by Dr. Jan Duffy",
+  name: "Turnberry Place",
   locality: "Las Vegas",
   region: "NV",
-  postalCode: "89117",
-  streetAddress: "7475 W Sahara Ave Ste 100",
+  postalCode: "89109",
+  streetAddress: "2827 Paradise Rd",
 } as const
 
 /**
