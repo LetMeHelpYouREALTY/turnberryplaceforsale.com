@@ -37,23 +37,35 @@
 // Canonical NAP for the Google Business Profile that owns reviews relevant
 // to this site.
 //
-// IMPORTANT: the Dr. Jan Duffy team operates multiple distinct offices,
-// each with its own GBP. Confirmed offices include (non-exhaustive):
-//   - 921 S Main St ("Arts District" / Downtown)
-//   - 1490 Center Crossing Rd ("Centennial Hills")
-//   - 8850 W Sunset Rd Ste 200 ("Affordable Homes" / Sunset)
-//   - 7475 W Sahara Ave Ste 100 ("Strip High Rise")
-//   - 3185 St Rose Pkwy Ste 101 ("MacDonald Highlands" / Henderson)
-//   - 2827 Paradise Rd -- THIS OFFICE, the Turnberry Place team location
+// Target GBP (as of 2026-04-18, pending Google verification):
 //
-// The 2827 Paradise Rd office is the physical origin of the services
-// marketed on turnberryplaceforsale.com. Matching GBP NAP below drives
-// Google entity resolution via the Maps URL API search action. If a
-// dedicated GBP exists at 2827 Paradise Rd under a different business
-// name (e.g. "The Turnberry Place Team"), set NEXT_PUBLIC_GBP_PLACE_ID
-// in Vercel env to that listing's place_id for a deep-link upgrade.
+//   Turnberry Place | Condos by Dr. Jan Duffy
+//   2827 Paradise Rd, Las Vegas, NV 89109
+//
+// This is a NEW GBP specifically created for the Turnberry Place team's
+// office at 2827 Paradise Rd, distinct from Dr. Duffy's other verticals
+// (Arts District / Centennial Hills / Affordable Homes / Strip High Rise
+// / MacDonald Highlands). Business name matches exactly what's registered
+// so the Google Maps URL API search action resolves straight to this GBP
+// once verification completes -- no code change required on verify day.
+//
+// OPERATIONAL WORKFLOW while the GBP is pending verification:
+//
+//   1. NEXT_PUBLIC_GBP_REVIEWS_DISABLED=true should be set in Vercel to
+//      hide the CTAs site-wide. Avoids sending visitors to disambiguation
+//      pages or the HOA-owned Turnberry Place building listing during
+//      the pending window.
+//   2. When Google verifies the new GBP, remove (or set to "false") the
+//      disabled flag in Vercel. Maps search URL below snaps into place
+//      immediately.
+//   3. Grab the place_id from Google's Place ID Finder or the GBP
+//      dashboard and paste it into NEXT_PUBLIC_GBP_PLACE_ID in Vercel
+//      to upgrade from "Maps search" to a deep-link into the reviews
+//      tab (https://search.google.com/local/reviews?placeid=...).
+//
+// See .env.example for env var reference.
 const CANONICAL_NAP = {
-  name: "Turnberry Place",
+  name: "Turnberry Place | Condos by Dr. Jan Duffy",
   locality: "Las Vegas",
   region: "NV",
   postalCode: "89109",
