@@ -1,3 +1,5 @@
+export { buildAggregateRating } from 'lib/schema/aggregateRating'
+export type { AggregateRating } from 'lib/schema/aggregateRating'
 export { buildApartmentComplexSchema } from 'lib/schema/apartmentComplex'
 export type { ListingInventorySnapshot } from 'lib/schema/apartmentComplex'
 export { buildBreadcrumbListSchema } from 'lib/schema/breadcrumbList'

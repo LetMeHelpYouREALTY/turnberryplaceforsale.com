@@ -1,4 +1,5 @@
 import { TURNBERRY_GEO } from 'lib/schema/geo'
+import { buildAggregateRating } from 'lib/schema/aggregateRating'
 
 type AreaServedEntry =
   | { '@type': 'City'; name: string }
@@ -10,6 +11,10 @@ type RealEstateAgentInput = {
 }
 
 export function buildRealEstateAgentSchema({ baseUrl }: RealEstateAgentInput) {
+  // AggregateRating is env-gated (see lib/schema/aggregateRating.ts).
+  // Emitted only when verified GBP numbers are set in Vercel env --
+  // never fabricated defaults.
+  const aggregateRating = buildAggregateRating()
   const areaServed: AreaServedEntry[] = [
     { '@type': 'City', name: 'Las Vegas' },
     { '@type': 'City', name: 'Paradise' },
@@ -64,5 +69,6 @@ export function buildRealEstateAgentSchema({ baseUrl }: RealEstateAgentInput) {
     priceRange: '$800,000 - $10,000,000+',
     image: `${baseUrl}/images/turnberry/asset-1.jpg`,
     logo: `${baseUrl}/images/turnberry/asset-19.jpg`,
+    ...(aggregateRating ? { aggregateRating } : {}),
   }
 }

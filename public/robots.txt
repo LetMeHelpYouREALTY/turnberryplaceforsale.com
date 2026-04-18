@@ -29,6 +29,41 @@ Allow: /
 User-agent: Applebot-Extended
 Allow: /
 
+User-agent: Applebot
+Allow: /
+
+# Anthropic's user-attributed crawler (distinct from ClaudeBot)
+User-agent: anthropic-ai
+Allow: /
+
+# DuckDuckGo's AI-assist crawler (2024+)
+User-agent: DuckAssistBot
+Allow: /
+
+# Meta / Llama training crawler
+User-agent: Meta-ExternalAgent
+Allow: /
+
+# Amazon Alexa / Q / Olympus training crawler
+User-agent: Amazonbot
+Allow: /
+
+# ByteDance (TikTok) training crawler
+User-agent: Bytespider
+Allow: /
+
+# Facebook / Instagram link-preview scraper (Open Graph rendering)
+User-agent: facebookexternalhit
+Allow: /
+
+# Twitter / X link-preview scraper (Twitter Card rendering)
+User-agent: Twitterbot
+Allow: /
+
+# LinkedIn link-preview scraper
+User-agent: LinkedInBot
+Allow: /
+
 # Do NOT disallow /_next/static (JS/CSS chunks). Blocking it can prevent Google
 # from rendering pages correctly and may hurt indexing in Search Console.
 

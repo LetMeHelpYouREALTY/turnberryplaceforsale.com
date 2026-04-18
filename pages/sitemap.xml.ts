@@ -1,4 +1,5 @@
 import { GetServerSideProps } from 'next'
+import { BUILD_DATE_ISO } from 'lib/build-date'
 
 // Ensure www is always used as primary domain
 const baseUrl = (() => {
@@ -34,7 +35,13 @@ const staticPages = [
 const availableCondosTowerPaths = [1, 2, 3, 4].map((n) => `/available-condos?tower=${n}`)
 
 function generateSiteMap() {
-  const today = new Date().toISOString().split('T')[0]
+  // Use BUILD_DATE_ISO (frozen per deploy in next.config.js) rather than
+  // `new Date()`. With a dynamic timestamp the sitemap would advertise a
+  // fresh `<lastmod>` on every single URL every request -- Google treats
+  // that as "lastmod inflation" and starts distrusting the freshness
+  // signal. Build-stable lastmod changes only when the site actually
+  // redeploys, which is the correct signal.
+  const today = BUILD_DATE_ISO.split('T')[0]
 
   const staticUrls = staticPages.map((path) => {
     const cleanPath = path === '' ? '' : path.replace(/\/$/, '')
