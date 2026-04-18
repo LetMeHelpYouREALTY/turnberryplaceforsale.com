@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import { areReviewsDisabled, getReviewsReadUrl, getReviewsWriteUrl } from 'lib/reviews'
 
 interface Testimonial {
   quote: string
@@ -151,18 +152,30 @@ export function ClientTestimonials() {
             </div>
           </div>
         </div>
-        <div className="row mt-4">
-          <div className="col-12 text-center">
-            <a
-              href="https://www.google.com/maps/place/?q=place_id:ChIJN1t_tDeuEmsRUsoyG83frY4"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn btn-outline-primary"
-            >
-              View All Google Reviews
-            </a>
+        {!areReviewsDisabled() ? (
+          <div className="row mt-4">
+            <div className="col-12 text-center d-flex flex-wrap justify-content-center gap-2">
+              <a
+                href={getReviewsReadUrl()}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn btn-outline-primary"
+              >
+                View Google Reviews
+                <span className="sr-only"> for Turnberry Place (opens Google Maps in a new tab)</span>
+              </a>
+              <a
+                href={getReviewsWriteUrl()}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn btn-outline-secondary"
+              >
+                Write a Review
+                <span className="sr-only"> on Google (opens in a new tab)</span>
+              </a>
+            </div>
           </div>
-        </div>
+        ) : null}
       </div>
     </div>
   )

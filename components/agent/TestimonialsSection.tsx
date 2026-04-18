@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useState } from "react"
 import Link from "next/link"
 import { ChevronLeft, ChevronRight, Star } from "lucide-react"
+import { areReviewsDisabled, getReviewsReadUrl, getReviewsWriteUrl } from "lib/reviews"
 
 const GOLD = "#D4AF37"
 
@@ -142,17 +143,30 @@ export function TestimonialsSection() {
             </button>
           </div>
 
-          <div className="mt-6 text-center">
-            <Link
-              href="https://www.google.com/search?q=Turnberry+Place+Las+Vegas+reviews"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center justify-center rounded-full border px-6 py-3 font-semibold text-gray-900 hover:bg-gray-50"
-              style={{ borderColor: "rgba(212, 175, 55, 0.45)" }}
-            >
-              View Google Reviews
-            </Link>
-          </div>
+          {!areReviewsDisabled() ? (
+            <div className="mt-6 flex flex-col sm:flex-row gap-3 justify-center items-center">
+              <Link
+                href={getReviewsReadUrl()}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center rounded-full border px-6 py-3 font-semibold text-gray-900 hover:bg-gray-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
+                style={{ borderColor: "rgba(212, 175, 55, 0.45)", outlineColor: GOLD }}
+              >
+                View Google Reviews
+                <span className="sr-only"> for Turnberry Place (opens Google Maps in a new tab)</span>
+              </Link>
+              <Link
+                href={getReviewsWriteUrl()}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center rounded-full border px-6 py-3 font-semibold text-gray-900 hover:bg-gray-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
+                style={{ borderColor: "rgba(17, 24, 39, 0.2)", outlineColor: GOLD }}
+              >
+                Write a Review
+                <span className="sr-only"> on Google (opens in a new tab)</span>
+              </Link>
+            </div>
+          ) : null}
         </div>
       </div>
     </section>
