@@ -5170,11 +5170,15 @@ main#main-content {
     text-align: center;
 }
 
+/* `.doc-modal` isn't wired up in any current component, but the rule is
+   preserved in case a Drupal-authored modal ever reintroduces the class.
+   The previous `background-image` pointed at a third-party vendor S3
+   bucket (cribflyer-publicsite) and has been dropped to avoid leaking
+   brand presentation to an external dependency. */
 .doc-modal .modal-content {
     border: none;
     border-radius: 0;
-    background-image: url(https://s3.amazonaws.com/cribflyer-publicsite/images/triangles-bg.jpg);
-    background-size: cover;
+    background-color: #ffffff;
 }
 
 .doc-modal .modal-dialog {

@@ -37,7 +37,7 @@ export default function StirlingClubPage({ menus }: StirlingClubPageProps) {
                     <div className="col-12 col-md-6">
                       <div className="left-image pb-4 pb-md-0">
                         <Image
-                          src="https://assets.cribflyer-proxy.com/cdn-cgi/image/height=400,fit=contain,format=auto,quality=85/4616/5/2976704/asset.jpg"
+                          src="/images/turnberry/stirling-club-hero.jpg"
                           width={600}
                           height={400}
                           alt="The Stirling Club at Turnberry Place Las Vegas"

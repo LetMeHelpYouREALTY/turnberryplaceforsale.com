@@ -11,13 +11,18 @@ import Link from "next/link"
 
 interface NeighborhoodPageProps extends LayoutProps {}
 
+// Self-hosted hero imagery (migrated off assets.cribflyer-proxy.com on
+// 2026-04-18). Served from /public so Next/Image can optimize to WebP/AVIF
+// with the rest of the site, removes a third-party CDN dependency, and
+// keeps image delivery on the same origin as the HTML (better for caching
+// and LCP).
 const neighborhoodImages = [
-  "https://assets.cribflyer-proxy.com/cdn-cgi/image/width=1200,fit=contain,rotate=0,format=auto,quality=85/4616/8/2976700/asset.jpg",
-  "https://assets.cribflyer-proxy.com/cdn-cgi/image/width=1200,fit=contain,rotate=0,format=auto,quality=85/4616/8/2976701/asset.jpg",
-  "https://assets.cribflyer-proxy.com/cdn-cgi/image/width=1200,fit=contain,rotate=0,format=auto,quality=85/4616/8/2976702/asset.jpg",
-  "https://assets.cribflyer-proxy.com/cdn-cgi/image/width=1200,fit=contain,rotate=0,format=auto,quality=85/4616/8/2976694/asset.jpg",
-  "https://assets.cribflyer-proxy.com/cdn-cgi/image/width=1200,fit=contain,rotate=0,format=auto,quality=85/4616/8/2976699/asset.jpg",
-  "https://assets.cribflyer-proxy.com/cdn-cgi/image/width=1200,fit=contain,rotate=0,format=auto,quality=85/4616/8/2976697/asset.jpg",
+  "/images/turnberry/neighborhood-1.jpg",
+  "/images/turnberry/neighborhood-2.jpg",
+  "/images/turnberry/neighborhood-3.jpg",
+  "/images/turnberry/neighborhood-4.jpg",
+  "/images/turnberry/neighborhood-5.jpg",
+  "/images/turnberry/neighborhood-6.jpg",
 ]
 
 export default function NeighborhoodPage({ menus }: NeighborhoodPageProps) {
