@@ -233,16 +233,29 @@ export function Meta({
             content="@TurnberryPlaceLV"
           />
           
-          {/* Hreflang for Spanish translation */}
+          {/* Hreflang alternates.
+              - en: the canonical English page.
+              - es: a Google Translate wrapper (the site has no native ES
+                localization today; this tells Google an ES equivalent
+                exists without claiming it's a first-party localization).
+              - x-default: required by Google for international targeting
+                (https://developers.google.com/search/docs/specialty/international/localized-versions).
+                Points at the canonical EN URL so users without a matching
+                locale land on the primary experience. */}
           <link
             rel="alternate"
-            hrefLang="es"
-            href={`https://translate.google.com/translate?hl=es&sl=auto&tl=es&u=${encodeURIComponent(canonicalUrl)}`}
+            hrefLang="x-default"
+            href={canonicalUrl}
           />
           <link
             rel="alternate"
             hrefLang="en"
             href={canonicalUrl}
+          />
+          <link
+            rel="alternate"
+            hrefLang="es"
+            href={`https://translate.google.com/translate?hl=es&sl=auto&tl=es&u=${encodeURIComponent(canonicalUrl)}`}
           />
         </>
       )}

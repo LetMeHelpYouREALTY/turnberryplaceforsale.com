@@ -1,0 +1,12 @@
+# Turnberry Place Las Vegas — Security Policy
+# RFC 9116: https://www.rfc-editor.org/rfc/rfc9116
+#
+# If you believe you've found a security vulnerability on this site
+# (which is a marketing site — no user data, no authentication, no
+# payment processing), please email the contact below. We'll
+# acknowledge within 3 business days.
+
+Contact: mailto:DrDuffy@TurnberryPlaceForSale.com
+Expires: 2027-04-18T00:00:00.000Z
+Preferred-Languages: en
+Canonical: https://www.turnberryplaceforsale.com/.well-known/security.txt
