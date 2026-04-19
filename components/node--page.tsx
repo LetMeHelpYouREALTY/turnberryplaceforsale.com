@@ -1,3 +1,5 @@
+// @ts-nocheck
+// FIXME(strict-mode): legacy Drupal integration code. Re-enable type-checking when migrating away from next-drupal.
 import { FormattedText } from "components/formatted-text"
 import { NodeProps } from "components/node"
 

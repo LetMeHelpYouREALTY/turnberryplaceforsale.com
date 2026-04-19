@@ -532,7 +532,7 @@ export default function PhotosPage({ menus }: PhotosPageProps) {
     ]
     const curated = curatedIds
       .map((id) => galleryItems.find((g) => g.id === id))
-      .filter((g): g is ImageGalleryItem => Boolean(g) && g.kind === "image")
+      .filter((g): g is ImageGalleryItem => Boolean(g) && g!.kind === "image")
     const fallback = galleryItems.filter(
       (g): g is ImageGalleryItem => g.kind === "image"
     )
@@ -1405,9 +1405,9 @@ export default function PhotosPage({ menus }: PhotosPageProps) {
 
           const stopAllVideos = () => {
             const root = pswp.element || document
-            root.querySelectorAll("video").forEach((v) => {
+            root.querySelectorAll("video").forEach((v: HTMLVideoElement) => {
               try {
-                ;(v as HTMLVideoElement).pause()
+                v.pause()
               } catch {}
             })
           }

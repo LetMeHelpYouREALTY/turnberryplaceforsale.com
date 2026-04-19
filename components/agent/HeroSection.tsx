@@ -8,7 +8,7 @@ export function HeroSection() {
     tourUrl({ utmMedium: 'cta', utmCampaign: 'agent-hero' })
 
   return (
-    <section className="relative min-h-[90vh] flex items-center bg-gray-900 overflow-hidden">
+    <section className="relative flex items-center bg-gray-900 overflow-hidden py-16 md:py-20 lg:py-24">
       {/* Background image */}
       <div className="absolute inset-0 z-0">
         <Image
@@ -23,11 +23,11 @@ export function HeroSection() {
         <div className="absolute inset-0 bg-gradient-to-r from-gray-900 via-gray-900/95 to-gray-900/70" />
       </div>
 
-      <div className="container mx-auto px-4 relative z-10 py-16">
-        <div className="grid lg:grid-cols-2 gap-10 items-center">
-          {/* Left: photo + badge */}
+      <div className="container mx-auto px-4 relative z-10">
+        <div className="grid lg:grid-cols-[auto_1fr] gap-8 lg:gap-12 items-center">
+          {/* Left: photo + badge (smaller for tighter hero) */}
           <div className="relative flex justify-center lg:justify-start">
-            <div className="relative w-72 h-72 md:w-96 md:h-96">
+            <div className="relative w-40 h-40 md:w-52 md:h-52">
               <div className="absolute inset-0 rounded-full border-2 border-[#D4AF37] -rotate-6" />
               <div className="relative w-full h-full rounded-full overflow-hidden border-4 border-white/20">
                 <Image
@@ -35,12 +35,12 @@ export function HeroSection() {
                   alt="Dr. Jan Duffy - Turnberry Place Resident & REALTOR"
                   fill
                   priority
-                  sizes="(max-width: 768px) 288px, 384px"
+                  sizes="(max-width: 768px) 160px, 208px"
                   className="object-cover"
                 />
               </div>
               <div
-                className="absolute -bottom-3 left-1/2 -translate-x-1/2 px-6 py-2 rounded-full font-semibold text-sm whitespace-nowrap shadow-lg"
+                className="absolute -bottom-3 left-1/2 -translate-x-1/2 px-4 py-1.5 rounded-full font-semibold text-xs whitespace-nowrap shadow-lg"
                 style={{ backgroundColor: GOLD, color: "#111827" }}
               >
                 Turnberry Place Resident
@@ -110,8 +110,8 @@ export function HeroSection() {
                 href={calendlyUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center px-8 py-4 rounded-full font-bold text-white border bg-white/5 transition-transform hover:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
-                style={{ borderColor: "rgba(212, 175, 55, 0.55)", outlineColor: GOLD }}
+                className="inline-flex items-center justify-center px-8 py-4 rounded-full font-bold text-gray-900 bg-white border-2 transition-transform hover:-translate-y-0.5 hover:bg-gray-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
+                style={{ borderColor: GOLD, outlineColor: GOLD }}
                 data-cta="agent-hero-schedule"
               >
                 Schedule Tour

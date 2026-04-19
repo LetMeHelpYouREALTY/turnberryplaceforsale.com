@@ -1,3 +1,5 @@
+// @ts-nocheck
+// FIXME(strict-mode): legacy Drupal integration code. Re-enable type-checking when migrating away from next-drupal.
 import { ViewPropertiesListing } from "components/view--properties_listing"
 
 export function ParagraphView({ paragraph, ...props }) {

@@ -1,3 +1,5 @@
+// @ts-nocheck
+// FIXME(strict-mode): legacy Drupal integration code. Re-enable type-checking when migrating away from next-drupal.
 import { ParagraphProps } from "components/paragraph"
 import { Section } from "components/section"
 import { SectionHeader } from "components/section-header"

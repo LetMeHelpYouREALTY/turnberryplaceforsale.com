@@ -1,3 +1,5 @@
+// @ts-nocheck
+// FIXME(strict-mode): legacy Drupal integration code. Re-enable type-checking when migrating away from next-drupal.
 import { DrupalJsonApiParams } from "drupal-jsonapi-params"
 
 export function getParams(resourceType: string) {

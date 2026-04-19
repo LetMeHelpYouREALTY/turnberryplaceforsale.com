@@ -74,24 +74,30 @@ export function GBPMapCard({
 
   return (
     <section
-      className={`gbp-map-card ${className}`.trim()}
+      className={`gbp-map-card bg-gray-50 py-12 md:py-16 ${className}`.trim()}
       aria-labelledby="gbp-map-card-heading"
       itemScope
       itemType="https://schema.org/RealEstateAgent"
     >
-      <div className="container mx-auto px-4 py-10 md:py-12">
+      <div className="container mx-auto px-4">
         <div className="text-center mb-8">
-          <h2 id="gbp-map-card-heading" className="text-2xl md:text-3xl font-serif mb-2">
+          <h2 id="gbp-map-card-heading" className="text-2xl md:text-3xl font-serif mb-2 text-gray-900">
             {heading}
           </h2>
-          <p className="text-gray-500 text-sm md:text-base">
-            Staffed office on the <strong>{GBP_WAYFINDING}</strong> — call ahead for guard-gated access.
+          <p className="text-gray-600 text-sm md:text-base">
+            Staffed office on the <strong className="text-gray-900">{GBP_WAYFINDING}</strong> — call ahead for guard-gated access.
           </p>
         </div>
 
-        <div className={isCompact ? 'max-w-2xl mx-auto space-y-6' : 'grid md:grid-cols-2 gap-8 lg:gap-10 max-w-6xl mx-auto items-start'}>
+        <div
+          className={
+            isCompact
+              ? 'max-w-2xl mx-auto bg-white rounded-2xl border border-gray-200 shadow-md p-5 md:p-6 space-y-6'
+              : 'grid md:grid-cols-2 gap-8 lg:gap-10 max-w-6xl mx-auto items-start bg-white rounded-2xl border border-gray-200 shadow-md p-5 md:p-8'
+          }
+        >
           {/* LEFT / TOP — Map embed */}
-          <div className="gbp-map-embed-wrap rounded-lg overflow-hidden shadow-lg border border-gray-200">
+          <div className="gbp-map-embed-wrap rounded-lg overflow-hidden shadow-sm border border-gray-200">
             <div className="relative aspect-[4/3]">
               <iframe
                 src={embedUrl}
@@ -105,20 +111,20 @@ export function GBPMapCard({
           </div>
 
           {/* RIGHT / BOTTOM — NAP + Hours + CTAs */}
-          <div className="space-y-5">
+          <div className="space-y-5 text-gray-900">
             {/* NAP block */}
             <div>
               <div className="flex items-start gap-3">
                 <MapPin size={20} className="flex-shrink-0 text-amber-600 mt-1" aria-hidden="true" />
                 <address className="not-italic text-gray-800" itemProp="address" itemScope itemType="https://schema.org/PostalAddress">
-                  <div className="font-semibold" itemProp="name">{GBP_NAME}</div>
-                  <div>
+                  <div className="font-semibold text-gray-900" itemProp="name">{GBP_NAME}</div>
+                  <div className="text-gray-800">
                     <span itemProp="streetAddress">2827 Paradise Rd, Suite 2</span>,{' '}
                     <span itemProp="addressLocality">Las Vegas</span>,{' '}
                     <span itemProp="addressRegion">NV</span>{' '}
                     <span itemProp="postalCode">89109</span>
                   </div>
-                  <div className="text-sm text-gray-500 italic">{GBP_WAYFINDING}</div>
+                  <div className="text-sm text-gray-600 italic">{GBP_WAYFINDING}</div>
                 </address>
               </div>
             </div>
@@ -207,9 +213,9 @@ export function GBPMapCard({
             </div>
 
             {/* Phone number as plain text for scanners / copy-paste */}
-            <p className="text-xs text-gray-500 pt-2 border-t border-gray-200">
+            <p className="text-xs text-gray-600 pt-2 border-t border-gray-200">
               <span className="sr-only">Phone: </span>
-              <a href={`tel:${GBP_PHONE_TEL}`} className="underline" itemProp="telephone">
+              <a href={`tel:${GBP_PHONE_TEL}`} className="underline text-gray-900 font-medium" itemProp="telephone">
                 {GBP_PHONE_DISPLAY}
               </a>
               <span aria-hidden="true"> · </span>

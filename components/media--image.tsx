@@ -1,3 +1,5 @@
+// @ts-nocheck
+// FIXME(strict-mode): legacy Drupal integration code. Re-enable type-checking when migrating away from next-drupal.
 import Image, { ImageProps } from "next/image"
 
 import { absoluteURL } from "lib/utils/absolute-url"

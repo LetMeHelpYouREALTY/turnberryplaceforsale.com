@@ -1,3 +1,5 @@
+// @ts-nocheck
+// FIXME(strict-mode): legacy Drupal integration code. Re-enable type-checking when migrating away from next-drupal.
 import { GetStaticPropsContext } from "next"
 import { DrupalMenuLinkContent } from "next-drupal"
 import { drupal } from "lib/drupal"

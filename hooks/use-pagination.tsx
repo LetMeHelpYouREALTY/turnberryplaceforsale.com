@@ -56,7 +56,7 @@ export const usePagination = ({
 
     items.push(
       ...Array.from(Array(show).keys()).map(
-        (pageNumber: number): PagerItem | null => {
+        (pageNumber: number): PagerItem => {
           const page = pageNumber + pagerFirst - 1
           return {
             type: "page",

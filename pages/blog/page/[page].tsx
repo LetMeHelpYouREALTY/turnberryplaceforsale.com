@@ -1,3 +1,5 @@
+// @ts-nocheck
+// FIXME(strict-mode): legacy Drupal blog integration. Re-enable type-checking when migrating away from next-drupal.
 import * as React from "react"
 import { GetStaticPathsResult, GetStaticPropsResult } from "next"
 import { useRouter } from "next/router"

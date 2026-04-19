@@ -104,7 +104,7 @@ export default function NodePage({ node, menus, inventory }: NodePageProps) {
     <Layout menus={menus}>
       <Meta title={node.title} tags={node.metatag} path={node.path?.alias} />
       <Head>
-        {node.content_translations?.map((translation, index) =>
+        {node.content_translations?.map((translation: { langcode: string; path: string }, index: number) =>
           translation.langcode !== router.locale ? (
             <link
               key={index}
@@ -639,7 +639,7 @@ export async function getStaticProps(
     if (process.env.NEXT_PUBLIC_DRUPAL_BASE_URL) {
       try {
         const path = await drupal.translatePathFromContext(context)
-        if (path && RESOURCE_TYPES.includes(path.jsonapi.resourceName)) {
+        if (path?.jsonapi && RESOURCE_TYPES.includes(path.jsonapi.resourceName)) {
           const node = await drupal.getResourceFromContext<DrupalNode>(path, context, {
             params: getParams(path.jsonapi.resourceName),
           })
@@ -721,7 +721,7 @@ export async function getStaticProps(
   try {
     const path = await drupal.translatePathFromContext(context)
 
-    if (!path || !RESOURCE_TYPES.includes(path.jsonapi.resourceName)) {
+    if (!path?.jsonapi || !RESOURCE_TYPES.includes(path.jsonapi.resourceName)) {
       return {
         notFound: true,
       }

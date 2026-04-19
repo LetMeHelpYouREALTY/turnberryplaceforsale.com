@@ -7,7 +7,7 @@ export function LocaleSwitcher() {
 
   return (
     <div className="flex">
-      {locales.map((locale) => (
+      {(locales ?? []).map((locale) => (
         <Link href={asPath} key={locale} locale={locale} passHref>
           <a
             data-cy={`local-switcher-${locale}`}

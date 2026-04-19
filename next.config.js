@@ -74,7 +74,78 @@ module.exports = {
     minimumCacheTTL: 31536000,
   },
   async headers() {
+    // Content-Security-Policy for the whole site.
+    //
+    // Allowlist covers every third-party the site actually embeds:
+    //   - RealScout (PRIMARY conversion): em.realscout.com (script host) +
+    //     www.realscout.com (API host). BOTH are required; missing either
+    //     causes the widget to fail silently (empty shell, console warning).
+    //   - Calendly (secondary conversion): assets.calendly.com + calendly.com.
+    //   - Google Maps (iframe embed): www.google.com (frame) +
+    //     maps.googleapis.com + maps.gstatic.com (JS API + tiles).
+    //   - Google Analytics + Google Ads + Tag Manager.
+    //   - Vercel Analytics + Speed Insights: *.vercel-analytics.com +
+    //     *.vercel-insights.com + vercel.live.
+    //   - Calendly iframe popup: calendly.com + assets.calendly.com.
+    //   - Fonts from Google Fonts (next/font/google self-hosts at build
+    //     time, so only fonts.gstatic.com for fallback).
+    //
+    // `unsafe-inline` + `unsafe-eval` are required for Next.js's
+    // hydration shim, Calendly widget initialization, and Google
+    // Tag Manager. When Next.js ships stable CSP nonce support in a
+    // future major, revisit to remove `unsafe-inline` from script-src.
+    const CSP = [
+      "default-src 'self'",
+      "script-src 'self' 'unsafe-inline' 'unsafe-eval' " +
+        "https://em.realscout.com https://www.realscout.com " +
+        "https://assets.calendly.com " +
+        "https://maps.googleapis.com " +
+        "https://www.googletagmanager.com https://www.google-analytics.com https://www.googleadservices.com https://googleads.g.doubleclick.net " +
+        "https://va.vercel-scripts.com https://vercel.live",
+      "connect-src 'self' " +
+        "https://em.realscout.com https://www.realscout.com " +
+        "https://calendly.com https://assets.calendly.com " +
+        "https://maps.googleapis.com " +
+        "https://www.google-analytics.com https://*.analytics.google.com https://stats.g.doubleclick.net " +
+        "https://vitals.vercel-insights.com https://vercel.live wss://ws-us3.pusher.com",
+      "frame-src 'self' " +
+        "https://em.realscout.com https://www.realscout.com " +
+        "https://calendly.com https://assets.calendly.com " +
+        "https://www.google.com " +
+        "https://vercel.live",
+      "img-src 'self' data: blob: https:",
+      "style-src 'self' 'unsafe-inline' https://assets.calendly.com https://fonts.googleapis.com",
+      "font-src 'self' data: https://fonts.gstatic.com https://assets.calendly.com",
+      "media-src 'self' blob: https://*.vimeocdn.com https://player.vimeo.com",
+      "worker-src 'self' blob:",
+      "object-src 'none'",
+      "base-uri 'self'",
+      "form-action 'self' https://calendly.com",
+      "frame-ancestors 'self'",
+      "upgrade-insecure-requests",
+    ].join('; ')
+
+    const securityHeaders = [
+      { key: 'Content-Security-Policy', value: CSP },
+      { key: 'X-Content-Type-Options', value: 'nosniff' },
+      { key: 'Referrer-Policy', value: 'strict-origin-when-cross-origin' },
+      { key: 'X-Frame-Options', value: 'SAMEORIGIN' },
+      {
+        key: 'Strict-Transport-Security',
+        value: 'max-age=63072000; includeSubDomains; preload',
+      },
+      {
+        key: 'Permissions-Policy',
+        value: 'camera=(), microphone=(), geolocation=(self), interest-cohort=()',
+      },
+    ]
+
     return [
+      {
+        // Baseline security + CSP for every route
+        source: '/:path*',
+        headers: securityHeaders,
+      },
       {
         // Strong caching for locally hosted gallery images
         source: '/images/turnberry/:path*',
