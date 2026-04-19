@@ -199,9 +199,8 @@ export function Navbar({ links, ...props }: NavbarProps) {
                 <div className="agent-phone">
                   <a href="tel:+17025001971" title="Office phone">(702) 500-1971</a>
                 </div>
-                <div className="agent-address d-none d-md-block font-size-80 mt-1" style={{ fontSize: '0.75rem', opacity: 0.9 }}>
-                  2827 Paradise Rd, Suite 2, Las Vegas, NV 89109
-                </div>
+                {/* Street address lives in the footer only (per brand/UX rule 2026-04-18)
+                    to keep the header NAP tight and avoid visual NAP duplication. */}
               </div>
             </div>
           </div>
