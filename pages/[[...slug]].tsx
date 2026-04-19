@@ -25,6 +25,7 @@ import { PropertyGrid } from "components/property-grid"
 import { VIPNewsletterSignup } from "components/vip-newsletter-signup"
 import { LuxuryAmenitiesGrid } from "components/luxury-amenities-grid"
 import { HomeRequestCalendly } from "components/home-request-calendly"
+import { GBPMapCard } from "components/gbp-map-card"
 import { BUILD_DATE_ISO, BUILD_DATE_MONTH_YEAR } from "lib/build-date"
 // Components WhyWorkWithUs / ClientTestimonials / PowerOfNumbers / InTheMedia
 // exist in components/ but are currently orphaned (nothing imports them).
@@ -174,7 +175,7 @@ function HomePageContent({
               {/* Changed from h1 to h2 - hero section already has the H1 */}
               <h2 className="mb-1" itemProp="name">Turnberry Place Las Vegas</h2>
               <p itemProp="address" itemScope itemType="https://schema.org/PostalAddress">
-                <span itemProp="addressLocality">Las Vegas</span>, <span itemProp="addressRegion">NV</span> <span itemProp="postalCode">89109</span>
+                <span itemProp="streetAddress">2827 Paradise Rd</span>, <span itemProp="addressLocality">Las Vegas</span>, <span itemProp="addressRegion">NV</span> <span itemProp="postalCode">89109</span>
               </p>
               <h2 className="h3 mb-3">4 Luxury Towers from $800,000 to $10M+</h2>
               <p className="mt-2 mb-1 homepage-inventory">
@@ -304,6 +305,9 @@ function HomePageContent({
 
       <HomeFaqSection />
 
+      {/* Google Business Profile: map + hours + Call/Directions/Reviews */}
+      <GBPMapCard heading="Visit the Turnberry Place Office" />
+
       {/* Open House Section - Matching Live Site */}
       <section className="card-content card-open-house card-open-house--bg py-5" id="card-id-2271761" data-card-type="8" aria-label="Schedule Private Showing">
         <div className="container">
@@ -363,7 +367,9 @@ function HomePageContent({
                 <div className="py-2 col-12 text-center">
                   <h2>Dr. Jan Duffy, REALTOR</h2>
                   <div className="my-1">
-                    The Turnberry Place Team at Berkshire Hathaway HomeServices Nevada Properties
+                    Turnberry Place High Rise Condos | Homes by Dr. Jan Duffy
+                    <br />
+                    <span className="font-size-80 text-muted">Berkshire Hathaway HomeServices Nevada Properties</span>
                     <br /> S.0197614.LLC
                   </div>
                 </div>
@@ -395,7 +401,7 @@ function HomePageContent({
                   <Image
                     className="img-fluid company-logo home-logo-img"
                     src="/images/turnberry/asset-19.jpg"
-                    alt="The Turnberry Place Team at Berkshire Hathaway HomeServices Nevada Properties Logo"
+                    alt="Berkshire Hathaway HomeServices Nevada Properties logo"
                     width={250}
                     height={100}
                     loading="lazy"

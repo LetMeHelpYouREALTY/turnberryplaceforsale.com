@@ -4,6 +4,7 @@ import { getMenus } from "lib/get-menus"
 import { Meta } from "components/meta"
 import { JsonLdSchema } from "components/json-ld-schema"
 import { BreadcrumbSchema } from "components/breadcrumb-schema"
+import { GBPMapCard } from "components/gbp-map-card"
 import Link from "next/link"
 
 interface OpenHousePageProps extends LayoutProps {}
@@ -156,6 +157,8 @@ export default function OpenHousePage({ menus }: OpenHousePageProps) {
           </div>
         </div>
       </div>
+
+      <GBPMapCard heading="Find Us for Your Private Showing" />
     </Layout>
   )
 }

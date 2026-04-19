@@ -1933,7 +1933,7 @@ export default function PhotosPage({ menus }: PhotosPageProps) {
               </section>
               <h2>About This Turnberry Place Photo Gallery</h2>
               <p>
-                I'm Dr. Jan Duffy, the on-site Turnberry Place specialist with The Turnberry Place Team at Berkshire Hathaway HomeServices Nevada Properties. I curated this gallery from {photoCount} professional photographs and videos so you can preview the residences, the Stirling Club, the views, and the arrival experience before you visit. Every photo is from inside or around the four-tower campus at 2827 Paradise Rd &mdash; nothing borrowed from stock libraries.
+                I'm Dr. Jan Duffy, the on-site Turnberry Place specialist with Berkshire Hathaway HomeServices Nevada Properties. I curated this gallery from {photoCount} professional photographs and videos so you can preview the residences, the Stirling Club, the views, and the arrival experience before you visit. Every photo is from inside or around the four-tower campus at 2827 Paradise Rd &mdash; nothing borrowed from stock libraries.
               </p>
 
               <h2 className="mt-5">Luxury Residences</h2>

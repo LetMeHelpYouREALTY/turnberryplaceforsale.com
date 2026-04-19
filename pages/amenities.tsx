@@ -25,6 +25,7 @@ import { getMenus } from "lib/get-menus"
 import { Meta } from "components/meta"
 import { JsonLdSchema } from "components/json-ld-schema"
 import { BreadcrumbSchema } from "components/breadcrumb-schema"
+import { GBPMapCard } from "components/gbp-map-card"
 
 const officePhoneDisplay = "(702) 500-1971"
 const officePhoneTel = "+17025001971"
@@ -553,6 +554,8 @@ export default function AmenitiesPage({ menus }: AmenitiesPageProps) {
           </div>
         </section>
       </div>
+
+      <GBPMapCard heading="Visit Us to Tour the Amenities in Person" />
     </Layout>
   )
 }

@@ -30,12 +30,12 @@ export function MapPlaceSchema() {
   const localBusinessSchema = {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
-    "name": "Turnberry Place Las Vegas",
-    "description": "Luxury high-rise condominium community one block from the Las Vegas Strip",
+    "name": "Turnberry Place High Rise Condos | Homes by Dr. Jan Duffy",
+    "description": "Staffed Dr. Jan Duffy office serving Turnberry Place luxury high-rise condominium buyers and sellers, one block from the Las Vegas Strip.",
     "url": `${baseUrl}/map`,
     "address": {
       "@type": "PostalAddress",
-      "streetAddress": "2827 Paradise Rd",
+      "streetAddress": "2827 Paradise Rd, Suite 2",
       "addressLocality": "Las Vegas",
       "addressRegion": "NV",
       "postalCode": "89109",

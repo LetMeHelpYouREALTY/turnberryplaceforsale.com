@@ -37,10 +37,12 @@
 // Canonical NAP for the Google Business Profile that owns reviews relevant
 // to this site.
 //
-// Target GBP (as of 2026-04-18, pending Google verification):
+// Target GBP (as of 2026-04-18, pending Google verification — the 20th
+// location in the Dr. Jan Duffy portfolio, following the verified
+// sibling-listing naming pattern used across the other 19 offices):
 //
-//   Turnberry Place | Condos by Dr. Jan Duffy
-//   2827 Paradise Rd, Las Vegas, NV 89109
+//   Turnberry Place High Rise Condos | Homes by Dr. Jan Duffy
+//   2827 Paradise Rd, Suite 2, Las Vegas, NV 89109  (Suite 2, 1st floor, staffed office)
 //
 // This is a NEW GBP specifically created for the Turnberry Place team's
 // office at 2827 Paradise Rd, distinct from Dr. Duffy's other verticals
@@ -63,13 +65,15 @@
 //      to upgrade from "Maps search" to a deep-link into the reviews
 //      tab (https://search.google.com/local/reviews?placeid=...).
 //
-// See .env.example for env var reference.
+// See .env.example for env var reference and lib/google-business-profile.ts
+// for the wider set of GBP-related constants (hours, floor, etc.) used by
+// the GBPMapCard component and the RealEstateAgent schema.
 const CANONICAL_NAP = {
-  name: "Turnberry Place | Condos by Dr. Jan Duffy",
+  name: "Turnberry Place High Rise Condos | Homes by Dr. Jan Duffy",
   locality: "Las Vegas",
   region: "NV",
   postalCode: "89109",
-  streetAddress: "2827 Paradise Rd",
+  streetAddress: "2827 Paradise Rd, Suite 2",
 } as const
 
 /**

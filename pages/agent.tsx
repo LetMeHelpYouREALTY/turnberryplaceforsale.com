@@ -11,6 +11,7 @@ import { TestimonialsSection } from "components/agent/TestimonialsSection"
 import { LocationContactSection } from "components/agent/LocationContactSection"
 import { CalendlySection } from "components/agent/CalendlySection"
 import { NewsletterSection } from "components/agent/NewsletterSection"
+import { GBPMapCard } from "components/gbp-map-card"
 
 interface AgentPageProps extends LayoutProps {}
 
@@ -31,6 +32,7 @@ export default function AgentPage({ menus }: AgentPageProps) {
         <YourNeighborSection />
         <TestimonialsSection />
         <LocationContactSection />
+        <GBPMapCard heading="Visit Dr. Jan Duffy at Turnberry Place" />
         <CalendlySection />
         <NewsletterSection />
       </div>

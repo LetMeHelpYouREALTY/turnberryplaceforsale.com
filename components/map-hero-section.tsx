@@ -10,7 +10,7 @@ interface MapHeroSectionProps {
 }
 
 export function MapHeroSection({
-  address = '2827 Paradise Rd, Las Vegas, NV 89109',
+  address = '2827 Paradise Rd, Suite 2, Las Vegas, NV 89109',
   mapKey = 'AIzaSyDSF9E67HCf0-pecnANALPYA-donlDhIww',
 }: MapHeroSectionProps) {
   const mapsQuery = encodeURIComponent(address)

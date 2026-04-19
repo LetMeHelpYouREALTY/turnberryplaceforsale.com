@@ -2,7 +2,14 @@
 
 import React from 'react'
 import Link from 'next/link'
-import { MapPin, Phone, Calendar, Navigation } from 'lucide-react'
+import { MapPin, Phone, Calendar, Navigation, Star, PenSquare } from 'lucide-react'
+import {
+  GBP_WAYFINDING,
+  getDirectionsUrl,
+  gbpReviewsDisabled,
+  getGbpReviewsUrl,
+  getGbpWriteReviewUrl,
+} from 'lib/google-business-profile'
 
 interface DirectionsContactCTAProps {
   address?: string
@@ -11,11 +18,14 @@ interface DirectionsContactCTAProps {
 }
 
 export function DirectionsContactCTA({
-  address = '2827 Paradise Rd, Las Vegas, NV 89109',
+  address = '2827 Paradise Rd, Suite 2, Las Vegas, NV 89109',
   phone = '(702) 500-1971',
   calendlyUrl = process.env.NEXT_PUBLIC_CALENDLY_URL || 'https://calendly.com/drjanduffy/1-home-tour-30-mins',
 }: DirectionsContactCTAProps) {
-  const directionsUrl = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(address)}`
+  const directionsUrl = getDirectionsUrl()
+  const reviewsHidden = gbpReviewsDisabled()
+  const reviewsUrl = getGbpReviewsUrl()
+  const writeReviewUrl = getGbpWriteReviewUrl()
 
   return (
     <section className="py-16 bg-gray-900 text-white">
@@ -34,10 +44,13 @@ export function DirectionsContactCTA({
               </div>
               
               {/* Address */}
-              <address className="not-italic text-gray-200 text-lg mb-6 flex items-start gap-2">
+              <address className="not-italic text-gray-200 text-lg mb-2 flex items-start gap-2">
                 <MapPin size={20} className="text-[#D4AF37] mt-1 flex-shrink-0" aria-hidden="true" />
                 <span>{address}</span>
               </address>
+              <p className="text-sm text-gray-400 italic mb-6 pl-7">
+                Office on the {GBP_WAYFINDING}
+              </p>
             </div>
 
             {/* Get Directions Button */}
@@ -50,6 +63,32 @@ export function DirectionsContactCTA({
               <Navigation size={20} className="mr-2" aria-hidden="true" />
               Get Directions
             </Link>
+
+            {/* Google Reviews Buttons */}
+            {!reviewsHidden && (
+              <div className="grid grid-cols-2 gap-3 pt-2">
+                <Link
+                  href={reviewsUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center gap-2 px-4 py-3 bg-transparent border border-[#D4AF37] text-[#D4AF37] font-semibold rounded-lg hover:bg-[#D4AF37] hover:text-gray-900 transition-colors text-sm"
+                  aria-label="View Google reviews for the Turnberry Place office"
+                >
+                  <Star size={16} aria-hidden="true" />
+                  Reviews
+                </Link>
+                <Link
+                  href={writeReviewUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center gap-2 px-4 py-3 bg-transparent border border-[#D4AF37] text-[#D4AF37] font-semibold rounded-lg hover:bg-[#D4AF37] hover:text-gray-900 transition-colors text-sm"
+                  aria-label="Write a Google review for the Turnberry Place office"
+                >
+                  <PenSquare size={16} aria-hidden="true" />
+                  Write Review
+                </Link>
+              </div>
+            )}
 
             {/* Direction Tips */}
             <div className="pt-6 border-t border-gray-700 space-y-3">

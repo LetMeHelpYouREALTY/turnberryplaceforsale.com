@@ -9,6 +9,7 @@ import { getMenus } from "lib/get-menus"
 import { Meta } from "components/meta"
 import { JsonLdSchema } from "components/json-ld-schema"
 import { BreadcrumbSchema } from "components/breadcrumb-schema"
+import { GBPMapCard } from "components/gbp-map-card"
 import { LeadCaptureForm } from "components/lead-capture-form"
 import { BUILD_DATE_ISO } from "lib/build-date"
 // ClientTestimonials currently orphaned (neutralized 2026-04-18 to use only
@@ -297,6 +298,8 @@ export default function RequestDetailsPage({ menus }: RequestDetailsPageProps) {
 
       {/* Client Testimonials Section */}
       {/* Client Testimonials and VIP Newsletter - Available on homepage and /agent page */}
+
+      <GBPMapCard heading="Visit Our Office to Learn More" />
     </Layout>
   )
 }

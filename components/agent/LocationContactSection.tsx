@@ -4,7 +4,7 @@ import { Calendar, Mail, MapPin, Phone } from "lucide-react"
 const GOLD = "#D4AF37"
 
 export function LocationContactSection() {
-  const address = "2827 Paradise Rd, Las Vegas, NV 89109"
+  const address = "2827 Paradise Rd, Suite 2, Las Vegas, NV 89109"
   const mapsQuery = encodeURIComponent(address)
   const mapsEmbedSrc = `https://www.google.com/maps?q=${mapsQuery}&output=embed`
   const directionsHref = `https://www.google.com/maps/dir/?api=1&destination=${mapsQuery}`

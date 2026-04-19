@@ -13,7 +13,7 @@ export function ContactMessageModal({
   agentName = 'Dr. Jan Duffy, REALTOR',
   agentPhone = '(702) 500-1971',
   agentLicense = 'S.0197614.LLC',
-  companyName = 'The Turnberry Place Team at Berkshire Hathaway HomeServices Nevada Properties'
+  companyName = 'Turnberry Place High Rise Condos | Homes by Dr. Jan Duffy'
 }: ContactMessageModalProps) {
   const [isOpen, setIsOpen] = useState(false)
   const [formData, setFormData] = useState({

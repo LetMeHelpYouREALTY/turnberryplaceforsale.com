@@ -5,6 +5,7 @@ import { Meta } from "components/meta"
 import { JsonLdSchema } from "components/json-ld-schema"
 import { BreadcrumbSchema } from "components/breadcrumb-schema"
 import { NeighborhoodSection } from "components/neighborhood-section"
+import { GBPMapCard } from "components/gbp-map-card"
 // QuickSearchWidget, FeaturedListingCard, VIPNewsletterSignup available on homepage
 import Image from "next/image"
 import Link from "next/link"
@@ -196,6 +197,8 @@ export default function NeighborhoodPage({ menus }: NeighborhoodPageProps) {
       </div>
 
       {/* Featured Listings and VIP Newsletter - Available on homepage */}
+
+      <GBPMapCard heading="Our Office in the Neighborhood" />
     </Layout>
   )
 }

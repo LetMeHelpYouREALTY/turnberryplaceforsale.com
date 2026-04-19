@@ -4,6 +4,7 @@ import { getMenus } from "lib/get-menus"
 import { Meta } from "components/meta"
 import { JsonLdSchema } from "components/json-ld-schema"
 import { BreadcrumbSchema } from "components/breadcrumb-schema"
+import { GBPMapCard } from "components/gbp-map-card"
 // ClientTestimonials currently orphaned (neutralized 2026-04-18 to use only
 // verified Google reviews). VIPNewsletterSignup imported separately where used.
 import Image from "next/image"
@@ -124,6 +125,8 @@ export default function StirlingClubPage({ menus }: StirlingClubPageProps) {
       </div>
 
       {/* Client Testimonials and VIP Newsletter - Available on homepage and /agent page */}
+
+      <GBPMapCard heading="Tour The Stirling Club With Dr. Jan Duffy" />
     </Layout>
   )
 }

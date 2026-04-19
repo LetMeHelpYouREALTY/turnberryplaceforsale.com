@@ -194,13 +194,13 @@ export function Navbar({ links, ...props }: NavbarProps) {
               <div className="agent-text">
                 <div className="agent-name">DR. JAN DUFFY, REALTOR</div>
                 <div className="d-none d-lg-block agent-company">
-                  The Turnberry Place Team at Berkshire Hathaway HomeServices Nevada Properties
+                  Turnberry Place High Rise Condos | Homes by Dr. Jan Duffy
                 </div>
                 <div className="agent-phone">
                   <a href="tel:+17025001971" title="Office phone">(702) 500-1971</a>
                 </div>
                 <div className="agent-address d-none d-md-block font-size-80 mt-1" style={{ fontSize: '0.75rem', opacity: 0.9 }}>
-                  2827 Paradise Rd, Las Vegas, NV 89109
+                  2827 Paradise Rd, Suite 2, Las Vegas, NV 89109
                 </div>
               </div>
             </div>

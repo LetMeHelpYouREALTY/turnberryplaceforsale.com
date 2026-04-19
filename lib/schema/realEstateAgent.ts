@@ -1,5 +1,6 @@
 import { TURNBERRY_GEO } from 'lib/schema/geo'
 import { buildAggregateRating } from 'lib/schema/aggregateRating'
+import { buildOpeningHoursSpecification } from 'lib/google-business-profile'
 
 type AreaServedEntry =
   | { '@type': 'City'; name: string }
@@ -47,13 +48,14 @@ export function buildRealEstateAgentSchema({ baseUrl }: RealEstateAgentInput) {
     },
     address: {
       '@type': 'PostalAddress',
-      streetAddress: '2827 Paradise Rd',
+      streetAddress: '2827 Paradise Rd, Suite 2',
       addressLocality: 'Las Vegas',
       addressRegion: 'NV',
       postalCode: '89109',
       addressCountry: 'US',
     },
     geo: TURNBERRY_GEO,
+    openingHoursSpecification: buildOpeningHoursSpecification(),
     areaServed,
     worksFor: {
       '@type': 'Organization',

@@ -46,7 +46,7 @@ export function AgentBioModal({ agentId = '14435' }: AgentBioModalProps) {
             <div className="text-center mb-4">
               <h3>Dr. Jan Duffy, REALTOR</h3>
               <p className="mb-2">
-                The Turnberry Place Team at Berkshire Hathaway HomeServices Nevada Properties
+                Turnberry Place High Rise Condos | Homes by Dr. Jan Duffy
               </p>
               <p className="mb-3">S.0197614.LLC</p>
               <Image

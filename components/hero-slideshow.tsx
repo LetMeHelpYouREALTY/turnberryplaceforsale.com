@@ -19,7 +19,7 @@ const heroSchema = {
   telephone: '+17025001971',
   address: {
     '@type': 'PostalAddress',
-    streetAddress: '2827 Paradise Rd',
+    streetAddress: '2827 Paradise Rd, Suite 2',
     addressLocality: 'Las Vegas',
     addressRegion: 'NV',
     postalCode: '89109',

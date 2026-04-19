@@ -14,21 +14,47 @@ Comprehensive audit completed to ensure consistent NAP (Name, Address, Phone) an
 ## Standardized Information
 
 ### ✅ Name
-- **Standard Format:** `Dr. Jan Duffy`
+- **Site Brand / NAP Name:** `Turnberry Place High Rise Condos | Homes by Dr. Jan Duffy`
+  - Matches the portfolio-wide GBP naming pattern used across all 19 sibling Dr. Jan Duffy offices (e.g. `Las Vegas Strip High Rise Condos | Homes by Dr. Jan Duffy` — Sahara; `Las Vegas Arts District Condos | Homes by Dr. Jan Duffy` — Downtown). This makes the Turnberry Place site the 20th location and keeps GBP ↔ site NAP identical.
+  - Used in: `Organization` JSON-LD, `og:site_name`, footer + header brand lines, agent bio modal, contact modal default, agent section on `[[...slug]]`.
+- **Licensed Agent (person):** `Dr. Jan Duffy, REALTOR`
+  - Used in: `RealEstateAgent` JSON-LD `name`, navbar agent-name, hero schema, vCard `FN`, author meta. NEVER changed — must stay a person to preserve license linkage to `S.0197614.LLC`.
+- **Supervising Brokerage (compliance):** `Berkshire Hathaway HomeServices Nevada Properties`
+  - Used in: `RealEstateAgent.worksFor`, vCard `ORG`, footer BHHS logo, agent bio prose, agent section secondary line on `[[...slug]]`, BHHS logo alt text. Present on every page per Nevada real estate advertising requirements.
 - **License:** `S.0197614.LLC`
-- **Business Name:** `The Turnberry Place Team at Berkshire Hathaway HomeServices Nevada Properties`
 - **Status:** ✅ Consistent across all pages
 - **Note:** No instances of "Janet" found - all use "Jan"
 
+> **GBP alignment:** This brand string is the intended GBP Business name for the Turnberry Place (2827 Paradise Rd) office — GBP location #20 in the Dr. Jan Duffy portfolio. It follows the exact verified-listing naming pattern used across the other 19 offices (e.g. `Las Vegas Strip High Rise Condos | Homes by Dr. Jan Duffy`, `Las Vegas Arts District Condos | Homes by Dr. Jan Duffy`), so the site NAP and GBP business name match 1:1. The 2827 Paradise Rd office is staffed, so listing it as the GBP address is legitimate.
+
 ### ✅ Address
-- **Standard Format:** `2827 Paradise Rd, Las Vegas, NV 89109`
-- **Status:** ✅ Consistent across all pages
+
+The site uses a **semantic split** between the agent's staffed office and the physical building/community, because schema.org treats them as different entity types (`RealEstateAgent` / `LocalBusiness` vs `ApartmentComplex` / `Place` / `Residence`):
+
+#### Agent office NAP (staffed, GBP-registered)
+
+- **Visible Format:** `2827 Paradise Rd, Suite 2, Las Vegas, NV 89109`
+- **Wayfinding note:** Suite 2 is on the 1st floor (surfaced in `<GBPMapCard>` + `<DirectionsContactCTA>`)
+- **Used in:** footer, navbar, `<GBPMapCard>`, vCard, `RealEstateAgent` + `LocalBusiness` JSON-LD, agent/HeroSection, agent/LocationContactSection, `/map` directions destination, `lib/google-business-profile.ts` `GBP_ADDRESS`, `lib/reviews.ts` `CANONICAL_NAP`.
+- **Schema Format:**
+  - streetAddress: `2827 Paradise Rd, Suite 2`
+  - addressLocality: `Las Vegas`
+  - addressRegion: `NV`
+  - postalCode: `89109`
+  - addressCountry: `US`
+
+#### Building / community address (describes the physical 4-tower complex)
+
+- **Format:** `2827 Paradise Rd, Las Vegas, NV 89109` (no suite — the complex itself has no suite; only the agent's office does)
+- **Used in:** `ApartmentComplex` JSON-LD (`lib/schema/apartmentComplex.ts`), `Place` schema (`components/map-place-schema.tsx` `placeSchema`), `Residence` microdata on `[[...slug]].tsx`, towers schema, `RealEstateListing` address on `/price-features` + `/request-details`, `ImageGallery` contentLocation on `/photos`, neighborhood map iframe query, and all building-descriptive prose.
 - **Schema Format:**
   - streetAddress: `2827 Paradise Rd`
   - addressLocality: `Las Vegas`
   - addressRegion: `NV`
   - postalCode: `89109`
   - addressCountry: `US`
+
+- **Status:** ✅ Consistent across all pages (2026-04-18 audit)
 
 ### ✅ Phone Number
 - **Display Format:** `(702) 500-1971` (for all visible text)
@@ -155,7 +181,7 @@ Comprehensive audit completed to ensure consistent NAP (Name, Address, Phone) an
 
 4. **components/footer.tsx**
    - ✅ Phone: `+17025001971` (fixed)
-   - ✅ Organization name: `The Turnberry Place Team at Berkshire Hathaway HomeServices Nevada Properties`
+   - ✅ Organization name: `Turnberry Place High Rise Condos | Homes by Dr. Jan Duffy`
 
 ---
 

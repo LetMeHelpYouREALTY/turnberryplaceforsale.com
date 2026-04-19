@@ -173,7 +173,7 @@ export function Meta({
           <meta
             key="og_site_name"
             property="og:site_name"
-            content="Turnberry Place Las Vegas | Luxury Real Estate"
+            content="Turnberry Place High Rise Condos | Homes by Dr. Jan Duffy"
           />
           {/* Open Graph image(s) */}
           {effectiveOgImages.map((img, idx) => (

@@ -15,7 +15,7 @@ const calendlyUrl =
 const organizationSchema = {
   '@context': 'https://schema.org',
   '@type': 'Organization',
-  name: 'The Turnberry Place Team at Berkshire Hathaway HomeServices Nevada Properties',
+  name: 'Turnberry Place High Rise Condos | Homes by Dr. Jan Duffy',
   url: baseUrl,
   logo: `${baseUrl}/images/turnberry/asset-19.jpg`,
   contactPoint: {
@@ -108,7 +108,7 @@ export function Footer({ links }: FooterProps) {
             <h2 id="footer-contact-heading" className="sr-only">Contact Information</h2>
             <div className="row justify-content-center align-items-center pt-4 pt-md-5">
               <div className="agent-company-info col-12 col-lg-10 font-size-90 d-flex flex-column flex-md-row justify-content-center align-items-center text-center">
-                <div className="px-2 px-md-3 mb-2 mb-md-0">The Turnberry Place Team at Berkshire Hathaway HomeServices Nevada Properties</div>
+                <div className="px-2 px-md-3 mb-2 mb-md-0">Turnberry Place High Rise Condos | Homes by Dr. Jan Duffy</div>
                 <div className="px-2 px-md-3 mb-2 mb-md-0"><strong>License: S.0197614.LLC</strong></div>
                 <div className="px-2 px-md-3 mb-2 mb-md-0">
                   <a href="tel:+17025001971" className="footer-phone-link" title="Office phone" itemProp="telephone">
@@ -116,7 +116,7 @@ export function Footer({ links }: FooterProps) {
                   </a>
                 </div>
                 <div className="px-2 px-md-3">
-                  2827 Paradise Rd, Las Vegas, NV 89109
+                  2827 Paradise Rd, Suite 2, Las Vegas, NV 89109
                 </div>
               </div>
             </div>
@@ -185,7 +185,7 @@ export function Footer({ links }: FooterProps) {
               </Link>
             </div>
             <div className="mt-3 font-size-80 text-muted">
-              Turnberry Place Las Vegas | 2827 Paradise Rd, Las Vegas, NV 89109 | Dr. Jan Duffy | <a href="tel:+17025001971" className="footer-phone-link" itemProp="telephone">(702) 500-1971</a>
+              Turnberry Place High Rise Condos | Homes by Dr. Jan Duffy | 2827 Paradise Rd, Suite 2, Las Vegas, NV 89109 | <a href="tel:+17025001971" className="footer-phone-link" itemProp="telephone">(702) 500-1971</a>
             </div>
             <div className="mt-2 font-size-80 text-muted">
               Last updated: {BUILD_DATE_DISPLAY}

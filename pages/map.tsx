@@ -21,8 +21,12 @@ interface MapPageProps extends LayoutProps {}
 export default function MapPage({ menus }: MapPageProps) {
   const [activeCategory, setActiveCategory] = useState("all")
   const [selectedPlace, setSelectedPlace] = useState<Place | null>(null)
-  const mapKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY || "AIzaSyDSF9E67HCf0-pecnANALPYA-donlDhIww"
-  const streetAddress = "2827 Paradise Rd, Las Vegas, NV 89109"
+  // Google Maps JS API key — env-only per security-env.mdc rule. When
+  // unset, <InteractiveMap /> renders a graceful "map pending" state.
+  // Restrict the key in Google Cloud Console to the site's HTTP referrer
+  // before shipping to production.
+  const mapKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY ?? ""
+  const streetAddress = "2827 Paradise Rd, Suite 2, Las Vegas, NV 89109"
 
   const handleCategoryChange = (categoryId: string, query: string) => {
     setActiveCategory(categoryId)
