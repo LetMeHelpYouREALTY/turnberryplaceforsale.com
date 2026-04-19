@@ -5,6 +5,7 @@ import { Meta } from "components/meta"
 import { JsonLdSchema } from "components/json-ld-schema"
 import { BreadcrumbSchema } from "components/breadcrumb-schema"
 import { GBPMapCard } from "components/gbp-map-card"
+import { GBP_PHONE_DISPLAY, GBP_PHONE_TEL } from "lib/google-business-profile"
 import Link from "next/link"
 
 interface OpenHousePageProps extends LayoutProps {}
@@ -14,7 +15,7 @@ export default function OpenHousePage({ menus }: OpenHousePageProps) {
     <Layout menus={menus}>
       <Meta
         title="Open House - Turnberry Place Las Vegas"
-        description="Open house and private showing info for Turnberry Place luxury high-rise condos near the Las Vegas Strip. Las Vegas Strip High Rise Condos for Sale. Call (702) 500-1971."
+        description={`Open house and private showing info for Turnberry Place luxury high-rise condos near the Las Vegas Strip. Las Vegas Strip High Rise Condos for Sale. Call ${GBP_PHONE_DISPLAY}.`}
         path="/open-house"
       />
       <JsonLdSchema type="property" />
@@ -47,8 +48,8 @@ export default function OpenHousePage({ menus }: OpenHousePageProps) {
                     <Link href="/request-details" className="btn btn-custom btn-lg" title="Request Showing">
                       Request Showing
                     </Link>
-                    <a href="tel:+17025001971" className="btn btn-custom btn-lg" title="Call (702) 500-1971">
-                      Call (702) 500-1971
+                    <a href={`tel:${GBP_PHONE_TEL}`} className="btn btn-custom btn-lg" title={`Call ${GBP_PHONE_DISPLAY}`}>
+                      Call {GBP_PHONE_DISPLAY}
                     </a>
                   </div>
                 </div>
@@ -151,7 +152,7 @@ export default function OpenHousePage({ menus }: OpenHousePageProps) {
                 Whether you're interested in a specific residence, want to explore multiple options, or are just beginning your search for luxury living in Las Vegas, I'm here to help. My goal is to provide you with the information, guidance, and support you need to make informed decisions about Turnberry Place and find the perfect residence that meets your needs and exceeds your expectations.
               </p>
               <p className="mt-4">
-                <strong>Schedule your private showing today!</strong> Contact the office at <a href="tel:+17025001971" className="text-decoration-underline">(702) 500-1971</a> or <Link href="/request-details" className="text-decoration-underline">request a showing online</Link>. With my extensive knowledge of Turnberry Place and the Las Vegas luxury market, I can provide you with an exceptional showing experience that helps you discover the perfect luxury residence.
+                <strong>Schedule your private showing today!</strong> Contact the office at <a href={`tel:${GBP_PHONE_TEL}`} className="text-decoration-underline">{GBP_PHONE_DISPLAY}</a> or <Link href="/request-details" className="text-decoration-underline">request a showing online</Link>. With my extensive knowledge of Turnberry Place and the Las Vegas luxury market, I can provide you with an exceptional showing experience that helps you discover the perfect luxury residence.
               </p>
             </div>
           </div>

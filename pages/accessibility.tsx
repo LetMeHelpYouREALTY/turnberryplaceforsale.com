@@ -4,6 +4,7 @@ import { Layout, LayoutProps } from "components/layout"
 import { Meta } from "components/meta"
 import { getMenus } from "lib/get-menus"
 import { BUILD_DATE_DISPLAY } from "lib/build-date"
+import { GBP_PHONE_DISPLAY, GBP_PHONE_TEL } from "lib/google-business-profile"
 
 interface AccessibilityPageProps extends LayoutProps {}
 
@@ -12,7 +13,7 @@ export default function AccessibilityPage({ menus }: AccessibilityPageProps) {
     <Layout menus={menus}>
       <Meta
         title="Accessibility Statement | Turnberry Place Las Vegas"
-        description="Accessibility statement for TurnberryPlaceForSale.com. Need help? Call (702) 500-1971."
+        description={`Accessibility statement for TurnberryPlaceForSale.com. Need help? Call ${GBP_PHONE_DISPLAY}.`}
         path="/accessibility"
       />
 
@@ -40,7 +41,7 @@ export default function AccessibilityPage({ menus }: AccessibilityPageProps) {
           </p>
           <p className="mt-2">
             <strong>Phone:</strong>{" "}
-            <a href="tel:+17025001971">(702) 500-1971</a>
+            <a href={`tel:${GBP_PHONE_TEL}`}>{GBP_PHONE_DISPLAY}</a>
             <br />
             <strong>Email:</strong>{" "}
             <a href="mailto:DrDuffy@TurnberryPlaceForSale.com">DrDuffy@TurnberryPlaceForSale.com</a>

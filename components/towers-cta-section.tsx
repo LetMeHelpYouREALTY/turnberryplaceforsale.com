@@ -4,6 +4,7 @@ import React from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { tourUrl } from 'lib/calendly'
+import { GBP_PHONE_DISPLAY, GBP_PHONE_TEL } from 'lib/google-business-profile'
 
 export function TowersCTASection() {
   const calendlyUrl =
@@ -134,7 +135,7 @@ export function TowersCTASection() {
                 Or call now:
               </p>
               <a
-                href="tel:+17025001971"
+                href={`tel:${GBP_PHONE_TEL}`}
                 className="font-weight-semibold"
                 style={{
                   color: '#D4AF37',
@@ -153,7 +154,7 @@ export function TowersCTASection() {
                   e.currentTarget.style.color = '#D4AF37'
                 }}
               >
-                (702) 500-1971
+                {GBP_PHONE_DISPLAY}
               </a>
             </div>
 

@@ -1,5 +1,6 @@
 import Image from "next/image"
 import { tourUrl } from "lib/calendly"
+import { GBP_PHONE_DISPLAY, GBP_PHONE_TEL } from "lib/google-business-profile"
 
 const GOLD = "#D4AF37"
 
@@ -98,13 +99,13 @@ export function HeroSection() {
             {/* CTAs */}
             <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
               <a
-                href="tel:+17025001971"
+                href={`tel:${GBP_PHONE_TEL}`}
                 className="inline-flex items-center justify-center px-8 py-4 rounded-full font-bold text-gray-900 shadow-lg transition-transform hover:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
                 style={{ backgroundColor: GOLD, outlineColor: GOLD }}
-                aria-label="Call (702) 500-1971"
+                aria-label={`Call ${GBP_PHONE_DISPLAY}`}
                 data-cta="agent-hero-call"
               >
-                Call (702) 500-1971
+                Call {GBP_PHONE_DISPLAY}
               </a>
               <a
                 href={calendlyUrl}

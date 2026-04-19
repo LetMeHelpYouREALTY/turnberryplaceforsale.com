@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { MapPin, Phone, Calendar, Navigation, Star, PenSquare } from 'lucide-react'
 import {
   GBP_WAYFINDING,
+  GBP_PHONE_DISPLAY,
   getDirectionsUrl,
   gbpReviewsDisabled,
   getGbpReviewsUrl,
@@ -20,7 +21,7 @@ interface DirectionsContactCTAProps {
 
 export function DirectionsContactCTA({
   address = '2827 Paradise Rd, Suite 2, Las Vegas, NV 89109',
-  phone = '(702) 500-1971',
+  phone = GBP_PHONE_DISPLAY,
   calendlyUrl = tourUrl({ utmMedium: 'cta', utmCampaign: 'directions-contact' }),
 }: DirectionsContactCTAProps) {
   const directionsUrl = getDirectionsUrl()

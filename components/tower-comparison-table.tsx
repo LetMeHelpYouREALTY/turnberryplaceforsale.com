@@ -1,5 +1,6 @@
 import React from 'react'
 import Link from 'next/link'
+import { GBP_PHONE_DISPLAY, GBP_PHONE_TEL } from 'lib/google-business-profile'
 
 interface TowerData {
   number: number
@@ -129,10 +130,10 @@ export function TowerComparisonTable({ towers }: TowerComparisonTableProps) {
         <p className="text-center text-gray-500 mt-8">
           Not sure which tower?{' '}
           <Link
-            href="tel:+17025001971"
+            href={`tel:${GBP_PHONE_TEL}`}
             className="text-[#8a6d18] font-semibold hover:underline"
           >
-            Call (702) 500-1971
+            Call {GBP_PHONE_DISPLAY}
           </Link>
           {' '}for guidance
         </p>

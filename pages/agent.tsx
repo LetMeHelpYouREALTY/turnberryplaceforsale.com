@@ -11,6 +11,7 @@ import { TestimonialsSection } from "components/agent/TestimonialsSection"
 import { LocationContactSection } from "components/agent/LocationContactSection"
 import { CalendlySection } from "components/agent/CalendlySection"
 import { GBPMapCard } from "components/gbp-map-card"
+import { GBP_PHONE_DISPLAY } from "lib/google-business-profile"
 // NewsletterSection removed 2026-04-18: Calendly (via <CalendlySection>) is
 // the single conversion path site-wide. No on-page forms.
 
@@ -21,7 +22,7 @@ export default function AgentPage({ menus }: AgentPageProps) {
     <Layout menus={menus}>
       <Meta
         title="Dr. Jan Duffy | Your Turnberry Place Neighbor & REALTOR"
-        description="Dr. Jan Duffy lives at Turnberry Place and helps buyers and sellers in her community. Your neighbor, your expert. Call (702) 500-1971."
+        description={`Dr. Jan Duffy lives at Turnberry Place and helps buyers and sellers in her community. Your neighbor, your expert. Call ${GBP_PHONE_DISPLAY}.`}
         path="/agent"
       />
       <JsonLdSchema type="agent" />

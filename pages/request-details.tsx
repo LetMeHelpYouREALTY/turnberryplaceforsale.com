@@ -12,6 +12,7 @@ import { BreadcrumbSchema } from "components/breadcrumb-schema"
 import { GBPMapCard } from "components/gbp-map-card"
 import CalendlyEmbed from "components/calendly-embed"
 import { tourUrl } from "lib/calendly"
+import { GBP_PHONE_DISPLAY, GBP_PHONE_TEL } from "lib/google-business-profile"
 import { BUILD_DATE_ISO } from "lib/build-date"
 // Forms have been replaced with the Calendly booking widget (2026-04-18).
 // Calendly is the single conversion path; visitors who prefer to talk
@@ -21,8 +22,9 @@ interface RequestDetailsPageProps extends LayoutProps {}
 
 export default function RequestDetailsPage({ menus }: RequestDetailsPageProps) {
   const calendlyUrl = tourUrl({ utmMedium: 'inline', utmCampaign: 'request-details' })
-  const officePhoneDisplay = "(702) 500-1971"
-  const officePhoneTel = "+17025001971"
+  // Aliased imports from the single-source-of-truth site constants.
+  const officePhoneDisplay = GBP_PHONE_DISPLAY
+  const officePhoneTel = GBP_PHONE_TEL
   const propertyAddress = "2827 Paradise Rd, Las Vegas, NV 89109"
 
   const heroImage = "/images/turnberry/19738766_web1_copy_2827-Paradise-15.jpg-FULL.webp"
@@ -96,7 +98,7 @@ export default function RequestDetailsPage({ menus }: RequestDetailsPageProps) {
     <Layout menus={menus}>
       <Meta
         title="Request Turnberry Place Pricing & Details | Schedule a Private Tour"
-        description="Request pricing and details for Turnberry Place luxury high-rise condos near the Las Vegas Strip. Las Vegas Strip High Rise Condos for Sale. Call (702) 500-1971."
+        description={`Request pricing and details for Turnberry Place luxury high-rise condos near the Las Vegas Strip. Las Vegas Strip High Rise Condos for Sale. Call ${GBP_PHONE_DISPLAY}.`}
         path="/request-details"
       />
       <Head>

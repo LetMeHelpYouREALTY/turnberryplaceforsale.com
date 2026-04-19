@@ -4,6 +4,7 @@ import { useState } from 'react'
 import Link from 'next/link'
 import { Home } from 'lucide-react'
 import { tourUrl } from 'lib/calendly'
+import { GBP_PHONE_DISPLAY, GBP_PHONE_TEL } from 'lib/google-business-profile'
 
 type HomeRequestCalendlyProps = {
   /** Show link to home valuation widget on /price-features */
@@ -31,7 +32,7 @@ export function HomeRequestCalendly({ showValuationCTA = true }: HomeRequestCale
       </h3>
       <p className="text-muted small mb-3">
         Pick a time for a private Turnberry Place tour. Questions first? Call{' '}
-        <a href="tel:+17025001971">(702) 500-1971</a>.
+        <a href={`tel:${GBP_PHONE_TEL}`}>{GBP_PHONE_DISPLAY}</a>.
       </p>
       <button
         type="button"

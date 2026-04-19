@@ -27,6 +27,7 @@ import { PropertyGrid } from "components/property-grid"
 import { LuxuryAmenitiesGrid } from "components/luxury-amenities-grid"
 import { HomeRequestCalendly } from "components/home-request-calendly"
 import { GBPMapCard } from "components/gbp-map-card"
+import { GBP_PHONE_DISPLAY, GBP_PHONE_TEL } from "lib/google-business-profile"
 import { BUILD_DATE_ISO, BUILD_DATE_MONTH_YEAR } from "lib/build-date"
 // Components WhyWorkWithUs / ClientTestimonials / PowerOfNumbers / InTheMedia
 // exist in components/ but are currently orphaned (nothing imports them).
@@ -58,7 +59,7 @@ export default function NodePage({ node, menus, inventory }: NodePageProps) {
       <Layout menus={menus}>
         <Meta
           title="Turnberry Place High-Rise Condos | Near the Las Vegas Strip"
-          description="Turnberry Place luxury high-rise condos near the Las Vegas Strip. Turnberry Towers Las Vegas High Rise Condos & Las Vegas Strip High Rise Condos for Sale. Call (702) 500-1971."
+          description={`Turnberry Place luxury high-rise condos near the Las Vegas Strip. Turnberry Towers Las Vegas High Rise Condos & Las Vegas Strip High Rise Condos for Sale. Call ${GBP_PHONE_DISPLAY}.`}
           keywords="Turnberry Towers Las Vegas High Rise Condos, Las Vegas Strip High Rise Condos for Sale, Turnberry Place for sale, Turnberry Place condos, Las Vegas high-rise condos, luxury condos Las Vegas, Las Vegas Strip condos, Stirling Club, Dr. Jan Duffy REALTOR"
           ogImage="https://www.turnberryplaceforsale.com/images/turnberry/Turnberry_Place_For_Sale.jpg"
           ogImageAlt="Turnberry Place Las Vegas luxury high-rise condominium community"
@@ -293,8 +294,8 @@ function HomePageContent({
                 <Link href="/available-condos" className="btn btn-primary btn-lg mr-2">
                   View All Listings
                 </Link>
-                <a href="tel:+17025001971" className="btn btn-outline-primary btn-lg" title="Call (702) 500-1971">
-                  Call (702) 500-1971
+                <a href={`tel:${GBP_PHONE_TEL}`} className="btn btn-outline-primary btn-lg" title={`Call ${GBP_PHONE_DISPLAY}`}>
+                  Call {GBP_PHONE_DISPLAY}
                 </a>
               </div>
             </div>
@@ -390,7 +391,7 @@ function HomePageContent({
                 <div className="col-12 text-center py-2">
                   <div className="py-2 d-flex flex-column flex-lg-row align-items-center justify-content-center home-info-row">
                     <div className="mx-2" itemScope itemType="https://schema.org/LocalBusiness">
-                      <span>Office:</span> <a href="tel:+17025001971" title="Phone office">(702) 500-1971</a>
+                      <span>Office:</span> <a href={`tel:${GBP_PHONE_TEL}`} title="Phone office">{GBP_PHONE_DISPLAY}</a>
                     </div>
                   </div>
                   <div className="py-2">

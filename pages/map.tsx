@@ -15,6 +15,7 @@ import { getMenus } from "lib/get-menus"
 import { Meta } from "components/meta"
 import { MapPlaceSchema } from "components/map-place-schema"
 import { BreadcrumbSchema } from "components/breadcrumb-schema"
+import { GBP_PHONE_DISPLAY } from "lib/google-business-profile"
 
 interface MapPageProps extends LayoutProps {}
 
@@ -46,7 +47,7 @@ export default function MapPage({ menus }: MapPageProps) {
     <Layout menus={menus}>
       <Meta
         title="Turnberry Place Location | One Block From Las Vegas Strip"
-        description="Turnberry Place at 2827 Paradise Rd - one block from the Strip, 10 min to airport. See nearby dining, entertainment, and shopping. Call (702) 500-1971."
+        description={`Turnberry Place at 2827 Paradise Rd - one block from the Strip, 10 min to airport. See nearby dining, entertainment, and shopping. Call ${GBP_PHONE_DISPLAY}.`}
         path="/map"
       />
       <MapPlaceSchema />

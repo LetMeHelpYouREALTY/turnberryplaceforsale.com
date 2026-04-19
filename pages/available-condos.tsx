@@ -8,6 +8,7 @@ import { BreadcrumbSchema } from "components/breadcrumb-schema"
 import Script from "next/script"
 import Link from "next/link"
 import { BUILD_DATE_MONTH_YEAR } from "lib/build-date"
+import { GBP_PHONE_DISPLAY, GBP_PHONE_TEL } from "lib/google-business-profile"
 
 interface AvailableCondosPageProps extends LayoutProps {}
 
@@ -16,7 +17,7 @@ export default function AvailableCondosPage({ menus }: AvailableCondosPageProps)
     <Layout menus={menus}>
       <Meta
         title="Turnberry Place Condos for Sale | Las Vegas"
-        description="Browse available Turnberry Place luxury high-rise condos near the Las Vegas Strip. Las Vegas Strip High Rise Condos for Sale. Call (702) 500-1971."
+        description={`Browse available Turnberry Place luxury high-rise condos near the Las Vegas Strip. Las Vegas Strip High Rise Condos for Sale. Call ${GBP_PHONE_DISPLAY}.`}
         ogImage="https://www.turnberryplaceforsale.com/images/turnberry/condos_for_sale_Turnberry_Place.jpg"
         ogImageAlt="Turnberry Place condos for sale in Las Vegas"
         path="/available-condos"
@@ -120,8 +121,8 @@ export default function AvailableCondosPage({ menus }: AvailableCondosPageProps)
               </div>
               <div className="text-center mt-4">
                 <p className="mb-3">Interested in viewing these luxury condos?</p>
-                <a href="tel:+17025001971" className="btn btn-custom btn-lg" title="Call (702) 500-1971">
-                  Call (702) 500-1971
+                <a href={`tel:${GBP_PHONE_TEL}`} className="btn btn-custom btn-lg" title={`Call ${GBP_PHONE_DISPLAY}`}>
+                  Call {GBP_PHONE_DISPLAY}
                 </a>
               </div>
               </div>
@@ -139,7 +140,7 @@ export default function AvailableCondosPage({ menus }: AvailableCondosPageProps)
                   The RealScout widget above displays current available properties with real-time information. Use the filters to find residences that match your preferences by price, size, or tower.
                 </p>
                 <p>
-                  <strong>Ready to view available condos?</strong> Contact the office at <a href="tel:+17025001971" className="text-decoration-underline">(702) 500-1971</a> to schedule a private showing or discuss available properties.
+                  <strong>Ready to view available condos?</strong> Contact the office at <a href={`tel:${GBP_PHONE_TEL}`} className="text-decoration-underline">{GBP_PHONE_DISPLAY}</a> to schedule a private showing or discuss available properties.
                 </p>
               </div>
             </div>

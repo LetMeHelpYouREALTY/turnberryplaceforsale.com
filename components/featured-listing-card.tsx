@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import Link from 'next/link'
+import { GBP_PHONE_TEL } from 'lib/google-business-profile'
 
 interface FeaturedListingCardProps {
   image: string
@@ -132,7 +133,7 @@ export function FeaturedListingCard({
               View Details
             </Link>
             <a
-              href="tel:+17025001971"
+              href={`tel:${GBP_PHONE_TEL}`}
               className="btn btn-outline-primary btn-sm"
               onClick={() => {
                 if (typeof window !== 'undefined' && (window as any).gtag) {

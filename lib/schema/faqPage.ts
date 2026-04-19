@@ -1,3 +1,5 @@
+import { GBP_PHONE_DISPLAY } from 'lib/google-business-profile'
+
 export type FaqItem = {
   question: string
   answer: string
@@ -38,7 +40,7 @@ export const TURNBERRY_FAQ_ITEMS: FaqItem[] = [
   {
     question: 'Who is the listing agent for Turnberry Place condos?',
     answer:
-      'Dr. Jan Duffy, REALTOR, focuses on Turnberry Place and Las Vegas luxury high-rise condos. She is licensed in Nevada (S.0197614.LLC) with Berkshire Hathaway HomeServices Nevada Properties and can be reached at (702) 500-1971.',
+      `Dr. Jan Duffy, REALTOR, focuses on Turnberry Place and Las Vegas luxury high-rise condos. She is licensed in Nevada (S.0197614.LLC) with Berkshire Hathaway HomeServices Nevada Properties and can be reached at ${GBP_PHONE_DISPLAY}.`,
   },
   {
     question: 'Are Turnberry Place condos a good investment?',

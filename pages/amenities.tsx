@@ -27,9 +27,7 @@ import { JsonLdSchema } from "components/json-ld-schema"
 import { BreadcrumbSchema } from "components/breadcrumb-schema"
 import { GBPMapCard } from "components/gbp-map-card"
 import { tourUrl } from "lib/calendly"
-
-const officePhoneDisplay = "(702) 500-1971"
-const officePhoneTel = "+17025001971"
+import { GBP_PHONE_DISPLAY as officePhoneDisplay, GBP_PHONE_TEL as officePhoneTel } from "lib/google-business-profile"
 const propertyAddress = "2827 Paradise Rd, Las Vegas, NV 89109"
 const calendlyUrl = tourUrl({ utmMedium: 'cta', utmCampaign: 'amenities' })
 
@@ -122,7 +120,7 @@ export default function AmenitiesPage({ menus }: AmenitiesPageProps) {
     <Layout menus={menus}>
       <Meta
         title="Turnberry Place Amenities | Stirling Club Las Vegas"
-        description="Turnberry Place amenities include the 80,000 sqft Stirling Club with pools, spa, fitness, tennis, and dining. Guard-gated luxury living near the Las Vegas Strip. Call (702) 500-1971."
+        description={`Turnberry Place amenities include the 80,000 sqft Stirling Club with pools, spa, fitness, tennis, and dining. Guard-gated luxury living near the Las Vegas Strip. Call ${officePhoneDisplay}.`}
         ogImage="https://www.turnberryplaceforsale.com/images/turnberry/sterlingclubpoolwithpeople.jpeg"
         ogImageAlt="Resort-style pool at The Stirling Club at Turnberry Place Las Vegas"
         path="/amenities"
@@ -533,7 +531,7 @@ export default function AmenitiesPage({ menus }: AmenitiesPageProps) {
                   <h3>Contact Dr. Jan Duffy for Amenities Information</h3>
                   <p className="mb-0">
                     <strong>Ready to learn more?</strong> Call{" "}
-                    <a href="tel:+17025001971" className="text-decoration-underline">
+                    <a href={`tel:${officePhoneTel}`} className="text-decoration-underline">
                       {officePhoneDisplay}
                     </a>{" "}
                     or schedule a tour on{" "}

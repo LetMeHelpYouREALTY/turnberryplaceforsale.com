@@ -3,6 +3,7 @@
 import { useEffect } from 'react'
 import { useRouter } from 'next/router'
 import { tourUrl } from 'lib/calendly'
+import { GBP_PHONE_DISPLAY, GBP_PHONE_TEL } from 'lib/google-business-profile'
 
 export function StickyCTA() {
   const { asPath } = useRouter()
@@ -54,10 +55,10 @@ export function StickyCTA() {
         <div className="row align-items-center no-gutters">
           <div className="col-12 col-sm-4 mb-2 mb-sm-0">
             <a 
-              href="tel:+17025001971" 
+              href={`tel:${GBP_PHONE_TEL}`} 
               className="btn btn-light btn-sm font-weight-bold w-100 d-flex align-items-center justify-content-center"
               onClick={() => handleCTAClick('phone')}
-              aria-label="Call (702) 500-1971"
+              aria-label={`Call ${GBP_PHONE_DISPLAY}`}
             >
               <svg width="20" height="20" fill="currentColor" className="mr-2" viewBox="0 0 16 16" aria-hidden="true">
                 <path d="M3.654 1.328a.678.678 0 0 0-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.568 17.568 0 0 0 4.168 6.608 17.569 17.569 0 0 0 6.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 0 0-.063-1.015l-2.307-1.794a.678.678 0 0 0-.58-.122L9.65 11.5a.678.678 0 0 1-.58-.122L6.864 9.65a.678.678 0 0 1-.122-.58l.122-2.307a.678.678 0 0 0-.122-.58L4.682 3.654a.678.678 0 0 0-.028-.326z"/>

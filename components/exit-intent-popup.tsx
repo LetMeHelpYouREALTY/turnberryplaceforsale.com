@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
+import { GBP_PHONE_DISPLAY, GBP_PHONE_TEL } from 'lib/google-business-profile'
 
 export function ExitIntentPopup() {
   const [showPopup, setShowPopup] = useState(false)
@@ -78,11 +79,11 @@ export function ExitIntentPopup() {
         </p>
         <div className="d-flex flex-column gap-2">
           <a 
-            href="tel:+17025001971" 
+            href={`tel:${GBP_PHONE_TEL}`} 
             className="btn btn-primary btn-lg font-weight-bold"
             onClick={() => handleCTAClick('phone')}
           >
-            📞 Call (702) 500-1971
+            📞 Call {GBP_PHONE_DISPLAY}
           </a>
           <Link 
             href="/request-details" 

@@ -6,6 +6,7 @@ import { getMenus } from 'lib/get-menus'
 import { Meta } from 'components/meta'
 import { JsonLdSchema } from 'components/json-ld-schema'
 import { BreadcrumbSchema } from 'components/breadcrumb-schema'
+import { GBP_PHONE_DISPLAY, GBP_PHONE_TEL } from 'lib/google-business-profile'
 import Script from 'next/script'
 import Link from 'next/link'
 import Image from 'next/image'
@@ -19,7 +20,7 @@ export default function MLSPage({ menus }: MLSPageProps) {
     <Layout menus={menus}>
       <Meta
         title="Turnberry Place Las Vegas | MLS Property Listing"
-        description="Turnberry Place luxury high-rise condos in Las Vegas, NV 89109. 4 luxury towers from $800,000 to $10M+. Exclusive Stirling Club amenities. Call (702) 500-1971."
+        description={`Turnberry Place luxury high-rise condos in Las Vegas, NV 89109. 4 luxury towers from $800,000 to $10M+. Exclusive Stirling Club amenities. Call ${GBP_PHONE_DISPLAY}.`}
         keywords="Turnberry Place Las Vegas, luxury condos Las Vegas, high-rise condos for sale, Las Vegas Strip condos, MLS listing"
         ogImage="/images/turnberry/Turnberry_Place_For_Sale.jpg"
         ogImageAlt="Turnberry Place Las Vegas luxury high-rise condominium community"
@@ -241,10 +242,10 @@ export default function MLSPage({ menus }: MLSPageProps) {
               View All Listings
             </Link>
             <a
-              href="tel:+17025001971"
+              href={`tel:${GBP_PHONE_TEL}`}
               className="inline-block border-2 border-amber-600 text-amber-600 hover:bg-amber-600 hover:text-white px-6 py-3 rounded-lg font-semibold transition"
             >
-              Call (702) 500-1971
+              Call {GBP_PHONE_DISPLAY}
             </a>
           </div>
         </div>
@@ -389,10 +390,10 @@ export default function MLSPage({ menus }: MLSPageProps) {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a
-              href="tel:+17025001971"
+              href={`tel:${GBP_PHONE_TEL}`}
               className="bg-amber-600 hover:bg-amber-700 text-white px-8 py-4 rounded-lg font-semibold text-lg transition"
             >
-              Call (702) 500-1971
+              Call {GBP_PHONE_DISPLAY}
             </a>
             <Link
               href="/request-details"

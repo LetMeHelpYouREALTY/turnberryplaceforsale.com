@@ -8,6 +8,7 @@ import { SharedAmenitiesSection } from "components/shared-amenities-section"
 import { TowersCTASection } from "components/towers-cta-section"
 import { getMenus } from "lib/get-menus"
 import { Meta } from "components/meta"
+import { GBP_PHONE_DISPLAY, GBP_PHONE_TEL } from "lib/google-business-profile"
 import { TowersSchema } from "components/towers-schema"
 import { BreadcrumbSchema } from "components/breadcrumb-schema"
 import { JsonLdSchema } from "components/json-ld-schema"
@@ -22,7 +23,7 @@ export default function TowersPage({ menus }: TowersPageProps) {
     <Layout menus={menus}>
       <Meta
         title="Turnberry Place Towers | Las Vegas Luxury High-Rise Condos"
-        description="Explore four luxury towers at Turnberry Place Las Vegas. Compare Tower 1-4 features, views, and prices. Starting from $800K. Call (702) 500-1971."
+        description={`Explore four luxury towers at Turnberry Place Las Vegas. Compare Tower 1-4 features, views, and prices. Starting from $800K. Call ${GBP_PHONE_DISPLAY}.`}
         ogImage="https://www.turnberryplaceforsale.com/images/turnberry/turnberry-tower-south-view.jpeg"
         ogImageAlt="Turnberry Place towers and surrounding Las Vegas views"
         path="/towers"
@@ -86,10 +87,10 @@ export default function TowersPage({ menus }: TowersPageProps) {
               Compare Towers
             </button>
             <Link
-              href="tel:+17025001971"
+              href={`tel:${GBP_PHONE_TEL}`}
               className="px-8 py-4 rounded-md font-medium text-white border-2 border-white transition-all duration-300 hover:bg-white hover:text-gray-900"
             >
-              Call (702) 500-1971
+              Call {GBP_PHONE_DISPLAY}
             </Link>
           </div>
         </div>

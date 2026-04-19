@@ -6,6 +6,7 @@ import { JsonLdSchema } from "components/json-ld-schema"
 import { BreadcrumbSchema } from "components/breadcrumb-schema"
 import { NeighborhoodSection } from "components/neighborhood-section"
 import { GBPMapCard } from "components/gbp-map-card"
+import { GBP_PHONE_DISPLAY } from "lib/google-business-profile"
 // QuickSearchWidget, FeaturedListingCard, VIPNewsletterSignup available on homepage
 import Image from "next/image"
 import Link from "next/link"
@@ -31,7 +32,7 @@ export default function NeighborhoodPage({ menus }: NeighborhoodPageProps) {
     <Layout menus={menus}>
       <Meta
         title="Neighborhood - Turnberry Place Las Vegas"
-        description="Turnberry Place neighborhood guide near the Las Vegas Strip (by Wynn/Encore). Las Vegas Strip High Rise Condos for Sale. Call (702) 500-1971."
+        description={`Turnberry Place neighborhood guide near the Las Vegas Strip (by Wynn/Encore). Las Vegas Strip High Rise Condos for Sale. Call ${GBP_PHONE_DISPLAY}.`}
         path="/neighborhood"
       />
       <JsonLdSchema type="property" />

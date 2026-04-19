@@ -2,6 +2,7 @@ import React from "react"
 import Head from "next/head"
 import { useRouter } from "next/router"
 import { DrupalMetatag } from "types/drupal"
+import { GBP_PHONE_DISPLAY } from "lib/google-business-profile"
 
 interface MetaProps {
   title?: string
@@ -80,7 +81,7 @@ export function Meta({
   const defaultDescription =
     "Turnberry Place luxury high-rise condos near the Las Vegas Strip. " +
     `${PRIMARY_KEYWORD_1} & ${PRIMARY_KEYWORD_2}. ` +
-    "Call (702) 500-1971."
+    `Call ${GBP_PHONE_DISPLAY}.`
   const effectiveDescription = description || defaultDescription
 
   // Note: meta keywords are not used by Google, but we keep them for completeness and other crawlers/tools.

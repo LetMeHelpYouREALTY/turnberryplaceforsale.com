@@ -19,14 +19,15 @@ import { Meta } from "components/meta"
 import { JsonLdSchema } from "components/json-ld-schema"
 import { BreadcrumbSchema } from "components/breadcrumb-schema"
 import { tourUrl } from "lib/calendly"
+import { GBP_PHONE_DISPLAY, GBP_PHONE_TEL } from "lib/google-business-profile"
 import { BUILD_DATE_ISO } from "lib/build-date"
 
 interface PriceFeaturesPageProps extends LayoutProps {}
 
 export default function PriceFeaturesPage({ menus }: PriceFeaturesPageProps) {
   const calendlyUrl = tourUrl({ utmMedium: 'cta', utmCampaign: 'price-features' })
-  const officePhoneDisplay = "(702) 500-1971"
-  const officePhoneTel = "+17025001971"
+  const officePhoneDisplay = GBP_PHONE_DISPLAY
+  const officePhoneTel = GBP_PHONE_TEL
   const propertyAddress = "2827 Paradise Rd, Las Vegas, NV 89109"
 
   const heroImage = "/images/turnberry/19738766_web1_2827-Paradise-17.jpg-FULL.webp"

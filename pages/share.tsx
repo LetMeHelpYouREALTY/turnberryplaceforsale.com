@@ -10,6 +10,7 @@ import { BreadcrumbSchema } from "components/breadcrumb-schema"
 import DigitalCard from "components/digital-card"
 import CalendlyEmbed from "components/calendly-embed"
 import CalendlyButton from "components/calendly-button"
+import { GBP_PHONE_DISPLAY, GBP_PHONE_TEL } from "lib/google-business-profile"
 
 interface SharePageProps extends LayoutProps {}
 
@@ -395,7 +396,7 @@ export default function SharePage({ menus }: SharePageProps) {
                 Whether you're sharing Turnberry Place with others or have received a share and want to learn more, I'm available to provide the information and support you need. My goal is to help everyone discover the exceptional quality and lifestyle that Turnberry Place offers and find the perfect luxury residence that meets their needs.
               </p>
               <p className="mt-4">
-                <strong>Have questions about Turnberry Place?</strong> Contact the office at <a href="tel:+17025001971" className="text-decoration-underline">(702) 500-1971</a>. I'm here to provide comprehensive information about Turnberry Place and help you or those you've shared with explore this exceptional luxury community.
+                <strong>Have questions about Turnberry Place?</strong> Contact the office at <a href={`tel:${GBP_PHONE_TEL}`} className="text-decoration-underline">{GBP_PHONE_DISPLAY}</a>. I'm here to provide comprehensive information about Turnberry Place and help you or those you've shared with explore this exceptional luxury community.
               </p>
             </div>
           </div>

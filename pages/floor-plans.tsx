@@ -8,6 +8,7 @@ import { Meta } from 'components/meta'
 import { JsonLdSchema } from 'components/json-ld-schema'
 import { BreadcrumbSchema } from 'components/breadcrumb-schema'
 import { floorPlans, FloorPlan } from 'lib/floorPlans'
+import { GBP_PHONE_DISPLAY, GBP_PHONE_TEL } from 'lib/google-business-profile'
 import FloorPlanCard from 'components/FloorPlanCard'
 import FloorPlanFilters, { FilterState } from 'components/FloorPlanFilters'
 import FloorPlanComparison from 'components/FloorPlanComparison'
@@ -225,7 +226,7 @@ export default function FloorPlansPage({ menus }: FloorPlansPageProps) {
               As a Las Vegas real estate expert with deep knowledge of Turnberry Place floor plans, I can provide comprehensive information about available floor plans, their characteristics, and how they accommodate various lifestyle needs.
             </p>
             <p className="text-gray-600">
-              <strong>Ready to explore Turnberry Place floor plans?</strong> Contact the office at <a href="tel:+17025001971" className="text-amber-600 hover:text-amber-700 underline">(702) 500-1971</a> to discuss available floor plans, schedule a private showing, and learn how different floor plans can accommodate your lifestyle needs.
+              <strong>Ready to explore Turnberry Place floor plans?</strong> Contact the office at <a href={`tel:${GBP_PHONE_TEL}`} className="text-amber-600 hover:text-amber-700 underline">{GBP_PHONE_DISPLAY}</a> to discuss available floor plans, schedule a private showing, and learn how different floor plans can accommodate your lifestyle needs.
             </p>
           </div>
         </div>

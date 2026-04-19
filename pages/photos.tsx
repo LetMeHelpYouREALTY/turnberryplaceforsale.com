@@ -15,6 +15,7 @@ import vimeoVideos from "../data/media/vimeo-videos.json"
 import { BUILD_DATE_DISPLAY, BUILD_DATE_ISO } from "lib/build-date"
 import { TURNBERRY_GEO } from "lib/schema/geo"
 import { tourUrl } from "lib/calendly"
+import { GBP_PHONE_DISPLAY, GBP_PHONE_TEL } from "lib/google-business-profile"
 
 type GalleryCategory = "Residences" | "Stirling Club" | "Views" | "Amenities"
 type GalleryFilter = "All" | GalleryCategory
@@ -565,8 +566,8 @@ export default function PhotosPage({ menus }: PhotosPageProps) {
 
   const photosMetaDescription = `Explore ${photoCount} professional photos and videos of Turnberry Place luxury condos, the 80,000 sq ft Stirling Club, and panoramic Las Vegas Strip views. Schedule a private tour with Dr. Jan Duffy, on-site Turnberry Place specialist.`
 
-  const phoneHref = "tel:+17025001971"
-  const phoneDisplay = "(702) 500-1971"
+  const phoneHref = `tel:${GBP_PHONE_TEL}`
+  const phoneDisplay = GBP_PHONE_DISPLAY
   const calendlyUrl = tourUrl({ utmMedium: 'cta', utmCampaign: 'photos' })
 
   const photosOgImages = allItems
@@ -707,7 +708,7 @@ export default function PhotosPage({ menus }: PhotosPageProps) {
         name: "Can I tour Turnberry Place in person after viewing the photos?",
         acceptedAnswer: {
           "@type": "Answer",
-          text: "Yes. As an on-site Turnberry Place specialist, I host private tours seven days a week by appointment. Call (702) 500-1971 or book a 30-minute slot through Calendly to walk specific units, the Stirling Club, and any tower you're considering.",
+          text: `Yes. As an on-site Turnberry Place specialist, I host private tours seven days a week by appointment. Call ${GBP_PHONE_DISPLAY} or book a 30-minute slot through Calendly to walk specific units, the Stirling Club, and any tower you're considering.`,
         },
       },
       {
@@ -1968,7 +1969,7 @@ export default function PhotosPage({ menus }: PhotosPageProps) {
               <details className="photos-faq-item mt-2">
                 <summary><strong>Can I tour Turnberry Place in person after viewing the photos?</strong></summary>
                 <p className="mt-2">
-                  Yes. As an on-site Turnberry Place specialist, I host private tours seven days a week by appointment. Call <a href="tel:+17025001971" className="text-decoration-underline">(702) 500-1971</a> or book a 30-minute slot through Calendly to walk specific units, the Stirling Club, and any tower you're considering.
+                  Yes. As an on-site Turnberry Place specialist, I host private tours seven days a week by appointment. Call <a href={`tel:${GBP_PHONE_TEL}`} className="text-decoration-underline">{GBP_PHONE_DISPLAY}</a> or book a 30-minute slot through Calendly to walk specific units, the Stirling Club, and any tower you're considering.
                 </p>
               </details>
 
@@ -1994,7 +1995,7 @@ export default function PhotosPage({ menus }: PhotosPageProps) {
               </details>
 
               <p className="mt-4">
-                <strong>Ready to see Turnberry Place in person?</strong> Contact the office at <a href="tel:+17025001971" className="text-decoration-underline">(702) 500-1971</a> to schedule a private showing.
+                <strong>Ready to see Turnberry Place in person?</strong> Contact the office at <a href={`tel:${GBP_PHONE_TEL}`} className="text-decoration-underline">{GBP_PHONE_DISPLAY}</a> to schedule a private showing.
               </p>
 
               <p className="mt-4 text-muted small">

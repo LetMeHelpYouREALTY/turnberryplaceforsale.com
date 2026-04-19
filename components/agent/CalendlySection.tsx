@@ -15,6 +15,7 @@
 import Image from "next/image"
 import CalendlyEmbed from "components/calendly-embed"
 import { consultationUrl } from "lib/calendly"
+import { GBP_PHONE_DISPLAY, GBP_PHONE_TEL } from "lib/google-business-profile"
 
 const GOLD = "#D4AF37"
 
@@ -37,13 +38,13 @@ export function CalendlySection() {
 
             <div className="mt-6 flex flex-col sm:flex-row gap-3">
               <a
-                href="tel:+17025001971"
+                href={`tel:${GBP_PHONE_TEL}`}
                 className="inline-flex items-center justify-center rounded-full px-6 py-3 font-bold text-gray-900 shadow-sm"
                 style={{ backgroundColor: GOLD }}
-                aria-label="Call (702) 500-1971"
+                aria-label={`Call ${GBP_PHONE_DISPLAY}`}
                 data-cta="agent-schedule-call"
               >
-                Call (702) 500-1971
+                Call {GBP_PHONE_DISPLAY}
               </a>
             </div>
 

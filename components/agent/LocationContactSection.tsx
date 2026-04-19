@@ -1,6 +1,7 @@
 import Link from "next/link"
 import { Calendar, Mail, MapPin, Phone } from "lucide-react"
 import { tourUrl } from "lib/calendly"
+import { GBP_PHONE_DISPLAY, GBP_PHONE_TEL } from "lib/google-business-profile"
 
 const GOLD = "#D4AF37"
 
@@ -65,16 +66,16 @@ export function LocationContactSection() {
                 <div className="flex-1">
                   <div className="text-sm text-gray-600">Phone</div>
                   <a
-                    href="tel:+17025001971"
+                    href={`tel:${GBP_PHONE_TEL}`}
                     className="mt-1 block text-2xl font-bold text-gray-900"
-                    aria-label="Call (702) 500-1971"
+                    aria-label={`Call ${GBP_PHONE_DISPLAY}`}
                     data-cta="agent-contact-call"
                   >
-                    (702) 500-1971
+                    {GBP_PHONE_DISPLAY}
                   </a>
                   <div className="mt-3">
                     <a
-                      href="tel:+17025001971"
+                      href={`tel:${GBP_PHONE_TEL}`}
                       className="inline-flex items-center justify-center rounded-full px-6 py-3 font-bold text-gray-900 shadow-sm"
                       style={{ backgroundColor: GOLD }}
                     >
