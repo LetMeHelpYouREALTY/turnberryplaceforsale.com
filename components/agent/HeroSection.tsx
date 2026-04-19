@@ -1,10 +1,11 @@
 import Image from "next/image"
+import { tourUrl } from "lib/calendly"
 
 const GOLD = "#D4AF37"
 
 export function HeroSection() {
   const calendlyUrl =
-    process.env.NEXT_PUBLIC_CALENDLY_URL || "https://calendly.com/drjanduffy/1-home-tour-30-mins"
+    tourUrl({ utmMedium: 'cta', utmCampaign: 'agent-hero' })
 
   return (
     <section className="relative min-h-[90vh] flex items-center bg-gray-900 overflow-hidden">

@@ -2,7 +2,7 @@ import { GetStaticPropsResult } from "next"
 import Head from "next/head"
 import Image from "next/image"
 import Link from "next/link"
-import React, { useEffect, useMemo, useState } from "react"
+import React, { useEffect, useMemo } from "react"
 import { CalendarDays, CheckCircle2, Phone } from "lucide-react"
 import { Layout, LayoutProps } from "components/layout"
 import { getMenus } from "lib/get-menus"
@@ -10,15 +10,17 @@ import { Meta } from "components/meta"
 import { JsonLdSchema } from "components/json-ld-schema"
 import { BreadcrumbSchema } from "components/breadcrumb-schema"
 import { GBPMapCard } from "components/gbp-map-card"
-import { LeadCaptureForm } from "components/lead-capture-form"
+import CalendlyEmbed from "components/calendly-embed"
+import { tourUrl } from "lib/calendly"
 import { BUILD_DATE_ISO } from "lib/build-date"
-// ClientTestimonials currently orphaned (neutralized 2026-04-18 to use only
-// verified Google reviews). VIPNewsletterSignup imported separately where used.
+// Forms have been replaced with the Calendly booking widget (2026-04-18).
+// Calendly is the single conversion path; visitors who prefer to talk
+// use the phone / directions CTAs in <GBPMapCard> below.
 
 interface RequestDetailsPageProps extends LayoutProps {}
 
 export default function RequestDetailsPage({ menus }: RequestDetailsPageProps) {
-  const calendlyUrl = "https://calendly.com/drjanduffy/1-home-tour-30-mins"
+  const calendlyUrl = tourUrl({ utmMedium: 'inline', utmCampaign: 'request-details' })
   const officePhoneDisplay = "(702) 500-1971"
   const officePhoneTel = "+17025001971"
   const propertyAddress = "2827 Paradise Rd, Las Vegas, NV 89109"
@@ -26,8 +28,6 @@ export default function RequestDetailsPage({ menus }: RequestDetailsPageProps) {
   const heroImage = "/images/turnberry/19738766_web1_copy_2827-Paradise-15.jpg-FULL.webp"
   const agentPhoto = "/images/turnberry/asset-1.jpg"
   const bhhsLogo = "/images/turnberry/asset-19.jpg"
-
-  const [showCalendly, setShowCalendly] = useState(false)
 
   const realEstateListingSchema = useMemo(() => {
     return {
@@ -227,52 +227,16 @@ export default function RequestDetailsPage({ menus }: RequestDetailsPageProps) {
 
               <div className="col-12 col-lg-7" data-reveal>
                 <div className="request-details-form-panel">
-                  <h2 className="request-details-h2 mb-2">Send a Quick Request</h2>
+                  <h2 className="request-details-h2 mb-2">Schedule Your Private Tour</h2>
                   <p className="request-details-copy mb-4">
-                    Tell us what you’re looking for (tower, view, budget). We’ll respond with
-                    pricing, availability, and next steps.
+                    Pick a 30-minute slot that works for you. Dr. Jan Duffy will confirm
+                    tower, view, and budget preferences when you book — she&apos;ll have
+                    current pricing and availability ready for your tour.
                   </p>
-                  <LeadCaptureForm variant="footer" showValuationCTA={false} />
-                </div>
-              </div>
-            </div>
-
-            {/* Lazy Calendly Embed */}
-            <div className="row mt-4">
-              <div className="col-12" data-reveal>
-                <div className="request-details-calendly">
-                  <div className="d-flex flex-column flex-md-row align-items-start align-items-md-center justify-content-between gap-2">
-                    <div>
-                      <h3 className="request-details-h3 mb-1">Prefer to book instantly?</h3>
-                      <div className="request-details-copy mb-0">
-                        Click to load the booking calendar (loads only when requested).
-                      </div>
-                    </div>
-                    <button
-                      type="button"
-                      className="btn btn-primary request-details-btn-gold"
-                      onClick={() => setShowCalendly((v) => !v)}
-                      aria-expanded={showCalendly}
-                    >
-                      {showCalendly ? "Hide Calendar" : "Pick a Time"}
-                    </button>
-                  </div>
-
-                  {showCalendly && (
-                    <div className="request-details-calendly-frame mt-3">
-                      <iframe
-                        title="Schedule a private tour - Calendly"
-                        src={`${calendlyUrl}?hide_gdpr_banner=1`}
-                        width="100%"
-                        height="760"
-                        style={{ border: 0 }}
-                        loading="lazy"
-                      />
-                    </div>
-                  )}
-
-                  <div className="small text-muted mt-2">
-                    Or call the office at <a href={`tel:${officePhoneTel}`}>{officePhoneDisplay}</a>.
+                  <CalendlyEmbed url={calendlyUrl} />
+                  <div className="small text-muted mt-3">
+                    Prefer to talk first? Call the office at{" "}
+                    <a href={`tel:${officePhoneTel}`}>{officePhoneDisplay}</a>.
                   </div>
                 </div>
               </div>

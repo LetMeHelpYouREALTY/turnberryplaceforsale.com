@@ -2,6 +2,7 @@
 
 import { useEffect } from 'react'
 import { useRouter } from 'next/router'
+import { tourUrl } from 'lib/calendly'
 
 export function StickyCTA() {
   const { asPath } = useRouter()
@@ -42,8 +43,7 @@ export function StickyCTA() {
 
   if (!isEnabled) return null
 
-  const calendlyUrl =
-    process.env.NEXT_PUBLIC_CALENDLY_URL || 'https://calendly.com/drjanduffy/1-home-tour-30-mins'
+  const calendlyUrl = tourUrl({ utmMedium: 'sticky' })
   const realScoutUrl =
     process.env.NEXT_PUBLIC_REALSCOUT_URL ||
     'https://drjanduffy.realscout.com/homesearch/shared-searches/U2hhcmVhYmxlU2VhcmNoTGluay00MDE0'

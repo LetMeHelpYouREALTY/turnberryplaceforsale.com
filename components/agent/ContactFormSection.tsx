@@ -1,5 +1,13 @@
 'use client'
 
+/**
+ * @deprecated 2026-04-18
+ *
+ * ORPHANED component. The site's single conversion path is the Calendly
+ * booking widget (components/calendly-embed.tsx + components/agent/CalendlySection).
+ * Do NOT re-import.
+ */
+
 import { useMemo, useState } from "react"
 
 const GOLD = "#D4AF37"

@@ -1,5 +1,6 @@
 import Link from "next/link"
 import { Calendar, Mail, MapPin, Phone } from "lucide-react"
+import { tourUrl } from "lib/calendly"
 
 const GOLD = "#D4AF37"
 
@@ -8,8 +9,7 @@ export function LocationContactSection() {
   const mapsQuery = encodeURIComponent(address)
   const mapsEmbedSrc = `https://www.google.com/maps?q=${mapsQuery}&output=embed`
   const directionsHref = `https://www.google.com/maps/dir/?api=1&destination=${mapsQuery}`
-  const calendlyUrl =
-    process.env.NEXT_PUBLIC_CALENDLY_URL || "https://calendly.com/drjanduffy/1-home-tour-30-mins"
+  const calendlyUrl = tourUrl({ utmMedium: 'cta', utmCampaign: 'agent-location' })
 
   return (
     <section className="bg-gray-50 py-16 lg:py-24" aria-label="Location and contact">

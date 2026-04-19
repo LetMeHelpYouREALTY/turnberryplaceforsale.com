@@ -10,6 +10,7 @@ import {
   getGbpReviewsUrl,
   getGbpWriteReviewUrl,
 } from 'lib/google-business-profile'
+import { tourUrl } from 'lib/calendly'
 
 interface DirectionsContactCTAProps {
   address?: string
@@ -20,7 +21,7 @@ interface DirectionsContactCTAProps {
 export function DirectionsContactCTA({
   address = '2827 Paradise Rd, Suite 2, Las Vegas, NV 89109',
   phone = '(702) 500-1971',
-  calendlyUrl = process.env.NEXT_PUBLIC_CALENDLY_URL || 'https://calendly.com/drjanduffy/1-home-tour-30-mins',
+  calendlyUrl = tourUrl({ utmMedium: 'cta', utmCampaign: 'directions-contact' }),
 }: DirectionsContactCTAProps) {
   const directionsUrl = getDirectionsUrl()
   const reviewsHidden = gbpReviewsDisabled()

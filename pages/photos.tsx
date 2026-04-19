@@ -14,6 +14,7 @@ import { useRouter } from "next/router"
 import vimeoVideos from "../data/media/vimeo-videos.json"
 import { BUILD_DATE_DISPLAY, BUILD_DATE_ISO } from "lib/build-date"
 import { TURNBERRY_GEO } from "lib/schema/geo"
+import { tourUrl } from "lib/calendly"
 
 type GalleryCategory = "Residences" | "Stirling Club" | "Views" | "Amenities"
 type GalleryFilter = "All" | GalleryCategory
@@ -566,8 +567,7 @@ export default function PhotosPage({ menus }: PhotosPageProps) {
 
   const phoneHref = "tel:+17025001971"
   const phoneDisplay = "(702) 500-1971"
-  const calendlyUrl =
-    process.env.NEXT_PUBLIC_CALENDLY_URL || "https://calendly.com/drjanduffy/1-home-tour-30-mins"
+  const calendlyUrl = tourUrl({ utmMedium: 'cta', utmCampaign: 'photos' })
 
   const photosOgImages = allItems
     .filter((i): i is ImageGalleryItem => i.kind === "image")
@@ -1614,10 +1614,7 @@ export default function PhotosPage({ menus }: PhotosPageProps) {
                 </div>
               <a
                 className="photos-toast-cta"
-                href={
-                  process.env.NEXT_PUBLIC_CALENDLY_URL ||
-                  "https://calendly.com/drjanduffy/1-home-tour-30-mins"
-                }
+                href={calendlyUrl}
                 target="_blank"
                 rel="noopener noreferrer"
               >

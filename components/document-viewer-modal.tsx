@@ -1,5 +1,14 @@
 'use client'
 
+/**
+ * @deprecated 2026-04-18
+ *
+ * ORPHANED component. The site's single conversion path is the Calendly
+ * booking widget (components/calendly-embed.tsx). Any gated-document
+ * requests should be replaced with a Calendly flow (book a call to
+ * receive the document). Do NOT re-import this modal.
+ */
+
 import { useState } from 'react'
 
 interface DocumentViewerModalProps {

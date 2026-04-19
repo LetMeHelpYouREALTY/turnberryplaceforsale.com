@@ -4,6 +4,7 @@ import { DrupalMenuLinkContent } from "next-drupal"
 import { Navbar } from "components/navbar"
 import { Footer } from "components/footer"
 import { StickyCTA } from "components/sticky-cta"
+import { CalendlyBadge } from "components/calendly-badge"
 
 export interface LayoutProps {
   menus: {
@@ -42,6 +43,7 @@ export function Layout({ menus, children }: LayoutProps) {
       </main>
       <StickyCTA />
       <Footer links={menus.footer} />
+      <CalendlyBadge />
     </div>
   )
 }

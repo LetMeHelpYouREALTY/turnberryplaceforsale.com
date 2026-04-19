@@ -1,5 +1,13 @@
 "use client"
 
+/**
+ * @deprecated 2026-04-18
+ *
+ * ORPHANED component. Removed from /agent on 2026-04-18 — the site's
+ * single conversion path is the Calendly booking widget (via
+ * <CalendlySection />). Do NOT re-import.
+ */
+
 import { useState } from "react"
 
 const GOLD = "#D4AF37"

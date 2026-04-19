@@ -1,5 +1,17 @@
 'use client'
 
+/**
+ * @deprecated 2026-04-18
+ *
+ * This component is ORPHANED. The site's single conversion path is the
+ * Calendly booking widget (see components/calendly-embed.tsx) — do NOT
+ * re-import this form. Lead capture now happens when a visitor books a
+ * time slot; Calendly pushes the contact info directly to the CRM.
+ *
+ * Kept in the tree (not deleted) only so git history + any external
+ * references remain resolvable. Will be removed in a future cleanup.
+ */
+
 import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'

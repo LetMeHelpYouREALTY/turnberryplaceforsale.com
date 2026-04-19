@@ -3,9 +3,7 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import { Home } from 'lucide-react'
-
-const calendlyUrl =
-  process.env.NEXT_PUBLIC_CALENDLY_URL || 'https://calendly.com/drjanduffy/1-home-tour-30-mins'
+import { tourUrl } from 'lib/calendly'
 
 type HomeRequestCalendlyProps = {
   /** Show link to home valuation widget on /price-features */
@@ -14,9 +12,17 @@ type HomeRequestCalendlyProps = {
 
 /**
  * Replaces legacy lead form in homepage contact section — Calendly loads on demand.
+ *
+ * Homepage keeps the lazy-toggle pattern (unlike /agent which now renders
+ * the inline widget immediately) because the homepage is the LCP-critical
+ * page: every extra kB above the fold hurts mobile Core Web Vitals.
+ * widget.js is still loaded once via <CalendlyBadge />, so when the user
+ * clicks "Pick a time" here, the iframe loads instantly with no script
+ * bootstrap delay.
  */
 export function HomeRequestCalendly({ showValuationCTA = true }: HomeRequestCalendlyProps) {
   const [showCalendly, setShowCalendly] = useState(false)
+  const calendlyUrl = tourUrl({ utmMedium: 'inline', utmCampaign: 'home-request' })
 
   return (
     <div className="home-request-calendly text-center" aria-labelledby="contact-label">
@@ -44,7 +50,7 @@ export function HomeRequestCalendly({ showValuationCTA = true }: HomeRequestCale
         <div id="home-calendly-frame" className="agent-calendly-frame mt-3 text-start">
           <iframe
             title="Schedule a private tour — Calendly"
-            src={`${calendlyUrl}?hide_gdpr_banner=1`}
+            src={calendlyUrl}
             width="100%"
             height={760}
             loading="lazy"

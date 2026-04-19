@@ -2,14 +2,15 @@ import Link from "next/link"
 import Image from "next/image"
 import { DrupalMenuLinkContent } from "next-drupal"
 import { BUILD_DATE_DISPLAY } from "lib/build-date"
+import { CalendlyLink } from "components/calendly-link"
+import { tourUrl } from "lib/calendly"
 
 interface FooterProps {
   links: DrupalMenuLinkContent[]
 }
 
 const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://www.turnberryplaceforsale.com'
-const calendlyUrl =
-  process.env.NEXT_PUBLIC_CALENDLY_URL || 'https://calendly.com/drjanduffy/1-home-tour-30-mins'
+const calendlyUrl = tourUrl({ utmMedium: 'footer', utmCampaign: 'footer-portrait' })
 
 // Organization schema for footer
 const organizationSchema = {
@@ -160,6 +161,11 @@ export function Footer({ links }: FooterProps) {
               </a>
             </div>
             <div className="mt-3 font-size-80">
+              <CalendlyLink
+                className="footer-privacy-link"
+                text="Schedule time with me"
+              />
+              <span className="mx-2" aria-hidden="true">|</span>
               <Link
                 href="/privacy"
                 className="footer-privacy-link"

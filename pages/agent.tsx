@@ -10,8 +10,9 @@ import { YourNeighborSection } from "components/agent/YourNeighborSection"
 import { TestimonialsSection } from "components/agent/TestimonialsSection"
 import { LocationContactSection } from "components/agent/LocationContactSection"
 import { CalendlySection } from "components/agent/CalendlySection"
-import { NewsletterSection } from "components/agent/NewsletterSection"
 import { GBPMapCard } from "components/gbp-map-card"
+// NewsletterSection removed 2026-04-18: Calendly (via <CalendlySection>) is
+// the single conversion path site-wide. No on-page forms.
 
 interface AgentPageProps extends LayoutProps {}
 
@@ -34,7 +35,6 @@ export default function AgentPage({ menus }: AgentPageProps) {
         <LocationContactSection />
         <GBPMapCard heading="Visit Dr. Jan Duffy at Turnberry Place" />
         <CalendlySection />
-        <NewsletterSection />
       </div>
     </Layout>
   )

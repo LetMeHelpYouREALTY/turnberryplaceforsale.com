@@ -18,12 +18,13 @@ import { getMenus } from "lib/get-menus"
 import { Meta } from "components/meta"
 import { JsonLdSchema } from "components/json-ld-schema"
 import { BreadcrumbSchema } from "components/breadcrumb-schema"
+import { tourUrl } from "lib/calendly"
 import { BUILD_DATE_ISO } from "lib/build-date"
 
 interface PriceFeaturesPageProps extends LayoutProps {}
 
 export default function PriceFeaturesPage({ menus }: PriceFeaturesPageProps) {
-  const calendlyUrl = "https://calendly.com/drjanduffy/1-home-tour-30-mins"
+  const calendlyUrl = tourUrl({ utmMedium: 'cta', utmCampaign: 'price-features' })
   const officePhoneDisplay = "(702) 500-1971"
   const officePhoneTel = "+17025001971"
   const propertyAddress = "2827 Paradise Rd, Las Vegas, NV 89109"

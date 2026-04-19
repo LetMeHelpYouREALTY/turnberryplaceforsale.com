@@ -22,7 +22,8 @@ import { JsonLdSchema } from "components/json-ld-schema"
 import { HomeFaqSection } from "components/home-faq-section"
 import { LiveInventoryBadge } from "components/live-inventory-badge"
 import { PropertyGrid } from "components/property-grid"
-import { VIPNewsletterSignup } from "components/vip-newsletter-signup"
+// VIPNewsletterSignup removed 2026-04-18: all forms replaced with Calendly;
+// lead capture now happens through the booking widget on /request-details.
 import { LuxuryAmenitiesGrid } from "components/luxury-amenities-grid"
 import { HomeRequestCalendly } from "components/home-request-calendly"
 import { GBPMapCard } from "components/gbp-map-card"

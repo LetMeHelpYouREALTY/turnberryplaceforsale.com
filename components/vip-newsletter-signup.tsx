@@ -1,5 +1,12 @@
 'use client'
 
+/**
+ * @deprecated 2026-04-18
+ *
+ * ORPHANED component. The site's single conversion path is the Calendly
+ * booking widget (components/calendly-embed.tsx). Do NOT re-import.
+ */
+
 import { useState } from 'react'
 
 interface VIPNewsletterSignupProps {

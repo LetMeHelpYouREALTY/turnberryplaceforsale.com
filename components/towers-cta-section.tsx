@@ -3,10 +3,11 @@
 import React from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
+import { tourUrl } from 'lib/calendly'
 
 export function TowersCTASection() {
   const calendlyUrl =
-    process.env.NEXT_PUBLIC_CALENDLY_URL || 'https://calendly.com/drjanduffy/1-home-tour-30-mins'
+    tourUrl({ utmMedium: 'cta', utmCampaign: 'towers-cta' })
 
   return (
     <section

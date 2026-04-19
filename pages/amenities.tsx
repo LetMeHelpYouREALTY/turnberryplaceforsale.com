@@ -26,13 +26,12 @@ import { Meta } from "components/meta"
 import { JsonLdSchema } from "components/json-ld-schema"
 import { BreadcrumbSchema } from "components/breadcrumb-schema"
 import { GBPMapCard } from "components/gbp-map-card"
+import { tourUrl } from "lib/calendly"
 
 const officePhoneDisplay = "(702) 500-1971"
 const officePhoneTel = "+17025001971"
 const propertyAddress = "2827 Paradise Rd, Las Vegas, NV 89109"
-const calendlyUrl =
-  process.env.NEXT_PUBLIC_CALENDLY_URL ||
-  "https://calendly.com/drjanduffy/1-home-tour-30-mins"
+const calendlyUrl = tourUrl({ utmMedium: 'cta', utmCampaign: 'amenities' })
 
 const heroImage =
   "/images/turnberry/Las-Vegas-High-Rise-Condo-Living-Downtown-Las-Vegas-Turnberry-Place-Interior.jpg"

@@ -1,5 +1,14 @@
 'use client'
 
+/**
+ * @deprecated 2026-04-18
+ *
+ * ORPHANED component. The site's single conversion path is the Calendly
+ * booking widget (components/calendly-embed.tsx). Visitors who want a
+ * virtual tour book a time slot and Dr. Jan Duffy runs the tour over
+ * video during that slot. Do NOT re-import this modal.
+ */
+
 import { useState } from 'react'
 
 interface VirtualOpenHouseModalProps {
