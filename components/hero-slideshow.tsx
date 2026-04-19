@@ -3,6 +3,7 @@ import Image from "next/image"
 import Link from "next/link"
 import { ArrowRight, Phone } from "lucide-react"
 import { BUILD_DATE_MONTH_YEAR } from "lib/build-date"
+import { GBP_PHONE_TEL } from "lib/google-business-profile"
 
 interface HeroSlideshowProps {
   photos: string[]
@@ -16,7 +17,7 @@ const heroSchema = {
   '@type': ['RealEstateAgent', 'LocalBusiness'],
   name: 'Dr. Jan Duffy - Turnberry Place Specialist',
   image: `${baseUrl}/images/turnberry/asset-1.jpg`,
-  telephone: '+17025001971',
+  telephone: GBP_PHONE_TEL,
   address: {
     '@type': 'PostalAddress',
     streetAddress: '2827 Paradise Rd, Suite 2',

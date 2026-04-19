@@ -1,6 +1,6 @@
 import { TURNBERRY_GEO } from 'lib/schema/geo'
 import { buildAggregateRating } from 'lib/schema/aggregateRating'
-import { buildOpeningHoursSpecification } from 'lib/google-business-profile'
+import { buildOpeningHoursSpecification, GBP_PHONE_TEL, GBP_EMAIL } from 'lib/google-business-profile'
 
 type AreaServedEntry =
   | { '@type': 'City'; name: string }
@@ -34,8 +34,8 @@ export function buildRealEstateAgentSchema({ baseUrl }: RealEstateAgentInput) {
     description:
       'Turnberry Place specialist and Las Vegas luxury high-rise condo REALTOR. Licensed REALTOR (S.0197614.LLC) with Berkshire Hathaway HomeServices Nevada Properties.',
     url: baseUrl,
-    telephone: ['+17025001971'],
-    email: 'DrDuffy@TurnberryPlaceForSale.com',
+    telephone: [GBP_PHONE_TEL],
+    email: GBP_EMAIL,
     hasCredential: {
       '@type': 'EducationalOccupationalCredential',
       credentialCategory: 'license',

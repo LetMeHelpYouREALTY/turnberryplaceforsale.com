@@ -11,7 +11,7 @@ interface MapHeroSectionProps {
 
 export function MapHeroSection({
   address = '2827 Paradise Rd, Suite 2, Las Vegas, NV 89109',
-  mapKey = 'AIzaSyDSF9E67HCf0-pecnANALPYA-donlDhIww',
+  mapKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY ?? '',
 }: MapHeroSectionProps) {
   const mapsQuery = encodeURIComponent(address)
   const mapsEmbedSrc = `https://www.google.com/maps/embed/v1/place?key=${mapKey}&q=${mapsQuery}&zoom=15`

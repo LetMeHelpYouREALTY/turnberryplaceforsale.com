@@ -1,3 +1,5 @@
+import { GBP_PHONE_TEL } from 'lib/google-business-profile'
+
 type OrganizationInput = {
   baseUrl: string
 }
@@ -11,7 +13,7 @@ export function buildOrganizationSchema({ baseUrl }: OrganizationInput) {
     logo: `${baseUrl}/images/turnberry/asset-19.jpg`,
     contactPoint: {
       '@type': 'ContactPoint',
-      telephone: '+17025001971',
+      telephone: GBP_PHONE_TEL,
       contactType: 'Real Estate Sales',
       areaServed: 'US',
       availableLanguage: ['English', 'Spanish'],

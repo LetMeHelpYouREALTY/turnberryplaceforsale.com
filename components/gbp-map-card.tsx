@@ -67,8 +67,18 @@ export function GBPMapCard({
   const reviewsUrl = getGbpReviewsUrl()
   const writeReviewUrl = getGbpWriteReviewUrl()
 
-  // Mon=0 … Sun=6 in our data; Date.getDay() is Sun=0 … Sat=6.
-  const todayIndex = ((new Date().getDay() + 6) % 7)
+  // Today-of-week index for highlighting the current day in the hours table.
+  // Resolved in useEffect (not during render) so SSR output is deterministic
+  // — otherwise Vercel's UTC server render can disagree with the client's
+  // local timezone on day-of-week at midnight boundaries, triggering React
+  // hydration-mismatch errors. See turnberry-integrity-patterns.mdc §3.
+  // Pre-mount value -1 means no row gets highlighted during SSR + first
+  // render, then the real highlight pops in on the client.
+  const [todayIndex, setTodayIndex] = React.useState<number>(-1)
+  React.useEffect(() => {
+    // Mon=0 … Sun=6 in our data; Date.getDay() is Sun=0 … Sat=6.
+    setTodayIndex((new Date().getDay() + 6) % 7)
+  }, [])
 
   const isCompact = variant === 'compact'
 

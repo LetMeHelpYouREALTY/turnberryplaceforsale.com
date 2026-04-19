@@ -210,6 +210,7 @@ export default function MLSPage({ menus }: MLSPageProps) {
 
           <div className="widget-wrapper">
             <Script
+              id="realscout-widget-js"
               src="https://em.realscout.com/widgets/realscout-web-components.umd.js"
               type="module"
               strategy="lazyOnload"

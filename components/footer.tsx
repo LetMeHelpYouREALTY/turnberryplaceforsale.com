@@ -4,6 +4,7 @@ import { DrupalMenuLinkContent } from "next-drupal"
 import { BUILD_DATE_DISPLAY } from "lib/build-date"
 import { CalendlyLink } from "components/calendly-link"
 import { tourUrl } from "lib/calendly"
+import { GBP_PHONE_DISPLAY, GBP_PHONE_TEL } from "lib/google-business-profile"
 
 interface FooterProps {
   links: DrupalMenuLinkContent[]
@@ -21,7 +22,7 @@ const organizationSchema = {
   logo: `${baseUrl}/images/turnberry/asset-19.jpg`,
   contactPoint: {
     '@type': 'ContactPoint',
-    telephone: '+17025001971',
+    telephone: GBP_PHONE_TEL,
     contactType: 'sales',
   },
 }
@@ -112,8 +113,8 @@ export function Footer({ links }: FooterProps) {
                 <div className="px-2 px-md-3 mb-2 mb-md-0">Turnberry Place High Rise Condos | Homes by Dr. Jan Duffy</div>
                 <div className="px-2 px-md-3 mb-2 mb-md-0"><strong>License: S.0197614.LLC</strong></div>
                 <div className="px-2 px-md-3 mb-2 mb-md-0">
-                  <a href="tel:+17025001971" className="footer-phone-link" title="Office phone" itemProp="telephone">
-                    (702) 500-1971
+                  <a href={`tel:${GBP_PHONE_TEL}`} className="footer-phone-link" title="Office phone" itemProp="telephone">
+                    {GBP_PHONE_DISPLAY}
                   </a>
                 </div>
                 <div className="px-2 px-md-3">
@@ -191,7 +192,7 @@ export function Footer({ links }: FooterProps) {
               </Link>
             </div>
             <div className="mt-3 font-size-80 text-muted">
-              Turnberry Place High Rise Condos | Homes by Dr. Jan Duffy | 2827 Paradise Rd, Suite 2, Las Vegas, NV 89109 | <a href="tel:+17025001971" className="footer-phone-link" itemProp="telephone">(702) 500-1971</a>
+              Turnberry Place High Rise Condos | Homes by Dr. Jan Duffy | 2827 Paradise Rd, Suite 2, Las Vegas, NV 89109 | <a href={`tel:${GBP_PHONE_TEL}`} className="footer-phone-link" itemProp="telephone">{GBP_PHONE_DISPLAY}</a>
             </div>
             <div className="mt-2 font-size-80 text-muted">
               Last updated: {BUILD_DATE_DISPLAY}

@@ -7,6 +7,7 @@ import { Menu, X } from "lucide-react"
 
 import { LocaleSwitcher } from "components/locale-switcher"
 import Link from "next/link"
+import { GBP_PHONE_DISPLAY, GBP_PHONE_TEL } from "lib/google-business-profile"
 
 interface NavbarProps {
   links: DrupalMenuLinkContent[]
@@ -197,7 +198,7 @@ export function Navbar({ links, ...props }: NavbarProps) {
                   Turnberry Place High Rise Condos | Homes by Dr. Jan Duffy
                 </div>
                 <div className="agent-phone">
-                  <a href="tel:+17025001971" title="Office phone">(702) 500-1971</a>
+                  <a href={`tel:${GBP_PHONE_TEL}`} title="Office phone">{GBP_PHONE_DISPLAY}</a>
                 </div>
                 {/* Street address lives in the footer only (per brand/UX rule 2026-04-18)
                     to keep the header NAP tight and avoid visual NAP duplication. */}

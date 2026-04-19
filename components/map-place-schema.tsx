@@ -1,5 +1,6 @@
 import React from 'react'
 import { JsonLd } from './json-ld'
+import { GBP_PHONE_TEL } from 'lib/google-business-profile'
 
 export function MapPlaceSchema() {
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://www.turnberryplaceforsale.com'
@@ -24,7 +25,7 @@ export function MapPlaceSchema() {
       "longitude": -115.1564
     },
     "image": `${baseUrl}/images/turnberry/Turnberry_Place_For_Sale.jpg`,
-    "telephone": "+17025001971"
+    "telephone": GBP_PHONE_TEL
   }
 
   const localBusinessSchema = {
@@ -46,7 +47,7 @@ export function MapPlaceSchema() {
       "latitude": 36.1408,
       "longitude": -115.1564
     },
-    "telephone": "+17025001971",
+    "telephone": GBP_PHONE_TEL,
     "priceRange": "$800,000 - $10,000,000+",
     "image": `${baseUrl}/images/turnberry/Turnberry_Place_For_Sale.jpg`
   }

@@ -287,6 +287,7 @@ export default function PriceFeaturesPage({ menus }: PriceFeaturesPageProps) {
                 </p>
                 <div className="widget-card--light widget-wrapper" data-reveal>
                   <Script
+                    id="realscout-widget-js"
                     src="https://em.realscout.com/widgets/realscout-web-components.umd.js"
                     type="module"
                     strategy="lazyOnload"

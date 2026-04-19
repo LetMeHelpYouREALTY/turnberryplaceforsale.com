@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import Image from 'next/image'
+import { GBP_PHONE_DISPLAY, GBP_PHONE_TEL, GBP_EMAIL } from 'lib/google-business-profile'
 
 interface AgentBioModalProps {
   agentId?: string
@@ -57,7 +58,7 @@ export function AgentBioModal({ agentId = '14435' }: AgentBioModalProps) {
                 height={200}
               />
               <p className="mb-3">
-                <strong>Office:</strong> <a href="tel:+17025001971">(702) 500-1971</a>
+                <strong>Office:</strong> <a href={`tel:${GBP_PHONE_TEL}`}>{GBP_PHONE_DISPLAY}</a>
               </p>
             </div>
 
@@ -76,8 +77,8 @@ export function AgentBioModal({ agentId = '14435' }: AgentBioModalProps) {
               </p>
               <p className="mt-4">
                 <strong>For expert guidance in Turnberry Place real estate, contact Dr. Jan Duffy:</strong><br />
-                Phone: <a href="tel:+17025001971">(702) 500-1971</a><br />
-                Email: <a href="mailto:DrDuffy@TurnberryPlaceForSale.com">DrDuffy@TurnberryPlaceForSale.com</a>
+                Phone: <a href={`tel:${GBP_PHONE_TEL}`}>{GBP_PHONE_DISPLAY}</a><br />
+                Email: <a href={`mailto:${GBP_EMAIL}`}>{GBP_EMAIL}</a>
               </p>
             </div>
           </div>

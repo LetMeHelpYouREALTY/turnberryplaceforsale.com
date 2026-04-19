@@ -3,6 +3,7 @@
 import React, { useState } from 'react'
 import Image from 'next/image'
 import { QRCodeSVG } from 'qrcode.react'
+import { GBP_PHONE_DISPLAY, GBP_PHONE_TEL, GBP_EMAIL } from 'lib/google-business-profile'
 
 interface DigitalCardProps {
   cardId?: string
@@ -22,8 +23,8 @@ FN:Dr. Jan Duffy
 N:Duffy;Jan;Dr.;;
 ORG:Berkshire Hathaway HomeServices Nevada Properties
 TITLE:REALTOR - Turnberry Place Specialist
-TEL;TYPE=WORK,VOICE:(702) 500-1971
-EMAIL:DrDuffy@TurnberryPlaceForSale.com
+TEL;TYPE=WORK,VOICE:${GBP_PHONE_DISPLAY}
+EMAIL:${GBP_EMAIL}
 ADR;TYPE=WORK:;Suite 2;2827 Paradise Rd;Las Vegas;NV;89109;USA
 URL:${siteUrl}
 NOTE:Turnberry Place Las Vegas Luxury Condo Specialist. License S.0197614.LLC
@@ -65,14 +66,14 @@ END:VCARD`
 
   const handleShareSMS = () => {
     const message = encodeURIComponent(
-      `Check out Turnberry Place luxury condos in Las Vegas! Contact Dr. Jan Duffy: (702) 500-1971 - ${siteUrl}`
+      `Check out Turnberry Place luxury condos in Las Vegas! Contact Dr. Jan Duffy: ${GBP_PHONE_DISPLAY} - ${siteUrl}`
     )
     window.open(`sms:?body=${message}`, '_blank')
   }
 
   const handleShareWhatsApp = () => {
     const message = encodeURIComponent(
-      `Discover luxury high-rise condos at Turnberry Place Las Vegas! 4 towers near the Strip. Contact Dr. Jan Duffy: (702) 500-1971 ${siteUrl}`
+      `Discover luxury high-rise condos at Turnberry Place Las Vegas! 4 towers near the Strip. Contact Dr. Jan Duffy: ${GBP_PHONE_DISPLAY} ${siteUrl}`
     )
     window.open(`https://wa.me/?text=${message}`, '_blank')
   }
@@ -80,7 +81,7 @@ END:VCARD`
   const handleShareEmail = () => {
     const subject = encodeURIComponent('Turnberry Place Las Vegas - Luxury Condos')
     const body = encodeURIComponent(
-      `I thought you might be interested in Turnberry Place, a luxury high-rise condo community near the Las Vegas Strip.\n\nContact Dr. Jan Duffy for more information:\nPhone: (702) 500-1971\nWebsite: ${siteUrl}\n\nFeatures include:\n- 4 luxury towers\n- Guard-gated security\n- The Stirling Club amenities\n- Strip and mountain views`
+      `I thought you might be interested in Turnberry Place, a luxury high-rise condo community near the Las Vegas Strip.\n\nContact Dr. Jan Duffy for more information:\nPhone: ${GBP_PHONE_DISPLAY}\nWebsite: ${siteUrl}\n\nFeatures include:\n- 4 luxury towers\n- Guard-gated security\n- The Stirling Club amenities\n- Strip and mountain views`
     )
     window.open(`mailto:?subject=${subject}&body=${body}`, '_blank')
   }
@@ -114,14 +115,14 @@ END:VCARD`
         {/* Contact Info */}
         <div className="mt-4 space-y-2 text-sm">
           <a 
-            href="tel:+17025001971" 
+            href={`tel:${GBP_PHONE_TEL}`}
             className="flex items-center gap-2 hover:text-amber-400 transition-colors"
             itemProp="telephone"
           >
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
             </svg>
-            (702) 500-1971
+            {GBP_PHONE_DISPLAY}
           </a>
           <p className="flex items-center gap-2 text-gray-400">
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
