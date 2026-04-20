@@ -22,6 +22,7 @@ import { JsonLdSchema } from "components/json-ld-schema"
 import { HomeFaqSection } from "components/home-faq-section"
 import { LiveInventoryBadge } from "components/live-inventory-badge"
 import { PropertyGrid } from "components/property-grid"
+import { RealScoutHomeListingsLazy } from "components/realscout-home-listings-lazy"
 // VIPNewsletterSignup removed 2026-04-18: all forms replaced with Calendly;
 // lead capture now happens through the booking widget on /request-details.
 import { LuxuryAmenitiesGrid } from "components/luxury-amenities-grid"
@@ -36,7 +37,6 @@ import { TURNBERRY_HERO_HOME_ALTS } from "lib/image-alt"
 import { FeaturedListingCard } from "components/featured-listing-card"
 import Image from "next/image"
 import Link from "next/link"
-import Script from "next/script"
 
 const RESOURCE_TYPES = ["node--page", "node--landing_page", "node--article"]
 
@@ -66,23 +66,8 @@ export default function NodePage({ node, menus, inventory }: NodePageProps) {
         />
         <Head>
           <meta name="author" content="Dr. Jan Duffy, REALTOR" />
-          {/* Performance optimizations */}
-          <link rel="preconnect" href="https://fonts.googleapis.com" />
-          <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+          {/* Fonts load via next/font in _app — no external font preconnect. Hero LCP: next/image priority on slide 0 (no raw JPEG preload). */}
           <link rel="dns-prefetch" href="https://em.realscout.com" />
-          
-          {/* Preload critical resources for faster LCP */}
-          <link
-            rel="preload"
-            as="image"
-            href="/images/turnberry/Turnberry_Place_For_Sale.jpg"
-            fetchPriority="high"
-          />
-          <link
-            rel="preload"
-            as="image"
-            href="/images/turnberry/asset-1.jpg"
-          />
         </Head>
         <JsonLdSchema
           type="home"
@@ -264,30 +249,7 @@ function HomePageContent({
                   Browse current listings with real-time availability, pricing, and property details. Use the filters to find your perfect luxury residence.
                 </p>
               </div>
-              <div className="widget-card--light widget-wrapper">
-                <Script
-                  id="realscout-widget-js"
-                  src="https://em.realscout.com/widgets/realscout-web-components.umd.js"
-                  type="module"
-                  strategy="lazyOnload"
-                />
-                <style jsx>{`
-                  realscout-office-listings {
-                    --rs-listing-divider-color: #0e64c8;
-                    width: 100%;
-                    min-height: 400px;
-                  }
-                `}</style>
-                {/* @ts-ignore - Custom web component */}
-                <realscout-office-listings
-                  agent-encoded-id="QWdlbnQtMjI1MDUw"
-                  sort-order="NEWEST"
-                  listing-status="For Sale"
-                  property-types=",TC,LAL"
-                  price-min="500000"
-                  price-max="16000000"
-                ></realscout-office-listings>
-              </div>
+              <RealScoutHomeListingsLazy />
               <div className="text-center mt-4">
                 <p className="mb-3">Interested in viewing these luxury condos?</p>
                 <Link

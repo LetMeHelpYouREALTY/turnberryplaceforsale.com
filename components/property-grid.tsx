@@ -77,10 +77,10 @@ function PropertyCard({ property }: { property: PropertyCard }) {
           src={property.image}
           alt={property.alt || property.title}
           fill
-          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
+          sizes="(max-width: 767px) 100vw, (max-width: 991px) 50vw, 25vw"
           style={{ objectFit: 'cover', transition: 'transform 0.3s ease' }}
           loading="lazy"
-          quality={85}
+          quality={72}
           className="property-card-image"
         />
       </div>

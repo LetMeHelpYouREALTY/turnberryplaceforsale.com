@@ -5,6 +5,9 @@ import { ArrowRight, Phone } from "lucide-react"
 import { BUILD_DATE_MONTH_YEAR } from "lib/build-date"
 import { heroSlideAlt } from "lib/image-alt"
 
+const HERO_BLUR_DATA_URL =
+  "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
+
 interface HeroSlideshowProps {
   photos: string[]
   /** Optional per-slide alt text (same length as `photos`); defaults to indexed Turnberry descriptions. */
@@ -14,21 +17,6 @@ interface HeroSlideshowProps {
 export function HeroSlideshow({ photos, photoAlts }: HeroSlideshowProps) {
   const [currentSlide, setCurrentSlide] = useState(0)
   const [isPaused, setIsPaused] = useState(false)
-  const [loadedImages, setLoadedImages] = useState<Set<number>>(new Set<number>())
-
-  // Preload all images to prevent black screens
-  useEffect(() => {
-    photos.forEach((photo, index) => {
-      const img = document.createElement('img')
-      img.src = photo
-      img.onload = () => {
-        setLoadedImages((prev) => new Set(prev).add(index))
-      }
-      img.onerror = () => {
-        console.warn(`Failed to load hero image ${index + 1}: ${photo}`)
-      }
-    })
-  }, [photos])
 
   useEffect(() => {
     if (isPaused) return
@@ -41,89 +29,57 @@ export function HeroSlideshow({ photos, photoAlts }: HeroSlideshowProps) {
   const goToSlide = (index: number) => {
     setCurrentSlide(index)
     setIsPaused(true)
-    // Resume after 10 seconds
     setTimeout(() => setIsPaused(false), 10000)
   }
 
-  // Individual brightness adjustments per photo
   const getBrightnessFilter = (index: number) => {
-    // Photo 6 (index 5) needs more brightness
     if (index === 5) {
       return "brightness(1.3) contrast(1.1)"
     }
-    // Photos 2 and 3 (indices 1 and 2) - ensure they're visible
     if (index === 1 || index === 2) {
       return "brightness(1.2) contrast(1.1)"
     }
-    // Default brightness for other photos
     return "brightness(1.1) contrast(1.05)"
   }
 
   return (
     <header className="card-top-header relative h-screen min-h-[500px] w-full">
-      {/* RealEstateAgent JSON-LD: single canonical graph from `JsonLdSchema` (`#realestateagent`). */}
-
-      {/* Slideshow */}
+      {/* Slideshow: stacked next/image only (no raw CSS background — LCP + bandwidth). */}
       <div className="slick-slideshow absolute inset-0 z-0" aria-label="Hero image slideshow">
         {photos.map((photo, index) => {
-          const isLoaded = loadedImages.has(index)
           const isCurrent = index === currentSlide
-          const isFirstSlide = index === 0
           const slideAlt =
             photoAlts?.[index]?.trim() || heroSlideAlt(index, photos.length)
+          const isLcpSlide = index === 0
 
           return (
             <div
               key={index}
               className={`slide absolute inset-0 transition-opacity duration-1000 ${
-                isCurrent ? "opacity-100 z-10" : "opacity-0 z-0"
+                isCurrent ? "opacity-100 z-10" : "opacity-0 z-0 pointer-events-none"
               }`}
-              style={{
-                backgroundImage: isLoaded ? `url(${photo})` : 'none',
-                backgroundColor: isLoaded ? 'transparent' : '#1a1a1a', // Fallback color while loading
-                backgroundSize: "cover",
-                backgroundPosition: "center",
-                backgroundRepeat: "no-repeat",
-                filter: getBrightnessFilter(index), // Individual brightness per photo
-                transition: isLoaded ? 'opacity 1s ease-in-out, filter 0.3s ease' : 'opacity 1s ease-in-out',
-              }}
               aria-hidden={!isCurrent}
-              role="img"
-              aria-label={isCurrent ? `Hero slide ${index + 1} of ${photos.length}: ${slideAlt}` : undefined}
             >
-              {/* Use Next.js Image for LCP optimization - first slide only */}
-              {isCurrent && isFirstSlide && (
+              <div
+                className="absolute inset-0"
+                style={{ filter: getBrightnessFilter(index) }}
+              >
                 <Image
                   src={photo}
                   alt={slideAlt}
                   fill
-                  priority={true}
                   sizes="100vw"
-                  quality={85}
+                  priority={isLcpSlide}
+                  fetchPriority={isLcpSlide ? "high" : "low"}
+                  {...(!isLcpSlide ? { loading: "lazy" as const } : {})}
+                  quality={isLcpSlide ? 85 : 72}
+                  placeholder={isLcpSlide ? "blur" : "empty"}
+                  blurDataURL={isLcpSlide ? HERO_BLUR_DATA_URL : undefined}
                   style={{
-                    objectFit: 'cover',
-                    filter: getBrightnessFilter(index),
+                    objectFit: "cover",
                   }}
-                  placeholder="blur"
-                  blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
                 />
-              )}
-              
-              {/* Show loading state for images that haven't loaded yet */}
-              {!isLoaded && isCurrent && (
-                <div style={{
-                  position: 'absolute',
-                  inset: 0,
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  backgroundColor: '#1a1a1a',
-                  color: '#ffffff',
-                  fontSize: '0.875rem',
-                }}>
-                  Loading image...
-                </div>
-              )}
+              </div>
             </div>
           )
         })}
@@ -230,7 +186,7 @@ export function HeroSlideshow({ photos, photoAlts }: HeroSlideshowProps) {
               loading={index === 0 ? 'eager' : 'lazy'}
               quality={60}
               placeholder="blur"
-              blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
+              blurDataURL={HERO_BLUR_DATA_URL}
             />
           </button>
           )
