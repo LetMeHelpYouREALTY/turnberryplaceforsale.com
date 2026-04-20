@@ -445,7 +445,7 @@ export default function MLSPage({ menus }: MLSPageProps) {
 export async function getStaticProps(): Promise<GetStaticPropsResult<MLSPageProps>> {
   return {
     props: {
-      menus: await getMenus({} as any),
+      menus: await getMenus(),
     },
   }
 }

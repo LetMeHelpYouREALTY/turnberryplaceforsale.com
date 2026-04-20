@@ -42,7 +42,7 @@ export default function AgentPage({ menus }: AgentPageProps) {
 export async function getStaticProps(): Promise<GetStaticPropsResult<AgentPageProps>> {
   return {
     props: {
-      menus: await getMenus({} as any),
+      menus: await getMenus(),
     },
   }
 }

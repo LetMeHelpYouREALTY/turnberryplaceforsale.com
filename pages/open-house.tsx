@@ -165,7 +165,7 @@ export default function OpenHousePage({ menus }: OpenHousePageProps) {
 export async function getStaticProps(): Promise<GetStaticPropsResult<OpenHousePageProps>> {
   return {
     props: {
-      menus: await getMenus({} as any),
+      menus: await getMenus(),
     },
   }
 }

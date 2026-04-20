@@ -242,7 +242,7 @@ export default function FloorPlansPage({ menus }: FloorPlansPageProps) {
 export async function getStaticProps(): Promise<GetStaticPropsResult<FloorPlansPageProps>> {
   return {
     props: {
-      menus: await getMenus({} as any),
+      menus: await getMenus(),
     },
   }
 }

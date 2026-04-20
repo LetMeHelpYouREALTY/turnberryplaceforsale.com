@@ -1,10 +1,15 @@
 // @ts-nocheck
 // FIXME(strict-mode): legacy Drupal integration code. Re-enable type-checking when migrating away from next-drupal.
-import { GetStaticPropsContext } from "next"
+import type { GetStaticPropsContext } from "next"
 import { DrupalMenuLinkContent } from "next-drupal"
 import { drupal } from "lib/drupal"
 
-export async function getMenus(context: GetStaticPropsContext): Promise<{
+/** Locale fields used by `drupal.getMenu`; pass a subset of `getStaticProps` context or `{}`. */
+export type GetMenusInput = Partial<
+  Pick<GetStaticPropsContext, "locale" | "defaultLocale">
+>
+
+export async function getMenus(context: GetMenusInput = {}): Promise<{
   main: DrupalMenuLinkContent[]
   footer: DrupalMenuLinkContent[]
 }> {

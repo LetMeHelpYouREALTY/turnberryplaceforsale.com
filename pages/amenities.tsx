@@ -734,7 +734,7 @@ function Accordion({
 export async function getStaticProps(): Promise<GetStaticPropsResult<AmenitiesPageProps>> {
   return {
     props: {
-      menus: await getMenus({} as any),
+      menus: await getMenus(),
     },
   }
 }

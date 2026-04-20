@@ -409,7 +409,7 @@ export default function SharePage({ menus }: SharePageProps) {
 export async function getStaticProps(): Promise<GetStaticPropsResult<SharePageProps>> {
   return {
     props: {
-      menus: await getMenus({} as any),
+      menus: await getMenus(),
     },
   }
 }

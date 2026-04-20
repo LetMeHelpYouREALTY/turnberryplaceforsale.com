@@ -360,7 +360,7 @@ export default function TowersPage({ menus }: TowersPageProps) {
 export async function getStaticProps(): Promise<GetStaticPropsResult<TowersPageProps>> {
   return {
     props: {
-      menus: await getMenus({} as any),
+      menus: await getMenus(),
     },
   }
 }

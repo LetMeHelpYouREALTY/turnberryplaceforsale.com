@@ -61,7 +61,7 @@ export async function getStaticProps(): Promise<GetStaticPropsResult<Custom404Pr
   try {
     return {
       props: {
-        menus: await getMenus({} as any),
+        menus: await getMenus(),
       },
     }
   } catch (error) {

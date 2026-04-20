@@ -654,6 +654,7 @@ export async function getStaticProps(
     try {
       return {
         props: {
+          // Minimal stub for static home when Drupal is unavailable (not a full JSON:API node).
           node: {
             type: 'node--landing_page',
             id: 'home',
@@ -661,7 +662,7 @@ export async function getStaticProps(
             status: true,
             path: { alias: '/' },
             field_sections: [],
-          } as any,
+          } as unknown as DrupalNode,
           menus: await getMenus(context),
           inventory: serializedInventory,
         },
@@ -678,7 +679,7 @@ export async function getStaticProps(
             status: true,
             path: { alias: '/' },
             field_sections: [],
-          } as any,
+          } as unknown as DrupalNode,
           menus: {
             main: [],
             footer: [],

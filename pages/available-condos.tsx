@@ -156,7 +156,7 @@ export async function getStaticProps(): Promise<GetStaticPropsResult<AvailableCo
   try {
     return {
       props: {
-        menus: await getMenus({} as any),
+        menus: await getMenus(),
       },
     }
   } catch (error) {

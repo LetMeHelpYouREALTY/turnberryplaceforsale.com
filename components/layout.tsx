@@ -61,7 +61,7 @@ export function Layout({ menus, children }: LayoutProps) {
         className="border-t border-gray-200"
       />
       <StickyCTA />
-      <Footer links={menus.footer} />
+      <Footer />
       <CalendlyBadge />
     </div>
   )

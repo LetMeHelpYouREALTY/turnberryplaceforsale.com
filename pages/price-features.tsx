@@ -673,7 +673,7 @@ export default function PriceFeaturesPage({ menus }: PriceFeaturesPageProps) {
 export async function getStaticProps(): Promise<GetStaticPropsResult<PriceFeaturesPageProps>> {
   return {
     props: {
-      menus: await getMenus({} as any),
+      menus: await getMenus(),
     },
   }
 }

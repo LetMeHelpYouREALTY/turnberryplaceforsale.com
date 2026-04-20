@@ -272,7 +272,7 @@ export default function RequestDetailsPage({ menus }: RequestDetailsPageProps) {
 export async function getStaticProps(): Promise<GetStaticPropsResult<RequestDetailsPageProps>> {
   return {
     props: {
-      menus: await getMenus({} as any),
+      menus: await getMenus(),
     },
   }
 }

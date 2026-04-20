@@ -133,7 +133,7 @@ export default function StirlingClubPage({ menus }: StirlingClubPageProps) {
 export async function getStaticProps(): Promise<GetStaticPropsResult<StirlingClubPageProps>> {
   return {
     props: {
-      menus: await getMenus({} as any),
+      menus: await getMenus(),
     },
   }
 }

@@ -237,7 +237,7 @@ export default function NeighborhoodPage({ menus }: NeighborhoodPageProps) {
 export async function getStaticProps(): Promise<GetStaticPropsResult<NeighborhoodPageProps>> {
   return {
     props: {
-      menus: await getMenus({} as any),
+      menus: await getMenus(),
     },
   }
 }
