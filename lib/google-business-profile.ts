@@ -85,10 +85,9 @@ export const GBP_GEO = {
 
 /**
  * Hours for the staffed office at 2827 Paradise Rd, 1st floor.
- * Source: operator-provided 2026-04-18.
- *   Tue–Sat: 6 AM – 10 PM
- *   Sun:     6 AM – 9 PM
- *   Mon:     Closed
+ * Source: Google Business Profile main hours (operator-verified 2026-04-19).
+ *   Sun, Tue–Sat: 8:00 AM – 7:00 PM
+ *   Mon:            Closed
  *
  * IMPORTANT: keep this shape so `buildOpeningHoursSpecification()` can
  * emit schema.org-valid 24h strings ("HH:MM"). Times below are LOCAL
@@ -119,13 +118,13 @@ export type HoursRow = {
 }
 
 export const GBP_HOURS: readonly HoursRow[] = [
-  { order: 0, label: 'Mon', dayOfWeek: 'Monday',    display: 'Closed',          opens: null,    closes: null,    closed: true  },
-  { order: 1, label: 'Tue', dayOfWeek: 'Tuesday',   display: '6 AM – 10 PM',    opens: '06:00', closes: '22:00', closed: false },
-  { order: 2, label: 'Wed', dayOfWeek: 'Wednesday', display: '6 AM – 10 PM',    opens: '06:00', closes: '22:00', closed: false },
-  { order: 3, label: 'Thu', dayOfWeek: 'Thursday',  display: '6 AM – 10 PM',    opens: '06:00', closes: '22:00', closed: false },
-  { order: 4, label: 'Fri', dayOfWeek: 'Friday',    display: '6 AM – 10 PM',    opens: '06:00', closes: '22:00', closed: false },
-  { order: 5, label: 'Sat', dayOfWeek: 'Saturday',  display: '6 AM – 10 PM',    opens: '06:00', closes: '22:00', closed: false },
-  { order: 6, label: 'Sun', dayOfWeek: 'Sunday',    display: '6 AM – 9 PM',     opens: '06:00', closes: '21:00', closed: false },
+  { order: 0, label: 'Mon', dayOfWeek: 'Monday',    display: 'Closed',            opens: null,    closes: null,    closed: true  },
+  { order: 1, label: 'Tue', dayOfWeek: 'Tuesday',   display: '8:00 AM – 7:00 PM', opens: '08:00', closes: '19:00', closed: false },
+  { order: 2, label: 'Wed', dayOfWeek: 'Wednesday', display: '8:00 AM – 7:00 PM', opens: '08:00', closes: '19:00', closed: false },
+  { order: 3, label: 'Thu', dayOfWeek: 'Thursday',  display: '8:00 AM – 7:00 PM', opens: '08:00', closes: '19:00', closed: false },
+  { order: 4, label: 'Fri', dayOfWeek: 'Friday',    display: '8:00 AM – 7:00 PM', opens: '08:00', closes: '19:00', closed: false },
+  { order: 5, label: 'Sat', dayOfWeek: 'Saturday',  display: '8:00 AM – 7:00 PM', opens: '08:00', closes: '19:00', closed: false },
+  { order: 6, label: 'Sun', dayOfWeek: 'Sunday',    display: '8:00 AM – 7:00 PM', opens: '08:00', closes: '19:00', closed: false },
 ]
 
 type OpeningHoursSpecification = {
