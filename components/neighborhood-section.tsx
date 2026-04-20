@@ -2,6 +2,7 @@
 
 import React from 'react'
 import { ShoppingBag, UtensilsCrossed, Plane, MapPin } from 'lucide-react'
+import { TURNBERRY_MAPS_Q_LATLNG } from 'lib/schema/geo'
 
 interface NearbyHighlight {
   icon: React.ElementType
@@ -101,7 +102,7 @@ export function NeighborhoodSection({
                   </p>
                   {/* Google Maps Embed - Replace with your API key */}
                   <iframe
-                    src="https://www.google.com/maps?q=2827+Paradise+Rd,+Las+Vegas,+NV+89109&output=embed"
+                    src={`https://www.google.com/maps?q=${encodeURIComponent(TURNBERRY_MAPS_Q_LATLNG)}&output=embed`}
                     width="100%"
                     height="100%"
                     style={{ border: 0, position: 'absolute', top: 0, left: 0 }}

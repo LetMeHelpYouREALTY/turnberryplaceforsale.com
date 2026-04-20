@@ -4,7 +4,6 @@ import { getMenus } from "lib/get-menus"
 import { Meta } from "components/meta"
 import { JsonLdSchema } from "components/json-ld-schema"
 import { BreadcrumbSchema } from "components/breadcrumb-schema"
-import { GBPMapCard } from "components/gbp-map-card"
 import { GBP_PHONE_DISPLAY, GBP_PHONE_TEL } from "lib/google-business-profile"
 import Link from "next/link"
 
@@ -159,7 +158,6 @@ export default function OpenHousePage({ menus }: OpenHousePageProps) {
         </div>
       </div>
 
-      <GBPMapCard heading="Find Us for Your Private Showing" />
     </Layout>
   )
 }

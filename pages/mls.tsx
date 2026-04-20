@@ -12,6 +12,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { TowerCards } from 'components/tower-cards'
 import { LuxuryAmenitiesGrid } from 'components/luxury-amenities-grid'
+import { mlsGalleryAlt } from 'lib/image-alt'
 
 interface MLSPageProps extends LayoutProps {}
 
@@ -28,6 +29,35 @@ export default function MLSPage({ menus }: MLSPageProps) {
       />
       <JsonLdSchema type="property" propertyPrice="$800,000 - $10,000,000+" />
       <BreadcrumbSchema currentPageTitle="Turnberry Place MLS Listing" />
+
+      <nav
+        className="bg-gray-50 border-b border-gray-200 py-3"
+        aria-label="Browse Turnberry Place site"
+      >
+        <div className="container mx-auto px-4 flex flex-wrap justify-center gap-4 text-sm md:text-base text-center">
+          <Link
+            href="/"
+            className="text-amber-800 font-medium hover:underline"
+            title="Turnberry Place Las Vegas — home"
+          >
+            Turnberry Place home
+          </Link>
+          <Link
+            href="/available-condos"
+            className="text-amber-800 font-medium hover:underline"
+            title="Browse luxury high-rise condos for sale"
+          >
+            View condos for sale
+          </Link>
+          <Link
+            href="/request-details"
+            className="text-amber-800 font-medium hover:underline"
+            title="Request listing details and schedule a tour"
+          >
+            Request details & tour
+          </Link>
+        </div>
+      </nav>
 
       {/* Hero Section */}
       <section className="bg-gradient-to-br from-gray-900 to-gray-800 text-white py-12 md:py-16">
@@ -153,7 +183,7 @@ export default function MLSPage({ menus }: MLSPageProps) {
               <Link key={idx} href="/photos" className="relative aspect-square overflow-hidden rounded-lg group">
                 <Image
                   src={src}
-                  alt={`Turnberry Place Las Vegas - Photo ${idx + 1}`}
+                  alt={mlsGalleryAlt(idx)}
                   fill
                   sizes="(max-width: 768px) 50vw, 25vw"
                   className="object-cover group-hover:scale-110 transition-transform duration-300"
@@ -356,7 +386,7 @@ export default function MLSPage({ menus }: MLSPageProps) {
               <div>
                 <h3 className="text-xl font-semibold mb-3 text-gray-900">Prime Location</h3>
                 <p className="text-gray-700">
-                  Turnberry Place's location at 2747–2877 Paradise Road positions it at the heart of Las Vegas' most dynamic corridor. The property lies within a one-mile radius of over twenty Zagat-rated restaurants, including establishments at the Wynn, Encore, and Resorts World.
+                  Turnberry Place's location at 2827 Paradise Rd, Las Vegas, NV 89109 positions it at the heart of Las Vegas' most dynamic corridor. The property lies within a one-mile radius of over twenty Zagat-rated restaurants, including establishments at the Wynn, Encore, and Resorts World.
                 </p>
               </div>
               <div>

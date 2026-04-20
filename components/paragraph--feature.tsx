@@ -8,6 +8,7 @@ import { Links } from "components/links"
 import { FormattedText } from "components/formatted-text"
 import { ParagraphProps } from "components/paragraph"
 import { Section } from "components/section"
+import { TURNBERRY_IMAGE_ALT_FALLBACK } from "lib/image-alt"
 
 export function ParagraphFeature({ paragraph, ...props }: ParagraphProps) {
   return (
@@ -33,7 +34,8 @@ export function ParagraphFeature({ paragraph, ...props }: ParagraphProps) {
                   paragraph.field_media.field_media_image.uri.url
                 )}
                 alt={
-                  paragraph.field_media.field_media_image.resourceIdObjMeta.alt
+                  paragraph.field_media.field_media_image.resourceIdObjMeta.alt?.trim() ||
+                  TURNBERRY_IMAGE_ALT_FALLBACK
                 }
                 width={500}
                 height={300}

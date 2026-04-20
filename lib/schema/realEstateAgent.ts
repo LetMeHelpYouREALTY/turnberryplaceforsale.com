@@ -1,6 +1,13 @@
 import { TURNBERRY_GEO } from 'lib/schema/geo'
+import { realEstateAgentEntityId } from 'lib/schema/entityIds'
 import { buildAggregateRating } from 'lib/schema/aggregateRating'
-import { buildOpeningHoursSpecification, GBP_PHONE_TEL, GBP_EMAIL } from 'lib/google-business-profile'
+import {
+  buildOpeningHoursSpecification,
+  GBP_ADDRESS,
+  GBP_PHONE_TEL,
+  GBP_EMAIL,
+} from 'lib/google-business-profile'
+import { AGENT_KNOWS_ABOUT_SEMANTIC } from 'lib/seo/semantic-topics'
 
 type AreaServedEntry =
   | { '@type': 'City'; name: string }
@@ -28,7 +35,7 @@ export function buildRealEstateAgentSchema({ baseUrl }: RealEstateAgentInput) {
   return {
     '@context': 'https://schema.org',
     '@type': 'RealEstateAgent',
-    '@id': `${baseUrl}/#realestateagent`,
+    '@id': realEstateAgentEntityId(baseUrl),
     name: 'Dr. Jan Duffy, REALTOR',
     alternateName: 'The Turnberry Place Team',
     description:
@@ -48,11 +55,7 @@ export function buildRealEstateAgentSchema({ baseUrl }: RealEstateAgentInput) {
     },
     address: {
       '@type': 'PostalAddress',
-      streetAddress: '2827 Paradise Rd, Suite 2',
-      addressLocality: 'Las Vegas',
-      addressRegion: 'NV',
-      postalCode: '89109',
-      addressCountry: 'US',
+      ...GBP_ADDRESS,
     },
     geo: TURNBERRY_GEO,
     openingHoursSpecification: buildOpeningHoursSpecification(),
@@ -62,12 +65,7 @@ export function buildRealEstateAgentSchema({ baseUrl }: RealEstateAgentInput) {
       name: 'Berkshire Hathaway HomeServices Nevada Properties',
       url: 'https://www.berkshirehathawayhs.com',
     },
-    knowsAbout: [
-      'Luxury high-rise condos',
-      'Turnberry Place',
-      'Las Vegas Strip real estate',
-      'The Stirling Club',
-    ],
+    knowsAbout: [...AGENT_KNOWS_ABOUT_SEMANTIC],
     priceRange: '$800,000 - $10,000,000+',
     image: `${baseUrl}/images/turnberry/asset-1.jpg`,
     logo: `${baseUrl}/images/turnberry/asset-19.jpg`,

@@ -74,8 +74,8 @@ export function NodeArticleTeaser({ node, ...props }) {
         </div>
       )}
       <h2 className="my-4 text-2xl font-semibold md:text-3xl">
-        <Link href={node.path?.alias} passHref>
-          <a className="hover:text-blue-500">{node.title}</a>
+        <Link href={node.path?.alias ?? "/"} className="hover:text-blue-500">
+          {node.title}
         </Link>
       </h2>
       <div data-cy="node--meta" className="text-gray-600">
@@ -91,21 +91,22 @@ export function NodeArticleTeaser({ node, ...props }) {
           {node.body.summary}
         </p>
       ) : null}
-      <Link href={node.path.alias} passHref>
-        <a className="flex items-center mt-4 text-sm hover:text-blue-500">
-          Read more
-          <svg
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            className="w-4 h-4 ml-2"
-          >
-            <path d="M5 12h14M12 5l7 7-7 7" />
-          </svg>
-        </a>
+      <Link
+        href={node.path?.alias ?? "/"}
+        className="flex items-center mt-4 text-sm hover:text-blue-500"
+      >
+        Read more
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          className="w-4 h-4 ml-2"
+        >
+          <path d="M5 12h14M12 5l7 7-7 7" />
+        </svg>
       </Link>
     </article>
   )

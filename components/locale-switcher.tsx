@@ -8,16 +8,17 @@ export function LocaleSwitcher() {
   return (
     <div className="flex">
       {(locales ?? []).map((locale) => (
-        <Link href={asPath} key={locale} locale={locale} passHref>
-          <a
-            data-cy={`local-switcher-${locale}`}
-            className={classNames(
-              "flex items-center justify-center p-2 uppercase",
-              locale === currentLocale ? "text-white font-semibold" : "text-gray-300 hover:text-white"
-            )}
-          >
-            {locale}
-          </a>
+        <Link
+          href={asPath}
+          key={locale}
+          locale={locale}
+          data-cy={`local-switcher-${locale}`}
+          className={classNames(
+            "flex items-center justify-center p-2 uppercase",
+            locale === currentLocale ? "text-white font-semibold" : "text-gray-300 hover:text-white"
+          )}
+        >
+          {locale}
         </Link>
       ))}
     </div>

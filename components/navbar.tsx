@@ -5,78 +5,22 @@ import classNames from "classnames"
 import Image from "next/image"
 import { Menu, X } from "lucide-react"
 
-import { LocaleSwitcher } from "components/locale-switcher"
 import Link from "next/link"
 import { GBP_PHONE_DISPLAY, GBP_PHONE_TEL } from "lib/google-business-profile"
+import {
+  SITE_INTERNAL_LINKS_FLAT,
+  SITE_NAV_DESKTOP_ROW1,
+  SITE_NAV_DESKTOP_ROW2,
+} from "lib/site-internal-links"
+import { serializeJsonLd } from "lib/schema/serializeJsonLd"
 
 interface NavbarProps {
   links: DrupalMenuLinkContent[]
 }
 
-// Streamlined navigation structure with dropdowns
-interface NavItem {
-  href: string
-  title: string
-  children?: NavItem[]
-}
-
-const navigationStructure: NavItem[] = [
-  { href: "/", title: "Home" },
-  {
-    title: "Properties",
-    href: "/available-condos",
-    children: [
-      { href: "/available-condos", title: "Available Condos" },
-      { href: "/towers", title: "Towers" },
-      { href: "/price-features", title: "Price & Features" },
-    ]
-  },
-  { href: "/floor-plans", title: "Floor Plans" },
-  {
-    title: "About",
-    href: "/amenities",
-    children: [
-      { href: "/amenities", title: "Amenities" },
-      { href: "/stirling-club", title: "Stirling Club" },
-      { href: "/neighborhood", title: "Neighborhood" },
-      { href: "/photos", title: "Photos" },
-    ]
-  },
-  {
-    title: "Contact",
-    href: "/request-details",
-    children: [
-      { href: "/request-details", title: "Request Details" },
-      { href: "/open-house", title: "Open House" },
-      { href: "/agent", title: "Agent" },
-    ]
-  },
-  { href: "/map", title: "Map" },
-  { href: "/share", title: "Share" },
-]
-
-// Flattened list for mobile menu
-const navigationLinks = [
-  { href: "/", title: "Home" },
-  { href: "/available-condos", title: "Available Condos" },
-  { href: "/floor-plans", title: "Floor Plans" },
-  { href: "/towers", title: "Towers" },
-  { href: "/price-features", title: "Price & Features" },
-  { href: "/amenities", title: "Amenities" },
-  { href: "/stirling-club", title: "Stirling Club" },
-  { href: "/neighborhood", title: "Neighborhood" },
-  { href: "/photos", title: "Photos" },
-  { href: "/request-details", title: "Request Details" },
-  { href: "/open-house", title: "Open House" },
-  { href: "/agent", title: "Agent" },
-  { href: "/map", title: "Map" },
-  { href: "/share", title: "Share" },
-]
-
 export function Navbar({ links, ...props }: NavbarProps) {
-  const { locale, asPath } = useRouter()
+  const { asPath } = useRouter()
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-  const [openDropdown, setOpenDropdown] = useState<string | null>(null)
   const mobileMenuRef = useRef<HTMLElement>(null)
   const firstFocusableRef = useRef<HTMLAnchorElement>(null)
   const lastFocusableRef = useRef<HTMLAnchorElement>(null)
@@ -151,14 +95,6 @@ export function Navbar({ links, ...props }: NavbarProps) {
     }
   }, [mobileMenuOpen])
 
-  const isActive = (href: string, children?: NavItem[]) => {
-    if (asPath === href) return true
-    if (children) {
-      return children.some(child => asPath === child.href)
-    }
-    return false
-  }
-
   return (
     <>
       {/* Skip to content link - first focusable element */}
@@ -169,7 +105,7 @@ export function Navbar({ links, ...props }: NavbarProps) {
       {/* SiteNavigationElement Schema */}
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(siteNavigationSchema) }}
+        dangerouslySetInnerHTML={{ __html: serializeJsonLd(siteNavigationSchema, false) }}
       />
 
       <header role="banner" className="card-top-nav active w-100 fixed top-0 z-50 bg-gray-900 text-white">
@@ -209,115 +145,40 @@ export function Navbar({ links, ...props }: NavbarProps) {
             <div className="nav-wrapper d-none d-lg-block">
               {/* Top Row Navigation */}
               <div className="d-flex flex-wrap align-items-center justify-content-end" style={{ marginBottom: '0.25rem' }}>
-                <Link 
-                  href="/" 
-                  className={classNames("nav-link px-2", asPath === "/" && "active")}
-                  aria-current={asPath === "/" ? "page" : undefined}
-                >
-                  Home
-                </Link>
-                <Link 
-                  href="/price-features" 
-                  className={classNames("nav-link px-2", asPath === "/price-features" && "active")}
-                  aria-current={asPath === "/price-features" ? "page" : undefined}
-                >
-                  Price & Features
-                </Link>
-                <Link 
-                  href="/towers" 
-                  className={classNames("nav-link px-2", asPath === "/towers" && "active")}
-                  aria-current={asPath === "/towers" ? "page" : undefined}
-                >
-                  Towers
-                </Link>
-                <Link 
-                  href="/amenities" 
-                  className={classNames("nav-link px-2", asPath === "/amenities" && "active")}
-                  aria-current={asPath === "/amenities" ? "page" : undefined}
-                >
-                  Amenities
-                </Link>
-                <Link 
-                  href="/photos" 
-                  className={classNames("nav-link px-2", asPath === "/photos" && "active")}
-                  aria-current={asPath === "/photos" ? "page" : undefined}
-                >
-                  Photos
-                </Link>
-                <Link 
-                  href="/map" 
-                  className={classNames("nav-link px-2", asPath === "/map" && "active")}
-                  aria-current={asPath === "/map" ? "page" : undefined}
-                >
-                  Map
-                </Link>
-                <Link 
-                  href="/open-house" 
-                  className={classNames("nav-link px-2", asPath === "/open-house" && "active")}
-                  aria-current={asPath === "/open-house" ? "page" : undefined}
-                >
-                  Open House
-                </Link>
-                <Link 
-                  href="/request-details" 
-                  className={classNames("nav-link px-2", asPath === "/request-details" && "active")}
-                  aria-current={asPath === "/request-details" ? "page" : undefined}
-                >
-                  Request Details
-                </Link>
-                <Link 
-                  href="/agent" 
-                  className={classNames("nav-link px-2", asPath === "/agent" && "active")}
-                  aria-current={asPath === "/agent" ? "page" : undefined}
-                >
-                  Agent
-                </Link>
+                {SITE_NAV_DESKTOP_ROW1.map((link) => (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    className={classNames("nav-link px-2", asPath === link.href && "active")}
+                    aria-current={asPath === link.href ? "page" : undefined}
+                    title={link.linkTitle ?? link.title}
+                  >
+                    {link.title}
+                  </Link>
+                ))}
               </div>
               {/* Bottom Row Navigation */}
               <div className="d-flex flex-wrap align-items-center justify-content-end">
-                <Link 
-                  href="/available-condos" 
-                  className={classNames("nav-link px-2", asPath === "/available-condos" && "active")}
-                  aria-current={asPath === "/available-condos" ? "page" : undefined}
-                >
-                  Available Condos
-                </Link>
-                <Link 
-                  href="/floor-plans" 
-                  className={classNames("nav-link px-2", asPath === "/floor-plans" && "active")}
-                  aria-current={asPath === "/floor-plans" ? "page" : undefined}
-                >
-                  Floor Plans
-                </Link>
-                <Link 
-                  href="/share" 
-                  className={classNames("nav-link px-2", asPath === "/share" && "active")}
-                  aria-current={asPath === "/share" ? "page" : undefined}
-                >
-                  Share
-                </Link>
-                <Link 
-                  href="/stirling-club" 
-                  className={classNames("nav-link px-2", asPath === "/stirling-club" && "active")}
-                  aria-current={asPath === "/stirling-club" ? "page" : undefined}
-                >
-                  Stirling Club
-                </Link>
-                <Link 
-                  href="/neighborhood" 
-                  className={classNames("nav-link px-2", asPath === "/neighborhood" && "active")}
-                  aria-current={asPath === "/neighborhood" ? "page" : undefined}
-                >
-                  Neighborhood
-                </Link>
-                <Link
+                {SITE_NAV_DESKTOP_ROW2.map((link) => (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    className={classNames("nav-link px-2", asPath === link.href && "active")}
+                    aria-current={asPath === link.href ? "page" : undefined}
+                    title={link.linkTitle ?? link.title}
+                  >
+                    {link.title}
+                  </Link>
+                ))}
+                <a
                   href="https://translate.google.com/translate?hl=es&sl=auto&tl=es&u=https://www.turnberryplaceforsale.com"
                   className="nav-link px-2"
                   target="_blank"
                   rel="noopener noreferrer"
+                  title="View this site in Spanish (Google Translate)"
                 >
                   Español
-                </Link>
+                </a>
               </div>
             </div>
             <button
@@ -358,14 +219,14 @@ export function Navbar({ links, ...props }: NavbarProps) {
             onClick={(e) => e.stopPropagation()}
           >
             <ul>
-              {navigationLinks.map((link, index) => (
+              {SITE_INTERNAL_LINKS_FLAT.map((link, index) => (
                 <li key={link.href}>
                   <Link
                     href={link.href}
                     className="nav-mobile-link"
-                    title={link.title}
+                    title={link.linkTitle ?? link.title}
                     aria-current={asPath === link.href ? "page" : undefined}
-                    ref={index === 0 ? firstFocusableRef : index === navigationLinks.length - 1 ? lastFocusableRef : undefined}
+                    ref={index === 0 ? firstFocusableRef : index === SITE_INTERNAL_LINKS_FLAT.length - 1 ? lastFocusableRef : undefined}
                     onClick={() => setMobileMenuOpen(false)}
                     onKeyDown={(e) => {
                       if (e.key === 'Enter' || e.key === ' ') {
@@ -378,11 +239,12 @@ export function Navbar({ links, ...props }: NavbarProps) {
                 </li>
               ))}
               <li>
-                <Link
+                <a
                   href="https://translate.google.com/translate?hl=es&sl=auto&tl=es&u=https://www.turnberryplaceforsale.com"
                   className="nav-mobile-link"
                   target="_blank"
                   rel="noopener noreferrer"
+                  title="View this site in Spanish (Google Translate)"
                   onClick={() => setMobileMenuOpen(false)}
                   onKeyDown={(e) => {
                     if (e.key === 'Enter' || e.key === ' ') {
@@ -391,7 +253,7 @@ export function Navbar({ links, ...props }: NavbarProps) {
                   }}
                 >
                   Español
-                </Link>
+                </a>
               </li>
             </ul>
           </nav>

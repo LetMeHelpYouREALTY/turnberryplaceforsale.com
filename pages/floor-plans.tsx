@@ -12,6 +12,7 @@ import { GBP_PHONE_DISPLAY, GBP_PHONE_TEL } from 'lib/google-business-profile'
 import FloorPlanCard from 'components/FloorPlanCard'
 import FloorPlanFilters, { FilterState } from 'components/FloorPlanFilters'
 import FloorPlanComparison from 'components/FloorPlanComparison'
+import { serializeJsonLd } from 'lib/schema/serializeJsonLd'
 
 interface FloorPlansPageProps extends LayoutProps {}
 
@@ -134,7 +135,7 @@ export default function FloorPlansPage({ menus }: FloorPlansPageProps) {
       {/* SEO Schema */}
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(schema, null, 2) }}
+        dangerouslySetInnerHTML={{ __html: serializeJsonLd(schema, true) }}
       />
 
       {/* Hero Section */}

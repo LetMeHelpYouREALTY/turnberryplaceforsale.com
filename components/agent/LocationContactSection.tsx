@@ -1,15 +1,18 @@
 import Link from "next/link"
 import { Calendar, Mail, MapPin, Phone } from "lucide-react"
 import { tourUrl } from "lib/calendly"
-import { GBP_PHONE_DISPLAY, GBP_PHONE_TEL } from "lib/google-business-profile"
+import {
+  GBP_ADDRESS_LINE,
+  GBP_PHONE_DISPLAY,
+  GBP_PHONE_TEL,
+  getDirectionsUrl,
+} from "lib/google-business-profile"
 
 const GOLD = "#D4AF37"
 
 export function LocationContactSection() {
-  const address = "2827 Paradise Rd, Suite 2, Las Vegas, NV 89109"
-  const mapsQuery = encodeURIComponent(address)
-  const mapsEmbedSrc = `https://www.google.com/maps?q=${mapsQuery}&output=embed`
-  const directionsHref = `https://www.google.com/maps/dir/?api=1&destination=${mapsQuery}`
+  const address = GBP_ADDRESS_LINE
+  const directionsHref = getDirectionsUrl()
   const calendlyUrl = tourUrl({ utmMedium: 'cta', utmCampaign: 'agent-location' })
 
   return (
@@ -25,24 +28,20 @@ export function LocationContactSection() {
         </div>
 
         <div className="mt-10 grid lg:grid-cols-2 gap-8 items-stretch">
-          {/* Map */}
+          {/* NAP + deep-link to site-wide GBP map/hours block (Layout) — avoids a second map embed */}
           <div className="rounded-2xl overflow-hidden border border-gray-200 bg-white shadow-sm">
-            <div className="aspect-[16/10]">
-              <iframe
-                title="Turnberry Place map"
-                src={mapsEmbedSrc}
-                className="w-full h-full"
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-              />
-            </div>
-            <div className="p-5">
+            <div className="p-6 md:p-8">
               <div className="flex items-start gap-3">
-                <MapPin className="h-5 w-5" style={{ color: GOLD }} aria-hidden="true" />
-                <div>
-                  <div className="font-semibold text-gray-900">Turnberry Place</div>
-                  <div className="text-gray-600">{address}</div>
-                  <div className="mt-3">
+                <MapPin className="h-6 w-6 flex-shrink-0 mt-0.5" style={{ color: GOLD }} aria-hidden="true" />
+                <div className="space-y-3">
+                  <div>
+                    <div className="font-semibold text-gray-900 text-lg">Turnberry Place office</div>
+                    <address className="not-italic text-gray-600 mt-1">{address}</address>
+                  </div>
+                  <p className="text-sm text-gray-600">
+                    Map embed, office hours, call, directions, and Google reviews appear in the site-wide office section at the bottom of every page.
+                  </p>
+                  <div className="flex flex-wrap gap-3 pt-1">
                     <Link
                       href={directionsHref}
                       target="_blank"
@@ -50,7 +49,14 @@ export function LocationContactSection() {
                       className="inline-flex items-center justify-center rounded-full border px-5 py-2 font-semibold text-gray-900 hover:bg-gray-50"
                       style={{ borderColor: "rgba(212, 175, 55, 0.45)" }}
                     >
-                      Get Directions
+                      Open in Google Maps
+                    </Link>
+                    <Link
+                      href="#gbp-map-card-heading"
+                      className="inline-flex items-center justify-center rounded-full px-5 py-2 font-semibold text-gray-900 shadow-sm"
+                      style={{ backgroundColor: GOLD }}
+                    >
+                      Map & hours on this page
                     </Link>
                   </div>
                 </div>

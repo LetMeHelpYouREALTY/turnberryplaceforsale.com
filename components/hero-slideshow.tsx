@@ -3,38 +3,15 @@ import Image from "next/image"
 import Link from "next/link"
 import { ArrowRight, Phone } from "lucide-react"
 import { BUILD_DATE_MONTH_YEAR } from "lib/build-date"
-import { GBP_PHONE_TEL } from "lib/google-business-profile"
+import { heroSlideAlt } from "lib/image-alt"
 
 interface HeroSlideshowProps {
   photos: string[]
+  /** Optional per-slide alt text (same length as `photos`); defaults to indexed Turnberry descriptions. */
+  photoAlts?: readonly string[]
 }
 
-const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://www.turnberryplaceforsale.com'
-
-// LocalBusiness + RealEstateAgent schema for hero section
-const heroSchema = {
-  '@context': 'https://schema.org',
-  '@type': ['RealEstateAgent', 'LocalBusiness'],
-  name: 'Dr. Jan Duffy - Turnberry Place Specialist',
-  image: `${baseUrl}/images/turnberry/asset-1.jpg`,
-  telephone: GBP_PHONE_TEL,
-  address: {
-    '@type': 'PostalAddress',
-    streetAddress: '2827 Paradise Rd, Suite 2',
-    addressLocality: 'Las Vegas',
-    addressRegion: 'NV',
-    postalCode: '89109',
-  },
-  geo: {
-    '@type': 'GeoCoordinates',
-    latitude: 36.1215,
-    longitude: -115.1524,
-  },
-  areaServed: 'Turnberry Place Las Vegas',
-  priceRange: '$800,000 - $10,000,000',
-}
-
-export function HeroSlideshow({ photos }: HeroSlideshowProps) {
+export function HeroSlideshow({ photos, photoAlts }: HeroSlideshowProps) {
   const [currentSlide, setCurrentSlide] = useState(0)
   const [isPaused, setIsPaused] = useState(false)
   const [loadedImages, setLoadedImages] = useState<Set<number>>(new Set<number>())
@@ -84,11 +61,7 @@ export function HeroSlideshow({ photos }: HeroSlideshowProps) {
 
   return (
     <header className="card-top-header relative h-screen min-h-[500px] w-full">
-      {/* LocalBusiness + RealEstateAgent Schema */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(heroSchema) }}
-      />
+      {/* RealEstateAgent JSON-LD: single canonical graph from `JsonLdSchema` (`#realestateagent`). */}
 
       {/* Slideshow */}
       <div className="slick-slideshow absolute inset-0 z-0" aria-label="Hero image slideshow">
@@ -96,7 +69,9 @@ export function HeroSlideshow({ photos }: HeroSlideshowProps) {
           const isLoaded = loadedImages.has(index)
           const isCurrent = index === currentSlide
           const isFirstSlide = index === 0
-          
+          const slideAlt =
+            photoAlts?.[index]?.trim() || heroSlideAlt(index, photos.length)
+
           return (
             <div
               key={index}
@@ -114,13 +89,13 @@ export function HeroSlideshow({ photos }: HeroSlideshowProps) {
               }}
               aria-hidden={!isCurrent}
               role="img"
-              aria-label={isCurrent ? `Hero slide ${index + 1} of ${photos.length}: Turnberry Place luxury high-rise condos with Las Vegas Strip views` : undefined}
+              aria-label={isCurrent ? `Hero slide ${index + 1} of ${photos.length}: ${slideAlt}` : undefined}
             >
               {/* Use Next.js Image for LCP optimization - first slide only */}
               {isCurrent && isFirstSlide && (
                 <Image
                   src={photo}
-                  alt="Turnberry Place luxury high-rise condos with Las Vegas Strip views"
+                  alt={slideAlt}
                   fill
                   priority={true}
                   sizes="100vw"
@@ -224,7 +199,10 @@ export function HeroSlideshow({ photos }: HeroSlideshowProps) {
 
       {/* Thumbnails Bar */}
       <div className="thumbnails-bar d-flex align-items-center justify-content-center">
-        {photos.map((photo, index) => (
+        {photos.map((photo, index) => {
+          const slideAlt =
+            photoAlts?.[index]?.trim() || heroSlideAlt(index, photos.length)
+          return (
           <button
             key={index}
             type="button"
@@ -239,13 +217,13 @@ export function HeroSlideshow({ photos }: HeroSlideshowProps) {
                 goToSlide(index)
               }
             }}
-            aria-label={`View slide ${index + 1} of ${photos.length}`}
+            aria-label={`Show hero slide ${index + 1} of ${photos.length} — ${slideAlt}`}
             aria-pressed={index === currentSlide}
             style={{ cursor: 'pointer', position: 'relative', width: '100px', height: '60px', overflow: 'hidden', border: 'none', background: 'transparent', padding: 0 }}
           >
             <Image
               src={photo}
-              alt={`Turnberry Place luxury condos Las Vegas - Slide ${index + 1}`}
+              alt=""
               fill
               sizes="100px"
               style={{ objectFit: 'cover' }}
@@ -255,7 +233,8 @@ export function HeroSlideshow({ photos }: HeroSlideshowProps) {
               blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
             />
           </button>
-        ))}
+          )
+        })}
         <Link
           href="/photos"
           className="ml-2"

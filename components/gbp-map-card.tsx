@@ -1,11 +1,12 @@
 /**
- * GBP Map Card — reusable component satisfying the site-wide "every page
- * must show map embed + hours + Call/Directions/View Reviews buttons"
- * rule (see user rule: localized NAP + GBP support).
+ * GBP Map Card — map embed + hours + Call / Directions / View Reviews (NAP from GBP).
  *
- * Drop this into any page with `<GBPMapCard />`. No props required; all
- * data flows from `lib/google-business-profile.ts` (single source of
- * truth for NAP / hours / URLs across all 19+ sibling sites).
+ * **Default:** `<Layout />` renders `<GBPMapCard variant="compact" />` on every route
+ * so all pages meet the localized NAP + GBP support rule. Use `variant="full"` only
+ * when a page needs a two-column hero (rare); avoid duplicating the card on the same URL.
+ *
+ * Data flows from `lib/google-business-profile.ts` (single source of truth for NAP,
+ * hours, and map URLs).
  *
  * Accessibility:
  *   - Iframe has a `title` attribute (WCAG 4.1.2).
@@ -28,6 +29,7 @@ import Link from 'next/link'
 import { Phone, MapPin, Navigation, Star, PenSquare, Clock } from 'lucide-react'
 import {
   GBP_NAME,
+  GBP_ADDRESS,
   GBP_ADDRESS_LINE,
   GBP_WAYFINDING,
   GBP_PHONE_DISPLAY,
@@ -129,7 +131,7 @@ export function GBPMapCard({
                 <address className="not-italic text-gray-800" itemProp="address" itemScope itemType="https://schema.org/PostalAddress">
                   <div className="font-semibold text-gray-900" itemProp="name">{GBP_NAME}</div>
                   <div className="text-gray-800">
-                    <span itemProp="streetAddress">2827 Paradise Rd, Suite 2</span>,{' '}
+                    <span itemProp="streetAddress">{GBP_ADDRESS.streetAddress}</span>,{' '}
                     <span itemProp="addressLocality">Las Vegas</span>,{' '}
                     <span itemProp="addressRegion">NV</span>{' '}
                     <span itemProp="postalCode">89109</span>

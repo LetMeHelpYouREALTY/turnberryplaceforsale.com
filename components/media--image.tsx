@@ -3,6 +3,7 @@
 import Image, { ImageProps } from "next/image"
 
 import { absoluteURL } from "lib/utils/absolute-url"
+import { TURNBERRY_IMAGE_ALT_FALLBACK } from "lib/image-alt"
 import { MediaProps } from "components/media"
 
 interface MediaImageProps extends MediaProps, Partial<ImageProps> {}
@@ -28,7 +29,11 @@ export function MediaImage({
       objectFit={objectFit}
       width={width || image.resourceIdObjMeta.width}
       height={height || image.resourceIdObjMeta.height}
-      alt={image.resourceIdObjMeta.alt || "Image"}
+      alt={
+        (image.resourceIdObjMeta.alt &&
+          String(image.resourceIdObjMeta.alt).trim()) ||
+        TURNBERRY_IMAGE_ALT_FALLBACK
+      }
       title={image.resourceIdObjMeta.title}
       {...props}
     />

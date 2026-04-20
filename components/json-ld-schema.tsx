@@ -1,6 +1,7 @@
 /**
  * JSON-LD Schema Markup Component
- * Composes builders from lib/schema — RealEstateAgent, ApartmentComplex, FAQPage, BreadcrumbList, Organization
+ * Composes builders from lib/schema — RealEstateAgent, ApartmentComplex, FAQPage, BreadcrumbList
+ * (Organization / WebSite / GBP LocalBusiness are emitted from `Layout`.)
  * Dr. Jan Duffy - Turnberry Place Las Vegas
  */
 
@@ -9,9 +10,9 @@ import {
   buildApartmentComplexSchema,
   buildBreadcrumbListSchema,
   buildFaqPageSchema,
-  buildOrganizationSchema,
   buildRealEstateAgentSchema,
 } from 'lib/schema'
+import { serializeJsonLd } from 'lib/schema/serializeJsonLd'
 
 export interface JsonLdSchemaProps {
   type?: 'home' | 'agent' | 'property' | 'towers'
@@ -55,7 +56,7 @@ export function JsonLdSchema({
         items: [{ name: 'Home', item: baseUrl }],
       }),
     )
-    schemas.push(buildOrganizationSchema({ baseUrl }))
+    /* Organization + WebSite: emitted once from `Layout` with stable @id. */
   }
 
   return (
@@ -64,7 +65,7 @@ export function JsonLdSchema({
         <script
           key={index}
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(schema, null, 2) }}
+          dangerouslySetInnerHTML={{ __html: serializeJsonLd(schema, true) }}
         />
       ))}
     </>

@@ -1,0 +1,61 @@
+---
+description: SEO & a11y patterns for anchors, image alt, JSON-LD entities, semantic topics, and internal links — Turnberry Place (review frequently; search moves fast)
+alwaysApply: true
+---
+
+# Turnberry — Anchors, Alt, Entities, Semantic Topics & Internal Links
+
+**Baseline review:** April 2026 · **Last repo audit:** 2026-04-19 (NAP/Link patterns + integrity rules). **Re-review this rule** at least quarterly, or whenever Next.js, Google Search, or schema.org guidance changes materially. Prefer official docs over blog “hacks.”
+
+---
+
+## 1. Anchor tags (`<a>`) & Next.js `Link`
+
+- **Internal routes (same site):** use `next/link` `Link` with `href` — **do not** nest `<a>` inside `Link` (Next.js 13+ renders the anchor; nested anchors are invalid HTML and break a11y).
+- **`tel:` / `mailto:` / external `https:`:** use a plain `<a>`. For `target="_blank"`, set `rel="noopener noreferrer"`.
+- **Copy:** prefer descriptive visible text (“Browse Turnberry Place floor plans”) over generic (“Click here”). Optional `title` / `linkTitle` for extra context on short labels.
+- **Project hooks:** global nav/footer labels and routes live in `lib/site-internal-links.ts` — keep chrome links aligned there.
+
+---
+
+## 2. Image `alt` text
+
+- **Informative images:** specific, human-readable `alt` (subject + location/context when relevant). Match NAP/GBP tone; no keyword stuffing.
+- **Decorative:** `alt=""` only when the image is redundant with adjacent visible text or an interactive name (e.g. thumbnail inside a named button).
+- **CMS / Drupal gaps:** never emit bare empty alts without a fallback — use `lib/image-alt.ts` (`TURNBERRY_IMAGE_ALT_FALLBACK`, `TURNBERRY_RICHTEXT_IMAGE_ALT_FALLBACK`, helpers like `heroSlideAlt`, `listingCardImageAlt`, etc.) and `components/media--image.tsx` / `components/formatted-text.tsx` patterns.
+- **External feeds:** if a feed includes images, preserve URLs and alts per project user rules; extend CSP/`next/image` domains when needed.
+
+---
+
+## 3. Entity usage (schema.org / JSON-LD)
+
+- **Stable `@id` URIs:** use `lib/schema/entityIds.ts` (organization, WebSite, LocalBusiness, RealEstateAgent) so graphs reference the same entities across pages.
+- **Safe embedding:** serialize JSON-LD with `lib/schema/serializeJsonLd.ts` (handles U+2028/U+2029 in `<script type="application/ld+json">`).
+- **Layout-owned graph:** `Organization`, `WebSite`, and GBP `LocalBusiness` are emitted from `components/layout.tsx` — avoid duplicating the same `@type`/`@id` blocks in footers or heroes unless intentionally refactored.
+- **Credentials & ratings:** never fabricate `AggregateRating` — use `lib/schema/aggregateRating.ts` (env-gated). Align NAP with `lib/google-business-profile.ts` and GBP.
+
+---
+
+## 4. “LSI” / semantic topical coverage
+
+- **Terminology:** legacy “LSI keywords” are not a special Google list — modern ranking uses **topics, intent, and helpful content** (E-E-A-T). Do not stuff meta body copy.
+- **Project source:** topical vocabulary and default meta keyword/description strings live in `lib/seo/semantic-topics.ts` — extend there for consistency across `Meta`, `knowsAbout`, and related copy.
+- **Meta keywords:** low/no ranking value in Google; optional for other tools — keep readable, not spammy.
+
+---
+
+## 5. Internal linking (A tags / `Link`)
+
+- **Prefetch:** Next `Link` prefetches in viewport by default — appropriate for primary funnels; use `prefetch={false}` only when profiling shows unnecessary prefetch (e.g. huge lists).
+- **Current page:** use `aria-current="page"` on nav links when `href` matches the active route (see `components/navbar.tsx`, pagination patterns).
+- **404 / discovery:** cluster important routes with descriptive anchors (see `pages/404.tsx`); avoid orphan pages in the sitemap without at least one internal path to them.
+- **Fragment / hash links:** same-page anchors (`href="#section"`) are fine as plain `<a>`; cross-route hashes use `Link href="/path#id"`.
+
+---
+
+## 6. Maintenance checklist (for humans & agents)
+
+- [ ] Re-read Next.js `Link` docs when upgrading major versions.
+- [ ] Re-check Google Search Central (structured data, title/description) after major algorithm/FAQ updates.
+- [ ] After GBP/NAP changes, sync visible copy, schema, and `lib/google-business-profile.ts`.
+- [ ] Keep this file’s **Baseline review** date updated when you materially change strategy.

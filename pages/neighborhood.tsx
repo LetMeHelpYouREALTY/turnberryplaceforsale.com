@@ -5,11 +5,11 @@ import { Meta } from "components/meta"
 import { JsonLdSchema } from "components/json-ld-schema"
 import { BreadcrumbSchema } from "components/breadcrumb-schema"
 import { NeighborhoodSection } from "components/neighborhood-section"
-import { GBPMapCard } from "components/gbp-map-card"
 import { GBP_PHONE_DISPLAY } from "lib/google-business-profile"
 // QuickSearchWidget, FeaturedListingCard, VIPNewsletterSignup available on homepage
 import Image from "next/image"
 import Link from "next/link"
+import { neighborhoodGalleryAlt } from "lib/image-alt"
 
 interface NeighborhoodPageProps extends LayoutProps {}
 
@@ -69,7 +69,7 @@ export default function NeighborhoodPage({ menus }: NeighborhoodPageProps) {
                           src={img}
                           width={500}
                           height={500}
-                          alt="Turnberry Place Neighborhood and Area Profile"
+                          alt={neighborhoodGalleryAlt(index)}
                           className="img-area-thumb img-fluid"
                         />
                       </a>
@@ -197,9 +197,39 @@ export default function NeighborhoodPage({ menus }: NeighborhoodPageProps) {
         </div>
       </div>
 
-      {/* Featured Listings and VIP Newsletter - Available on homepage */}
+      <section
+        className="card-content py-5 border-top"
+        aria-label="Related Turnberry Place pages"
+      >
+        <div className="container">
+          <div className="row justify-content-center">
+            <div className="col-12 col-lg-10 text-center">
+              <h2 className="h5 mb-3">Next steps</h2>
+              <p className="text-muted mb-3">
+                See what&apos;s for sale and how the community sits on the map.
+              </p>
+              <div className="d-flex flex-wrap justify-content-center gap-3">
+                <Link
+                  href="/map"
+                  className="btn btn-outline-primary"
+                  title="Interactive map — Turnberry Place and nearby venues"
+                >
+                  Open the Turnberry Place area map
+                </Link>
+                <Link
+                  href="/available-condos"
+                  className="btn btn-primary"
+                  title="Luxury high-rise condos for sale at Turnberry Place"
+                >
+                  View Turnberry Place condos for sale
+                </Link>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
-      <GBPMapCard heading="Our Office in the Neighborhood" />
+      {/* Featured Listings and VIP Newsletter - Available on homepage */}
     </Layout>
   )
 }

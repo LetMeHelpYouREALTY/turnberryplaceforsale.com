@@ -13,6 +13,7 @@ This file exists so Cursor and other agents that prefer **`AGENTS.md`** load the
 - **Do not edit** `components/idx/*` without explicit user approval (MLS compliance).
 - **Secrets**: never commit live keys; use Vercel env and `.env.example` patterns.
 - **Standards baseline**: apply official best practices as of **April 2026**; verify material framework/SEO/platform changes against current docs before implementing.
+- **Cursor — anchors, alt, schema entities, semantic copy, internal links:** follow `.cursor/rules/turnberry-seo-links-schema-accessibility.mdc` (re-review that rule quarterly; search and framework guidance change often).
 
 ## Optional user rules
 

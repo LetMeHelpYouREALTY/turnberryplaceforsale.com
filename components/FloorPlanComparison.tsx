@@ -42,7 +42,7 @@ export default function FloorPlanComparison({ plans, onRemove, onClear }: Compar
               </button>
               <Image
                 src={plan.image}
-                alt={plan.name}
+                alt={`${plan.name} — Turnberry Place Las Vegas floor plan`}
                 width={60}
                 height={45}
                 className="object-contain bg-white rounded"

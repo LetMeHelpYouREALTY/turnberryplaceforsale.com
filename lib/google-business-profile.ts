@@ -33,6 +33,7 @@
  */
 
 import { areReviewsDisabled, getReviewsReadUrl, getReviewsWriteUrl } from 'lib/reviews'
+import { TURNBERRY_GEO_LAT, TURNBERRY_GEO_LNG, TURNBERRY_MAPS_Q_LATLNG } from 'lib/schema/geo'
 
 // ---------------------------------------------------------------------------
 // 1. Canonical NAP (must match GBP Business Profile exactly)
@@ -49,16 +50,17 @@ export const GBP_BROKERAGE = 'Berkshire Hathaway HomeServices Nevada Properties'
 /** Nevada Real Estate Division salesperson license. */
 export const GBP_LICENSE = 'S.0197614.LLC'
 
+/** Building line (suite / wayfinding is `GBP_WAYFINDING`, not duplicated here). */
 export const GBP_ADDRESS = {
-  streetAddress: '2827 Paradise Rd, Suite 2',
+  streetAddress: '2827 Paradise Rd',
   addressLocality: 'Las Vegas',
   addressRegion: 'NV',
   postalCode: '89109',
   addressCountry: 'US',
 } as const
 
-/** Human-readable one-line address (visible NAP). */
-export const GBP_ADDRESS_LINE = '2827 Paradise Rd, Suite 2, Las Vegas, NV 89109'
+/** Human-readable one-line address (visible NAP + Maps search fallback text). */
+export const GBP_ADDRESS_LINE = '2827 Paradise Rd, Las Vegas, NV 89109'
 
 /**
  * Wayfinding note for visitors — NOT part of the formal `streetAddress`
@@ -71,14 +73,10 @@ export const GBP_PHONE_TEL = '+17025001971'
 
 export const GBP_EMAIL = 'DrDuffy@TurnberryPlaceForSale.com'
 
-/**
- * Approximate parcel-entrance coordinates for 2827 Paradise Rd.
- * Kept in sync with `lib/schema/geo.ts` TURNBERRY_GEO; update both if the
- * GBP pin moves.
- */
+/** Derived from `lib/schema/geo.ts` TURNBERRY_GEO (single source of truth). */
 export const GBP_GEO = {
-  latitude: 36.1408,
-  longitude: -115.1564,
+  latitude: TURNBERRY_GEO_LAT,
+  longitude: TURNBERRY_GEO_LNG,
 } as const
 
 // ---------------------------------------------------------------------------
@@ -204,8 +202,7 @@ export function getMapEmbedUrl(): string {
     )}&output=embed`
   }
 
-  const query = [GBP_NAME, GBP_ADDRESS_LINE].join(' ')
-  return `https://www.google.com/maps?q=${encodeURIComponent(query)}&output=embed`
+  return `https://www.google.com/maps?q=${encodeURIComponent(TURNBERRY_MAPS_Q_LATLNG)}&output=embed`
 }
 
 /** Directions deep-link — opens Google Maps with the destination prefilled. */
@@ -220,7 +217,7 @@ export function getDirectionsUrl(): string {
     )
   }
   return `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(
-    GBP_ADDRESS_LINE,
+    TURNBERRY_MAPS_Q_LATLNG,
   )}`
 }
 
@@ -232,9 +229,8 @@ export function getMapsListingUrl(): string {
       placeId,
     )}`
   }
-  const query = [GBP_NAME, GBP_ADDRESS_LINE].join(' ')
   return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
-    query,
+    TURNBERRY_MAPS_Q_LATLNG,
   )}`
 }
 

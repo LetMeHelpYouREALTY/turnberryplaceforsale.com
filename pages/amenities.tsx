@@ -25,9 +25,9 @@ import { getMenus } from "lib/get-menus"
 import { Meta } from "components/meta"
 import { JsonLdSchema } from "components/json-ld-schema"
 import { BreadcrumbSchema } from "components/breadcrumb-schema"
-import { GBPMapCard } from "components/gbp-map-card"
 import { tourUrl } from "lib/calendly"
 import { GBP_PHONE_DISPLAY as officePhoneDisplay, GBP_PHONE_TEL as officePhoneTel } from "lib/google-business-profile"
+import { serializeJsonLd } from "lib/schema/serializeJsonLd"
 const propertyAddress = "2827 Paradise Rd, Las Vegas, NV 89109"
 const calendlyUrl = tourUrl({ utmMedium: 'cta', utmCampaign: 'amenities' })
 
@@ -130,7 +130,7 @@ export default function AmenitiesPage({ menus }: AmenitiesPageProps) {
         <script
           type="application/ld+json"
           // eslint-disable-next-line react/no-danger
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(amenitySchema) }}
+          dangerouslySetInnerHTML={{ __html: serializeJsonLd(amenitySchema, false) }}
         />
       </Head>
 
@@ -505,8 +505,12 @@ export default function AmenitiesPage({ menus }: AmenitiesPageProps) {
                       >
                         Schedule on Calendly
                       </a>
-                      <Link href="/request-details" className="btn btn-outline-light btn-lg w-100">
-                        Request Information
+                      <Link
+                        href="/request-details"
+                        className="btn btn-outline-light btn-lg w-100"
+                        title="Request Turnberry Place pricing, amenities details, and tours"
+                      >
+                        Request details & pricing
                       </Link>
                     </div>
                     <div className="amenities-cta-note">
@@ -552,7 +556,45 @@ export default function AmenitiesPage({ menus }: AmenitiesPageProps) {
         </section>
       </div>
 
-      <GBPMapCard heading="Visit Us to Tour the Amenities in Person" />
+      <section
+        className="container mx-auto px-4 py-8 border-t border-gray-200"
+        aria-label="Related Turnberry Place pages"
+      >
+        <h2 className="sr-only">Related pages</h2>
+        <p className="text-center text-gray-600 mb-4">
+          Planning a move? Explore these pages next.
+        </p>
+        <ul className="list-unstyled d-flex flex-wrap justify-content-center gap-3 gap-md-4 text-center mb-0">
+          <li>
+            <Link
+              href="/stirling-club"
+              className="text-decoration-underline"
+              title="The Stirling Club — private amenities for residents"
+            >
+              The Stirling Club — resident amenities
+            </Link>
+          </li>
+          <li>
+            <Link
+              href="/neighborhood"
+              className="text-decoration-underline"
+              title="Las Vegas Strip and Paradise corridor neighborhood guide"
+            >
+              Strip & Paradise corridor neighborhood
+            </Link>
+          </li>
+          <li>
+            <Link
+              href="/floor-plans"
+              className="text-decoration-underline"
+              title="Turnberry Place floor plans and layouts"
+            >
+              Floor plans & residence layouts
+            </Link>
+          </li>
+        </ul>
+      </section>
+
     </Layout>
   )
 }

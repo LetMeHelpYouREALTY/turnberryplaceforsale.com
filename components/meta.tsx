@@ -3,6 +3,11 @@ import Head from "next/head"
 import { useRouter } from "next/router"
 import { DrupalMetatag } from "types/drupal"
 import { GBP_PHONE_DISPLAY } from "lib/google-business-profile"
+import {
+  PRIMARY_KEYWORD_2,
+  buildDefaultMetaDescription,
+  buildDefaultMetaKeywords,
+} from "lib/seo/semantic-topics"
 
 interface MetaProps {
   title?: string
@@ -15,9 +20,6 @@ interface MetaProps {
   path?: string
   tags?: DrupalMetatag[]
 }
-
-const PRIMARY_KEYWORD_1 = "Turnberry Towers Las Vegas High Rise Condos"
-const PRIMARY_KEYWORD_2 = "Las Vegas Strip High Rise Condos for Sale"
 
 function withSuffix(base: string, suffix: string) {
   if (!base) return suffix
@@ -77,25 +79,12 @@ export function Meta({
   const effectiveTitle =
     title && appendPrimaryKeyword2ToTitle ? withSuffix(title, PRIMARY_KEYWORD_2) : title || defaultTitle
 
-  // Keep this succinct and natural; avoid stuffing while still including the exact phrases.
-  const defaultDescription =
-    "Turnberry Place luxury high-rise condos near the Las Vegas Strip. " +
-    `${PRIMARY_KEYWORD_1} & ${PRIMARY_KEYWORD_2}. ` +
-    `Call ${GBP_PHONE_DISPLAY}.`
+  // Topical default: primary phrases + semantic clusters (see `lib/seo/semantic-topics.ts`).
+  const defaultDescription = buildDefaultMetaDescription(GBP_PHONE_DISPLAY)
   const effectiveDescription = description || defaultDescription
 
-  // Note: meta keywords are not used by Google, but we keep them for completeness and other crawlers/tools.
-  const defaultKeywords = [
-    PRIMARY_KEYWORD_1,
-    PRIMARY_KEYWORD_2,
-    "Turnberry Place for sale",
-    "Turnberry Place condos",
-    "Las Vegas high-rise condos",
-    "luxury condos Las Vegas",
-    "Las Vegas Strip condos",
-    "Stirling Club",
-    "Dr. Jan Duffy REALTOR",
-  ].join(", ")
+  // Note: meta keywords are not used by Google for ranking, but support topical signals for other tools.
+  const defaultKeywords = buildDefaultMetaKeywords()
   const effectiveKeywords = keywords || defaultKeywords
 
   const defaultOgImage =

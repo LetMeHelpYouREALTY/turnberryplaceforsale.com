@@ -21,6 +21,7 @@ import { BreadcrumbSchema } from "components/breadcrumb-schema"
 import { tourUrl } from "lib/calendly"
 import { GBP_PHONE_DISPLAY, GBP_PHONE_TEL } from "lib/google-business-profile"
 import { BUILD_DATE_ISO } from "lib/build-date"
+import { serializeJsonLd } from "lib/schema/serializeJsonLd"
 
 interface PriceFeaturesPageProps extends LayoutProps {}
 
@@ -117,7 +118,7 @@ export default function PriceFeaturesPage({ menus }: PriceFeaturesPageProps) {
         <script
           type="application/ld+json"
           // eslint-disable-next-line react/no-danger
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(realEstateListingSchema) }}
+          dangerouslySetInnerHTML={{ __html: serializeJsonLd(realEstateListingSchema, false) }}
         />
       </Head>
       <JsonLdSchema type="property" propertyPrice="$800,000 - $10,000,000+" />

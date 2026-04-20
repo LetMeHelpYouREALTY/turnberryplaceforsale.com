@@ -86,11 +86,37 @@ export default function TowersPage({ menus }: TowersPageProps) {
             >
               Compare Towers
             </button>
-            <Link
+            <a
               href={`tel:${GBP_PHONE_TEL}`}
               className="px-8 py-4 rounded-md font-medium text-white border-2 border-white transition-all duration-300 hover:bg-white hover:text-gray-900"
+              title={`Call ${GBP_PHONE_DISPLAY} — Turnberry Place specialist`}
             >
               Call {GBP_PHONE_DISPLAY}
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <section
+        className="bg-gray-50 border-y border-gray-200 py-6"
+        aria-label="Related Turnberry Place pages"
+      >
+        <div className="container mx-auto px-4">
+          <p className="text-center text-sm text-gray-600 mb-3">Explore layouts and location</p>
+          <div className="flex flex-wrap justify-center gap-4 md:gap-8 text-center text-sm md:text-base">
+            <Link
+              href="/floor-plans"
+              className="text-amber-800 font-medium hover:underline"
+              title="Turnberry Place floor plans and residence sizes"
+            >
+              Turnberry Place floor plans & residence layouts
+            </Link>
+            <Link
+              href="/map"
+              className="text-amber-800 font-medium hover:underline"
+              title="Map of Turnberry Place and nearby dining, Strip access, and venues"
+            >
+              Neighborhood map — Strip, dining & points of interest
             </Link>
           </div>
         </div>

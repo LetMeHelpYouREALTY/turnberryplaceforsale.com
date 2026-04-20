@@ -1,4 +1,8 @@
 import NextDocument, { Html, Main, NextScript, Head } from "next/document"
+import {
+  TURNBERRY_GEO_POSITION_META,
+  TURNBERRY_ICBM_META,
+} from "lib/schema/geo"
 
 export default class Document extends NextDocument {
   render() {
@@ -22,6 +26,10 @@ export default class Document extends NextDocument {
             />
           ) : null}
           <meta name="author" content="Dr. Jan Duffy, REALTOR" />
+          <meta name="geo.region" content="US-NV" />
+          <meta name="geo.placename" content="Las Vegas" />
+          <meta name="geo.position" content={TURNBERRY_GEO_POSITION_META} />
+          <meta name="ICBM" content={TURNBERRY_ICBM_META} />
           {/* Google Analytics is now loaded via next/script in pages/_app.tsx
               (strategy="afterInteractive", non-blocking). Legacy UA property removed. */}
         </Head>

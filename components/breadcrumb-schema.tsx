@@ -6,6 +6,7 @@
 import React from 'react'
 import { useRouter } from 'next/router'
 import { buildBreadcrumbListSchema } from 'lib/schema/breadcrumbList'
+import { serializeJsonLd } from 'lib/schema/serializeJsonLd'
 
 interface BreadcrumbItem {
   name: string
@@ -70,7 +71,7 @@ export function BreadcrumbSchema({ items, currentPageTitle }: BreadcrumbSchemaPr
   return (
     <script
       type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema, null, 2) }}
+      dangerouslySetInnerHTML={{ __html: serializeJsonLd(schema, true) }}
     />
   )
 }

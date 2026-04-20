@@ -10,7 +10,6 @@ import { YourNeighborSection } from "components/agent/YourNeighborSection"
 import { TestimonialsSection } from "components/agent/TestimonialsSection"
 import { LocationContactSection } from "components/agent/LocationContactSection"
 import { CalendlySection } from "components/agent/CalendlySection"
-import { GBPMapCard } from "components/gbp-map-card"
 import { GBP_PHONE_DISPLAY } from "lib/google-business-profile"
 // NewsletterSection removed 2026-04-18: Calendly (via <CalendlySection>) is
 // the single conversion path site-wide. No on-page forms.
@@ -34,7 +33,6 @@ export default function AgentPage({ menus }: AgentPageProps) {
         <YourNeighborSection />
         <TestimonialsSection />
         <LocationContactSection />
-        <GBPMapCard heading="Visit Dr. Jan Duffy at Turnberry Place" />
         <CalendlySection />
       </div>
     </Layout>

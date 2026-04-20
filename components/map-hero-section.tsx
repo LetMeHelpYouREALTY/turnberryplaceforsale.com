@@ -1,8 +1,13 @@
 'use client'
 
 import React from 'react'
-import Link from 'next/link'
 import { MapPin } from 'lucide-react'
+import {
+  GBP_ADDRESS_LINE,
+  getDirectionsUrl,
+  getMapEmbedUrl,
+} from 'lib/google-business-profile'
+import { TURNBERRY_MAPS_Q_LATLNG } from 'lib/schema/geo'
 
 interface MapHeroSectionProps {
   address?: string
@@ -10,12 +15,15 @@ interface MapHeroSectionProps {
 }
 
 export function MapHeroSection({
-  address = '2827 Paradise Rd, Suite 2, Las Vegas, NV 89109',
+  address = GBP_ADDRESS_LINE,
   mapKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY ?? '',
 }: MapHeroSectionProps) {
-  const mapsQuery = encodeURIComponent(address)
-  const mapsEmbedSrc = `https://www.google.com/maps/embed/v1/place?key=${mapKey}&q=${mapsQuery}&zoom=15`
-  const directionsHref = `https://www.google.com/maps/dir/?api=1&destination=${mapsQuery}`
+  const pinQ = encodeURIComponent(TURNBERRY_MAPS_Q_LATLNG)
+  const mapsEmbedSrc =
+    mapKey.length > 0
+      ? `https://www.google.com/maps/embed/v1/place?key=${encodeURIComponent(mapKey)}&q=${pinQ}&zoom=15`
+      : getMapEmbedUrl()
+  const directionsHref = getDirectionsUrl()
 
   const distances = [
     { text: '1 min walk to Las Vegas Strip', icon: '🚶' },
@@ -50,15 +58,16 @@ export function MapHeroSection({
             ))}
           </div>
           
-          {/* Get Directions Button */}
-          <Link
+          {/* Get Directions — external Google Maps URL */}
+          <a
             href={directionsHref}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center justify-center px-8 py-4 bg-[#D4AF37] text-gray-900 font-semibold rounded-lg hover:bg-[#B8941F] transition-colors shadow-md hover:shadow-lg"
+            title="Open directions to Turnberry Place in Google Maps"
           >
             Get Directions
-          </Link>
+          </a>
         </div>
       </div>
 

@@ -15,7 +15,8 @@ import { getMenus } from "lib/get-menus"
 import { Meta } from "components/meta"
 import { MapPlaceSchema } from "components/map-place-schema"
 import { BreadcrumbSchema } from "components/breadcrumb-schema"
-import { GBP_PHONE_DISPLAY } from "lib/google-business-profile"
+import { GBP_ADDRESS_LINE, GBP_PHONE_DISPLAY } from "lib/google-business-profile"
+import { TURNBERRY_MAP_CENTER } from "lib/schema/geo"
 
 interface MapPageProps extends LayoutProps {}
 
@@ -27,7 +28,7 @@ export default function MapPage({ menus }: MapPageProps) {
   // Restrict the key in Google Cloud Console to the site's HTTP referrer
   // before shipping to production.
   const mapKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY ?? ""
-  const streetAddress = "2827 Paradise Rd, Suite 2, Las Vegas, NV 89109"
+  const streetAddress = GBP_ADDRESS_LINE
 
   const handleCategoryChange = (categoryId: string, query: string) => {
     setActiveCategory(categoryId)
@@ -73,7 +74,10 @@ export default function MapPage({ menus }: MapPageProps) {
               {/* Interactive Map */}
               <InteractiveMap
                 mapKey={mapKey}
-                center={{ lat: 36.1408, lng: -115.1564 }}
+                center={{
+                  lat: TURNBERRY_MAP_CENTER.lat,
+                  lng: TURNBERRY_MAP_CENTER.lng,
+                }}
                 zoom={15}
                 activeCategory={activeCategory}
                 places={placesData}

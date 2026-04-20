@@ -4,58 +4,21 @@ import { DrupalMenuLinkContent } from "next-drupal"
 import { BUILD_DATE_DISPLAY } from "lib/build-date"
 import { CalendlyLink } from "components/calendly-link"
 import { tourUrl } from "lib/calendly"
-import { GBP_PHONE_DISPLAY, GBP_PHONE_TEL } from "lib/google-business-profile"
+import { GBP_ADDRESS_LINE, GBP_PHONE_DISPLAY, GBP_PHONE_TEL } from "lib/google-business-profile"
+import { SITE_INTERNAL_LINKS_FLAT } from "lib/site-internal-links"
 
 interface FooterProps {
   links: DrupalMenuLinkContent[]
 }
 
-const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://www.turnberryplaceforsale.com'
 const calendlyUrl = tourUrl({ utmMedium: 'footer', utmCampaign: 'footer-portrait' })
 
-// Organization schema for footer
-const organizationSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'Organization',
-  name: 'Turnberry Place High Rise Condos | Homes by Dr. Jan Duffy',
-  url: baseUrl,
-  logo: `${baseUrl}/images/turnberry/asset-19.jpg`,
-  contactPoint: {
-    '@type': 'ContactPoint',
-    telephone: GBP_PHONE_TEL,
-    contactType: 'sales',
-  },
-}
-
-// Single source of truth for all site navigation links
-const allPages = [
-  { href: "/", title: "Home" },
-  { href: "/available-condos", title: "Available Condos" },
-  { href: "/towers", title: "Towers" },
-  { href: "/price-features", title: "Price & Features" },
-  { href: "/floor-plans", title: "Floor Plans" },
-  { href: "/amenities", title: "Amenities" },
-  { href: "/stirling-club", title: "Stirling Club" },
-  { href: "/neighborhood", title: "Neighborhood" },
-  { href: "/photos", title: "Photos" },
-  { href: "/map", title: "Map" },
-  { href: "/open-house", title: "Open House" },
-  { href: "/request-details", title: "Request Details" },
-  { href: "/agent", title: "Agent" },
-  { href: "/share", title: "Share" },
-]
-
-// Footer links - use same array to avoid duplication
-const footerLinks = allPages
+const footerLinks = SITE_INTERNAL_LINKS_FLAT
 
 export function Footer({ links }: FooterProps) {
   return (
     <>
-      {/* Organization Schema */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
-      />
+      {/* Organization JSON-LD: emitted once from `Layout` (`#organization`). */}
 
       {/* Site Links Section - Above Footer */}
       <section className="card-content site-links-section py-4" aria-label="Site Links">
@@ -65,11 +28,12 @@ export function Footer({ links }: FooterProps) {
               <h2 id="footer-nav-heading" className="sr-only">Site Navigation</h2>
               <nav role="navigation" aria-labelledby="footer-nav-heading">
                 <div className="row g-3">
-                  {allPages.map((link) => (
+                  {SITE_INTERNAL_LINKS_FLAT.map((link) => (
                     <div key={link.href} className="col-6 col-sm-4 col-md-3 col-lg-2">
-                      <Link 
-                        href={link.href} 
+                      <Link
+                        href={link.href}
                         className="site-link-item d-block text-center py-2 px-3"
+                        title={link.linkTitle ?? link.title}
                       >
                         {link.title}
                       </Link>
@@ -94,7 +58,11 @@ export function Footer({ links }: FooterProps) {
                 <div className="row g-2">
                   {footerLinks.map((link) => (
                     <div key={link.href} className="col-6 col-sm-4 col-md-3 col-lg-2 text-center py-2">
-                      <Link href={link.href} className="footer-nav-link">
+                      <Link
+                        href={link.href}
+                        className="footer-nav-link"
+                        title={link.linkTitle ?? link.title}
+                      >
                         {link.title}
                       </Link>
                     </div>
@@ -118,7 +86,7 @@ export function Footer({ links }: FooterProps) {
                   </a>
                 </div>
                 <div className="px-2 px-md-3">
-                  2827 Paradise Rd, Suite 2, Las Vegas, NV 89109
+                  {GBP_ADDRESS_LINE}
                 </div>
               </div>
             </div>
@@ -192,7 +160,7 @@ export function Footer({ links }: FooterProps) {
               </Link>
             </div>
             <div className="mt-3 font-size-80 text-muted">
-              Turnberry Place High Rise Condos | Homes by Dr. Jan Duffy | 2827 Paradise Rd, Suite 2, Las Vegas, NV 89109 | <a href={`tel:${GBP_PHONE_TEL}`} className="footer-phone-link" itemProp="telephone">{GBP_PHONE_DISPLAY}</a>
+              Turnberry Place High Rise Condos | Homes by Dr. Jan Duffy | {GBP_ADDRESS_LINE} | <a href={`tel:${GBP_PHONE_TEL}`} className="footer-phone-link" itemProp="telephone">{GBP_PHONE_DISPLAY}</a>
             </div>
             <div className="mt-2 font-size-80 text-muted">
               Last updated: {BUILD_DATE_DISPLAY}

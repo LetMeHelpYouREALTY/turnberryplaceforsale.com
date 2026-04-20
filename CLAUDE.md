@@ -29,6 +29,7 @@ Marketing site for **Turnberry Place** luxury high-rise condos (Las Vegas). **Ne
 
 ## SEO / Search
 
+- **Cursor rule (mirrored practices):** `.cursor/rules/turnberry-seo-links-schema-accessibility.mdc` — anchors/`Link`, image `alt`, JSON-LD entities, semantic topical copy, internal linking. **Re-review quarterly**; update the rule when Google/Next.js/schema guidance shifts.
 - **Heading hierarchy**: the home page should expose **one `<h1>`** (hero in `HeroSlideshow`); section titles use `<h2>` / `<h3>`.
 - **Home valuation** (RealScout `realscout-home-value`): lives on **`/price-features#home-value-estimate`**, not on `/`, to avoid a second widget script on the homepage.
 - **`public/robots.txt`**: do **not** add `Disallow: /_next/` — crawlers need `/_next/static` assets to render. Sitemap URL is listed at the bottom of `robots.txt`.

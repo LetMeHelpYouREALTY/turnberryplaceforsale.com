@@ -3,7 +3,12 @@
 import React, { useState } from 'react'
 import Image from 'next/image'
 import { QRCodeSVG } from 'qrcode.react'
-import { GBP_PHONE_DISPLAY, GBP_PHONE_TEL, GBP_EMAIL } from 'lib/google-business-profile'
+import {
+  GBP_ADDRESS_LINE,
+  GBP_EMAIL,
+  GBP_PHONE_DISPLAY,
+  GBP_PHONE_TEL,
+} from 'lib/google-business-profile'
 
 interface DigitalCardProps {
   cardId?: string
@@ -129,7 +134,7 @@ END:VCARD`
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
             </svg>
-            2827 Paradise Rd, Suite 2, Las Vegas, NV 89109
+            {GBP_ADDRESS_LINE}
           </p>
         </div>
 

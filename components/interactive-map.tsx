@@ -3,6 +3,8 @@
 import React, { useState, useCallback, useMemo } from 'react'
 import { GoogleMap, useJsApiLoader, Marker, InfoWindow } from '@react-google-maps/api'
 import { Navigation, Maximize2, Map as MapIcon } from 'lucide-react'
+import { GBP_ADDRESS_LINE } from 'lib/google-business-profile'
+import { TURNBERRY_MAP_CENTER } from 'lib/schema/geo'
 
 interface Place {
   name: string
@@ -27,11 +29,6 @@ interface InteractiveMapProps {
   places: Place[]
   onPlaceClick?: (place: Place) => void
   selectedPlace?: Place | null
-}
-
-const TURNBERRY_LOCATION = {
-  lat: 36.1408,
-  lng: -115.1564,
 }
 
 const categoryColors: Record<string, string> = {
@@ -113,7 +110,7 @@ const createMarkerIcon = (
 
 export function InteractiveMap({
   mapKey,
-  center = TURNBERRY_LOCATION,
+  center = TURNBERRY_MAP_CENTER,
   zoom = 15,
   activeCategory,
   places = [],
@@ -252,7 +249,7 @@ export function InteractiveMap({
       >
         {/* Turnberry Place Marker (Gold Star) */}
         <Marker
-          position={TURNBERRY_LOCATION}
+          position={TURNBERRY_MAP_CENTER}
           icon={createMarkerIcon('', false, true, google?.maps)}
           title="Turnberry Place"
           onClick={() => setInfoWindowOpen('turnberry')}
@@ -262,12 +259,12 @@ export function InteractiveMap({
         {/* Turnberry Info Window */}
         {infoWindowOpen === 'turnberry' && (
           <InfoWindow
-            position={TURNBERRY_LOCATION}
+            position={TURNBERRY_MAP_CENTER}
             onCloseClick={handleInfoWindowClose}
           >
             <div className="p-2 min-w-[200px]">
               <h3 className="text-lg font-semibold text-gray-900 mb-1">Turnberry Place</h3>
-              <p className="text-sm text-gray-600 mb-2">2827 Paradise Rd, Las Vegas, NV 89109</p>
+              <p className="text-sm text-gray-600 mb-2">{GBP_ADDRESS_LINE}</p>
               <p className="text-xs text-gray-500">Luxury High-Rise Condominiums</p>
             </div>
           </InfoWindow>

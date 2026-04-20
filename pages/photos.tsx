@@ -16,6 +16,7 @@ import { BUILD_DATE_DISPLAY, BUILD_DATE_ISO } from "lib/build-date"
 import { TURNBERRY_GEO } from "lib/schema/geo"
 import { tourUrl } from "lib/calendly"
 import { GBP_PHONE_DISPLAY, GBP_PHONE_TEL } from "lib/google-business-profile"
+import { serializeJsonLd } from "lib/schema/serializeJsonLd"
 
 type GalleryCategory = "Residences" | "Stirling Club" | "Views" | "Amenities"
 type GalleryFilter = "All" | GalleryCategory
@@ -1268,6 +1269,12 @@ export default function PhotosPage({ menus }: PhotosPageProps) {
             const thumbUrlFor = (src: string) =>
               `/_next/image?url=${encodeURIComponent(src)}&w=96&q=70`
 
+            const escAttr = (s: string) =>
+              String(s)
+                .replace(/&/g, "&amp;")
+                .replace(/"/g, "&quot;")
+                .replace(/</g, "&lt;")
+
             const render = () => {
               const current = pswp.currIndex ?? 0
               el.innerHTML = filteredItems
@@ -1275,8 +1282,9 @@ export default function PhotosPage({ menus }: PhotosPageProps) {
                   const active = i === current ? "is-active" : ""
                   const thumbSrc = item.kind === "image" ? item.src : item.poster
                   const thumbUrl = thumbUrlFor(thumbSrc)
-                  return `<button type="button" class="pswp__lux-thumb ${active}" data-idx="${i}" aria-label="${item.title}">
-                    <img src="${thumbUrl}" alt="" loading="lazy" />
+                  const thumbAlt = escAttr(item.title)
+                  return `<button type="button" class="pswp__lux-thumb ${active}" data-idx="${i}">
+                    <img src="${thumbUrl}" alt="${thumbAlt}" loading="lazy" />
                   </button>`
                 })
                 .join("")
@@ -1471,21 +1479,21 @@ export default function PhotosPage({ menus }: PhotosPageProps) {
           key="photos_breadcrumb_schema"
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify(breadcrumbSchema),
+            __html: serializeJsonLd(breadcrumbSchema, false),
           }}
         />
         <script
           key="photos_image_gallery_schema"
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify(imageGallerySchema),
+            __html: serializeJsonLd(imageGallerySchema, false),
           }}
         />
         <script
           key="photos_faq_schema"
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify(faqSchema),
+            __html: serializeJsonLd(faqSchema, false),
           }}
         />
       </Head>
@@ -1746,14 +1754,12 @@ export default function PhotosPage({ menus }: PhotosPageProps) {
                   )}
             </div>
                 <div className="photos-toolbar-actions">
-                  <Link
-                    href="/tour"
+                  <a
+                    href="#photos-masonry"
                     className="photos-slideshow-link"
-                    target="_blank"
-                    rel="noopener noreferrer"
                   >
-                    Launch Slideshow
-                  </Link>
+                    Jump to gallery
+                  </a>
                 </div>
                 </div>
                       </div>

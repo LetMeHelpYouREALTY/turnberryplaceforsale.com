@@ -42,7 +42,7 @@
 // sibling-listing naming pattern used across the other 19 offices):
 //
 //   Turnberry Place High Rise Condos | Homes by Dr. Jan Duffy
-//   2827 Paradise Rd, Suite 2, Las Vegas, NV 89109  (Suite 2, 1st floor, staffed office)
+//   2827 Paradise Rd, Las Vegas, NV 89109  (staffed office Suite 2, 1st floor — see GBP_WAYFINDING)
 //
 // This is a NEW GBP specifically created for the Turnberry Place team's
 // office at 2827 Paradise Rd, distinct from Dr. Duffy's other verticals
@@ -73,7 +73,7 @@ const CANONICAL_NAP = {
   locality: "Las Vegas",
   region: "NV",
   postalCode: "89109",
-  streetAddress: "2827 Paradise Rd, Suite 2",
+  streetAddress: "2827 Paradise Rd",
 } as const
 
 /**

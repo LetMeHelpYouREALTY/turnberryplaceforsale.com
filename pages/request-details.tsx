@@ -9,14 +9,14 @@ import { getMenus } from "lib/get-menus"
 import { Meta } from "components/meta"
 import { JsonLdSchema } from "components/json-ld-schema"
 import { BreadcrumbSchema } from "components/breadcrumb-schema"
-import { GBPMapCard } from "components/gbp-map-card"
 import CalendlyEmbed from "components/calendly-embed"
 import { tourUrl } from "lib/calendly"
 import { GBP_PHONE_DISPLAY, GBP_PHONE_TEL } from "lib/google-business-profile"
 import { BUILD_DATE_ISO } from "lib/build-date"
+import { serializeJsonLd } from "lib/schema/serializeJsonLd"
 // Forms have been replaced with the Calendly booking widget (2026-04-18).
 // Calendly is the single conversion path; visitors who prefer to talk
-// use the phone / directions CTAs in <GBPMapCard> below.
+// Phone / directions: use the site-wide Turnberry Place office block in the layout footer area.
 
 interface RequestDetailsPageProps extends LayoutProps {}
 
@@ -105,7 +105,7 @@ export default function RequestDetailsPage({ menus }: RequestDetailsPageProps) {
         <script
           type="application/ld+json"
           // eslint-disable-next-line react/no-danger
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(realEstateListingSchema) }}
+          dangerouslySetInnerHTML={{ __html: serializeJsonLd(realEstateListingSchema, false) }}
         />
       </Head>
       <JsonLdSchema type="property" />
@@ -265,7 +265,6 @@ export default function RequestDetailsPage({ menus }: RequestDetailsPageProps) {
       {/* Client Testimonials Section */}
       {/* Client Testimonials and VIP Newsletter - Available on homepage and /agent page */}
 
-      <GBPMapCard heading="Visit Our Office to Learn More" />
     </Layout>
   )
 }

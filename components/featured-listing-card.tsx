@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { GBP_PHONE_TEL } from 'lib/google-business-profile'
+import { listingCardImageAlt } from 'lib/image-alt'
 
 interface FeaturedListingCardProps {
   image: string
@@ -70,7 +71,7 @@ export function FeaturedListingCard({
         <div style={{ position: 'relative', width: '100%', height: '100%' }}>
           <Image
             src={image}
-            alt={title}
+            alt={listingCardImageAlt(title, tower, unit)}
             fill
             style={{ objectFit: 'cover', transition: 'transform 0.3s ease' }}
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"

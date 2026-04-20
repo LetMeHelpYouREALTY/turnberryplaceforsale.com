@@ -26,9 +26,9 @@ import { PropertyGrid } from "components/property-grid"
 // lead capture now happens through the booking widget on /request-details.
 import { LuxuryAmenitiesGrid } from "components/luxury-amenities-grid"
 import { HomeRequestCalendly } from "components/home-request-calendly"
-import { GBPMapCard } from "components/gbp-map-card"
 import { GBP_PHONE_DISPLAY, GBP_PHONE_TEL } from "lib/google-business-profile"
 import { BUILD_DATE_ISO, BUILD_DATE_MONTH_YEAR } from "lib/build-date"
+import { TURNBERRY_HERO_HOME_ALTS } from "lib/image-alt"
 // Components WhyWorkWithUs / ClientTestimonials / PowerOfNumbers / InTheMedia
 // exist in components/ but are currently orphaned (nothing imports them).
 // Neutralized to empty-state-safe defaults on 2026-04-18 (see each file's
@@ -66,11 +66,6 @@ export default function NodePage({ node, menus, inventory }: NodePageProps) {
         />
         <Head>
           <meta name="author" content="Dr. Jan Duffy, REALTOR" />
-          <meta name="geo.region" content="US-NV" />
-          <meta name="geo.placename" content="Las Vegas" />
-          <meta name="geo.position" content="36.1408;-115.1564" />
-          <meta name="ICBM" content="36.1408, -115.1564" />
-          
           {/* Performance optimizations */}
           <link rel="preconnect" href="https://fonts.googleapis.com" />
           <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
@@ -167,7 +162,7 @@ function HomePageContent({
   return (
     <>
       {/* Hero Section with Slideshow */}
-      <HeroSlideshow photos={heroPhotos} />
+      <HeroSlideshow photos={heroPhotos} photoAlts={TURNBERRY_HERO_HOME_ALTS} />
       
       {/* Price & Features Section - Combined like live site */}
       <section className="card-content card-price-features py-5" id="card-id-2271756" data-card-type="3" itemScope itemType="https://schema.org/Residence" aria-label="Turnberry Place Pricing">
@@ -247,8 +242,12 @@ function HomePageContent({
             ]}
           />
           <div className="text-center mt-6">
-            <Link href="/towers" className="btn btn-primary btn-lg">
-              Learn More About All Towers
+            <Link
+              href="/towers"
+              className="btn btn-primary btn-lg"
+              title="Compare Turnberry Place towers 1–4 — stories, views, and residences"
+            >
+              Explore all four Turnberry Place towers
             </Link>
           </div>
         </div>
@@ -291,8 +290,12 @@ function HomePageContent({
               </div>
               <div className="text-center mt-4">
                 <p className="mb-3">Interested in viewing these luxury condos?</p>
-                <Link href="/available-condos" className="btn btn-primary btn-lg mr-2">
-                  View All Listings
+                <Link
+                  href="/available-condos"
+                  className="btn btn-primary btn-lg mr-2"
+                  title="Browse Turnberry Place luxury high-rise condos for sale — Las Vegas Strip"
+                >
+                  Browse Turnberry Place condos for sale
                 </Link>
                 <a href={`tel:${GBP_PHONE_TEL}`} className="btn btn-outline-primary btn-lg" title={`Call ${GBP_PHONE_DISPLAY}`}>
                   Call {GBP_PHONE_DISPLAY}
@@ -307,9 +310,6 @@ function HomePageContent({
       <LuxuryAmenitiesGrid />
 
       <HomeFaqSection />
-
-      {/* Google Business Profile: map + hours + Call/Directions/Reviews */}
-      <GBPMapCard heading="Visit the Turnberry Place Office" />
 
       {/* Open House Section - Matching Live Site */}
       <section className="card-content card-open-house card-open-house--bg py-5" id="card-id-2271761" data-card-type="8" aria-label="Schedule Private Showing">
@@ -329,8 +329,12 @@ function HomePageContent({
                   <p className="none-scheduled mb-4">
                     Schedule a Private Showing
                   </p>
-                  <Link className="btn btn-custom btn-lg" href="/request-details" title="Schedule Private Showing">
-                    Schedule Private Showing
+                  <Link
+                    className="btn btn-custom btn-lg"
+                    href="/request-details"
+                    title="Schedule a private showing at Turnberry Place — Las Vegas high-rise condos"
+                  >
+                    Schedule a private Turnberry Place showing
                   </Link>
                 </div>
               </div>
@@ -395,8 +399,12 @@ function HomePageContent({
                     </div>
                   </div>
                   <div className="py-2">
-                    <Link className="cursor-pointer btn-agent-bio" href="/agent" title="View Bio">
-                      View Bio
+                    <Link
+                      className="cursor-pointer btn-agent-bio"
+                      href="/agent"
+                      title="Dr. Jan Duffy — Turnberry Place REALTOR bio and contact"
+                    >
+                      Meet Dr. Jan Duffy — your Turnberry Place agent
                     </Link>
                   </div>
                 </div>
@@ -465,8 +473,12 @@ function HomePageContent({
               </div>
               
               <div className="text-center py-4">
-                <Link href="/photos" className="btn btn-primary btn-lg">
-                  View All Photos
+                <Link
+                  href="/photos"
+                  className="btn btn-primary btn-lg"
+                  title="Full photo gallery — Turnberry Place residences, Stirling Club, and Strip views"
+                >
+                  See the full Turnberry Place photo gallery
                 </Link>
               </div>
             </div>
@@ -483,8 +495,12 @@ function HomePageContent({
                 Floor Plans
               </h2>
               <div className="py-4">
-                <Link href="/floor-plans" className="btn btn-primary btn-lg">
-                  View All Floor Plans
+                <Link
+                  href="/floor-plans"
+                  className="btn btn-primary btn-lg"
+                  title="Turnberry Place floor plans — high-rise condo layouts"
+                >
+                  Browse Turnberry Place floor plans & layouts
                 </Link>
               </div>
             </div>
@@ -522,8 +538,12 @@ function HomePageContent({
                       Features include state-of-the-art fitness center, resort-style pools, tennis courts, spa services, dining venues, and business facilities.
                     </p>
                     <div className="mt-3">
-                      <Link href="/stirling-club" className="btn btn-primary">
-                        Learn More About The Stirling Club
+                      <Link
+                        href="/stirling-club"
+                        className="btn btn-primary"
+                        title="The Stirling Club — 80,000 sq ft private amenities for Turnberry Place residents"
+                      >
+                        Discover The Stirling Club at Turnberry Place
                       </Link>
                     </div>
                   </div>
@@ -564,8 +584,12 @@ function HomePageContent({
                   <p>Turnberry Place is located just one block east of the Las Vegas Strip between the Wynn Encore and Sahara resorts. This guard-gated, four-tower condominium complex offers residents immediate proximity to the Entertainment Capital of the World while residing in a serene, tropical-inspired oasis.</p>
                 </div>
                 <div className="text-center mt-4">
-                  <Link href="/neighborhood" className="btn btn-primary btn-lg">
-                    Learn More About The Neighborhood
+                  <Link
+                    href="/neighborhood"
+                    className="btn btn-primary btn-lg"
+                    title="Las Vegas Strip & Paradise Rd — neighborhood guide for Turnberry Place"
+                  >
+                    Las Vegas Strip & Paradise Rd neighborhood guide
                   </Link>
                 </div>
               </div>
