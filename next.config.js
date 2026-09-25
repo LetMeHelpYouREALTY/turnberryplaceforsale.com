@@ -47,7 +47,6 @@ module.exports = {
     NEXT_PUBLIC_BUILD_DATE_DISPLAY: BUILD_DATE_DISPLAY,
     NEXT_PUBLIC_BUILD_DATE_MONTH_YEAR: BUILD_DATE_MONTH_YEAR,
   },
-  swcMinify: true,
   compress: true,
   poweredByHeader: false,
   reactStrictMode: true,
