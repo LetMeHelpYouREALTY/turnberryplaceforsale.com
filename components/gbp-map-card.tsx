@@ -31,7 +31,6 @@ import {
   GBP_NAME,
   GBP_ADDRESS,
   GBP_ADDRESS_LINE,
-  GBP_WAYFINDING,
   GBP_PHONE_DISPLAY,
   GBP_PHONE_TEL,
   GBP_HOURS,
@@ -97,7 +96,7 @@ export function GBPMapCard({
             {heading}
           </h2>
           <p className="text-gray-600 text-sm md:text-base">
-            Staffed office on the <strong className="text-gray-900">{GBP_WAYFINDING}</strong> — call ahead for guard-gated access.
+            Staffed office — call ahead for guard-gated access.
           </p>
         </div>
 
@@ -136,7 +135,6 @@ export function GBPMapCard({
                     <span itemProp="addressRegion">NV</span>{' '}
                     <span itemProp="postalCode">89109</span>
                   </div>
-                  <div className="text-sm text-gray-600 italic">{GBP_WAYFINDING}</div>
                 </address>
               </div>
             </div>

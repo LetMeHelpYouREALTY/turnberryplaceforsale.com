@@ -4,7 +4,6 @@ import {
   GBP_ADDRESS_LINE,
   GBP_PHONE_DISPLAY,
   GBP_PHONE_TEL,
-  GBP_WAYFINDING,
 } from "lib/google-business-profile"
 
 const GOLD = "#D4AF37"
@@ -81,7 +80,7 @@ export function HeroSection() {
             <div className="mt-6 text-gray-300">
               <span className="font-semibold text-white">Location:</span>{" "}
               <span>
-                Turnberry Place • {GBP_ADDRESS_LINE} ({GBP_WAYFINDING})
+                Turnberry Place • {GBP_ADDRESS_LINE}
               </span>
             </div>
 

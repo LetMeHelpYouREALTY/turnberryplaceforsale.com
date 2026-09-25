@@ -5,7 +5,6 @@ import Link from 'next/link'
 import { MapPin, Phone, Calendar, Navigation, Star, PenSquare } from 'lucide-react'
 import {
   GBP_ADDRESS_LINE,
-  GBP_WAYFINDING,
   GBP_PHONE_DISPLAY,
   getDirectionsUrl,
   gbpReviewsDisabled,
@@ -51,9 +50,6 @@ export function DirectionsContactCTA({
                 <MapPin size={20} className="text-[#D4AF37] mt-1 flex-shrink-0" aria-hidden="true" />
                 <span>{address}</span>
               </address>
-              <p className="text-sm text-gray-400 italic mb-6 pl-7">
-                Office on the {GBP_WAYFINDING}
-              </p>
             </div>
 
             {/* Get Directions Button */}

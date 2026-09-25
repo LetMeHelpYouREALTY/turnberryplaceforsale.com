@@ -30,7 +30,7 @@ ORG:Berkshire Hathaway HomeServices Nevada Properties
 TITLE:REALTOR - Turnberry Place Specialist
 TEL;TYPE=WORK,VOICE:${GBP_PHONE_DISPLAY}
 EMAIL:${GBP_EMAIL}
-ADR;TYPE=WORK:;Suite 2;2827 Paradise Rd;Las Vegas;NV;89109;USA
+ADR;TYPE=WORK:;;2827 Paradise Rd;Las Vegas;NV;89109;USA
 URL:${siteUrl}
 NOTE:Turnberry Place Las Vegas Luxury Condo Specialist. License S.0197614.LLC
 END:VCARD`
