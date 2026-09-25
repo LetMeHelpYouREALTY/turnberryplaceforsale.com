@@ -90,9 +90,8 @@ Never show intermediate drafts - only present refined, deployable code.
 - Always check for current incentives when mentioning builders
 
 ### Contact Integration
-- Primary Phone: 702-500-1955 (professional)
-- Marketing Phone: 702-222-1964 (CTAs, urgent)
-- All CTAs should include: "Call/text 702-222-1964"
+- Site phone: (702) 500-1971 (the only phone on this site; matches Google Business Profile). Never use 702-222-1964 (Dr. Jan's cell) or 702-500-1942 (FUB line).
+- All CTAs should include: "Call/text (702) 500-1971"
 
 ---
 
