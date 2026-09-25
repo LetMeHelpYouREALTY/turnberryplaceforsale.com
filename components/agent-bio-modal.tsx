@@ -73,7 +73,7 @@ export function AgentBioModal({ agentId = '14435' }: AgentBioModalProps) {
                 Dr. Duffy's commitment to client success is reflected in her extensive knowledge of Las Vegas luxury real estate, particularly along the Strip corridor. She assists both buyers and sellers at Turnberry Place, providing detailed market analysis, strategic pricing guidance, and skilled negotiations.
               </p>
               <p>
-                Based at Berkshire Hathaway's office at 7475 West Sahara Avenue, Dr. Duffy serves clients seven days a week from 6:00 AM to 9:00 PM. As a veteran-owned, women-owned business, she brings professionalism and dedication to every client interaction.
+                Based at Berkshire Hathaway's office at 7475 West Sahara Avenue, Dr. Duffy serves clients seven days a week from 8:00 AM to 8:00 PM. As a veteran-owned, women-owned business, she brings professionalism and dedication to every client interaction.
               </p>
               <p className="mt-4">
                 <strong>For expert guidance in Turnberry Place real estate, contact Dr. Jan Duffy:</strong><br />
