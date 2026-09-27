@@ -7,6 +7,9 @@ import { MapHeroSection } from "components/map-hero-section"
 import { CategoryFilterTabs } from "components/category-filter-tabs"
 import { PlaceCardsGrid } from "components/place-cards-grid"
 import { InteractiveMap } from "components/interactive-map"
+import { NearbyAmenityMapFallback } from "components/nearby-amenity-map-fallback"
+import Link from "next/link"
+import { NEARBY_AMENITIES_PAGE_PATH } from "lib/nearby-amenities/config"
 import { DistanceReferenceSection } from "components/distance-reference-section"
 import { NeighborhoodBenefitsSection } from "components/neighborhood-benefits-section"
 import { DirectionsContactCTA } from "components/directions-contact-cta"
@@ -63,7 +66,11 @@ export default function MapPage({ menus }: MapPageProps) {
             <div className="col-12">
               <h2 className="text-center mb-4">Explore Nearby Places</h2>
               <p className="lead text-center mb-4">
-                Use the interactive map below to discover nearby schools, parks, restaurants, coffee shops, and other amenities that make this location ideal for luxury living.
+                Use the interactive map below to discover nearby schools, parks, restaurants, coffee shops, and other amenities that make this location ideal for luxury living.{' '}
+                <Link href={NEARBY_AMENITIES_PAGE_PATH} title="Full nearby amenities guide for Turnberry Place">
+                  Open the nearby amenities guide
+                </Link>
+                .
               </p>
               
               {/* Category Filter Tabs */}
@@ -72,18 +79,30 @@ export default function MapPage({ menus }: MapPageProps) {
                 onCategoryChange={handleCategoryChange}
               />
               {/* Interactive Map */}
-              <InteractiveMap
-                mapKey={mapKey}
-                center={{
-                  lat: TURNBERRY_MAP_CENTER.lat,
-                  lng: TURNBERRY_MAP_CENTER.lng,
-                }}
-                zoom={15}
-                activeCategory={activeCategory}
-                places={placesData}
-                onPlaceClick={handlePlaceClick}
-                selectedPlace={selectedPlace}
-              />
+              <div id="map-container">
+                {mapKey ? (
+                  <InteractiveMap
+                    mapKey={mapKey}
+                    center={{
+                      lat: TURNBERRY_MAP_CENTER.lat,
+                      lng: TURNBERRY_MAP_CENTER.lng,
+                    }}
+                    zoom={15}
+                    activeCategory={activeCategory}
+                    places={placesData}
+                    onPlaceClick={handlePlaceClick}
+                    selectedPlace={selectedPlace}
+                  />
+                ) : (
+                  <NearbyAmenityMapFallback
+                    places={
+                      activeCategory === 'all'
+                        ? placesData
+                        : placesData.filter((p) => p.category === activeCategory)
+                    }
+                  />
+                )}
+              </div>
             </div>
           </div>
 

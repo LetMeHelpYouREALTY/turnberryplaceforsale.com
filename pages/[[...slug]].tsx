@@ -27,6 +27,7 @@ import { RealScoutHomeListingsLazy } from "components/realscout-home-listings-la
 // lead capture now happens through the booking widget on /request-details.
 import { LuxuryAmenitiesGrid } from "components/luxury-amenities-grid"
 import { HomeRequestCalendly } from "components/home-request-calendly"
+import { NearbyAmenitiesSection } from "components/nearby-amenities-section"
 import { GBP_PHONE_DISPLAY, GBP_PHONE_TEL } from "lib/google-business-profile"
 import { BUILD_DATE_ISO, BUILD_DATE_MONTH_YEAR } from "lib/build-date"
 import { TURNBERRY_HERO_HOME_ALTS } from "lib/image-alt"
@@ -535,6 +536,8 @@ function HomePageContent({
         </div>
       </section>
 
+      <NearbyAmenitiesSection />
+
       {/* Turnberry Place Neighborhood Section - Link to dedicated page */}
       <section className="card-content card-areas py-5" id="card-id-2282239" data-card-type="42" aria-label="Turnberry Place Neighborhood">
         <div className="container">
@@ -699,7 +702,7 @@ export async function getStaticProps(
   }
 
   // Check if this is a static page route that should be handled elsewhere
-  const staticRoutes = ['towers', 'amenities', 'photos', 'floor-plans', 'stirling-club', 'neighborhood']
+  const staticRoutes = ['towers', 'amenities', 'nearby-amenities', 'photos', 'floor-plans', 'stirling-club', 'neighborhood']
   if (slug && slug.length === 1 && staticRoutes.includes(slug[0])) {
     return {
       notFound: true,

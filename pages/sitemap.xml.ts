@@ -26,6 +26,7 @@ const staticPages = [
   '/amenities',
   '/photos',
   '/map',
+  '/nearby-amenities',
   '/open-house',
   '/request-details',
   '/agent',

@@ -9,6 +9,7 @@ import Script from "next/script"
 import Link from "next/link"
 import { BUILD_DATE_MONTH_YEAR } from "lib/build-date"
 import { GBP_PHONE_DISPLAY, GBP_PHONE_TEL } from "lib/google-business-profile"
+import { NearbyAmenitiesSection } from "components/nearby-amenities-section"
 
 interface AvailableCondosPageProps extends LayoutProps {}
 
@@ -147,6 +148,11 @@ export default function AvailableCondosPage({ menus }: AvailableCondosPageProps)
           </div>
         </div>
       </div>
+
+      <NearbyAmenitiesSection
+        heading="Explore the Paradise Road neighborhood"
+        id="available-condos-nearby"
+      />
     </Layout>
   )
 }
