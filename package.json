@@ -22,6 +22,7 @@
     "test:e2e": "start-server-and-test 'yarn preview' http://localhost:3001 cy:open",
     "test:e2e:ci": "start-server-and-test 'yarn preview' http://localhost:3001 cy:run",
     "vbuild": "npx vercel build",
+    "test:fub": "node --experimental-strip-types --test lib/follow-up-boss.test.ts",
     "check": "npm run lint && npx vercel build",
     "deploy": "git add . && git commit -m 'update' && git push"
   },

@@ -867,6 +867,10 @@ export default function PhotosPage({ menus }: PhotosPageProps) {
           name: "Gallery Visitor",
           email: exitEmail,
           message: "Exclusive listings request from /photos (exit intent)",
+          formName: "Photos exit-intent",
+          eventType: "Registration",
+          sourceUrl:
+            typeof window !== "undefined" ? window.location.href : undefined,
         }),
       })
       if (!res.ok) throw new Error("Request failed")
@@ -2060,8 +2064,9 @@ export default function PhotosPage({ menus }: PhotosPageProps) {
               </div>
             ) : null}
             {exitSubmitted === "error" ? (
-              <div className="photos-exit-msg is-error" role="status" aria-live="polite">
-                Something went wrong. Please try again or call <a href={phoneHref}>{phoneDisplay}</a>.
+              <div className="photos-exit-msg is-error" role="alert" aria-live="polite">
+                Sorry, something went wrong sending your message. Please call or text Dr. Jan
+                Duffy at <a href={phoneHref}>{phoneDisplay}</a>.
               </div>
             ) : null}
           </div>
