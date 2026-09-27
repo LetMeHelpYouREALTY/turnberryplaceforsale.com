@@ -6218,6 +6218,12 @@ main#main-content {
   min-height: 520px;
 }
 
+.nearby-amenity-map-fallback--list-only {
+  display: block;
+  min-height: 0;
+  margin-top: 1rem;
+}
+
 @media (min-width: 992px) {
   .nearby-amenity-map-fallback {
     grid-template-columns: 1.1fr 0.9fr;

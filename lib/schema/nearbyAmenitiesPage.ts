@@ -19,18 +19,22 @@ const SCHEMA_TYPE_BY_CATEGORY: Record<string, string> = {
   parking: 'ParkingFacility',
 }
 
-function placeToSchemaItem(place: (typeof nearbyCuratedPlaces)[number], baseUrl: string) {
+function placeToSchemaItem(place: (typeof nearbyCuratedPlaces)[number]) {
   const schemaType = SCHEMA_TYPE_BY_CATEGORY[place.category] ?? 'Place'
   return {
     '@type': schemaType,
     name: place.name,
-    address: {
-      '@type': 'PostalAddress',
-      streetAddress: place.address.split(',')[0]?.trim() ?? place.address,
-      addressLocality: 'Las Vegas',
-      addressRegion: 'NV',
-      addressCountry: 'US',
-    },
+    ...(place.addressVerified
+      ? {
+          address: {
+            '@type': 'PostalAddress',
+            streetAddress: place.address.split(',')[0]?.trim() ?? place.address,
+            addressLocality: 'Las Vegas',
+            addressRegion: 'NV',
+            addressCountry: 'US',
+          },
+        }
+      : {}),
     ...(place.lat && place.lng
       ? {
           geo: {
@@ -40,7 +44,7 @@ function placeToSchemaItem(place: (typeof nearbyCuratedPlaces)[number], baseUrl:
           },
         }
       : {}),
-    url: `${baseUrl}/nearby-amenities#${place.category}`,
+    url: place.sourceUrl,
   }
 }
 
@@ -95,7 +99,7 @@ export function buildNearbyAmenitiesPageGraph({
       itemListElement: featuredForList.map((place, index) => ({
         '@type': 'ListItem',
         position: index + 1,
-        item: placeToSchemaItem(place, baseUrl),
+        item: placeToSchemaItem(place),
       })),
     },
     {

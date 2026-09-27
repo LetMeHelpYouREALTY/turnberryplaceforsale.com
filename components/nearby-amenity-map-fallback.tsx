@@ -1,22 +1,37 @@
 import React from 'react'
 import Link from 'next/link'
-import type { Place } from 'lib/places-data'
 import { NEARBY_AMENITIES_COMMUNITY } from 'lib/nearby-amenities/config'
 import { TURNBERRY_MAPS_Q_LATLNG } from 'lib/schema/geo'
 
+export type NearbyAmenityFallbackPlace = {
+  name: string
+  distance?: string
+  address: string
+}
+
 type NearbyAmenityMapFallbackProps = {
-  places: Place[]
+  places: NearbyAmenityFallbackPlace[]
   mapTitle?: string
+  /** When true, render only the curated list (interactive map already visible above). */
+  listOnly?: boolean
 }
 
 export function NearbyAmenityMapFallback({
   places,
   mapTitle = `Map centered on ${NEARBY_AMENITIES_COMMUNITY.name}`,
+  listOnly = false,
 }: NearbyAmenityMapFallbackProps) {
   const embedSrc = `https://www.google.com/maps?q=${encodeURIComponent(TURNBERRY_MAPS_Q_LATLNG)}&z=14&output=embed`
 
   return (
-    <div className="nearby-amenity-map-fallback">
+    <div
+      className={
+        listOnly
+          ? 'nearby-amenity-map-fallback nearby-amenity-map-fallback--list-only'
+          : 'nearby-amenity-map-fallback'
+      }
+    >
+      {!listOnly && (
       <div className="nearby-amenity-map-fallback__map">
         <iframe
           src={embedSrc}
@@ -27,6 +42,7 @@ export function NearbyAmenityMapFallback({
           className="nearby-amenity-map-fallback__iframe"
         />
       </div>
+      )}
       <div className="nearby-amenity-map-fallback__list">
         <h3 className="nearby-amenity-map-fallback__list-title">
           Curated places near {NEARBY_AMENITIES_COMMUNITY.name}

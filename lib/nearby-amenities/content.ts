@@ -63,8 +63,8 @@ export const NEARBY_AMENITIES_SECTIONS: NearbyContentSection[] = [
     id: 'parks-recreation',
     title: 'Parks & recreation',
     paragraphs: [
-      'Urban green space near Turnberry Place includes community parks such as Paradise Park and cultural greens at Symphony Park downtown. Many residents also lean on The Stirling Club—Turnberry Place\'s private 80,000-square-foot club with pools, tennis, and fitness—so recreation often starts on property.',
-      'Wynn Golf Club lies along the Strip resort corridor, and Las Vegas Golf Club offers additional public play a few miles west for owners who want a traditional course day.',
+      'Recreation near Turnberry Place often starts on property at The Stirling Club—the community\'s private club with pools, tennis, and fitness. Clark County and City of Las Vegas operate additional parks and trails across the valley for owners who want open space beyond the towers.',
+      'Wynn Golf Club lies along the Strip resort corridor within a short drive of Paradise Road for owners who want a resort course round.',
     ],
   },
   {

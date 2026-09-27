@@ -1,9 +1,8 @@
 'use client'
 
-import React, { useCallback, useEffect, useMemo, useState } from 'react'
-import { GoogleMap, useJsApiLoader, Marker, InfoWindow } from '@react-google-maps/api'
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { Navigation, Maximize2, Map as MapIcon } from 'lucide-react'
-import type { Place } from 'lib/places-data'
+import type { CuratedNearbyPlace } from 'lib/nearby-amenities/curated-places'
 import { GBP_ADDRESS_LINE } from 'lib/google-business-profile'
 import { NEARBY_AMENITIES_COMMUNITY } from 'lib/nearby-amenities/config'
 import {
@@ -14,8 +13,13 @@ import { NearbyAmenityMapFallback } from 'components/nearby-amenity-map-fallback
 import { NearbyAmenityCategoryChips } from 'components/nearby-amenity-category-chips'
 import { filterCuratedPlacesByCategory } from 'lib/nearby-amenities/curated-places'
 import { categoryIdToDataCategory } from 'lib/nearby-amenities/config'
+import { loadGoogleMaps, mapsAuthFailed } from 'lib/google-maps-loader'
+import {
+  placeLocationToLiteral,
+  searchNearbyCategory,
+} from 'lib/nearby-amenities/search-nearby'
 
-const mapStyles = [
+const mapStyles: google.maps.MapTypeStyle[] = [
   {
     featureType: 'poi',
     elementType: 'labels',
@@ -38,7 +42,14 @@ const categoryColors: Record<string, string> = {
   parking: '#64748b',
 }
 
-type DynamicPlace = Place & { placeId?: string; source: 'curated' | 'places-api' }
+type ApiPlace = {
+  name: string
+  category: string
+  address: string
+  lat: number
+  lng: number
+  source: 'places-api'
+}
 
 function createMarkerIcon(
   category: string,
@@ -67,164 +78,183 @@ function createMarkerIcon(
   }
 }
 
+function buildInfoWindowContent(place: {
+  name: string
+  description?: string
+  address: string
+  distance?: string
+}): HTMLElement {
+  const root = document.createElement('div')
+  root.className = 'nearby-amenity-map__infowindow'
+
+  const title = document.createElement('h3')
+  title.textContent = place.name
+  root.appendChild(title)
+
+  if (place.description) {
+    const desc = document.createElement('p')
+    desc.textContent = place.description
+    root.appendChild(desc)
+  }
+
+  const addr = document.createElement('p')
+  const addrLabel = document.createElement('strong')
+  addrLabel.textContent = 'Address: '
+  addr.appendChild(addrLabel)
+  addr.appendChild(document.createTextNode(place.address))
+  root.appendChild(addr)
+
+  if (place.distance) {
+    const dist = document.createElement('p')
+    const distLabel = document.createElement('strong')
+    distLabel.textContent = 'Distance: '
+    dist.appendChild(distLabel)
+    dist.appendChild(document.createTextNode(place.distance))
+    root.appendChild(dist)
+  }
+
+  const link = document.createElement('a')
+  link.href = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(place.address)}`
+  link.target = '_blank'
+  link.rel = 'noopener noreferrer'
+  link.className = 'nearby-amenity-map__directions-btn'
+  link.textContent = 'Directions'
+  root.appendChild(link)
+
+  return root
+}
+
 type NearbyAmenityMapClientProps = {
   mapKey: string
   mapId?: string
   initialCategory?: NearbyAmenityCategoryId
   showCategoryChips?: boolean
-  heightClassName?: string
 }
 
-function InteractiveMapWithKey({
-  mapKey,
+function NearbyAmenityInteractiveMap({
   mapId,
-  activeCategory,
   curatedPlaces,
-  dynamicPlaces,
+  apiPlaces,
+  activeCategory,
 }: {
-  mapKey: string
   mapId?: string
+  curatedPlaces: CuratedNearbyPlace[]
+  apiPlaces: ApiPlace[]
   activeCategory: NearbyAmenityCategoryId
-  curatedPlaces: Place[]
-  dynamicPlaces: DynamicPlace[]
 }) {
   const center = NEARBY_AMENITIES_COMMUNITY.center
-  const [infoWindowOpen, setInfoWindowOpen] = useState<string | null>(null)
+  const containerRef = useRef<HTMLDivElement>(null)
+  const mapRef = useRef<google.maps.Map | null>(null)
+  const markersRef = useRef<google.maps.Marker[]>([])
+  const infoWindowRef = useRef<google.maps.InfoWindow | null>(null)
   const [mapType, setMapType] = useState<'roadmap' | 'satellite'>('roadmap')
-  const [loadError, setLoadError] = useState(false)
-
-  const { isLoaded, loadError: loaderError } = useJsApiLoader({
-    id: 'google-map-nearby-amenities',
-    googleMapsApiKey: mapKey,
-    libraries: ['places'],
-  })
-
-  useEffect(() => {
-    if (loaderError) {
-      setLoadError(true)
-    }
-  }, [loaderError])
 
   const mergedPlaces = useMemo(() => {
-    const byName = new Map<string, DynamicPlace>()
+    const byName = new Map<string, CuratedNearbyPlace | ApiPlace>()
     for (const p of curatedPlaces) {
-      byName.set(p.name, { ...p, source: 'curated' })
+      byName.set(p.name, p)
     }
-    for (const p of dynamicPlaces) {
+    for (const p of apiPlaces) {
       if (!byName.has(p.name)) {
         byName.set(p.name, p)
       }
     }
     return Array.from(byName.values())
-  }, [curatedPlaces, dynamicPlaces])
+  }, [curatedPlaces, apiPlaces])
 
-  const getCoords = useCallback(
-    (place: DynamicPlace) => {
-      if (place.lat != null && place.lng != null) {
-        return { lat: place.lat, lng: place.lng }
+  useEffect(() => {
+    if (!containerRef.current || mapRef.current) {
+      return
+    }
+    const options: google.maps.MapOptions = {
+      center,
+      zoom: 14,
+      styles: mapStyles,
+      disableDefaultUI: true,
+      zoomControl: true,
+      mapTypeControl: false,
+      streetViewControl: false,
+      fullscreenControl: false,
+      mapTypeId: mapType,
+      ...(mapId ? { mapId } : {}),
+    }
+    mapRef.current = new google.maps.Map(containerRef.current, options)
+    infoWindowRef.current = new google.maps.InfoWindow()
+
+    return () => {
+      markersRef.current.forEach((m) => m.setMap(null))
+      markersRef.current = []
+      mapRef.current = null
+      infoWindowRef.current = null
+    }
+  }, [mapId, center, mapType])
+
+  useEffect(() => {
+    const map = mapRef.current
+    const infoWindow = infoWindowRef.current
+    if (!map || !infoWindow) {
+      return
+    }
+
+    markersRef.current.forEach((m) => m.setMap(null))
+    markersRef.current = []
+
+    const communityMarker = new google.maps.Marker({
+      map,
+      position: center,
+      icon: createMarkerIcon('', true, google.maps),
+      title: NEARBY_AMENITIES_COMMUNITY.name,
+      zIndex: 1000,
+    })
+    communityMarker.addListener('click', () => {
+      const content = buildInfoWindowContent({
+        name: NEARBY_AMENITIES_COMMUNITY.name,
+        description: 'Luxury high-rise condominiums',
+        address: GBP_ADDRESS_LINE,
+      })
+      infoWindow.setContent(content)
+      infoWindow.setPosition(center)
+      infoWindow.open({ map })
+    })
+    markersRef.current.push(communityMarker)
+
+    for (const place of mergedPlaces) {
+      const lat = place.lat
+      const lng = place.lng
+      if (lat == null || lng == null) {
+        continue
       }
-      return center
-    },
-    [center],
-  )
+      const category = place.category
+      const marker = new google.maps.Marker({
+        map,
+        position: { lat, lng },
+        icon: createMarkerIcon(category, false, google.maps),
+        title: place.name,
+      })
+      marker.addListener('click', () => {
+        const content = buildInfoWindowContent({
+          name: place.name,
+          description: 'description' in place ? place.description : undefined,
+          address: place.address,
+          distance: 'distance' in place ? place.distance : undefined,
+        })
+        infoWindow.setContent(content)
+        infoWindow.setPosition({ lat, lng })
+        infoWindow.open({ map })
+      })
+      markersRef.current.push(marker)
+    }
+  }, [mergedPlaces, center, activeCategory])
 
-  if (loadError) {
-    return (
-      <NearbyAmenityMapFallback places={curatedPlaces} />
-    )
-  }
-
-  if (!isLoaded) {
-    return (
-      <div className="nearby-amenity-map__loading" aria-busy="true">
-        <div className="nearby-amenity-map__spinner" aria-hidden="true" />
-        <p>Loading map…</p>
-      </div>
-    )
-  }
-
-  const mapOptions: google.maps.MapOptions = {
-    styles: mapStyles,
-    disableDefaultUI: true,
-    zoomControl: true,
-    mapTypeControl: false,
-    streetViewControl: false,
-    fullscreenControl: false,
-    mapTypeId: mapType,
-    ...(mapId ? { mapId } : {}),
-  }
+  useEffect(() => {
+    if (mapRef.current) {
+      mapRef.current.setMapTypeId(mapType)
+    }
+  }, [mapType])
 
   return (
     <div className="nearby-amenity-map__canvas-wrap">
-      <GoogleMap
-        mapContainerClassName="nearby-amenity-map__canvas"
-        center={center}
-        zoom={14}
-        options={mapOptions}
-      >
-        <Marker
-          position={center}
-          icon={createMarkerIcon('', true, google.maps)}
-          title={NEARBY_AMENITIES_COMMUNITY.name}
-          onClick={() => setInfoWindowOpen('community')}
-          zIndex={1000}
-        />
-        {infoWindowOpen === 'community' && (
-          <InfoWindow position={center} onCloseClick={() => setInfoWindowOpen(null)}>
-            <div className="nearby-amenity-map__infowindow">
-              <h3>{NEARBY_AMENITIES_COMMUNITY.name}</h3>
-              <p>{GBP_ADDRESS_LINE}</p>
-              <p className="nearby-amenity-map__infowindow-muted">
-                Luxury high-rise condominiums
-              </p>
-            </div>
-          </InfoWindow>
-        )}
-        {mergedPlaces.map((place) => {
-          const coords = getCoords(place)
-          const open = infoWindowOpen === place.name
-          return (
-            <React.Fragment key={`${place.name}-${place.source}`}>
-              <Marker
-                position={coords}
-                icon={createMarkerIcon(place.category, false, google.maps, open)}
-                title={place.name}
-                onClick={() => setInfoWindowOpen(place.name)}
-              />
-              {open && (
-                <InfoWindow position={coords} onCloseClick={() => setInfoWindowOpen(null)}>
-                  <div className="nearby-amenity-map__infowindow">
-                    <h3>{place.name}</h3>
-                    {place.description && <p>{place.description}</p>}
-                    {place.rating != null && (
-                      <p className="nearby-amenity-map__rating">
-                        Rating: {place.rating}
-                      </p>
-                    )}
-                    <p>
-                      <strong>Address:</strong> {place.address}
-                    </p>
-                    {place.distance && (
-                      <p>
-                        <strong>Distance:</strong> {place.distance}
-                      </p>
-                    )}
-                    <a
-                      href={`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(place.address)}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="nearby-amenity-map__directions-btn"
-                    >
-                      Directions
-                      <span className="sr-only"> to {place.name} (opens in a new tab)</span>
-                    </a>
-                  </div>
-                </InfoWindow>
-              )}
-            </React.Fragment>
-          )
-        })}
-      </GoogleMap>
+      <div ref={containerRef} className="nearby-amenity-map__canvas" />
       <div className="nearby-amenity-map__controls">
         <button
           type="button"
@@ -240,7 +270,7 @@ function InteractiveMapWithKey({
             if (document.fullscreenElement) {
               document.exitFullscreen()
             } else {
-              document.documentElement.requestFullscreen()
+              containerRef.current?.requestFullscreen()
             }
           }}
           className="nearby-amenity-map__control-btn"
@@ -274,7 +304,10 @@ export function NearbyAmenityMapClient({
 }: NearbyAmenityMapClientProps) {
   const [activeCategory, setActiveCategory] =
     useState<NearbyAmenityCategoryId>(initialCategory)
-  const [dynamicPlaces, setDynamicPlaces] = useState<DynamicPlace[]>([])
+  const [useFallback, setUseFallback] = useState(false)
+  const [mapReady, setMapReady] = useState(false)
+  const [apiPlaces, setApiPlaces] = useState<ApiPlace[]>([])
+  const [placesSearchFailed, setPlacesSearchFailed] = useState(false)
 
   const dataCategory = categoryIdToDataCategory(activeCategory)
   const curatedPlaces = useMemo(
@@ -284,90 +317,96 @@ export function NearbyAmenityMapClient({
 
   const trimmedKey = mapKey?.trim() ?? ''
 
+  const enterFallback = useCallback(() => {
+    setUseFallback(true)
+    setMapReady(false)
+  }, [])
+
   useEffect(() => {
-    if (!trimmedKey || activeCategory === 'all') {
-      setDynamicPlaces([])
+    const onAuthFailure = () => enterFallback()
+    window.addEventListener('gmaps:auth-failure', onAuthFailure)
+    return () => window.removeEventListener('gmaps:auth-failure', onAuthFailure)
+  }, [enterFallback])
+
+  useEffect(() => {
+    if (!trimmedKey) {
+      enterFallback()
+      return
+    }
+    if (mapsAuthFailed) {
+      enterFallback()
       return
     }
 
     let cancelled = false
+    loadGoogleMaps(trimmedKey)
+      .then(() => {
+        if (!cancelled && !mapsAuthFailed) {
+          setMapReady(true)
+        }
+      })
+      .catch(() => {
+        if (!cancelled) {
+          enterFallback()
+        }
+      })
+
+    return () => {
+      cancelled = true
+    }
+  }, [trimmedKey, enterFallback])
+
+  useEffect(() => {
+    if (!mapReady || useFallback || !trimmedKey || activeCategory === 'all') {
+      setApiPlaces([])
+      setPlacesSearchFailed(false)
+      return
+    }
+
     const category = getCategoryById(activeCategory)
     const types = category?.placesPrimaryTypes
     if (!types?.length) {
       return
     }
 
-    async function runSearch() {
-      try {
-        const g = window.google
-        if (!g?.maps) {
-          return
-        }
-        const placesLib = (await g.maps.importLibrary('places')) as google.maps.PlacesLibrary
-        type PlaceWithSearchNearby = {
-          searchNearby: (req: {
-            fields: string[]
-            locationRestriction: {
-              center: { lat: number; lng: number }
-              radius: number
-            }
-            includedPrimaryTypes: string[]
-            maxResultCount: number
-          }) => Promise<{ places: google.maps.places.Place[] }>
-        }
-        const PlaceCtor = placesLib.Place as PlaceWithSearchNearby
-        if (!PlaceCtor?.searchNearby) {
-          return
-        }
-        const primaryTypes = types ?? []
-        const { places } = await PlaceCtor.searchNearby({
-          fields: ['displayName', 'location', 'formattedAddress', 'rating', 'id'],
-          locationRestriction: {
-            center: NEARBY_AMENITIES_COMMUNITY.center,
-            radius: 2500,
-          },
-          includedPrimaryTypes: primaryTypes,
-          maxResultCount: 12,
-        })
+    let cancelled = false
+    setPlacesSearchFailed(false)
+
+    searchNearbyCategory(activeCategory, types)
+      .then((places) => {
         if (cancelled) {
           return
         }
-        const mapped: DynamicPlace[] = []
+        const mapped: ApiPlace[] = []
         for (const p of places) {
-          const loc = p.location
-          const lat = loc?.lat()
-          const lng = loc?.lng()
+          const coords = placeLocationToLiteral(p.location)
           const name = String(p.displayName ?? 'Nearby place')
           const address = p.formattedAddress ?? ''
-          if (lat == null || lng == null || !address) {
+          if (!coords || !address) {
             continue
           }
           mapped.push({
             name,
             category: dataCategory ?? 'dining',
-            distance: '',
             address,
-            lat,
-            lng,
-            rating: p.rating ?? undefined,
-            placeId: p.id,
+            lat: coords.lat,
+            lng: coords.lng,
             source: 'places-api',
           })
         }
-        setDynamicPlaces(mapped)
-      } catch {
+        setApiPlaces(mapped)
+      })
+      .catch(() => {
         if (!cancelled) {
-          setDynamicPlaces([])
+          setApiPlaces([])
+          setPlacesSearchFailed(true)
         }
-      }
-    }
+      })
 
-    const timer = window.setTimeout(runSearch, 400)
     return () => {
       cancelled = true
-      window.clearTimeout(timer)
     }
-  }, [trimmedKey, activeCategory, dataCategory])
+  }, [mapReady, useFallback, trimmedKey, activeCategory, dataCategory])
 
   return (
     <div className="nearby-amenity-map">
@@ -378,21 +417,32 @@ export function NearbyAmenityMapClient({
         />
       )}
       <div className="nearby-amenity-map__frame">
-        {!trimmedKey ? (
+        {useFallback || !trimmedKey ? (
           <NearbyAmenityMapFallback places={curatedPlaces} />
+        ) : !mapReady ? (
+          <div className="nearby-amenity-map__loading" aria-busy="true">
+            <div className="nearby-amenity-map__spinner" aria-hidden="true" />
+            <p>Loading map…</p>
+          </div>
         ) : (
-          <InteractiveMapWithKey
-            mapKey={trimmedKey}
+          <NearbyAmenityInteractiveMap
             mapId={mapId}
-            activeCategory={activeCategory}
             curatedPlaces={curatedPlaces}
-            dynamicPlaces={dynamicPlaces}
+            apiPlaces={apiPlaces}
+            activeCategory={activeCategory}
           />
         )}
       </div>
+      {!useFallback && mapReady && placesSearchFailed && (
+        <NearbyAmenityMapFallback
+          places={curatedPlaces}
+          mapTitle={`Curated list near ${NEARBY_AMENITIES_COMMUNITY.name}`}
+          listOnly={true}
+        />
+      )}
       <p className="nearby-amenity-map__note">
-        Distances and live search results may vary. The curated list uses verified addresses near
-        Paradise Road; the interactive map loads when enabled for this site.
+        Distances and live search results may vary. Curated addresses are sourced from official
+        business and agency sites; the interactive map loads when enabled for this site.
       </p>
     </div>
   )

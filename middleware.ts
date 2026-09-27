@@ -15,9 +15,16 @@ export function middleware(request: NextRequest) {
     return NextResponse.redirect(url, 301)
   }
 
+  // Vercel preview hosts must not redirect to production (blocks PR review).
+  const isVercelPreviewHost = hostname.endsWith('.vercel.app')
+
   // Redirect non-www to www (ensure primary domain is www)
-  // This handles: turnberryplaceforsale.com, turnberryplaceforsalecom.vercel.app, and any other variants
-  if (hostname !== 'www.turnberryplaceforsale.com' && hostname.includes('turnberryplaceforsale')) {
+  // This handles: turnberryplaceforsale.com and other non-preview variants
+  if (
+    !isVercelPreviewHost &&
+    hostname !== 'www.turnberryplaceforsale.com' &&
+    hostname.includes('turnberryplaceforsale')
+  ) {
     url.hostname = 'www.turnberryplaceforsale.com'
     url.protocol = 'https:'
     return NextResponse.redirect(url, 301)
