@@ -104,7 +104,7 @@ module.exports = {
       "connect-src 'self' " +
         "https://em.realscout.com https://www.realscout.com " +
         "https://calendly.com https://assets.calendly.com " +
-        "https://maps.googleapis.com " +
+        "https://maps.googleapis.com https://places.googleapis.com " +
         "https://www.google-analytics.com https://*.analytics.google.com https://stats.g.doubleclick.net " +
         "https://vitals.vercel-insights.com https://vercel.live wss://ws-us3.pusher.com",
       "frame-src 'self' " +
