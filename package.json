@@ -39,7 +39,7 @@
     "drupal-jsonapi-params": "^2.3.1",
     "html-react-parser": "^4.2.10",
     "lucide-react": "^0.562.0",
-    "next": "^15.5.26",
+    "next": "^15.5.28",
     "next-drupal": "^2.0.0-beta.0",
     "nprogress": "^0.2.0",
     "photoswipe": "^5.4.4",
@@ -59,7 +59,7 @@
     "eslint": "^8.57.0",
     "eslint-config-next": "^15.5.26",
     "postcss": "^8.4.38",
-    "sharp": "^0.33.5",
+    "sharp": "^0.35.5",
     "tailwindcss": "^3.4.3",
     "typescript": "^5.4.5"
   }
