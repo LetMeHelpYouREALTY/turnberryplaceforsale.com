@@ -20,7 +20,7 @@ function isValidEmail(email: string) {
 
 export function ContactFormSection() {
   const calendlyUrl =
-    process.env.NEXT_PUBLIC_CALENDLY_URL || "https://calendly.com/drjanduffy/1-home-tour-30-mins"
+    process.env.NEXT_PUBLIC_CALENDLY_URL || "https://calendly.com/drjanduffy/showing"
 
   const [name, setName] = useState("")
   const [phone, setPhone] = useState("")

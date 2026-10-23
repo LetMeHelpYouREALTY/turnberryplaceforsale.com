@@ -51,7 +51,7 @@
 /** 30-minute private tour (the default "Schedule a Tour" CTA site-wide). */
 export const CALENDLY_TOUR_URL: string =
   process.env.NEXT_PUBLIC_CALENDLY_URL ??
-  'https://calendly.com/drjanduffy/1-home-tour-30-mins'
+  'https://calendly.com/drjanduffy/showing'
 
 /** 15-minute conversation ("Schedule time with me" top-of-funnel CTA). */
 export const CALENDLY_CONSULTATION_URL: string =
@@ -90,7 +90,7 @@ type BuildCalendlyUrlOpts = {
  * embed/link on the site looks and behaves consistently:
  *   - hide_gdpr_banner=1   (US-only audience)
  *   - primary_color=D4AF37 (site brand gold)
- *   - utm_source=website
+ *   - utm_source=turnberryplaceforsale.com (bare domain; the Calendly → FUB Worker maps it to the FUB lead source)
  *   - utm_medium=[badge|inline|button|link|sticky|footer|cta]
  *   - utm_campaign=[yyyy-mm or operator-provided]
  *
@@ -115,7 +115,7 @@ export function buildCalendlyUrl(
   if (!showGdprBanner) params.set('hide_gdpr_banner', '1')
 
   if (utmMedium) {
-    params.set('utm_source', 'website')
+    params.set('utm_source', 'turnberryplaceforsale.com')
     params.set('utm_medium', utmMedium)
     const campaign = utmCampaign ?? defaultCampaign()
     if (campaign) params.set('utm_campaign', campaign)
