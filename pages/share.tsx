@@ -390,7 +390,7 @@ export default function SharePage({ menus }: SharePageProps) {
 
               <h2>Contact Dr. Jan Duffy for More Information</h2>
               <p>
-                If you or someone you've shared Turnberry Place with has questions or wants to learn more, I'm here to provide comprehensive information and expert guidance. As a Las Vegas real estate expert with over 30 years of experience and deep knowledge of Turnberry Place, I can answer questions, provide detailed information, and help interested parties explore this exceptional community further.
+                If you or someone you've shared Turnberry Place with has questions or wants to learn more, I'm here to provide comprehensive information and expert guidance. As a Las Vegas real estate expert in real estate since 1983 and deep knowledge of Turnberry Place, I can answer questions, provide detailed information, and help interested parties explore this exceptional community further.
               </p>
               <p>
                 Whether you're sharing Turnberry Place with others or have received a share and want to learn more, I'm available to provide the information and support you need. My goal is to help everyone discover the exceptional quality and lifestyle that Turnberry Place offers and find the perfect luxury residence that meets their needs.

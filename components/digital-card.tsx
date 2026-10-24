@@ -111,10 +111,7 @@ END:VCARD`
         <h3 className="text-xl font-bold">Dr. Jan Duffy</h3>
         <p className="text-amber-400 text-sm">REALTOR® | Turnberry Place Specialist</p>
         <p className="text-gray-400 text-xs mt-1">
-          Berkshire Hathaway HomeServices Nevada Properties
-        </p>
-        <p className="text-gray-500 text-xs mt-1">
-          License: S.0197614.LLC
+          In real estate since 1983
         </p>
         
         {/* Contact Info */}

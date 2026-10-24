@@ -486,7 +486,7 @@ export default function AmenitiesPage({ menus }: AmenitiesPageProps) {
                       <div>
                         <div className="amenities-cta-agent-name">Dr. Jan Duffy</div>
                         <div className="amenities-cta-agent-sub">
-                          Berkshire Hathaway HomeServices Nevada Properties • License #S.0197614.LLC
+                          Top 1% Las Vegas REALTOR® • In real estate since 1983
                         </div>
                       </div>
                     </div>

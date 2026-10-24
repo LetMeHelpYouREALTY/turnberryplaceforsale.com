@@ -64,7 +64,7 @@ export default function OpenHousePage({ menus }: OpenHousePageProps) {
             <div className="col-12 col-lg-10 mx-auto">
               <h2>Private Showings at Turnberry Place</h2>
               <p>
-                While we don't currently have scheduled open houses, private showings are available by appointment to provide you with a personalized, comprehensive tour of Turnberry Place luxury residences. Private showings offer several advantages over traditional open houses, including personalized attention, flexible scheduling, and the opportunity to explore properties at your own pace. As a Las Vegas real estate expert with over 30 years of experience, I can provide detailed information about Turnberry Place residences, amenities, and lifestyle during your private showing.
+                While we don't currently have scheduled open houses, private showings are available by appointment to provide you with a personalized, comprehensive tour of Turnberry Place luxury residences. Private showings offer several advantages over traditional open houses, including personalized attention, flexible scheduling, and the opportunity to explore properties at your own pace. As a Las Vegas real estate expert in real estate since 1983, I can provide detailed information about Turnberry Place residences, amenities, and lifestyle during your private showing.
               </p>
               <h3>Benefits of Private Showings</h3>
               <p>
@@ -145,7 +145,7 @@ export default function OpenHousePage({ menus }: OpenHousePageProps) {
 
               <h2>Contact Dr. Jan Duffy to Schedule Your Private Showing</h2>
               <p>
-                Ready to experience Turnberry Place luxury living firsthand? Contact me today to schedule your private showing. As a Las Vegas real estate expert with over 30 years of experience and deep knowledge of Turnberry Place, I can provide you with a comprehensive, personalized tour that helps you understand the exceptional quality and lifestyle that Turnberry Place offers.
+                Ready to experience Turnberry Place luxury living firsthand? Contact me today to schedule your private showing. As a Las Vegas real estate expert in real estate since 1983 and deep knowledge of Turnberry Place, I can provide you with a comprehensive, personalized tour that helps you understand the exceptional quality and lifestyle that Turnberry Place offers.
               </p>
               <p>
                 Whether you're interested in a specific residence, want to explore multiple options, or are just beginning your search for luxury living in Las Vegas, I'm here to help. My goal is to provide you with the information, guidance, and support you need to make informed decisions about Turnberry Place and find the perfect residence that meets your needs and exceeds your expectations.

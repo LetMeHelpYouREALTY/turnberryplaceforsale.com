@@ -62,7 +62,7 @@ export function CalendlySection() {
                 <div>
                   <div className="font-semibold text-gray-900">Dr. Jan Duffy</div>
                   <div className="text-sm text-gray-600">
-                    Turnberry Place Resident • REALTOR (S.0197614.LLC)
+                    Turnberry Place Resident • REALTOR®
                   </div>
                 </div>
               </div>

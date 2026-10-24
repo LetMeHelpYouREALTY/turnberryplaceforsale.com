@@ -53,9 +53,6 @@ export function Footer() {
                   Turnberry Place High Rise Condos | Homes by Dr. Jan Duffy
                 </div>
                 <div className="px-2 px-md-3 mb-2 mb-md-0">
-                  <strong>License: S.0197614.LLC</strong>
-                </div>
-                <div className="px-2 px-md-3 mb-2 mb-md-0">
                   <a
                     href={`tel:${GBP_PHONE_TEL}`}
                     className="footer-phone-link"
@@ -146,6 +143,9 @@ export function Footer() {
               <a href={`tel:${GBP_PHONE_TEL}`} className="footer-phone-link">
                 {GBP_PHONE_DISPLAY}
               </a>
+            </div>
+            <div className="mt-2 font-size-80 text-muted">
+              Berkshire Hathaway HomeServices Nevada Properties since September 2008 · License S.0197614.LLC
             </div>
             <div className="mt-2 font-size-80 text-muted">
               Last updated: {BUILD_DATE_DISPLAY}

@@ -2,7 +2,6 @@
 
 import React from 'react'
 import Link from 'next/link'
-import Image from 'next/image'
 import { tourUrl } from 'lib/calendly'
 import { GBP_PHONE_DISPLAY, GBP_PHONE_TEL } from 'lib/google-business-profile'
 
@@ -160,28 +159,8 @@ export function TowersCTASection() {
 
             {/* Trust Elements */}
             <div className="mt-5 pt-4 border-top" style={{ borderColor: 'rgba(255, 255, 255, 0.1)' }}>
-              {/* Berkshire Hathaway Logo */}
-              <div className="mb-3">
-                <div className="d-inline-block" style={{ maxWidth: '250px', width: '100%' }}>
-                  <Image
-                    src="/images/turnberry/asset-19.jpg"
-                    alt="Berkshire Hathaway HomeServices Nevada Properties logo"
-                    width={250}
-                    height={104}
-                    style={{
-                      filter: 'brightness(1.1)',
-                      opacity: 0.95,
-                    }}
-                  />
-                </div>
-              </div>
-
-              {/* License Number */}
-              <p className="small mb-0" style={{ color: 'rgba(255, 255, 255, 0.7)' }}>
-                <strong>License: S.0197614.LLC</strong>
-              </p>
               <p className="small mb-0" style={{ color: 'rgba(255, 255, 255, 0.6)' }}>
-                Dr. Jan Duffy | Berkshire Hathaway HomeServices Nevada Properties
+                Dr. Jan Duffy | Top 1% Las Vegas REALTOR® | In real estate since 1983
               </p>
             </div>
           </div>

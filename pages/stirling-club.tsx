@@ -28,7 +28,7 @@ export default function StirlingClubPage({ menus }: StirlingClubPageProps) {
               <div className="page-header">
                 <h1>The Stirling Club: Exclusive Luxury at Your Doorstep</h1>
                 <p className="lead">
-                  The Stirling Club stands as the crown jewel of Turnberry Place, an 80,000-square-foot private membership facility exclusively for residents. This recently renovated world-class facility represents one of the most comprehensive private club amenities available in any Las Vegas condominium development. As a Las Vegas real estate expert with over 30 years of experience, I can attest that The Stirling Club's amenities rival the best private clubs worldwide, creating exceptional value for Turnberry Place residents.
+                  The Stirling Club stands as the crown jewel of Turnberry Place, an 80,000-square-foot private membership facility exclusively for residents. This recently renovated world-class facility represents one of the most comprehensive private club amenities available in any Las Vegas condominium development. As a Las Vegas real estate expert in real estate since 1983, I can attest that The Stirling Club's amenities rival the best private clubs worldwide, creating exceptional value for Turnberry Place residents.
                 </p>
               </div>
 
@@ -110,7 +110,7 @@ export default function StirlingClubPage({ menus }: StirlingClubPageProps) {
               <div className="content-section">
                 <h2>Contact Dr. Jan Duffy for Stirling Club Information</h2>
                 <p>
-                  As a Las Vegas real estate expert with over 30 years of experience and deep knowledge of Turnberry Place and The Stirling Club, I can provide comprehensive information about the club's amenities, facilities, and value propositions. My expertise in luxury condominium developments, combined with my understanding of The Stirling Club's unique offerings, enables me to help buyers appreciate the exceptional value that this private club provides.
+                  As a Las Vegas real estate expert in real estate since 1983 and deep knowledge of Turnberry Place and The Stirling Club, I can provide comprehensive information about the club's amenities, facilities, and value propositions. My expertise in luxury condominium developments, combined with my understanding of The Stirling Club's unique offerings, enables me to help buyers appreciate the exceptional value that this private club provides.
                 </p>
                 <p>
                   Whether you're interested in The Stirling Club's fitness facilities, recreational amenities, dining venues, business facilities, or social spaces, I can provide detailed information about how these amenities enhance daily living and create exceptional value. My goal is to help you understand the comprehensive nature of The Stirling Club and how it contributes to Turnberry Place's reputation as Las Vegas's premier high-rise condominium community.

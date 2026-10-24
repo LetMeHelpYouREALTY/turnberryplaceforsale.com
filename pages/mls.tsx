@@ -433,8 +433,7 @@ export default function MLSPage({ menus }: MLSPageProps) {
             </Link>
           </div>
           <p className="mt-6 text-gray-400">
-            Dr. Jan Duffy, REALTOR® | Berkshire Hathaway HomeServices Nevada Properties<br />
-            License: S.0197614.LLC
+            Dr. Jan Duffy, REALTOR® | In real estate since 1983
           </p>
         </div>
       </section>

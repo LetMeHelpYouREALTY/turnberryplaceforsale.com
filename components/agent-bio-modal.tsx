@@ -49,7 +49,7 @@ export function AgentBioModal({ agentId = '14435' }: AgentBioModalProps) {
               <p className="mb-2">
                 Turnberry Place High Rise Condos | Homes by Dr. Jan Duffy
               </p>
-              <p className="mb-3">S.0197614.LLC</p>
+              <p className="mb-3">Top 1% Las Vegas REALTOR®</p>
               <Image
                 className="img-fluid agent-photo rounded-circle mb-3"
                 src="/images/turnberry/asset-1.jpg"
@@ -64,7 +64,7 @@ export function AgentBioModal({ agentId = '14435' }: AgentBioModalProps) {
 
             <div className="agent-bio-content">
               <p>
-                Dr. Jan Duffy specializes in luxury high-rise properties at Turnberry Place, bringing expertise and dedication to Las Vegas' premier residential community. As a Realtor with Berkshire Hathaway HomeServices Nevada Properties, she combines in-depth knowledge of Turnberry Place with exceptional client service.
+                Dr. Jan Duffy specializes in luxury high-rise properties at Turnberry Place, bringing expertise and dedication to Las Vegas' premier residential community. As a REALTOR® in real estate since 1983, she combines in-depth knowledge of Turnberry Place with exceptional client service.
               </p>
               <p>
                 Known as the "Good to Know Realtor," Dr. Duffy offers comprehensive insights into Turnberry Place's unique lifestyle, amenities, and real estate opportunities. Her expertise extends beyond transactions to include detailed understanding of The Stirling Club, property values, and the distinctive features of each Turnberry Place tower.
@@ -73,7 +73,7 @@ export function AgentBioModal({ agentId = '14435' }: AgentBioModalProps) {
                 Dr. Duffy's commitment to client success is reflected in her extensive knowledge of Las Vegas luxury real estate, particularly along the Strip corridor. She assists both buyers and sellers at Turnberry Place, providing detailed market analysis, strategic pricing guidance, and skilled negotiations.
               </p>
               <p>
-                Based at Berkshire Hathaway's office at 7475 West Sahara Avenue, Dr. Duffy serves clients seven days a week from 8:00 AM to 8:00 PM. As a veteran-owned, women-owned business, she brings professionalism and dedication to every client interaction.
+                Dr. Duffy serves clients seven days a week from 8:00 AM to 8:00 PM. As a veteran-owned, women-owned business, she brings professionalism and dedication to every client interaction.
               </p>
               <p className="mt-4">
                 <strong>For expert guidance in Turnberry Place real estate, contact Dr. Jan Duffy:</strong><br />

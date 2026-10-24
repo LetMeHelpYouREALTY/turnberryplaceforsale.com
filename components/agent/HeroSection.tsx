@@ -70,7 +70,7 @@ export function HeroSection() {
             </h1>
 
             <p className="mt-4 text-xl md:text-2xl font-light" style={{ color: GOLD }}>
-              Your Neighbor at Turnberry Place
+              Your Neighbor at Turnberry Place · Top 1% Las Vegas REALTOR®
             </p>
 
             <p className="mt-5 text-lg md:text-xl text-gray-200 max-w-2xl mx-auto lg:mx-0">

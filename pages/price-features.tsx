@@ -37,7 +37,6 @@ export default function PriceFeaturesPage({ menus }: PriceFeaturesPageProps) {
   const lifestyleElevated = "/images/turnberry/Las-Vegas-High-Rise-Condo-Living-Downtown-Las-Vegas-Turnberry-Place-Interior.jpg"
   const lifestylePenthouse = "/images/turnberry/Turnberry_edited.jpg"
   const agentPhoto = "/images/turnberry/asset-1.jpg"
-  const bhhsLogo = "/images/turnberry/asset-19.jpg"
 
   const [openAccordion, setOpenAccordion] = useState<
     "financing" | "hoa" | "tax" | "included" | null
@@ -595,20 +594,10 @@ export default function PriceFeaturesPage({ menus }: PriceFeaturesPageProps) {
                   <div className="price-features-agent-body">
                     <div className="price-features-agent-name">Dr. Jan Duffy</div>
                     <div className="price-features-agent-sub">
-                      Berkshire Hathaway HomeServices Nevada Properties
+                      Top 1% Las Vegas REALTOR® · In real estate since 1983
                     </div>
-                    <div className="price-features-agent-license">License #S.0197614.LLC</div>
                     <div className="price-features-agent-phone">
                       <a href={`tel:${officePhoneTel}`}>{officePhoneDisplay}</a>
-                    </div>
-                    <div className="price-features-agent-logos">
-                      <Image
-                        src={bhhsLogo}
-                        alt="Berkshire Hathaway HomeServices Nevada Properties"
-                        width={260}
-                        height={120}
-                        className="img-auto-h"
-                      />
                     </div>
                   </div>
                 </div>

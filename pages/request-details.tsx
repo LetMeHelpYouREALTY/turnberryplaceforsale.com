@@ -29,7 +29,6 @@ export default function RequestDetailsPage({ menus }: RequestDetailsPageProps) {
 
   const heroImage = "/images/turnberry/19738766_web1_copy_2827-Paradise-15.jpg-FULL.webp"
   const agentPhoto = "/images/turnberry/asset-1.jpg"
-  const bhhsLogo = "/images/turnberry/asset-19.jpg"
 
   const realEstateListingSchema = useMemo(() => {
     return {
@@ -190,9 +189,8 @@ export default function RequestDetailsPage({ menus }: RequestDetailsPageProps) {
                     <div>
                       <div className="request-details-agent-name">Dr. Jan Duffy</div>
                       <div className="request-details-agent-sub">
-                        Berkshire Hathaway HomeServices Nevada Properties
+                        Top 1% Las Vegas REALTOR® · In real estate since 1983
                       </div>
-                      <div className="request-details-agent-license">License #S.0197614.LLC</div>
                       <div className="request-details-agent-phone">
                         <a href={`tel:${officePhoneTel}`}>{officePhoneDisplay}</a>
                       </div>
@@ -209,16 +207,6 @@ export default function RequestDetailsPage({ menus }: RequestDetailsPageProps) {
                     <div className="request-details-bullet">
                       <CheckCircle2 aria-hidden="true" /> Tour scheduling link included
                     </div>
-                  </div>
-
-                  <div className="request-details-bhhs">
-                    <Image
-                      src={bhhsLogo}
-                      alt="Berkshire Hathaway HomeServices Nevada Properties"
-                      width={260}
-                      height={120}
-                      style={{ height: "auto" }}
-                    />
                   </div>
 
                   <div className="small text-muted mt-2">

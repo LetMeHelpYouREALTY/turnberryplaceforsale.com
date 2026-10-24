@@ -102,7 +102,6 @@ export function ContactMessageModal({
             <div className="text-center mb-4">
               <h4>{agentName}</h4>
               <p className="mb-2">{companyName}</p>
-              <p className="mb-3">{agentLicense}</p>
               <p className="mb-3">
                 <strong>Mobile:</strong> <a href={`tel:${agentPhone.replace(/\D/g, '')}`}>{agentPhone}</a>
               </p>

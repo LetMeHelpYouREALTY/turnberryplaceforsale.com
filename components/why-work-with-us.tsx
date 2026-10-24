@@ -43,7 +43,7 @@ export function WhyWorkWithUs() {
     {
       title: 'The Power of Network',
       description:
-        'Dr. Jan Duffy is a licensed REALTOR® with Berkshire Hathaway HomeServices Nevada Properties (license S.0197614.LLC), which connects buyers and sellers to the Berkshire Hathaway global referral network and the full BHHS luxury marketing toolkit at no extra cost.',
+        'Dr. Jan Duffy is a licensed REALTOR®, in real estate since 1983, who connects buyers and sellers to a global referral network and a full luxury marketing toolkit at no extra cost.',
       linkText: 'Read Client Reviews',
       linkHref: '/agent#testimonials',
     },
@@ -80,9 +80,8 @@ export function WhyWorkWithUs() {
                 margin: '0 auto',
               }}
             >
-              A specialist who lives at Turnberry Place, backed by the Berkshire
-              Hathaway HomeServices network, with offices across the Las Vegas
-              Valley.
+              A specialist who lives at Turnberry Place, in real estate since
+              1983, with offices across the Las Vegas Valley.
             </p>
           </div>
         </div>

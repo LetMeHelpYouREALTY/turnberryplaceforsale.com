@@ -338,8 +338,7 @@ function HomePageContent({
                   <div className="my-1">
                     Turnberry Place High Rise Condos | Homes by Dr. Jan Duffy
                     <br />
-                    <span className="font-size-80 text-muted">Berkshire Hathaway HomeServices Nevada Properties</span>
-                    <br /> S.0197614.LLC
+                    <span className="font-size-80 text-muted">Top 1% Las Vegas REALTOR® · In real estate since 1983</span>
                   </div>
                 </div>
                 <div className="col-12 py-2 d-flex align-items-center justify-content-center">
@@ -369,18 +368,6 @@ function HomePageContent({
                       Meet Dr. Jan Duffy — your Turnberry Place agent
                     </Link>
                   </div>
-                </div>
-                <div className="col-12 text-center py-2">
-                  <Image
-                    className="img-fluid company-logo home-logo-img"
-                    src="/images/turnberry/asset-19.jpg"
-                    alt="Berkshire Hathaway HomeServices Nevada Properties logo"
-                    width={250}
-                    height={100}
-                    loading="lazy"
-                    quality={85}
-                    sizes="(max-width: 768px) 200px, 250px"
-                  />
                 </div>
               </div>
             </div>
