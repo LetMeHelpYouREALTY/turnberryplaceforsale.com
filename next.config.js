@@ -95,24 +95,24 @@ module.exports = {
     // future major, revisit to remove `unsafe-inline` from script-src.
     const CSP = [
       "default-src 'self'",
-      "script-src 'self' 'unsafe-inline' 'unsafe-eval' " +
+      "script-src https://widgetbe.com https://*.widgetbe.com 'self' 'unsafe-inline' 'unsafe-eval' " +
         "https://em.realscout.com https://www.realscout.com " +
         "https://assets.calendly.com " +
         "https://maps.googleapis.com " +
         "https://www.googletagmanager.com https://www.google-analytics.com https://www.googleadservices.com https://googleads.g.doubleclick.net " +
         "https://va.vercel-scripts.com https://vercel.live",
-      "connect-src 'self' " +
+      "connect-src https://widgetbe.com https://*.widgetbe.com 'self' " +
         "https://em.realscout.com https://www.realscout.com " +
         "https://calendly.com https://assets.calendly.com " +
         "https://maps.googleapis.com " +
         "https://www.google-analytics.com https://*.analytics.google.com https://stats.g.doubleclick.net " +
         "https://vitals.vercel-insights.com https://vercel.live wss://ws-us3.pusher.com",
-      "frame-src 'self' " +
+      "frame-src https://widgetbe.com https://*.widgetbe.com 'self' " +
         "https://em.realscout.com https://www.realscout.com " +
         "https://calendly.com https://assets.calendly.com " +
         "https://www.google.com " +
         "https://vercel.live",
-      "img-src 'self' data: blob: https:",
+      "img-src https://widgetbe.com https://*.widgetbe.com 'self' data: blob: https:",
       "style-src 'self' 'unsafe-inline' https://assets.calendly.com https://fonts.googleapis.com",
       "font-src 'self' data: https://fonts.gstatic.com https://assets.calendly.com",
       "media-src 'self' blob: https://*.vimeocdn.com https://player.vimeo.com",
