@@ -94,7 +94,7 @@ export default function NeighborhoodPage({ menus }: NeighborhoodPageProps) {
               </div>
 
               <div className="content-section">
-                <h2>Exclusive Community Features</h2>
+                <h2>Community Features</h2>
                     <h3>The Stirling Club</h3>
                     <p>
                       At the heart of Turnberry Place lies the Stirling Club, an 80,000-square-foot private membership facility exclusively for residents. This luxury hub features a state-of-the-art fitness center, resort-style indoor and outdoor pools, clay tennis and pickleball courts, a full-service spa, and multiple dining venues. The club's social spaces—including a business center with conference rooms, a media lounge, and a martini bar—foster a vibrant community atmosphere, allowing residents to host events or unwind without leaving the premises.
@@ -160,7 +160,7 @@ export default function NeighborhoodPage({ menus }: NeighborhoodPageProps) {
                     </p>
                     <h3>Comprehensive Security Systems</h3>
                     <p>
-                      Turnberry Place's security systems are comprehensive and continuously updated to ensure the highest levels of protection. The guard-gated entrance provides controlled access, while 24-hour security personnel patrol the property and monitor security systems. Video surveillance covers common areas, entrances, and parking facilities, providing additional security coverage. These systems work together to create a safe environment that allows residents to enjoy their homes with confidence.
+                      Turnberry Place's security systems are comprehensive and continuously updated to ensure the highest levels of protection. The guard-gated entrance provides controlled access, while 24-hour security personnel patrol the property and monitor security systems. Video surveillance covers common areas, entrances, and parking facilities, providing additional security coverage. These systems work together to create an environment that allows residents to enjoy their homes with confidence.
                     </p>
                     <h3>Privacy Features and Seclusion</h3>
                     <p>
