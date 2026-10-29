@@ -1,5 +1,4 @@
 import { TURNBERRY_GEO } from 'lib/schema/geo'
-import { buildAggregateRating } from 'lib/schema/aggregateRating'
 
 function buildTowerResidenceStubs() {
   return [1, 2, 3, 4].map((n) => ({
@@ -126,13 +125,6 @@ export function buildApartmentComplexSchema({
 
   if (listingInventory?.lastUpdatedIso) {
     schema.dateModified = listingInventory.lastUpdatedIso
-  }
-
-  // AggregateRating: env-gated, no fabrication. Emitted only when the
-  // operator sets verified GBP rating + count in Vercel env.
-  const aggregateRating = buildAggregateRating()
-  if (aggregateRating) {
-    schema.aggregateRating = aggregateRating
   }
 
   return schema
