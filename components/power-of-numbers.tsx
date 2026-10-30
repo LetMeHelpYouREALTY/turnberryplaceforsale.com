@@ -4,7 +4,7 @@
  * Prior to 2026-04-18 this component shipped four hardcoded stats:
  *   - "500+" families helped
  *   - "30+" years of experience
- *   - "4.9/5" average rating
+ *   - "5.0/5" average rating
  *   - "$500M+" in sales volume
  *
  * None were verifiable against the operator's other active sites (which
