@@ -159,6 +159,11 @@ module.exports = {
   },
   async redirects() {
     return [
+      {
+        source: '/contact',
+        destination: '/request-details',
+        permanent: true,
+      },
       // Redirect old/legacy routes to current pages (301 permanent redirects)
       {
         source: '/ap',
