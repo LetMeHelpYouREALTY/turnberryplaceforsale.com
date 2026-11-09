@@ -39,6 +39,11 @@ export const SITE_NAV_DESKTOP_ROW1: SiteInternalLink[] = [
 /** Desktop header — second row. */
 export const SITE_NAV_DESKTOP_ROW2: SiteInternalLink[] = [
   L('/available-condos', 'Available Condos', 'Luxury high-rise condos for sale at Turnberry Place'),
+  L(
+    '/sell-turnberry-place-condo',
+    'Sell Your Condo',
+    'Sell your Turnberry Place condo — listing consultation with Dr. Jan Duffy',
+  ),
   L('/floor-plans', 'Floor Plans', 'Turnberry Place floor plans and layouts'),
   L('/share', 'Share', 'Share Turnberry Place listings'),
   L('/stirling-club', 'Stirling Club', 'The Stirling Club — private amenities for residents'),
@@ -53,6 +58,11 @@ export const SITE_NAV_DESKTOP_ROW2: SiteInternalLink[] = [
 export const SITE_INTERNAL_LINKS_FLAT: SiteInternalLink[] = [
   L('/', 'Home', 'Turnberry Place Las Vegas — home'),
   L('/available-condos', 'Available Condos', 'Luxury high-rise condos for sale at Turnberry Place'),
+  L(
+    '/sell-turnberry-place-condo',
+    'Sell Your Condo',
+    'Sell your Turnberry Place condo — listing consultation with Dr. Jan Duffy',
+  ),
   L('/floor-plans', 'Floor Plans', 'Turnberry Place floor plans and layouts'),
   L('/towers', 'Towers', 'Turnberry Place towers overview'),
   L('/price-features', 'Price & Features', 'Pricing and features — Turnberry Place'),

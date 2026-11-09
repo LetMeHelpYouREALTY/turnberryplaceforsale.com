@@ -13,6 +13,7 @@ import { Fragment, useEffect, useMemo, useRef, useState } from "react"
 import { useRouter } from "next/router"
 import vimeoVideos from "../data/media/vimeo-videos.json"
 import { BUILD_DATE_DISPLAY, BUILD_DATE_ISO } from "lib/build-date"
+import { apartmentComplexEntityId } from "lib/schema/entityIds"
 import { TURNBERRY_GEO } from "lib/schema/geo"
 import { tourUrl } from "lib/calendly"
 import { GBP_PHONE_DISPLAY, GBP_PHONE_TEL } from "lib/google-business-profile"
@@ -667,7 +668,7 @@ export default function PhotosPage({ menus }: PhotosPageProps) {
     },
     isPartOf: {
       "@type": "ApartmentComplex",
-      "@id": `${baseUrl}/#apartmentcomplex`,
+      "@id": apartmentComplexEntityId(baseUrl),
     },
     contentLocation: {
       "@type": "Place",

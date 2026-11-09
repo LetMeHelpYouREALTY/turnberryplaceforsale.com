@@ -23,3 +23,8 @@ export function gbpLocalBusinessEntityId(baseUrl: string): string {
 export function realEstateAgentEntityId(baseUrl: string): string {
   return `${normalizeSiteOrigin(baseUrl)}/#realestateagent`
 }
+
+/** Home-page ApartmentComplex entity — stable across child routes (`isPartOf`). */
+export function apartmentComplexEntityId(baseUrl: string): string {
+  return `${normalizeSiteOrigin(baseUrl)}/#apartmentcomplex`
+}

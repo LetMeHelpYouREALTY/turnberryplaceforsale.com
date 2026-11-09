@@ -36,6 +36,7 @@ const staticPages = [
   '/neighborhood',
   '/accessibility',
   '/mls',
+  '/sell-turnberry-place-condo',
 ]
 
 /** Query variants for listings filters; `&` escaped for XML. */

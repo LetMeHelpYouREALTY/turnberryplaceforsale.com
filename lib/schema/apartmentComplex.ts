@@ -1,3 +1,4 @@
+import { apartmentComplexEntityId } from 'lib/schema/entityIds'
 import { TURNBERRY_GEO } from 'lib/schema/geo'
 
 function buildTowerResidenceStubs() {
@@ -53,7 +54,7 @@ export function buildApartmentComplexSchema({
   const schema: Record<string, unknown> = {
     '@context': 'https://schema.org',
     '@type': 'ApartmentComplex',
-    '@id': `${canonicalUrl}#apartmentcomplex`,
+    '@id': apartmentComplexEntityId(baseUrl),
     name: 'Turnberry Place Las Vegas',
     alternateName: 'Turnberry Place',
     url: canonicalUrl,

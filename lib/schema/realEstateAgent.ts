@@ -8,10 +8,26 @@ import {
 } from 'lib/google-business-profile'
 import { AGENT_KNOWS_ABOUT_SEMANTIC } from 'lib/seo/semantic-topics'
 
+type AreaServedPostalAddress = {
+  '@type': 'PostalAddress'
+  streetAddress: string
+  addressLocality: string
+  addressRegion: string
+  postalCode: string
+  addressCountry: string
+}
+
+type AreaServedContainedIn = { '@type': 'City'; name: string }
+
 type AreaServedEntry =
   | { '@type': 'City'; name: string }
   | { '@type': 'AdministrativeArea'; name: string }
-  | { '@type': 'Place'; name: string }
+  | {
+      '@type': 'Place'
+      name: string
+      address?: AreaServedPostalAddress
+      containedInPlace?: AreaServedContainedIn
+    }
 
 type RealEstateAgentInput = {
   baseUrl: string
@@ -25,6 +41,19 @@ export function buildRealEstateAgentSchema({ baseUrl }: RealEstateAgentInput) {
     { '@type': 'AdministrativeArea', name: 'Clark County' },
     { '@type': 'Place', name: 'Las Vegas, NV 89109' },
     { '@type': 'Place', name: 'Las Vegas, NV 89169' },
+    {
+      '@type': 'Place',
+      name: 'Turnberry Place',
+      address: {
+        '@type': 'PostalAddress',
+        streetAddress: GBP_ADDRESS.streetAddress,
+        addressLocality: GBP_ADDRESS.addressLocality,
+        addressRegion: GBP_ADDRESS.addressRegion,
+        postalCode: GBP_ADDRESS.postalCode,
+        addressCountry: GBP_ADDRESS.addressCountry,
+      },
+      containedInPlace: { '@type': 'City', name: 'Las Vegas' },
+    },
   ]
 
   return {
