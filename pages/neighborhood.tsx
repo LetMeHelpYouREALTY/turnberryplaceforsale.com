@@ -5,6 +5,7 @@ import { Meta } from "components/meta"
 import { JsonLdSchema } from "components/json-ld-schema"
 import { BreadcrumbSchema } from "components/breadcrumb-schema"
 import { NeighborhoodSection } from "components/neighborhood-section"
+import { NearbyAmenitiesSection } from "components/nearby-amenities-section"
 import { GBP_PHONE_DISPLAY } from "lib/google-business-profile"
 // QuickSearchWidget, FeaturedListingCard, VIPNewsletterSignup available on homepage
 import Image from "next/image"
@@ -77,6 +78,11 @@ export default function NeighborhoodPage({ menus }: NeighborhoodPageProps) {
                   ))}
                 </div>
               </div>
+
+              <NearbyAmenitiesSection
+                heading="What's nearby Turnberry Place"
+                id="neighborhood-nearby-map"
+              />
 
               <div className="content-section">
                 <h2>Prime Location and Accessibility</h2>
@@ -209,6 +215,13 @@ export default function NeighborhoodPage({ menus }: NeighborhoodPageProps) {
                 See what&apos;s for sale and how the community sits on the map.
               </p>
               <div className="d-flex flex-wrap justify-content-center gap-3">
+                <Link
+                  href="/nearby-amenities"
+                  className="btn btn-outline-primary"
+                  title="Nearby restaurants, grocery, and healthcare near Turnberry Place"
+                >
+                  Nearby amenities guide
+                </Link>
                 <Link
                   href="/map"
                   className="btn btn-outline-primary"

@@ -34,7 +34,9 @@ yarn-debug.log*
 yarn-error.log*
 
 # local env files
-.env*.local
+.env*
+!.env.example
+!*.example
 
 # Image URL extraction cache (optional - can be committed)
 # scripts/image-urls.json
